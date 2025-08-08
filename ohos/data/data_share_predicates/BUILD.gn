@@ -24,10 +24,10 @@ ohos_cj_library("ohos.data_share_predicates") {
   external_deps = [ "data_share:cj_data_share_predicates_ffi" ]
 
   cj_external_deps = [
-    "arkui_cangjie_api:ohos.base",
-    "cangjie_api:ohos.ffi",
-    "cangjie_api:ohos.labels",
-    "hiviewdfx_cangjie_api:ohos.hilog",
+    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.ffi",
+    "cangjie_ark_interop:ohos.labels",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
 
   cj_deps = [
@@ -35,6 +35,6 @@ ohos_cj_library("ohos.data_share_predicates") {
   ]
 
   subsystem_name = "distributeddatamgr"
-  part_name = "distributeddatamgr_cangjie_api"
+  part_name = "distributeddatamgr_cangjie_wrapper"
   lib_name = "data_share_predicates"
 }

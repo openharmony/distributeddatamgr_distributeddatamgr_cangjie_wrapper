@@ -15,7 +15,7 @@ The following figure shows the architecture of the **DistributedDataManager** su
 Level 1 and 2 directories of the **DistributedDataManager** subsystem:
 
 ```
-foundation/distributeddatamgr/distributeddatamgr_cangjie_api
+foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 ├── ohos             # Cangjie DistributedDataManager code
 ├── kit              # Cangjie kit code
 ├── figures          # architecture pictures
@@ -71,7 +71,7 @@ The UDMF provides standard data channels for many-to-many data sharing across ap
 
 **DistributedDataManager**
 
-distributeddatamgr_cangjie_api
+distributeddatamgr_cangjie_wrapper
 
 [distributeddatamgr\_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share)
 

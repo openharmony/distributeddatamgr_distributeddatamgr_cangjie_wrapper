@@ -18,7 +18,7 @@
 子系统1-2层目录描述
 
 ```
-foundation/distributeddatamgr/distributeddatamgr_cangjie_api
+foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 ├── ohos             # 仓颉分布式数据管理接口实现
 ├── kit              # 仓颉kit化代码
 ├── figures          # 存放readme中的架构图
@@ -74,7 +74,7 @@ OpenHarmony关系型数据库底层使用SQLite作为持久化存储引擎，支
 
 **分布式数据管理子系统**
 
-distributeddatamgr_cangjie_api
+distributeddatamgr_cangjie_wrapper
 
 [distributeddatamgr\_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share)
 

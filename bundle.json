@@ -1,16 +1,16 @@
 {
-    "name": "@ohos/distributeddatamgr_cangjie_api",
+    "name": "@ohos/distributeddatamgr_cangjie_wrapper",
     "description": "Provides the application with cangjie interfaces for distributeddatamgr",
     "version": "6.0",
     "license": "Apache-2.0",
     "publishAs": "code-segment",
     "segment": {
-        "destPath": "foundation/distributeddatamgr/distributeddatamgr_cangjie_api"
+        "destPath": "foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper"
     },
     "dirs": {},
     "scripts": {},
     "component": {
-        "name": "distributeddatamgr_cangjie_api",
+        "name": "distributeddatamgr_cangjie_wrapper",
         "subsystem": "distributeddatamgr",
         "syscap": [
             "SystemCapability.DistributedDataManager.DataShare.Core",
@@ -27,21 +27,21 @@
         "ram": "100000KB",
         "deps": {
             "components": [
-                "cangjie_api"
+                "cangjie_ark_interop"
             ]
         },
         "build": {
             "sub_component": [
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/data_share_predicates:ohos.data_share_predicates",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/distributed_kv_store:ohos.distributed_kv_store",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/preferences:ohos.preferences",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/relational_store:ohos.relational_store",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/values_bucket:ohos.values_bucket",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/kit/ArkData:kit.ArkData"
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/data_share_predicates:ohos.data_share_predicates",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/distributed_kv_store:ohos.distributed_kv_store",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/preferences:ohos.preferences",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/relational_store:ohos.relational_store",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/values_bucket:ohos.values_bucket",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/kit/ArkData:kit.ArkData"
             ],
             "inner_kits": [
                 {
-                    "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/data_share_predicates:ohos.data_share_predicates"
+                    "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/data_share_predicates:ohos.data_share_predicates"
                 }
             ],
             "test": [

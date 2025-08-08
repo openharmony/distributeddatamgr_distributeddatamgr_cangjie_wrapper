@@ -18,6 +18,6 @@ ohos_cj_library("ohos.data") {
   sources = [ "data.cj" ]
 
   subsystem_name = "distributeddatamgr"
-  part_name = "distributeddatamgr_cangjie_api"
+  part_name = "distributeddatamgr_cangjie_wrapper"
   lib_name = "data"
 }

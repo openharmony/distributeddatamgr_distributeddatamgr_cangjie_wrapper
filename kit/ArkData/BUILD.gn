@@ -28,6 +28,6 @@ ohos_cj_library("kit.ArkData") {
 
   kit = true
   subsystem_name = "distributeddatamgr"
-  part_name = "distributeddatamgr_cangjie_api"
+  part_name = "distributeddatamgr_cangjie_wrapper"
   lib_name = "ArkData"
 }
