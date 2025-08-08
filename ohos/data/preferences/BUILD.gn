@@ -24,14 +24,14 @@ ohos_cj_library("ohos.preferences") {
   external_deps = [ "preferences:cj_preferences_ffi" ]
 
   cj_external_deps = [
-    "ability_cangjie_api:ohos.ability",
-    "arkui_cangjie_api:ohos.base",
-    "cangjie_api:ohos.ffi",
-    "cangjie_api:ohos.labels",
-    "hiviewdfx_cangjie_api:ohos.hilog",
+    "ability_cangjie_wrapper:ohos.ability",
+    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.ffi",
+    "cangjie_ark_interop:ohos.labels",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
 
   subsystem_name = "distributeddatamgr"
-  part_name = "distributeddatamgr_cangjie_api"
+  part_name = "distributeddatamgr_cangjie_wrapper"
   lib_name = "preferences"
 }
