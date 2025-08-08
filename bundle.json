@@ -1,0 +1,51 @@
+{
+    "name": "@ohos/distributeddatamgr_cangjie_api",
+    "description": "Provides the application with cangjie interfaces for distributeddatamgr",
+    "version": "6.0",
+    "license": "Apache-2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/distributeddatamgr/distributeddatamgr_cangjie_api"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "distributeddatamgr_cangjie_api",
+        "subsystem": "distributeddatamgr",
+        "syscap": [
+            "SystemCapability.DistributedDataManager.DataShare.Core",
+            "SystemCapability.DistributedDataManager.KVStore.Core",
+            "SystemCapability.DistributedDataManager.Preferences.Core",
+            "SystemCapability.DistributedDataManager.RelationalStore.Core",
+            "SystemCapability.DistributedDataManager.DataShare.Core"
+        ],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "30000KB",
+        "ram": "100000KB",
+        "deps": {
+            "components": [
+                "cangjie_api"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/data_share_predicates:ohos.data_share_predicates",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/distributed_kv_store:ohos.distributed_kv_store",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/preferences:ohos.preferences",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/relational_store:ohos.relational_store",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/values_bucket:ohos.values_bucket",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/kit/ArkData:kit.ArkData"
+            ],
+            "inner_kits": [
+                {
+                    "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_api/ohos/data/data_share_predicates:ohos.data_share_predicates"
+                }
+            ],
+            "test": [
+            ]
+        }
+    }
+}
