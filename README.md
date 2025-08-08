@@ -1,0 +1,3 @@
+# distributeddatamgr_distributeddatamgr_cangjie_wrapper
+
+分布式数据管理子系统仓颉封装层
