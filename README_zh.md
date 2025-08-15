@@ -1,21 +1,21 @@
-# 分布式数据管理仓颉
+# 分布式数据管理仓颉接口
 
 ## 简介
 
-**子系统介绍**
+**内容介绍**
 
-分布式数据管理仓颉支持单设备的各种结构化数据的持久化，以及跨设备之间数据的同步、共享功能。开发者通过分布式数据管理仓颉，能够方便地完成应用程序数据在不同终端设备间的无缝衔接，满足用户跨设备使用数据的一致性体验。
+分布式数据管理仓颉接口是在 OpenHarmony 上基于分布式数据管理子系统能力之上封装的仓颉API。分布式数据管理子系统支持单设备的各种结构化数据的持久化，以及跨设备之间数据的同步、共享功能。开发者通过分布式数据管理仓颉，能够方便地完成应用程序数据在不同终端设备间的无缝衔接，满足用户跨设备使用数据的一致性体验。
 
 
-**子系统架构**
+**分布式数据管理仓颉接口架构**
 
-**图 1**  子系统架构图
+**图 1**  分布式数据管理仓颉接口架构图
 
 ![](figures/distributeddatamgr_cangjie_wrapper_architecture.png)
 
 ## 目录
 
-子系统1-2层目录描述
+分布式数据管理仓颉接口目录描述
 
 ```
 foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
@@ -35,10 +35,6 @@ foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 ### 数据共享
 
 **数据共享（Data Share）** 提供了向其他应用共享以及管理其数据的方法，支持同个设备上不同应用之间的数据共享。
-
-### 分布式数据服务
-
-**分布式数据服务（Distributed Data Service，DDS）** 提供不同设备间数据库数据分布式的能力。通过结合帐号、应用和数据库三元组，分布式数据服务对数据进行隔离。在通过可信认证的设备间，分布式数据服务支持数据相互同步，为用户提供在多种终端设备上一致的数据访问体验。
 
 ### Key-Value数据库
 
@@ -66,20 +62,14 @@ foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 
 OpenHarmony关系型数据库底层使用SQLite作为持久化存储引擎，支持SQLite具有的所有数据库特性，包括但不限于事务、索引、视图、触发器、外键、参数化查询和预编译SQL语句。
 
-### 标准化数据通路
-
-**标准化数据通路（Unified Data Management Framework,UDMF）** 针对多对多跨应用数据共享的不同业务场景提供了标准化的数据通路，提供了标准化的数据接入与读取接口。同时对文本、图片等数据类型提供了标准化定义，方便不同应用间进行数据交互，减少数据类型适配的工作量。
-
 ## 相关仓
 
 **分布式数据管理仓颉**
 
-distributeddatamgr_cangjie_wrapper
+[distributeddatamgr\_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share/blob/master/README_zh.md)
 
-[distributeddatamgr\_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share)
+[distributeddatamgr\_kv_store](https://gitee.com/openharmony/distributeddatamgr_kv_store/blob/master/README_zh.md)
 
-[distributeddatamgr\_kv_store](https://gitee.com/openharmony/distributeddatamgr_kv_store)
+[distributeddatamgr\_preferences](https://gitee.com/openharmony/distributeddatamgr_preferences/blob/master/README_zh.md)
 
-[distributeddatamgr\_preferences](https://gitee.com/openharmony/distributeddatamgr_preferences)
-
-[distributeddatamgr\_relational_store](https://gitee.com/openharmony/distributeddatamgr_relational_store)
+[distributeddatamgr\_relational_store](https://gitee.com/openharmony/distributeddatamgr_relational_store/blob/master/README_zh.md)
