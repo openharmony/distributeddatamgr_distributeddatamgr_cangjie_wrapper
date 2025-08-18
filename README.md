@@ -1,14 +1,14 @@
-# DistributedDataManager Subsystem
+# distributeddatamgr_cangjie_wrapper
 
 ## Introduction
 
-The **DistributedDataManager** subsystem implements persistence of a variety of structured data on a single device and data sync and sharing across devices. It allows application data to be seamlessly processed across devices, ensuring consistent user experience for the same application across devices.
+The distributeddatamgr_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the DistributedDataManager Subsystem. The **DistributedDataManager** subsystem implements persistence of a variety of structured data on a single device and data sync and sharing across devices. It allows application data to be seamlessly processed across devices, ensuring consistent user experience for the same application across devices.
 
 The following figure shows the architecture of the **DistributedDataManager** subsystem.
 
 **Figure 1** Architecture
 
-![](figures/en_Distributed_data_management_architecture.png)
+![](figures/distributeddatamgr_cangjie_wrapper_architecture_en.png)
 
 ## Directory Structure
 
@@ -68,10 +68,6 @@ With the SQLite as the persistence engine, the RDB store supports all SQLite fea
 The UDMF provides standard data channels for many-to-many data sharing across applications and provides standard APIs for data access. It also provides standard definitions for data types, such as text and image, to streamline data interaction between different applications and minimize the workload of data type adaptation.
 
 ## Repositories Involved
-
-**DistributedDataManager**
-
-distributeddatamgr_cangjie_wrapper
 
 [distributeddatamgr\_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share)
 

@@ -64,8 +64,6 @@ OpenHarmony关系型数据库底层使用SQLite作为持久化存储引擎，支
 
 ## 相关仓
 
-**分布式数据管理仓颉**
-
 [distributeddatamgr\_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share/blob/master/README_zh.md)
 
 [distributeddatamgr\_kv_store](https://gitee.com/openharmony/distributeddatamgr_kv_store/blob/master/README_zh.md)
