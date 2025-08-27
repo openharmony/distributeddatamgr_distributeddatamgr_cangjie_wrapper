@@ -13,13 +13,25 @@
  * limitations under the License.
  */
 
-package ohos.distributed_kv_store
+package ohos.data.distributed_kv_store
 
 import ohos.labels.*
-import ohos.base.*
 import ohos.ffi.*
 import std.collection.*
+import ohos.business_exception.BusinessException
 
+/**
+ * Provides methods related to device-collaboration distributed databases.
+ * <p>To create a {@code DeviceKVStore} database, you can use the
+ * {@link data.distributed.common.KVManager.getKVStore(Options, String)}
+ * method with {@code KVStoreType} set to {@code DEVICE_COLLABORATION} for the input parameter Options.
+ * This database manages distributed
+ * data by device, and cannot modify data synchronized from remote devices. When an application writes a
+ * key-value pair entry
+ * into the database, the system automatically adds the ID of the device running the application to the key.
+ *
+ * @relation interface DeviceKVStore extends SingleKVStore
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -34,9 +46,20 @@ public class DeviceKVStore <: SingleKVStore {
         releaseFFIData(myDataId)
     }
 
+    static func getKVStore(id: Int64, storeId: String, options: Options): DeviceKVStore {
+        DeviceKVStore(KVManager.getKVStoreId(id, storeId, options, DEVICE_COLLABORATION))
+    }
+    
     /**
-     * @brief  get(key: string, callback: AsyncCallback<boolean | string | number | Uint8Array>): void
-     * @brief  get(key: string): Promise<boolean | string | number | Uint8Array>
+     * Obtains the value matching the local device ID and specified key.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types;
+     * <br>3.Parameter verification failed.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100004 - Not found.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation get(key: string): Promise<boolean | string | number | Uint8Array>
      */
     @!APILevel[
         21,
@@ -48,8 +71,15 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  get(deviceId: string, key: string, callback: AsyncCallback<boolean | string | number | Uint8Array>): void
-     * @brief  get(deviceId: string, key: string): Promise<boolean | string | number | Uint8Array>
+     * Obtains the value matching a specified device ID and key.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types;
+     * <br>3.Parameter verification failed.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100004 - Not found.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation get(deviceId: string, key: string): Promise<boolean | string | number | Uint8Array>
      */
     @!APILevel[
         21,
@@ -58,7 +88,7 @@ public class DeviceKVStore <: SingleKVStore {
     ]
     func get(deviceId: String, key: String): ValueType {
         unsafe {
-            var result = ValueType.INTEGER(0)
+            var result = ValueType.Integer(0)
             try (
                 cDeviceId = LibC.mallocCString(deviceId).asResource(),
                 cKey = LibC.mallocCString(key).asResource()
@@ -78,30 +108,26 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getEntries(keyPrefix: string, callback: AsyncCallback<Entry[]>): void
-     * @brief  getEntries(keyPrefix: string): Promise<Entry[]>
+     * Obtains all key-value pairs that match the local device ID and specified key prefix.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getEntries(keyPrefix: string): Promise<Entry[]>
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public func getEntries(keyPrefix: String): ArrayList<Entry> {
+    public func getEntries(keyPrefix: String): Array<Entry> {
         return getEntries("", keyPrefix)
     }
 
-    /**
-     * @brief  getEntries(deviceId: string, keyPrefix: string, callback: AsyncCallback<Entry[]>): void
-     * @brief  getEntries(deviceId: string, keyPrefix: string): Promise<Entry[]>
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
-    ]
-    func getEntries(deviceId: String, keyPrefix: String): ArrayList<Entry> {
+    func getEntries(deviceId: String, keyPrefix: String): Array<Entry> {
         unsafe {
-            var entries = ArrayList<Entry>()
+            var entries = Array<Entry>()
             try (
                 cDeviceId = LibC.mallocCString(deviceId).asResource(),
                 cKeyPrefix = LibC.mallocCString(keyPrefix).asResource()
@@ -121,28 +147,24 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getEntries(query: Query, callback: AsyncCallback<Entry[]>): void
-     * @brief  getEntries(query: Query): Promise<Entry[]>
+     * Obtains the list of key-value pairs matching the local device ID and specified {@code Query} object.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getEntries(query: Query): Promise<Entry[]>
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public func getEntries(query: Query): ArrayList<Entry> {
+    public func getEntries(query: Query): Array<Entry> {
         return getEntries("", query)
     }
 
-    /**
-     * @brief  getEntries(deviceId: string, query: Query, callback: AsyncCallback<Entry[]>): void
-     * @brief  getEntries(deviceId: string, query: Query): Promise<Entry[]>
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
-    ]
-    func getEntries(deviceId: String, query: Query): ArrayList<Entry> {
+    func getEntries(deviceId: String, query: Query): Array<Entry> {
         unsafe {
             let cDeviceId = LibC.mallocCString(deviceId)
             var errCode: Int32 = 0
@@ -160,8 +182,19 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getResultSet(keyPrefix: string, callback: AsyncCallback<KVStoreResultSet>): void
-     * @brief  getResultSet(keyPrefix: string): Promise<KVStoreResultSet>
+     * Obtains the result set with the local device ID and specified prefix from a {@code DeviceKVStore} database.
+     * The {@code KVStoreResultSet} object can be used to query all key-value pairs that meet the search criteria.
+     * Each {@code DeviceKVStore} instance can have a maximum of four {@code KVStoreResultSet} objects at the
+     * same time.
+     * If you have created four objects, calling this method will return a failure. Therefore, you are advised to
+     * call the closeResultSet method to close unnecessary {@code KVStoreResultSet} objects in a timely manner.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100001 - Over max limits.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getResultSet(keyPrefix: string): Promise<KVStoreResultSet>
      */
     @!APILevel[
         21,
@@ -173,8 +206,19 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getResultSet(deviceId: string, keyPrefix: string, callback: AsyncCallback<KVStoreResultSet>): void
-     * @brief  getResultSet(deviceId: string, keyPrefix: string): Promise<KVStoreResultSet>
+     * Obtains the {@code KVStoreResultSet} object matching the specified device ID and key prefix.
+     * <p>The {@code KVStoreResultSet} object can be used to query all key-value pairs that meet the search criteria.
+     * Each {@code DeviceKVStore}
+     * instance can have a maximum of four {@code KVStoreResultSet} objects at the same time. If you have created four
+     * objects, calling this method will return a failure. Therefore, you are advised to call the closeResultSet method to close
+     * unnecessary {@code KVStoreResultSet} objects in a timely manner.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100001 - Over max limits.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getResultSet(deviceId: string, keyPrefix: string): Promise<KVStoreResultSet>
      */
     @!APILevel[
         21,
@@ -202,8 +246,14 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getResultSet(query: Query, callback:AsyncCallback<KVStoreResultSet>): void
-     * @brief  getResultSet(query: Query): Promise<KVStoreResultSet>
+     * Obtains the {@code KVStoreResultSet} object matching the local device ID and specified {@code Query} object.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100001 - Over max limits.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getResultSet(query: Query): Promise<KVStoreResultSet>
      */
     @!APILevel[
         21,
@@ -215,8 +265,14 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getResultSet(deviceId: string, query: Query, callback: AsyncCallback<KVStoreResultSet>): void
-     * @brief  getResultSet(deviceId: string, query: Query): Promise<KVStoreResultSet>
+     * Obtains the {@code KVStoreResultSet} object matching a specified device ID and {@code Query} object.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100001 - Over max limits.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getResultSet(deviceId: string, query: Query): Promise<KVStoreResultSet>
      */
     @!APILevel[
         21,
@@ -239,8 +295,13 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getResultSize(query: Query, callback: AsyncCallback<number>): void
-     * @brief  getResultSize(query: Query): Promise<number>
+     * Obtains the number of results matching the local device ID and specified {@code Query} object.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getResultSize(query: Query): Promise<number>
      */
     @!APILevel[
         21,
@@ -252,8 +313,13 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * @brief  getResultSize(deviceId: string, query: Query, callback: AsyncCallback<number>): void
-     * @brief  getResultSize(deviceId: string, query: Query): Promise<number>
+     * Obtains the number of results matching a specified device ID and {@code Query} object.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @relation getResultSize(deviceId: string, query: Query): Promise<number>
      */
     @!APILevel[
         21,

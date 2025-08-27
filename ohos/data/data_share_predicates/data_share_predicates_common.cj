@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-package ohos.data_share_predicates
+package ohos.data.data_share_predicates
 
-import ohos.ffi.*
 import ohos.hilog.*
-import ohos.base.*
-import std.collection.HashMap
+import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 
 const SUCCESS_CODE: Int32 = 0
 const MEMORY_ERROR: Int32 = -1

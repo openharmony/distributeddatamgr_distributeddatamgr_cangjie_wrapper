@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.values_bucket") {
+ohos_cangjie_shared_library("ohos.data.values_bucket") {
   sources = [ "value_type.cj" ]
 
   cj_external_deps = [
@@ -24,5 +24,4 @@ ohos_cj_library("ohos.values_bucket") {
 
   subsystem_name = "distributeddatamgr"
   part_name = "distributeddatamgr_cangjie_wrapper"
-  lib_name = "values_bucket"
 }

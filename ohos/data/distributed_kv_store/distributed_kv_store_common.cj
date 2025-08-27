@@ -13,132 +13,224 @@
  * limitations under the License.
  */
 
-package ohos.distributed_kv_store
+package ohos.data.distributed_kv_store
+
+import ohos.app.ability.BaseContext
+import ohos.labels.*
+import ohos.business_exception.getUniversalErrorMsg
 
 import std.collection.*
-import ohos.labels.*
-import ohos.base.*
-import ohos.ffi.*
 
+/**
+ * KVStore constants
+ * @relation interface Constants
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
-public let MAX_KEY_LENGTH: Int64 = 1024
-
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-]
-public let MAX_VALUE_LENGTH: Int64 = 4194303
-
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-]
-public let MAX_KEY_LENGTH_DEVICE: Int64 = 896
-
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-]
-public let MAX_STORE_ID_LENGTH: Int64 = 128
-
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-]
-public let MAX_QUERY_LENGTH: Int64 = 512000
-
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-]
-public let MAX_BATCH_SIZE: Int64 = 128
-
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-]
-public enum ValueType <: ToString {
+public class Constants {
+    /**
+     * Max key length is 1024.
+     * @relation readonly MAX_KEY_LENGTH: number;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    STRING(String)
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    INTEGER(Int32)
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    FLOAT(Float32)
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    BYTE_ARRAY(Array<Byte>)
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    BOOLEAN(Bool)
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    DOUBLE(Float64)
-    | ...
+    public static let MAX_KEY_LENGTH: Int32 = 1024
 
+    /**
+     * Max value length is 4194303.
+     * @relation readonly MAX_VALUE_LENGTH: number;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public func toString(): String {
-        return match (this) {
-            case STRING(v) => v
-            case INTEGER(v) => v.toString()
-            case FLOAT(v) => v.toString()
-            case BYTE_ARRAY(v) => v.toString()
-            case BOOLEAN(v) => v.toString()
-            case DOUBLE(v) => v.toString()
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
-        }
-    }
+    public static let MAX_VALUE_LENGTH: Int32 = 4194303
+
+    /**
+     * Max device coordinate key length is 896.
+     * @relation readonly MAX_KEY_LENGTH_DEVICE: number;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public static let MAX_KEY_LENGTH_DEVICE: Int32 = 896
+
+    /**
+     * Max store id length is 128.
+     * @relation readonly MAX_STORE_ID_LENGTH: number;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public static let MAX_STORE_ID_LENGTH: Int32 = 128
+
+    /**
+     * Max query length is 512000.
+     * @relation readonly MAX_QUERY_LENGTH: number;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public static let MAX_QUERY_LENGTH: Int32 = 512000
+
+    /**
+     * Max batch operation size is 128.
+     * @relation readonly MAX_BATCH_SIZE: number;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public static let MAX_BATCH_SIZE: Int32 = 128
+
+    protected init() {}
 }
 
+/**
+ * Indicates the {@code ValueType}.
+ *
+ * @relation enum ValueType
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
-public struct KVManagerConfig {
-    let context: StageContext
-    let bundleName: String
-
+public enum ValueType {
+    /**
+     * Indicates that the value type is string.
+     *
+     * @relation STRING,
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public init(context: StageContext, bundleName: String) {
+    StringValue(String)
+    |
+    /**
+     * Indicates that the value type is int.
+     *
+     * @relation INTEGER,
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    Integer(Int32)
+    |
+    /**
+     * Indicates that the value type is float.
+     *
+     * @relation FLOAT,
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    Float(Float32)
+    |
+    /**
+     * Indicates that the value type is byte array.
+     *
+     * @relation BYTE_ARRAY,
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    ByteArray(Array<Byte>)
+    |
+    /**
+     * Indicates that the value type is boolean.
+     *
+     * @relation BOOLEAN,
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    Boolean(Bool)
+    |
+    /**
+     * Indicates that the value type is double.
+     *
+     * @relation DOUBLE
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    Double(Float64)
+    | ...
+}
+
+/**
+ * Provides configuration information to create a {@link KVManager} instance,
+ * which includes the caller's package name and ability or hap context.
+ *
+ * @relation interface KVManagerConfig
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+]
+public class KVManagerConfig {
+    /**
+     * Indicates the ability or hap context
+     *
+     * @relation context: BaseContext
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var context: BaseContext
+
+    /**
+     * Indicates the bundleName
+     *
+     * @relation bundleName: string
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var bundleName: String
+
+    /**
+     * KVManagerConfig constructor.
+     *
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public init(context: BaseContext, bundleName: String) {
         this.context = context
         this.bundleName = bundleName
     }
@@ -156,31 +248,63 @@ enum KVStoreType {
     }
 }
 
+/**
+ * Describes the KVStore security level.
+ *
+ * @relation enum SecurityLevel
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public enum SecurityLevel {
+    /**
+     * S1: means the db is in the low security level
+     * There are some low impact when the data is leaked.
+     *
+     * @relation S1,
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S1
-    | @!APILevel[
+    |
+    /**
+     * S2: means the db is in the middle security level
+     * There are some major impact when the data is leaked.
+     *
+     * @relation S2,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S2
-    | @!APILevel[
+    |
+    /**
+     * S3: means the db is in the high security level
+     * There are some severity impact when the data is leaked.
+     *
+     * @relation S3,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S3
-    | @!APILevel[
+    |
+    /**
+     * S4: means the db is in the critical security level
+     * There are some critical impact when the data is leaked.
+     *
+     * @relation S4
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
@@ -198,11 +322,6 @@ public enum SecurityLevel {
         }
     }
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
     func getValue(): Int32 {
         match (this) {
             case S1 => 2
@@ -214,91 +333,240 @@ public enum SecurityLevel {
     }
 }
 
+
+/**
+ * Represents a node of a {@link Schema} instance.
+ * <p>With a {@link Schema} instance, you can define the value fields which stored in the database.
+ * <p>A FieldNode of the {@link Schema} instance is either a leaf or a non-leaf node.
+ * <p>The leaf node must have a value; the non-leaf node must have a child {@code FieldNode}.
+ *
+ * @relation class FieldNode
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
-public struct FieldNode {
+public class FieldNode {
+    /**
+     * Indicates the nullable of database field.
+     *
+     * @relation nullable: boolean;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
-    public var nullable: Bool = true
+    public var nullable: Bool
+
+    /**
+     * Indicates the default value of field node.
+     *
+     * @relation default: string;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var default: String
+
+    /**
+     * Indicates the type of value.
+     *
+     * @relation type: number;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
-    public var type_: Int32 = 0
+    public var nodeType: Int32
+
+    /**
+     * FieldNode constructor.
+     *
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
-    public init(name: String) {
-        this.default = name
+    public init(name: String, nullable: Bool, default: String, nodeType: Int32) {
+        this.nullable = nullable
+        this.default = default
+        this.nodeType = nodeType
     }
 }
 
+/**
+ * Represents the database schema.
+ * You can set the schema object in options when create or open the database.
+ *
+ * @relation class Schema
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
-public struct Schema {
+public class Schema {
+    /**
+     * Indicates the root json object.
+     *
+     * @relation root: FieldNode;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
-    public var root: FieldNode = FieldNode("undefined")
+    public var root: FieldNode
+
+    /**
+     * Indicates the string array of json.
+     *
+     * @relation indexes: Array<string>;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
-    public var indexes: Array<String> = []
+    public var indexes: Array<String>
+
+    /**
+     * Indicates the mode of schema.
+     *
+     * @relation mode: number;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
-    public var mode: Int32 = 0
+    public var mode: Int32
+
+    /**
+     * Indicates the skip size of schema.
+     *
+     * @relation skip: number;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
-    public var skip: Int32 = 0
+    public var skip: Int32
+
+    /**
+     * Schema constructor.
+     *
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
+    ]
+    public init(root: FieldNode, indexes: Array<String>, mode: Int32, skip: Int32) {
+        this.root = root
+        this.indexes = indexes
+        this.mode = mode
+        this.skip = skip
+    }
 }
 
+/**
+ * Provides configuration options to create a {@code SingleKVStore} or {@code DeviceKVStore}.
+ *
+ * @relation interface Options
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Options {
-    let createIfMissing: Bool
-    let encrypt: Bool
-    let backup: Bool
-    let autoSync: Bool
-    let securityLevel: SecurityLevel
-    let schema: Schema
+
+    /**
+     * Indicates whether to create a database when the database file does not exist
+     * @relation createIfMissing?: boolean
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var createIfMissing: Bool
+
+    /**
+     * Indicates whether database files to be encrypted
+     * @relation encrypt?: boolean
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var encrypt: Bool
+
+    /**
+     * Indicates whether to back up database files
+     * @relation backup?: boolean
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var backup: Bool
+
+    /**
+     * Indicates whether database files are automatically synchronized
+     * @relation autoSync?: boolean
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        permission: "ohos.permission.DISTRIBUTED_DATASYNC",
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var autoSync: Bool
+
+    /**
+     * Indicates the database security level
+     * @relation securityLevel: SecurityLevel
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var securityLevel: SecurityLevel
+
+    /**
+     * Indicates the database schema
+     * @relation schema?: Schema
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
+    ]
+    public var schema: ?Schema
+
+    /**
+     * Options constructor.
+     *
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init(securityLevel: SecurityLevel, createIfMissing!: Bool = true, encrypt!: Bool = false,
-        backup!: Bool = true, autoSync!: Bool = false, schema!: Schema = Schema()) {
+        backup!: Bool = true, autoSync!: Bool = false, schema!: ?Schema = None) {
         this.createIfMissing = createIfMissing
         this.encrypt = encrypt
         this.backup = backup
@@ -308,24 +576,45 @@ public class Options {
     }
 }
 
+/**
+ * Provides key-value pairs stored in the distributedKVStore.
+ *
+ * @relation interface Entry
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
-public struct Entry <: ToString {
+public class Entry {
+    /**
+     * Indicates the key.
+     *
+     * @relation key: string;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var key: String
+
+    /**
+     * Indicates the value.
+     *
+     * @relation value: Value;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var value: ValueType
+
+    /**
+     * Entry constructor.
+     *
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
@@ -334,14 +623,6 @@ public struct Entry <: ToString {
     public init(key: String, value: ValueType) {
         this.key = key
         this.value = value
-    }
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    public func toString(): String {
-        return "{key = ${key}, value = ${value}}"
     }
 }
 

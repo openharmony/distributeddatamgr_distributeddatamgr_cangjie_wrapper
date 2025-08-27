@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.preferences") {
+ohos_cangjie_shared_library("ohos.data.preferences") {
   sources = [
     "options.cj",
     "preferences.cj",
@@ -24,8 +24,10 @@ ohos_cj_library("ohos.preferences") {
   external_deps = [ "preferences:cj_preferences_ffi" ]
 
   cj_external_deps = [
-    "ability_cangjie_wrapper:ohos.ability",
+    "ability_cangjie_wrapper:ohos.app.ability.ui_ability",
     "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.callback_invoke",
+    "cangjie_ark_interop:ohos.business_exception",
     "cangjie_ark_interop:ohos.ffi",
     "cangjie_ark_interop:ohos.labels",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
@@ -33,5 +35,4 @@ ohos_cj_library("ohos.preferences") {
 
   subsystem_name = "distributeddatamgr"
   part_name = "distributeddatamgr_cangjie_wrapper"
-  lib_name = "preferences"
 }

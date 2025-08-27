@@ -16,8 +16,17 @@
 package kit.ArkData
 
 public import ohos.data.*
-public import ohos.data_share_predicates.*
-public import ohos.distributed_kv_store.*
-public import ohos.preferences.*
-public import ohos.relational_store.*
-public import ohos.values_bucket.*
+public import ohos.data.data_share_predicates.*
+public import ohos.data.distributed_kv_store.*
+public import ohos.data.preferences.*
+public import ohos.data.relational_store.*
+public import ohos.data.values_bucket.*
+
+import ohos.data.distributed_kv_store.Options as KVOptions 
+import ohos.data.distributed_kv_store.SecurityLevel as KVSecurityLevel 
+import ohos.data.distributed_kv_store.ValueType as KVValueType
+import ohos.data.preferences.Options as PreferencesOptions 
+import ohos.data.preferences.ValueType as PreferencesValueType 
+import ohos.data.relational_store.ValueType as RelationalStoreValueType 
+import ohos.data.relational_store.SecurityLevel as RelationalStoreSecurityLevel 
+import ohos.data.values_bucket.ValueType as VBValueType 

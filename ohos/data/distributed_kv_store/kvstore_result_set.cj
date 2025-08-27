@@ -13,13 +13,19 @@
  * limitations under the License.
  */
 
-package ohos.distributed_kv_store
+package ohos.data.distributed_kv_store
 
 import ohos.labels.*
-import std.collection.*
-import ohos.base.*
 import ohos.ffi.*
 
+/**
+ * Provides methods to operate the result set of the {@code SingleKVStore} or {@code DeviceKVStore} database.
+ * <p>The result set is created by using the {@code getResultSet} method in the {@code SingleKVStore} or
+ * {@code DeviceKVStore} class. This interface also provides methods to move the data read
+ * position in the result set.
+ *
+ * @relation interface KVStoreResultSet
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -35,7 +41,9 @@ public class KVStoreResultSet <: RemoteDataLite {
     }
 
     /**
-     * @brief  getCount(): number
+     * Obtains the number of lines in a result set.
+     *
+     * @relation getCount(): number
      */
     @!APILevel[
         21,

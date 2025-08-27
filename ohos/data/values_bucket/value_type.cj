@@ -13,49 +13,48 @@
  * limitations under the License.
  */
 
-package ohos.values_bucket
+package ohos.data.values_bucket
 
-import ohos.ffi.*
-import ohos.labels.*
+import ohos.ffi.CTypeResource
+import ohos.labels.APILevel
 
+/**
+ * Indicates possible value types
+ * @relation export type ValueType = number | string | boolean;
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
 public enum ValueType {
+    /* Integer */ 
     @!APILevel[
         21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
-    ]
-    Null
-    | @!APILevel[
-        21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Integer(Int64)
-    | @!APILevel[
+    |
+        /* Double */ 
+        @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Double(Float64)
-    | @!APILevel[
+    |
+        /* StringValue */ 
+        @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
-    Str(String)
-    | @!APILevel[
+    StringValue(String)
+    |
+        /* Boolean */ 
+        @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
@@ -66,7 +65,7 @@ public enum ValueType {
         match (this) {
             case Integer(v) => 1
             case Double(v) => 2
-            case Str(v) => 3
+            case StringValue(v) => 3
             case Boolean(v) => 4
             case _ => 0
         }
@@ -89,7 +88,7 @@ protected struct CValueType {
             case Double(n) =>
                 tag = 2
                 double = n
-            case Str(str) =>
+            case StringValue(str) =>
                 tag = 3
                 unsafe { string = LibC.mallocCString(str).getChars() }
             case Boolean(b) =>

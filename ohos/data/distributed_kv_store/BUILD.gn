@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.distributed_kv_store") {
+ohos_cangjie_shared_library("ohos.data.distributed_kv_store") {
   sources = [
     "device_kvstore.cj",
     "distributed_kv_store.cj",
@@ -28,9 +28,11 @@ ohos_cj_library("ohos.distributed_kv_store") {
   external_deps = [ "kv_store:cj_distributed_kv_store_ffi" ]
 
   cj_external_deps = [
-    "ability_cangjie_wrapper:ohos.ability",
-    "ability_cangjie_wrapper:ohos.ability",
+    "ability_cangjie_wrapper:ohos.app.ability",
+    "ability_cangjie_wrapper:ohos.app.ability.ui_ability",
     "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.callback_invoke",
+    "cangjie_ark_interop:ohos.business_exception",
     "cangjie_ark_interop:ohos.ffi",
     "cangjie_ark_interop:ohos.labels",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
@@ -38,5 +40,4 @@ ohos_cj_library("ohos.distributed_kv_store") {
 
   subsystem_name = "distributeddatamgr"
   part_name = "distributeddatamgr_cangjie_wrapper"
-  lib_name = "distributed_kv_store"
 }

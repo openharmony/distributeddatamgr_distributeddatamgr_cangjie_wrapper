@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-package ohos.distributed_kv_store
+package ohos.data.distributed_kv_store
 
-import ohos.base.*
-import std.collection.*
 import ohos.ffi.*
+
+import std.collection.*
 
 foreign {
     func FfiOHOSDistributedKVStoreCreateKVManager(boudleName: CString, context: StageContext): Int64
@@ -243,16 +243,16 @@ struct CKVValueType {
         double = 0.0
 
         match (value) {
-            case STRING(v) =>
+            case StringValue(v) =>
                 string = unsafe { LibC.mallocCString(v).getChars() }
                 tag = 0
-            case INTEGER(v) =>
+            case Integer(v) =>
                 integer = v
                 tag = 1
-            case FLOAT(v) =>
+            case Float(v) =>
                 float = v
                 tag = 2
-            case BYTE_ARRAY(v) =>
+            case ByteArray(v) =>
                 let bArrSize = v.size
                 let bArr: CPointer<UInt8> = safeMalloc<UInt8>(count: bArrSize)
                 unsafe {
@@ -262,10 +262,10 @@ struct CKVValueType {
                 }
                 byteArray = CArrByte(bArr, bArrSize)
                 tag = 3
-            case BOOLEAN(v) =>
+            case Boolean(v) =>
                 bool = v
                 tag = 4
-            case DOUBLE(v) =>
+            case Double(v) =>
                 double = v
                 tag = 5
             case _ => throw IllegalArgumentException("The type is not supported yet.")
@@ -274,22 +274,22 @@ struct CKVValueType {
 
     func toValueType(): ValueType {
         match (this.tag) {
-            case 0 => return ValueType.STRING(CString(this.string).toString())
-            case 1 => return ValueType.INTEGER(this.integer)
-            case 2 => return ValueType.FLOAT(this.float)
+            case 0 => return ValueType.StringValue(CString(this.string).toString())
+            case 1 => return ValueType.Integer(this.integer)
+            case 2 => return ValueType.Float(this.float)
             case 3 =>
                 let ptr = this.byteArray.head
                 let size = this.byteArray.size
                 if (ptr.isNull()) {
-                    return ValueType.BYTE_ARRAY(Array<UInt8>())
+                    return ValueType.ByteArray(Array<UInt8>())
                 }
                 let result = unsafe { Array<UInt8>(size, {i => ptr.read(i)}) }
-                return ValueType.BYTE_ARRAY(result)
-            case 4 => return ValueType.BOOLEAN(this.bool)
-            case 5 => return ValueType.DOUBLE(this.double)
+                return ValueType.ByteArray(result)
+            case 4 => return ValueType.Boolean(this.bool)
+            case 5 => return ValueType.Double(this.double)
             case _ =>
                 KV_STORE_LOG.info("WARNING: Blob have no data!")
-                return ValueType.INTEGER(-1)
+                return ValueType.Integer(-1)
         }
     }
 
@@ -317,11 +317,11 @@ struct CKVValueType {
 struct CFieldNode {
     var nullable: Bool
     var defaultString: CPointer<UInt8>
-    var type_: Int32
+    var nodeType: Int32
 
     init(fieldNode: FieldNode) {
         nullable = fieldNode.nullable
-        type_ = fieldNode.type_
+        nodeType = fieldNode.nodeType
         defaultString = unsafe { LibC.mallocCString(fieldNode.default).getChars() }
     }
 
@@ -380,7 +380,7 @@ struct COptions {
         autoSync = options.autoSync
         this.kvStoreType = kvStoreType.getValue()
         securityLevel = options.securityLevel.getValue()
-        schema = CSchema(options.schema)
+        schema = CSchema(options.schema ?? Schema(FieldNode("", true, "", 0), Array<String>(), 0, 0))
     }
 
     func free() {
@@ -421,21 +421,21 @@ struct CArrEntry {
     var head: CPointer<CEntry>
     var size: Int64
 
-    init(arr: ArrayList<Entry>) {
+    init(arr: Array<Entry>) {
         size = arr.size
         unsafe {
             let constructor = {p: Entry => CEntry(p)}
             let destructor = {p: CEntry => p.free()}
-            head = cjArr2CArr<Entry, CEntry>(arr.toArray(), constructor, destructor)
+            head = cjArr2CArr<Entry, CEntry>(arr, constructor, destructor)
         }
     }
 
-    func toArray(): ArrayList<Entry> {
+    func toArray(): Array<Entry> {
         if (head.isNull()) {
-            return ArrayList<Entry>()
+            return Array<Entry>()
         }
         unsafe {
-            return ArrayList<Entry>(size, {i => Entry(head.read(i).key.toString(), head.read(i).value.toValueType())})
+            return Array<Entry>(size, {i => Entry(head.read(i).key.toString(), head.read(i).value.toValueType())})
         }
     }
 

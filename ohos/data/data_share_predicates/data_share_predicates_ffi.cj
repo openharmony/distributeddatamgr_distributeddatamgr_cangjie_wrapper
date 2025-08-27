@@ -13,11 +13,9 @@
  * limitations under the License.
  */
 
-package ohos.data_share_predicates
+package ohos.data.data_share_predicates
 
-import ohos.ffi.*
-import ohos.base.*
-import ohos.values_bucket.*
+import ohos.data.values_bucket.*
 
 foreign {
     func FfiOHOSDataSharePredicatesCreateDataSharePredicates(): Int64

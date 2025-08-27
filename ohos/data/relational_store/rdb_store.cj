@@ -13,19 +13,23 @@
  * limitations under the License.
  */
 
-package ohos.relational_store
+package ohos.data.relational_store
 
 import ohos.ffi.*
 import std.collection.*
-import std.math.*
-import std.time.*
 import std.sync.*
 import ohos.labels.*
-import ohos.base.*
+import ohos.callback_invoke.{Callback0Argument, CallbackObject}
+import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 
+/**
+ * Provides methods for managing the relational database (RDB).
+ * This class provides methods for creating, querying, updating, and deleting RDBs.
+ *
+ * @relation interface RdbStore
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
@@ -45,15 +49,21 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief  query(predicates: RdbPredicates, columns?: Array<string>):Promise<ResultSet>
+     * Queries data in the database based on specified conditions.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @relation query(predicates: RdbPredicates, columns?: Array<string>): Promise<ResultSet>
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func query(predicates: RdbPredicates, columns: Array<String>): ResultSet {
+    public func query(predicates: RdbPredicates, columns!: Array<String> = []): ResultSet {
         var errCode: Int32 = 0
         let columnsSize = columns.size
         var columnsArray: CPointer<CString> = CPointer<CString>()
@@ -88,11 +98,34 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief delete(predicates: RdbPredicates, callback: AsyncCallback<number>):void
+     * Deletes data from the database based on a specified instance object of RdbPredicates.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
+     * @relation delete(predicates: RdbPredicates): Promise<number>;
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -107,11 +140,33 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief backup(destName:string, callback: AsyncCallback<void>):void
+     * Backs up a database in a specified name.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @relation backup(destName: string): Promise<void>;
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -130,11 +185,33 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief restore(srcName:string, callback: AsyncCallback<void>):void
+     * Restores a database from a specified database file.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @relation restore(srcName: string): Promise<void>;
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -153,11 +230,32 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief commit():void
+     * Commit the the sql you have executed.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. The store must not be nullptr.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @relation commit():void
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -167,11 +265,32 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief rollBack():void
+     * Roll back the sql you have already executed.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. The store must not be nullptr.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @relation rollBack():void
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -181,11 +300,33 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief beginTransaction():void
+     * BeginTransaction before execute your sql.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. The store must not be nullptr.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
+     * @relation beginTransaction():void
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -194,16 +335,7 @@ public class RdbStore <: RemoteDataLite {
         throwIfNotSuccess(code, "RdbStore", "beginTransaction")
     }
 
-    /**
-     * @brief executeSql(sql: string, callback: AsyncCallback<void>):void
-     */
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func executeSql(sql: String): Unit {
+    func executeSqlImpl(sql: String): Unit {
         unsafe {
             if (sql.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore executeSql failed: ${paramError("sql", "not empty string")}")
@@ -219,41 +351,46 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief  insert(table: string, values: ValuesBucket):Promise<number>
+     * Inserts a row of data into the target table.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
+     * @relation insertSync(table: string, values: ValuesBucket, conflict?: ConflictResolution): number;
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func insert(table: String, values: Map<String, ValueType>): Int64 {
-        if (table.isEmpty()) {
-            RELATIONAL_STORE_LOG.error("RdbStore insert failed: ${paramError("table", "not empty string")}")
-            throw BusinessException(getErrorCode(ERR_PARAMETER_ERROR),
-                "RdbStore insert failed: ${paramError("table", "not empty string")}")
-        }
-        return insert(table, values, ConflictResolution.ON_CONFLICT_NONE)
-    }
-
-    /**
-     * @brief  insert(table: string, values: ValuesBucket, conflict: ConflictResolution,
-     *  callback: AsyncCallback<number>): void
-     */
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func insert(table: String, values: Map<String, ValueType>, conflict: ConflictResolution): Int64 {
+    public func insert(table: String, values: ValuesBucket,
+        conflict!: ConflictResolution = ConflictResolution.OnConflictNone): Int64 {
         if (table.isEmpty()) {
             RELATIONAL_STORE_LOG.error("RdbStore insert failed: ${paramError("table", "not empty string")}")
             throw BusinessException(getErrorCode(ERR_PARAMETER_ERROR),
                 "RdbStore insert failed: ${paramError("table", "not empty string")}")
         }
         let cTable = unsafe { LibC.mallocCString(table) }
-        let cValue = ValuesBucket.create(values)
+        let cValue = CValuesBucket.create(values)
         var errCode: Int32 = 0
         throwIfOOM(cValue.isNone(), "RdbStore", "insert") {
             unsafe { LibC.free(cTable) }
@@ -270,30 +407,40 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief  update(values: ValuesBucket, predicates: RdbPredicates):Promise<number>
+     * Updates data in the database based on a specified instance object of RdbPredicates.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
+     * @relation updateSync(values: ValuesBucket, predicates: RdbPredicates, conflict?: ConflictResolution): number;
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func update(values: Map<String, ValueType>, predicates: RdbPredicates): Int64 {
-        return update(values, predicates, ConflictResolution.ON_CONFLICT_NONE)
-    }
-
-    /**
-     * @brief  update(values: ValuesBucket, predicates: RdbPredicates, conflict: ConflictResolution,
-     *  callback: AsyncCallback<number>):void
-     */
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func update(values: Map<String, ValueType>, predicates: RdbPredicates, conflict: ConflictResolution): Int64 {
-        let cValueBucket = ValuesBucket.create(values)
+    public func update(values: ValuesBucket, predicates: RdbPredicates,
+        conflict!: ConflictResolution = ConflictResolution.OnConflictNone): Int64 {
+        let cValueBucket = CValuesBucket.create(values)
         var errCode: Int32 = 0
         throwIfOOM(cValueBucket.isNone(), "RdbStore", "update")
         let affectedRows = unsafe {
@@ -308,16 +455,33 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief batchInsert(table: string, values: Array<ValuesBucket>, callback: AsyncCallback<number>):void
-     * @brief batchInsert(table: string, values: Array<ValuesBucket>):Promise<number>
+     * Inserts a batch of data into the target table.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
+     * @relation batchInsert(table: string, values: Array<ValuesBucket>):Promise<number>
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func batchInsert(table: String, values: Array<Map<String, ValueType>>): Int64 {
+    public func batchInsert(table: String, values: Array<ValuesBucket>): Int64 {
         unsafe {
             if (table.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore batchInsert failed: ${paramError("table", "not empty string")}")
@@ -328,10 +492,10 @@ public class RdbStore <: RemoteDataLite {
             if (valuesSize == 0) {
                 return 0
             }
-            let valuesBucketArray: CPointer<ValuesBucket> = calloc<ValuesBucket>(count: valuesSize)
+            let valuesBucketArray: CPointer<CValuesBucket> = calloc<CValuesBucket>(count: valuesSize)
             throwIfOOM(valuesBucketArray.isNull(), "RdbStore", "batchInsert")
             for (i in 0..valuesSize) {
-                let cVlaueBucket = ValuesBucket.create(values[i])
+                let cVlaueBucket = CValuesBucket.create(values[i])
                 throwIfOOM(cVlaueBucket.isNone(), "RdbStore", "batchInsert") {
                     freeValuesBucketArray(valuesBucketArray, i)
                     LibC.free(valuesBucketArray)
@@ -359,15 +523,21 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief  querySql(sql: string, bindArgs?: Array<ValueType>):Promise<ResultSet>
+     * Queries data in the database based on SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @relation querySql(sql: string, bindArgs?: Array<ValueType>):Promise<ResultSet>
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func querySql(sql: String, bindArgs!: Array<ValueType> = Array<ValueType>()): ResultSet {
+    public func querySql(sql: String, bindArgs!: Array<ValueType> = []): ResultSet {
         unsafe {
             if (sql.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore querySql failed: ${paramError("sql", "not empty string")}")
@@ -406,15 +576,47 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief executeSql(sql: string, bindArgs: Array<ValueType>, callback: AsyncCallback<void>):void
+     * Executes a SQL statement that contains specified parameters but returns no value.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 801 - Capability not supported the sql(attach,begin,commit,rollback etc.).
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800015 - The database does not respond.
+     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+     * Possible causes: Insert failed or the updated data does not exist.
+     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
+     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
+     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
+     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
+     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
+     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
+     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
+     * @relation executeSql(sql: string, bindArgs?: Array<ValueType>): Promise<void>;
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func executeSql(sql: String, bindArgs: Array<ValueType>): Unit {
+    public func executeSql(sql: String, bindArgs!: Array<ValueType> = []): Unit {
+        if (bindArgs.size == 0) {
+            executeSqlImpl(sql)
+        } else {
+            executeSqlImpl(sql, bindArgs)
+        }
+    }
+
+    func executeSqlImpl(sql: String, bindArgs: Array<ValueType>): Unit {
         unsafe {
             if (sql.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore executeSql failed: ${paramError("sql", "not empty string")}")
@@ -462,14 +664,22 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief on(event: string, interProcess: boolean, observer: Callback<void>): void
+     * Registers an observer for the database.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 801 - Capability not supported.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800050 - Failed to obtain the subscription service.
+     * @relation on(event: string, interProcess: boolean, observer: Callback<void>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func on(event: String, interProcess: Bool, callback: Callback0Argument): Unit {
+    public func on(event: String, interProcess: Bool, observer: Callback0Argument): Unit {
         if (event.isEmpty()) {
             RELATIONAL_STORE_LOG.error("RdbStore on failed: ${paramError("event", "not empty string")}")
             throw BusinessException(getErrorCode(ERR_PARAMETER_ERROR),
@@ -483,12 +693,12 @@ public class RdbStore <: RemoteDataLite {
         } else {
             v.value.getOrThrow()
         }
-        if (findCallbackObject(callbackList, callback)) {
+        if (findCallbackObject(callbackList, observer)) {
             RELATIONAL_STORE_LOG.error("RdbStore on failed: ${paramError("callback object", "different")}")
             return
         }
         unsafe {
-            let wrapper = {=> callback.invoke()}
+            let wrapper = {=> observer.invoke(None)}
             let lambdaData = Callback0Param<Unit>(wrapper)
             let cEvent = LibC.mallocCString(event)
             let errCode = FfiOHOSRelationalStoreOn(
@@ -500,19 +710,35 @@ public class RdbStore <: RemoteDataLite {
             )
             LibC.free(cEvent)
             throwIfNotSuccess(errCode, "RdbStore", "on")
-            callbackList.add((callback, lambdaData.getID()))
+            callbackList.add((observer, lambdaData.getID()))
         }
     }
 
     /**
-     * @brief off(event: string, interProcess: boolean, observer?: Callback<void>): void
+     * Remove specified observer of specified type from the database.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 801 - Capability not supported.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800050 - Failed to obtain the subscription service.
+     * @relation off(event: string, interProcess: boolean, observer?: Callback<void>): void
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func off(event: String, interProcess: Bool): Unit {
+    public func off(event: String, interProcess: Bool, observer!: ?Callback0Argument = None): Unit {
+        if (let Some(v) <- observer) {
+            offImpl(event, interProcess, v)
+        } else {
+            offImpl(event, interProcess)
+        }
+    }
+
+    func offImpl(event: String, interProcess: Bool): Unit {
         var v = eventCallbackMaps.entryView(event)
         if (v.value.isNone() || v.value.getOrThrow().size == 0) {
             RELATIONAL_STORE_LOG.error("RdbStore on failed: The event is not registered")
@@ -527,15 +753,7 @@ public class RdbStore <: RemoteDataLite {
         }
     }
 
-    /**
-     * @brief off(event: string, interProcess: boolean, observer?: Callback<void>): void
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func off(event: String, interProcess: Bool, callback: Callback0Argument): Unit {
+    func offImpl(event: String, interProcess: Bool, callback: Callback0Argument): Unit {
         var v = eventCallbackMaps.entryView(event)
         if (v.value.isNone() || v.value.getOrThrow().size == 0) {
             RELATIONAL_STORE_LOG.error("RdbStore on failed: The event is not registered")
@@ -582,7 +800,15 @@ public class RdbStore <: RemoteDataLite {
     }
 
     /**
-     * @brief emit(event: string): void
+     * Notifies the registered observers of a change to the data resource specified by Uri.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 801 - Capability not supported.
+     * @throws { BusinessException  } 14800000 - Inner error.
+     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
+     * @throws { BusinessException  } 14800050 - Failed to obtain the subscription service.
+     * @relation emit(event: string): void
      */
     @!APILevel[
         21,
