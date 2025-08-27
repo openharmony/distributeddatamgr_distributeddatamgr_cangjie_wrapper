@@ -13,23 +13,30 @@
  * limitations under the License.
  */
 
-package ohos.relational_store
+package ohos.data.relational_store
 
 import ohos.labels.*
 import ohos.ffi.*
-import std.collection.*
-import ohos.base.*
+import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 
+/**
+ * Manages relational database configurations.
+ *
+ * @relation class RdbPredicates
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class RdbPredicates <: RemoteDataLite {
+    /**
+     * A parameterized constructor used to create a RdbPredicates instance.
+     *
+     * @relation constructor(name: string);
+     */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -42,7 +49,10 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  inAllDevices(): RdbPredicates
+     * Specifies all remote devices which connect to local device when syncing distributed database.
+     * When query database, this function should not be called.
+     *
+     * @relation inAllDevices(): RdbPredicates
      */
     @!APILevel[
         21,
@@ -58,11 +68,13 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  beginWrap(): RdbPredicates
+     * Adds a left parenthesis to the RdbPredicates.
+     * This method is similar to ( of the SQL statement and needs to be used together with endWrap().
+     *
+     * @relation beginWrap(): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -75,11 +87,13 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  endWrap(): RdbPredicates
+     * Adds a right parenthesis to the RdbPredicates.
+     * This method is similar to ) of the SQL statement and needs to be used together with beginWrap().
+     *
+     * @relation endWrap(): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -92,11 +106,13 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  or(): RdbPredicates
+     * Adds an or condition to the RdbPredicates.
+     * This method is similar to or of the SQL statement.
+     *
+     * @relation or(): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -109,11 +125,13 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  and(): RdbPredicates
+     * Adds an and condition to the RdbPredicates.
+     * This method is similar to and of the SQL statement.
+     *
+     * @relation and(): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -126,11 +144,16 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  contains(field: string, value: string): RdbPredicates
+     * Configure the RdbPredicates to match the field whose data type is string and value
+     * contains a specified value.
+     * This method is similar to contains of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation contains(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -151,11 +174,16 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  beginsWith(field: string, value: string): RdbPredicates
+     * Configure the RdbPredicates to match the field whose data type is string and value starts
+     * with a specified string.
+     * This method is similar to value% of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation beginsWith(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -174,13 +202,17 @@ public class RdbPredicates <: RemoteDataLite {
             return this
         }
     }
-
     /**
-     * @brief  endsWith(field: string, value: string): RdbPredicates
+     * Configure the RdbPredicates to match the field whose data type is string and value
+     * ends with a specified string.
+     * This method is similar to %value of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation endsWith(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -201,11 +233,15 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  isNull(field: string): RdbPredicates
+     * Configure the RdbPredicates to match the fields whose value is null.
+     * This method is similar to is null of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation isNull(field: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -226,11 +262,15 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  isNotNull(field: string): RdbPredicates
+     * Configure the RdbPredicates to match the specified fields whose value is not null.
+     * This method is similar to is not null of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation isNotNull(field: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -251,11 +291,16 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  like(field: string, value: string): RdbPredicates
+     * Configure the RdbPredicates to match the fields whose data type is string and value is
+     * similar to a specified string.
+     * This method is similar to like of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation like(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -276,11 +321,16 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  glob(field: string, value: string): RdbPredicates
+     * Configure RdbPredicates to match the specified field whose data type is string and the value contains
+     * a wildcard.
+     * Different from like, the input parameters of this method are case-sensitive.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation glob(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -301,11 +351,15 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  orderByAsc(field: string): RdbPredicates
+     * Restricts the ascending order of the return list. When there are several orders,
+     * the one close to the head has the highest priority.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation orderByAsc(field: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -326,11 +380,15 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  orderByDesc(field: string): RdbPredicates
+     * Restricts the descending order of the return list. When there are several orders,
+     * the one close to the head has the highest priority.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation orderByDesc(field: string): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -351,11 +409,12 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  distinct(): RdbPredicates
+     * Restricts each row of the query result to be unique.
+     *
+     * @relation distinct(): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -368,11 +427,15 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  limitAs(value: number): RdbPredicates
+     * Restricts the max number of return records.
+     *
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation limitAs(value: number): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -385,11 +448,15 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  offsetAs(rowOffset: number): RdbPredicates
+     * Configure RdbPredicates to specify the start position of the returned result.
+     * Use this method together with limit(number).
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation offsetAs(rowOffset: number): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -402,11 +469,14 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  groupBy(fields: Array<string>): RdbPredicates
+     * Configure RdbPredicates to group query results by specified columns.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation groupBy(fields: Array<string>): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -438,11 +508,14 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  lessThanOrEqualTo(field: string, value: ValueType): RdbPredicates
+     * Restricts the value of the field to be smaller than or equal to the specified value.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation lessThanOrEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -468,11 +541,16 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  equalTo(field: string, value: ValueType): RdbPredicates
+     * Configure the RdbPredicates to match the field whose data type is ValueType and value is equal
+     * to a specified value.
+     * This method is similar to = of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation equalTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -496,12 +574,15 @@ public class RdbPredicates <: RemoteDataLite {
         return this
     }
 
-    /**  
-     * @brief  greaterThanOrEqualTo(field: string, value: ValueType): RdbPredicates
+    /**
+     * Restricts the value of the field to be greater than or equal to the specified value.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation greaterThanOrEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -527,11 +608,14 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  greaterThan(field: string, value: ValueType): RdbPredicates
+     * Restricts the value of the field to be greater than the specified value.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation greaterThan(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -557,11 +641,14 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  lessThan(field: string, value: ValueType): RdbPredicates
+     * Restricts the value of the field to be smaller than the specified value.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation lessThan(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -586,11 +673,16 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  notEqualTo(field: string, value: ValueType): RdbPredicates
+     * Configure the RdbPredicates to match the field whose data type is ValueType and value is not equal to
+     * a specified value.
+     * This method is similar to != of the SQL statement.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation notEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -616,15 +708,18 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  notBetween(field: string, low: ValueType, high: ValueType): RdbPredicates
+     * Configure RdbPredicates to match the specified field whose value is out of a given range.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation notBetween(field: string, low: ValueType, high: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func notBetween(field: String, lowValue: ValueType, highValue: ValueType): RdbPredicates {
+    public func notBetween(field: String, low: ValueType, high: ValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error(
@@ -633,8 +728,8 @@ public class RdbPredicates <: RemoteDataLite {
                     "RdbPredicates notBetween failed: ${paramError("field", "not empty string")}")
             }
             let cfield = LibC.mallocCString(field)
-            let lrtv = RetValueType.create(lowValue)
-            let hrtv = RetValueType.create(highValue)
+            let lrtv = RetValueType.create(low)
+            let hrtv = RetValueType.create(high)
             throwIfOOM(lrtv.isNone() || hrtv.isNone(), "RdbPredicates", "notBetween") {
                 LibC.free(cfield)
                 if (lrtv.isSome()) {
@@ -654,15 +749,18 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  between(field: string, low: ValueType, high: ValueType): RdbPredicates
+     * Configure RdbPredicates to match the specified field whose value is within a given range.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation between(field: string, low: ValueType, high: ValueType): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func between(field: String, lowValue: ValueType, highValue: ValueType): RdbPredicates {
+    public func between(field: String, low: ValueType, high: ValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates between failed: ${paramError("field", "not empty string")}")
@@ -670,8 +768,8 @@ public class RdbPredicates <: RemoteDataLite {
                     "RdbPredicates between failed: ${paramError("field", "not empty string")}")
             }
             let cfield = LibC.mallocCString(field)
-            let lrtv = RetValueType.create(lowValue)
-            let hrtv = RetValueType.create(highValue)
+            let lrtv = RetValueType.create(low)
+            let hrtv = RetValueType.create(high)
             throwIfOOM(lrtv.isNone() || hrtv.isNone(), "RdbPredicates", "between") {
                 if (lrtv.isSome()) {
                     lrtv.getOrThrow().free()
@@ -691,15 +789,19 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  in(field: string, value: Array<ValueType>): RdbPredicates
+     * Configure RdbPredicates to match the specified field whose data type is ValueType array and values
+     * are within a given range.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation in(field: string, value: Array<ValueType>): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func `in`(field: String, values: Array<ValueType>): RdbPredicates {
+    public func `in`(field: String, value: Array<ValueType>): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates in failed: ${paramError("field", "not empty string")}")
@@ -707,7 +809,7 @@ public class RdbPredicates <: RemoteDataLite {
                     "RdbPredicates in failed: ${paramError("field", "not empty string")}")
             }
             let cfield = LibC.mallocCString(field)
-            let valuesSize = values.size
+            let valuesSize = value.size
             let valuesArray: CPointer<RetValueType> = if (valuesSize == 0) {
                 CPointer<RetValueType>()
             } else {
@@ -717,7 +819,7 @@ public class RdbPredicates <: RemoteDataLite {
                 LibC.free(cfield)
             }
             for (i in 0..valuesSize) {
-                let valueType = RetValueType.create(values[i])
+                let valueType = RetValueType.create(value[i])
                 throwIfOOM(valueType.isNone(), "RdbPredicates", "in") {
                     freeValuesArray(valuesArray, i)
                     LibC.free<RetValueType>(valuesArray)
@@ -737,15 +839,19 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * @brief  notIn(field: string, value: Array<ValueType>): RdbPredicates
+     * Configure RdbPredicates to match the specified field whose data type is ValueType array and values
+     * are out of a given range.
+     *
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types.
+     * @relation notIn(field: string, value: Array<ValueType>): RdbPredicates
      */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func notIn(field: String, values: Array<ValueType>): RdbPredicates {
+    public func notIn(field: String, value: Array<ValueType>): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates notIn failed: ${paramError("field", "not empty string")}")
@@ -753,7 +859,7 @@ public class RdbPredicates <: RemoteDataLite {
                     "RdbPredicates notIn failed: ${paramError("field", "not empty string")}")
             }
             let cfield = LibC.mallocCString(field)
-            let valuesSize = values.size
+            let valuesSize = value.size
             let valuesArray: CPointer<RetValueType> = if (valuesSize == 0) {
                 CPointer<RetValueType>()
             } else {
@@ -763,7 +869,7 @@ public class RdbPredicates <: RemoteDataLite {
                 LibC.free(cfield)
             }
             for (i in 0..valuesSize) {
-                let valueType = RetValueType.create(values[i])
+                let valueType = RetValueType.create(value[i])
                 throwIfOOM(valueType.isNone(), "RdbPredicates", "notIn") {
                     freeValuesArray(valuesArray, i)
                     LibC.free<RetValueType>(valuesArray)

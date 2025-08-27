@@ -13,89 +13,159 @@
  * limitations under the License.
  */
 
-package ohos.preferences
+package ohos.data.preferences
 
 import ohos.labels.*
-import ohos.ffi.*
-import ohos.base.*
+import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR, ERR_NOT_SUPPOERTED, getUniversalErrorMsg }
+
 import std.collection.*
 
+/**
+ * the storage type
+ * @relation enum StorageType
+ */
 @!APILevel[
     21,
-    atomicservice: true,
+    stagemodelonly: true,
+    syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+]
+public enum StorageType {
+    /**
+     * XML storage type
+     * @relation XML = 0
+     */   
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+    ]
+    Xml
+    |
+    
+    /**
+     * GSKV storage type
+     * @relation GSKV
+     */  
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+    ]
+    Gskv
+    | ...
+}
+
+
+/**
+ * Enumeration implements a collection of basic data types.
+ */
+@!APILevel[
+    21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public enum ValueType {
+    /**
+     * Type for Int64.
+     */   
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    integer(Int64)
-    | @!APILevel[
+    Integer(Int64)
+    |
+    
+    /**
+     * Type for Float64.
+     */
+    @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    double(Float64)
-    | @!APILevel[
+    Double(Float64)
+    |
+
+    /**
+     * Type for String.
+     */
+    @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    string(String)
-    | @!APILevel[
+    StringData(String)
+    | 
+    
+    /**
+     * Type for Bool.
+     */    
+    @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    bool(Bool)
-    | @!APILevel[
+    BoolData(Bool)
+    |
+
+    /**
+     * Type for Array<Bool>.
+     */
+    @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    boolArray(Array<Bool>)
-    | @!APILevel[
+    BoolArray(Array<Bool>)
+    |
+
+    /**
+     * Type for Float64.
+     */
+    @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    doubleArray(Array<Float64>)
-    | @!APILevel[
+    DoubleArray(Array<Float64>)
+    |
+
+    /**
+     * Type for Array<String>.
+     */
+    @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    stringArray(Array<String>)
+    StringArray(Array<String>)
     | ...
 }
 
+/**
+ * The Max length of key.
+ *
+ * @relation const MAX_KEY_LENGTH: number
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
-public let MAX_KEY_LENGTH: Int64 = 1024
+public const MAX_KEY_LENGTH: UInt32 = 1024
 
+/**
+ * The Max length of value.
+ *
+ * @relation const MAX_VALUE_LENGTH: number
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
-public let MAX_VALUE_LENGTH: Int64 = 16 * 1024 * 1024
+public const MAX_VALUE_LENGTH: UInt32 = 16 * 1024 * 1024
 
 let MESSAGE_TPYE_ERROR = "The type should be change or multiProcessChange."
 
@@ -140,6 +210,24 @@ let NATIVE_ERR_TO_CJ_ERR_MAP = HashMap<Int32, Int32>(
     ]
 )
 
+func isInErrCodeMap(code: Int32): Bool {
+    let realCode = getCJErrorCode(code)
+    if (let Some(v) <- getUniversalErrorMsg(realCode)) {
+        return true
+    } else if (CJ_ERROR_MSG.contains(realCode)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+func checkCodeAndThrow(errCode: Int32, funcName: String) {
+    if (!isInErrCodeMap(errCode)) {
+        PREFERENCES_LOG.error("Preferences ${funcName} failed: ${getCJErrorMsg(E_DATA_GROUP_ID_INVALID)} code: ${getCJErrorCode(E_DATA_GROUP_ID_INVALID)}")
+        throw BusinessException(getCJErrorCode(E_DATA_GROUP_ID_INVALID), "Preferences ${funcName} failed: ${getCJErrorMsg(E_DATA_GROUP_ID_INVALID)} code: ${getCJErrorCode(E_DATA_GROUP_ID_INVALID)}")
+    }
+}
+
 func getNativeErrorMsg(code: Int32): String {
     match (NATIVE_ERROR_MSG.get(code)) {
         case Some(v) => v
@@ -165,52 +253,65 @@ func getCJErrorCode(code: Int32): Int32 {
     }
 }
 
+/**
+ * Manages preferences file configurations.
+ *
+ * @relation interface Options
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
-public struct Options {
+public class Options {
+    /**
+     * The preferences file name.
+     *
+     * @relation name: string
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public let name: String
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
-    ]
-    public let dataGroupId: String
+    public var name: String
 
+    /**
+     * Application Group Id.
+     *
+     * @relation dataGroupId?: string | null | undefined
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public init(name: String) {
-        this.name = name
-        this.dataGroupId = String.empty
-    }
+    public var dataGroupId: String
 
+    /**
+     * The preferences storage type.
+     *
+     * @relation storageType?: StorageType | null | undefined;
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public init(name: String, dataGroupId: String) {
+    public var storageType: StorageType
+
+    /**
+     * Options constructor.
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+    ]
+    public init(name: String, dataGroupId!: String = String.empty,
+        storageType!: StorageType = StorageType.Xml) {
         this.name = name
         this.dataGroupId = dataGroupId
+        this.storageType = storageType
     }
 }

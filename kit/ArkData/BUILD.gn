@@ -14,20 +14,18 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("kit.ArkData") {
+ohos_cangjie_shared_library("kit.ArkData") {
   sources = [ "index.cj" ]
 
   cj_deps = [
     "../../ohos/data:ohos.data",
-    "../../ohos/data/data_share_predicates:ohos.data_share_predicates",
-    "../../ohos/data/distributed_kv_store:ohos.distributed_kv_store",
-    "../../ohos/data/preferences:ohos.preferences",
-    "../../ohos/data/relational_store:ohos.relational_store",
-    "../../ohos/data/values_bucket:ohos.values_bucket",
+    "../../ohos/data/data_share_predicates:ohos.data.data_share_predicates",
+    "../../ohos/data/distributed_kv_store:ohos.data.distributed_kv_store",
+    "../../ohos/data/preferences:ohos.data.preferences",
+    "../../ohos/data/relational_store:ohos.data.relational_store",
+    "../../ohos/data/values_bucket:ohos.data.values_bucket",
   ]
 
-  kit = true
   subsystem_name = "distributeddatamgr"
   part_name = "distributeddatamgr_cangjie_wrapper"
-  lib_name = "ArkData"
 }

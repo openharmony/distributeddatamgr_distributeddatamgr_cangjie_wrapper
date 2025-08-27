@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-package ohos.preferences
+package ohos.data.preferences
+
+import ohos.ffi.*
 
 import std.collection.*
-import ohos.ffi.*
-import ohos.base.*
 
 foreign {
     func FfiOHOSPreferencesGetPreferences(context: StageContext, name: CString, dataGroupId: CString,
@@ -62,29 +62,29 @@ struct CPreferencesValueType {
     init(value: ValueType) {
         unsafe {
             match (value) {
-                case integer(n) =>
+                case Integer(n) =>
                     tag = 0
                     integer = n
-                case double(n) =>
+                case Double(n) =>
                     tag = 1
                     double = n
-                case string(str) =>
+                case StringData(str) =>
                     tag = 2
                     string = LibC.mallocCString(str).getChars()
-                case bool(b) =>
+                case BoolData(b) =>
                     tag = 3
                     bool = b
-                case boolArray(bArray) =>
+                case BoolArray(bArray) =>
                     tag = 4
                     let bArrSize = bArray.size
                     let bArr: CPointer<Bool> = cjArr2CArr<Bool, Bool>(bArray, {v => v})
                     boolArray = CArrBool(bArr, bArrSize)
-                case doubleArray(dArray) =>
+                case DoubleArray(dArray) =>
                     tag = 5
                     let dArrsize = dArray.size
                     let dArr: CPointer<Float64> = cjArr2CArr<Float64, Float64>(dArray, {v => v})
                     doubleArray = CArrDouble(dArr, dArrsize)
-                case stringArray(sArray) =>
+                case StringArray(sArray) =>
                     tag = 6
                     let sArrsize = sArray.size
                     let sArr: CPointer<CString> = cjArr2CArr<String, CString>(sArray, {str => LibC.mallocCString(str)}) {
@@ -98,28 +98,28 @@ struct CPreferencesValueType {
 
     static func parse(cPreferencesValueType: CPreferencesValueType): ValueType {
         match (cPreferencesValueType.tag) {
-            case 0 => return ValueType.integer(cPreferencesValueType.integer)
-            case 1 => return ValueType.double(cPreferencesValueType.double)
-            case 2 => return ValueType.string(CString(cPreferencesValueType.string).toString())
-            case 3 => return ValueType.bool(cPreferencesValueType.bool)
+            case 0 => return ValueType.Integer(cPreferencesValueType.integer)
+            case 1 => return ValueType.Double(cPreferencesValueType.double)
+            case 2 => return ValueType.StringData(CString(cPreferencesValueType.string).toString())
+            case 3 => return ValueType.BoolData(cPreferencesValueType.bool)
             case 4 =>
                 let ptr = cPreferencesValueType.boolArray.head
                 let size = cPreferencesValueType.boolArray.size
                 let result = unsafe { Array<Bool>(size, {i => ptr.read(i)}) }
-                return ValueType.boolArray(result)
+                return ValueType.BoolArray(result)
             case 5 =>
                 let ptr = cPreferencesValueType.doubleArray.head
                 let size = cPreferencesValueType.doubleArray.size
                 let result = unsafe { Array<Float64>(size, {i => ptr.read(i)}) }
-                return ValueType.doubleArray(result)
+                return ValueType.DoubleArray(result)
             case 6 =>
                 let ptr = cPreferencesValueType.stringArray.head
                 let size = cPreferencesValueType.stringArray.size
                 let result = unsafe { Array<String>(size, {i => ptr.read(i).toString()}) }
-                return ValueType.stringArray(result)
+                return ValueType.StringArray(result)
             case _ =>
                 PREFERENCES_LOG.info("WARNING: Shouldn't have walked here")
-                return ValueType.integer(-1)
+                return ValueType.Integer(-1)
         }
     }
 

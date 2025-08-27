@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-package ohos.relational_store
+package ohos.data.relational_store
 
 import ohos.ffi.*
 import std.collection.*
-import std.time.*
-import ohos.base.*
 
 type StageContext = CPointer<Unit>
 
@@ -58,10 +56,10 @@ foreign {
 
     func FfiOHOSRelationalStoreObtainDistributedTableName(id: Int64, device: CString, table: CString): CString
 
-    func FfiOHOSRelationalStoreInsert(id: Int64, table: CString, value: ValuesBucket, conflict: Int32,
+    func FfiOHOSRelationalStoreInsert(id: Int64, table: CString, value: CValuesBucket, conflict: Int32,
         errCode: CPointer<Int32>): Int64
 
-    func FfiOHOSRelationalStoreUpdate(id: Int64, valuesBucket: ValuesBucket, predicatesID: Int64,
+    func FfiOHOSRelationalStoreUpdate(id: Int64, valuesBucket: CValuesBucket, predicatesID: Int64,
         conflictResolution: Int32, errCode: CPointer<Int32>): Int64
 
     func FfiOHOSRelationalStoreExecuteSql(id: Int64, sql: CString, errCode: CPointer<Int32>): Unit
@@ -182,7 +180,7 @@ foreign {
 
     func FfiOHOSRelationalStoreCleanDirtyData(id: Int64, tableName: CString, cursor: UInt64): Int32
 
-    func FfiOHOSRelationalStoreBatchInsert(id: Int64, tableName: CString, values: CPointer<ValuesBucket>,
+    func FfiOHOSRelationalStoreBatchInsert(id: Int64, tableName: CString, values: CPointer<CValuesBucket>,
         valuesSize: Int64, insertNum: CPointer<Int64>): Int32
 
     func FfiOHOSRelationalStoreQuerySql(id: Int64, sql: CString, bindArgs: CPointer<RetValueType>, size: Int64,
@@ -191,7 +189,7 @@ foreign {
     func FfiOHOSRelationalStoreExecuteSqlBindArgs(id: Int64, sql: CString, bindArgs: CPointer<RetValueType>,
         bindArgsSize: Int64, errCode: CPointer<Int32>): Unit
 
-    func FfiOHOSRelationalStoreGetRow(id: Int64, errCode: CPointer<Int32>): ValuesBucket
+    func FfiOHOSRelationalStoreGetRow(id: Int64, errCode: CPointer<Int32>): CValuesBucket
 
     func FfiOHOSRelationalStoreOn(id: Int64, event: CString, interProcess: Bool, callback: Int64, observerID: Int64): Int32
 
@@ -443,20 +441,20 @@ struct RetValueType {
                 CPointer<UInt8>(), 0), RetAsset(), RetAssets(CPointer<RetAsset>(), 0))
         var tag: UInt8 = 0
         match (value) {
-            case null => tag = 0
-            case integer(n) =>
+            case Null => tag = 0
+            case Integer(n) =>
                 tag = 1
                 integer = n
-            case double(n) =>
+            case Double(n) =>
                 tag = 2
                 double = n
-            case string(str) =>
+            case StringValue(str) =>
                 tag = 3
                 match (mallocCString(str)) {
                     case Some(v) => string = v.getChars()
                     case None => return None
                 }
-            case boolean(b) =>
+            case Boolean(b) =>
                 tag = 4
                 boolean = b
             case Uint8Array(uint8Arr) =>
@@ -546,11 +544,11 @@ func convert(value: RetValueType): ValueType {
         let assets = value.assets.head
         let assetsSize = value.assets.size
         match (tag) {
-            case 0 => ValueType.null
-            case 1 => ValueType.integer(integer)
-            case 2 => ValueType.double(double)
-            case 3 => ValueType.string(CString(string).toString())
-            case 4 => ValueType.boolean(boolean)
+            case 0 => ValueType.Null
+            case 1 => ValueType.Integer(integer)
+            case 2 => ValueType.Double(double)
+            case 3 => ValueType.StringValue(CString(string).toString())
+            case 4 => ValueType.Boolean(boolean)
             case 5 =>
                 if (uint8Array.isNull()) {
                     return ValueType.Uint8Array(Array<UInt8>())
@@ -579,15 +577,15 @@ struct CStatistic {
 }
 
 @C
-struct ValuesBucket {
-    ValuesBucket(
+struct CValuesBucket {
+    CValuesBucket(
         let key: CPointer<CString>,
         let value: CPointer<RetValueType>,
         
         let size: Int64
     ) {}
 
-    static func create(map: Map<String, ValueType>): Option<ValuesBucket> {
+    static func create(map: Map<String, ValueType>): Option<CValuesBucket> {
         unsafe {
             let size = map.size
             let key = calloc<CString>(count: size)
@@ -618,7 +616,7 @@ struct ValuesBucket {
                 value.write(i, tmpValue.getOrThrow())
                 i++
             }
-            return ValuesBucket(key, value, size)
+            return CValuesBucket(key, value, size)
         }
     }
 
@@ -649,7 +647,7 @@ struct ValuesBucket {
     }
 }
 
-func convert(value: ValuesBucket): HashMap<String, ValueType> {
+func convert(value: CValuesBucket): HashMap<String, ValueType> {
     if (value.size < 0) {
         return HashMap<String, ValueType>()
     }

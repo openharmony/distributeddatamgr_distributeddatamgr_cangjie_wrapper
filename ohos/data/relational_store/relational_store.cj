@@ -13,27 +13,53 @@
  * limitations under the License.
  */
 
-package ohos.relational_store
+package ohos.data.relational_store
 
+import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
+import ohos.business_exception.BusinessException
 import ohos.labels.*
-import ohos.ffi.*
-import ohos.base.*
 
 /**
- * @brief  getRdbStore(context: Context, config: StoreConfig): Promise<RdbStore>
+ * Obtains a RDB store.
+ * You can set parameters of the RDB store as required. In general, this method is recommended
+ * to obtain a rdb store.
+ *
+ * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+ * <br>2. Incorrect parameter types; 3. Parameter verification failed. 
+ * @throws { BusinessException  } 14800000 - Inner error.
+ * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
+ * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
+ * @throws { BusinessException  } 14801001 - The operation is supported in the stage model only.
+ * @throws { BusinessException  } 14801002 - Invalid data group ID.
+ * @throws { BusinessException  } 14800017 - StoreConfig is changed.
+ * @throws { BusinessException  } 14800020 - The secret key is corrupted or lost.
+ * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+ * Possible causes: Insert failed or the updated data does not exist.
+ * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
+ * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
+ * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
+ * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
+ * @throws { BusinessException  } 14800029 - SQLite: The database is full.
+ * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+ * @throws { IllegalArgumentException } - The context is invalid.
+ *
+ * @relation function getRdbStore(context: Context, config: StoreConfig): Promise<RdbStore>;
  */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
-public func getRdbStore(context: StageContext, config: StoreConfig): RdbStore {
+public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStore {
+    let stageContext = getStageContext(context)
+    if (stageContext.isNull()) {
+        throw IllegalArgumentException("The context is invalid.")
+    }
     unsafe {
         let retStoreConfig = RetStoreConfig.create(config)
         var errCode: Int32 = 0
         throwIfOOM(retStoreConfig.isNone(), "getRdbStore")
-        let id = FfiOHOSRelationalStoreGetRdbStore(context, retStoreConfig.getOrThrow(), inout errCode)
+        let id = FfiOHOSRelationalStoreGetRdbStore(stageContext, retStoreConfig.getOrThrow(), inout errCode)
         retStoreConfig.getOrThrow().free()
         throwIfNotSuccess(errCode, "getRdbStore")
         return RdbStore(id)
@@ -41,39 +67,65 @@ public func getRdbStore(context: StageContext, config: StoreConfig): RdbStore {
 }
 
 /**
- * @brief  deleteRdbStore(context: Context, name: string): Promise<void>
+ * Deletes the database with a specified store config.
+ * When specify custom directory, this function should be called.
+ *
+ * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+ * <br>2. Incorrect parameter types.
+ * @throws { BusinessException  } 14800000 - Inner error.
+ * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
+ * @throws { IllegalArgumentException } - The context is invalid.
+ *
+ * @relation function deleteRdbStore(context: Context, name: string): Promise<void>;
  */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
-public func deleteRdbStore(context: StageContext, name: String): Unit {
+public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
+    let stageContext = getStageContext(context)
+    if (stageContext.isNull()) {
+        throw IllegalArgumentException("The context is invalid.")
+    }
     let cName = unsafe { LibC.mallocCString(name) }
     var errCode: Int32 = 0
     unsafe {
-        FfiOHOSRelationalStoreDeleteRdbStore(context, cName, inout errCode)
+        FfiOHOSRelationalStoreDeleteRdbStore(stageContext, cName, inout errCode)
         LibC.free(cName)
         throwIfNotSuccess(errCode, "deleteRdbStore")
     }
 }
 
 /**
- * @brief  deleteRdbStore(context: Context, config: StoreConfig): Promise<void>
+ * Deletes the database with a specified store config.
+ * When specify custom directory, this function should be called.
+ *
+ * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+ * <br>2. Incorrect parameter types.
+ * @throws { BusinessException  } 14800000 - Inner error.
+ * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
+ * @throws { BusinessException  } 14801001 - The operation is supported in the stage model only.
+ * @throws { BusinessException  } 14801002 - Invalid data group ID.
+ * @throws { IllegalArgumentException } - The context is invalid.
+ *
+ * @relation function deleteRdbStore(context: Context, config: StoreConfig): Promise<void>;
  */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
-public func deleteRdbStore(context: StageContext, config: StoreConfig): Unit {
+public func deleteRdbStore(context: UIAbilityContext, config: StoreConfig): Unit {
+    let stageContext = getStageContext(context)
+    if (stageContext.isNull()) {
+        throw IllegalArgumentException("The context is invalid.")
+    }
     unsafe {
         let retStoreConfig = RetStoreConfig.create(config)
         var errCode: Int32 = 0
         throwIfOOM(retStoreConfig.isNone(), "deleteRdbStore")
-        FfiOHOSRelationalStoreDeleteRdbStoreConfig(context, retStoreConfig.getOrThrow(), inout errCode)
+        FfiOHOSRelationalStoreDeleteRdbStoreConfig(stageContext, retStoreConfig.getOrThrow(), inout errCode)
         retStoreConfig.getOrThrow().free()
         throwIfNotSuccess(errCode, "deleteRdbStore")
     }
