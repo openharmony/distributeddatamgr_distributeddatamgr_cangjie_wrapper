@@ -32,16 +32,16 @@
         },
         "build": {
             "sub_component": [
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/data_share_predicates:ohos.data_share_predicates",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/distributed_kv_store:ohos.distributed_kv_store",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/preferences:ohos.preferences",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/relational_store:ohos.relational_store",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/values_bucket:ohos.values_bucket",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/data_share_predicates:ohos.data.data_share_predicates",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/distributed_kv_store:ohos.data.distributed_kv_store",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/preferences:ohos.data.preferences",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/relational_store:ohos.data.relational_store",
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/values_bucket:ohos.data.values_bucket",
                 "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/kit/ArkData:kit.ArkData"
             ],
             "inner_kits": [
                 {
-                    "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/data_share_predicates:ohos.data_share_predicates"
+                    "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/data_share_predicates:ohos.data.data_share_predicates"
                 }
             ],
             "test": [
