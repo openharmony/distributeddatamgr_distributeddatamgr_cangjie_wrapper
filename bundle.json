@@ -27,7 +27,14 @@
         "ram": "864KB",
         "deps": {
             "components": [
-                "cangjie_ark_interop"
+                "ability_cangjie_wrapper",
+                "arkui_cangjie_wrapper",
+                "cangjie_ark_interop",
+                "data_share",
+                "hiviewdfx_cangjie_wrapper",
+                "kv_store",
+                "preferences",
+                "relational_store"
             ]
         },
         "build": {

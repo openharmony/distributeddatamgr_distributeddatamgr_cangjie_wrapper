@@ -21,21 +21,47 @@ foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 ├── figures          # architecture pictures
 ```
 
+## Constraints
+
+The distributeddatamgr cangjie interface currently under development only supports standard devices.
+
+## Usage
+
+The distributeddatamgr_cangjie_wrapper provides the following capabilities:
+
+-   DataShare Predicates.
+-   Distributed KV Store.
+-   User Preferences.
+-   RDB Store.
+-   Value Bucket.
+
+Compared to ArkTS, the following features are currently not supported:
+
+-   Common Data Types.
+-   DataAbility Predicates.
+-   DataShare.
+-   Distributed Data Object.
+-   Shared User Preferences.
+-   Shared RDB Store.
+-   Unified Data Channel.
+-   Uniform Data Structs.
+-   Uniform Data Definition and Description.
+-   ArkData Intelligence Platform.
+-   DataShare ExtensionAbility.
+-   Device-Cloud Service.
+-   Device-Cloud Sharing Extension.
+-   DataShare Result Set.
+
+For distributeddatamgr APIs, please refer to
+1. [ohos.data.data_share_predicates](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkData/cj-apis-data_share_predicates.md)。
+2. [ohos.data.distributed_kv_store](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkData/cj-apis-distributed_kv_store.md)。
+3. [ohos.data.preferences](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkData/cj-apis-preferences.md)。
+4. [ohos.data.relational_store](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkData/cj-apis-relational_store.md)。
+5. [ohos.data.values_bucket](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkData/cj-apis-values_bucket.md)。
+
+For relevation guidance, please refer to [Database Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/database)。
+
 ## Component Description
-
-### Distributed Data Object
-
-As an object-oriented in-memory data management framework, the distributed data object framework provides APIs for basic data object management, including creating, querying, deleting, modifying, and subscribing to in-memory objects. Moreover, it provides distributed capabilities to implement data object collaboration for the same application between multiple devices that form a Super Device.
-
-JS APIs are provided to help you use distributed data objects like using local data objects. A variety of data types are supported, including basic data types such as number, string, and Boolean, as well as complex data types such as array and nested basic data types.
-
-### DataShare
-
-The **DataShare** module allows an application to share data with other applications. It allows data to be shared across different applications on the same device.
-
-### DDS
-
-The DDS implements database collaboration across devices for applications. Data of different devices is isolated based on a triplet of the account, application, and database. The DDS synchronizes data between trusted devices, delivering a consistent data access experience on different devices.
 
 ### KV Store
 
@@ -66,6 +92,10 @@ With the SQLite as the persistence engine, the RDB store supports all SQLite fea
 ### UDMF
 
 The UDMF provides standard data channels for many-to-many data sharing across applications and provides standard APIs for data access. It also provides standard definitions for data types, such as text and image, to streamline data interaction between different applications and minimize the workload of data type adaptation.
+
+## Code Contribution
+
+Developers are welcome to contribute code, documentation, etc. For specific contribution processes and methods, please refer to [Code Contribution](https://gitcode.com/openharmony/docs/blob/master/en/contribute/code-contribution.md).
 
 ## Repositories Involved
 
