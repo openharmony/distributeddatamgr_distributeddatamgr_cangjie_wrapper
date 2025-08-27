@@ -13,61 +13,376 @@
  * limitations under the License.
  */
 
-package ohos.relational_store
+package ohos.data.relational_store
 
 import ohos.ffi.*
 import ohos.hilog.*
-import ohos.base.*
 import ohos.labels.*
 import std.collection.*
+import ohos.business_exception.{ BusinessException, UNIVERSAL_ERROR_MAP, getUniversalErrorMsg}
 
 const UINT64_MAX: UInt64 = 0xffff_ffff_ffff_ffff
 let RELATIONAL_STORE_LOG = HilogChannel(0, 0xD001650, "CJ-Relational_Store")
 
+/**
+ * Indicates several assets in one column
+ * @relation type Assets = Asset[]
+ */
+public type Assets = Array<Asset>
+
+/**
+ * Values in buckets are stored in key-value pairs
+ * @relation type ValuesBucket = Record<string, ValueType>
+ */
+public type ValuesBucket = Map<String, ValueType>
+
+/**
+ * Specifies the cryptographic parameters used when opening an encrypted database.
+ * @relation interface CryptoParam
+ */
 @!APILevel[
     21,
-    crossplatform: true,
+    stagemodelonly: true,
+    syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+]
+public class CryptoParam {
+    /**
+     * Specifies the key used when opening an encrypted database.
+     * When finished passing the key to the database, its content should be set to all-zero.
+     * @relation encryptionKey: Uint8Array;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var encryptionKey: Array<UInt8>
+
+    /**
+     * Specifies the number of KDF iterations used when opening an encrypted database.
+     * Default number is 10000.
+     * When the number is set to 0, use default iteration number and encryption algorithm.
+     * @relation iterationCount?: number;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var iterationCount: Int32
+
+    /**
+     * Specifies the encryption algorithm when opening an encrypted database.
+     * Default encryption algorithm is AES_256_GCM.
+     * @relation encryptionAlgo?: EncryptionAlgo;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var encryptionAlgo: EncryptionAlgo
+
+    /**
+     * Specifies the HMAC algorithm when opening an encrypted database.
+     * Default HMAC algorithm is SHA256.
+     * @relation hmacAlgo?: HmacAlgo;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var hmacAlgo: HmacAlgo
+
+    /**
+     * Specifies the KDF algorithm when opening an encrypted database.
+     * Default KDF SHA algorithm is the same as HMAC algorithm.
+     * @relation kdfAlgo?: KdfAlgo;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var kdfAlgo: ?KdfAlgo
+
+    /**
+     * Specifies the page size used when opening an encrypted database.
+     * Default crypto page size is 1024.
+     * @relation cryptoPageSize?: number;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var cryptoPageSize: UInt32
+
+    /**
+     * CryptoParam constructor.
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public init(encryptionKey: Array<UInt8>, iterationCount!: Int32 = 10000,
+        encryptionAlgo!: EncryptionAlgo = EncryptionAlgo.Aes256Gcm,
+        hmacAlgo!: HmacAlgo = HmacAlgo.Sha256, kdfAlgo!: ?KdfAlgo = None,
+        cryptoPageSize!: UInt32 = 1024) {
+        this.encryptionKey = encryptionKey
+        this.iterationCount = iterationCount
+        this.encryptionAlgo = encryptionAlgo
+        this.hmacAlgo = hmacAlgo
+        this.kdfAlgo = kdfAlgo
+        this.cryptoPageSize = cryptoPageSize
+    }
+}
+
+/**
+ * Enumerates the supported KDF algorithm when opening a database.
+ * @relation enum KdfAlgo
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+]
+public enum KdfAlgo {
+    /**
+     * KDF_SHA1: PBKDF2_HMAC_SHA1 algorithm.
+     * @relation KDF_SHA1 = 0
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    KdfSha1
+    |
+    /**
+     * PBKDF2_HMAC_SHA256 algorithm.
+     * @relation KDF_SHA256
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    KdfSha256
+    |
+    /**
+     * PBKDF2_HMAC_SHA512 algorithm.
+     * @relation KDF_SHA512
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    KdfSha512
+    | ...
+}
+
+/**
+ * Enumerates the supported HMAC algorithm when opening a database.
+ * @relation enum HmacAlgo
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+]
+public enum HmacAlgo {
+    /**
+     * HMAC_SHA1 algorithm.
+     * @relation SHA1 = 0
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    Sha1
+    |
+    /**
+     * HMAC_SHA256 algorithm.
+     * @relation SHA256
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    Sha256
+    |
+    /**
+     * HMAC_SHA512 algorithm.
+     * @relation SHA512
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    Sha512
+    | ...
+}
+
+/**
+ * Enumerates the supported encryption algorithm when opening a database.
+ * @relation enum EncryptionAlgo
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+]
+public enum EncryptionAlgo {
+    /**
+     * Database is encrypted using AES_256_GCM.
+     * @relation AES_256_GCM = 0
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    Aes256Gcm
+    |
+    /**
+     * Database is encrypted using AES_256_CBC.
+     * @relation AES_256_CBC
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    Aes256Cbc
+    | ...
+}
+
+/**
+ * Enumerates the supported tokenizer when opening a database.
+ * @relation enum Tokenizer
+ */
+@!APILevel[
+    21,
+    stagemodelonly: true,
+    syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+]
+public enum Tokenizer {
+    /**
+     * not use tokenizer.
+     * @relation NONE_TOKENIZER = 0
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    NoneTokenizer
+    |
+    /**
+     * native icu tokenizer.
+     * @relation ICU_TOKENIZER
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    IcuTokenizer
+    |
+    /**
+     * self-developed enhance tokenizer.
+     * @relation CUSTOM_TOKENIZER
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    CustomTokenizer
+    | ...
+
+    func getValue(): Int32 {
+        match (this) {
+            case NoneTokenizer => 0
+            case IcuTokenizer => 1
+            case CustomTokenizer => 2
+            case _ => throw IllegalArgumentException("The type is not supported.")
+        }
+    }
+}
+
+/**
+ * Describes the {@code RdbStore} type.
+ *
+ * @relation enum SecurityLevel
+ */
+@!APILevel[
+    21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SecurityLevel {
+    /**
+     * S1: means the db is low level security
+     * There are some low impact, when the data is leaked.
+     *
+     * @relation S1 = 1,
+     */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S1
-    | @!APILevel[
+    |
+    /**
+     * S2: means the db is middle level security
+     * There are some major impact, when the data is leaked.
+     *
+     * @relation S2 = 2,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S2
-    | @!APILevel[
+    |
+    /**
+     * S3: means the db is high level security
+     * There are some severity impact, when the data is leaked.
+     *
+     * @relation S3 = 3,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S3
-    | @!APILevel[
+    |
+    /**
+     * S4: means the db is critical level security
+     * There are some critical impact, when the data is leaked.
+     *
+     * @relation S4 = 4
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S4
     | ...
 
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
             case S1 => 1
             case S2 => 2
@@ -78,392 +393,682 @@ public enum SecurityLevel {
     }
 }
 
+/**
+ * Describes the change type.
+ *
+ * @relation enum ChangeType
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ChangeType {
+    /**
+     * Means the change type is data change.
+     *
+     * @relation DATA_CHANGE,
+     */
     @!APILevel[
         21,
-        permission: "ohos.DISTRIBUTED_DATASYNC",
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    DATA_CHANGE
-    | @!APILevel[
+    DataChange
+    |
+    /**
+     * Means the change type is asset change.
+     *
+     * @relation ASSET_CHANGE
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ASSET_CHANGE
+    AssetChange
     | ...
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case DATA_CHANGE => 0
-            case ASSET_CHANGE => 1
+            case DataChange => 0
+            case AssetChange => 1
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 
     static func parse(val: Int32): ChangeType {
         match (val) {
-            case 0 => DATA_CHANGE
-            case 1 => ASSET_CHANGE
+            case 0 => DataChange
+            case 1 => AssetChange
             case _ => throw IllegalArgumentException("Unknown value.")
         }
     }
 }
 
+/**
+ * Manages relational database configurations.
+ *
+ * @relation interface StoreConfig
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class StoreConfig {
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let name: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let securityLevel: SecurityLevel
+    /**
+     * The database name.
+     * @relation name: string;
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public let encrypt: Bool
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let dataGroupId: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let customDir: String
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
-    ]
-    public let autoCleanDirtyData: Bool
+    public var name: String
 
+    /**
+     * Specifies the security level of the database.
+     * @relation securityLevel: SecurityLevel;
+     */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public init(name: String, securityLevel: SecurityLevel, encrypt!: Bool = false, dataGroupId!: String = "",
-        customDir!: String = "", autoCleanDirtyData!: Bool = true) {
+    public var securityLevel: SecurityLevel
+
+    /**
+     * Specifies whether the database is encrypted.
+     * @relation encrypt?: boolean;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var encrypt: Bool
+
+    /**
+     * The data group id of application.
+     * @relation dataGroupId?: string;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var dataGroupId: String
+
+    /**
+     * Specifies the directory relative to the database directory obtained from context.
+     * @relation customDir?: string;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var customDir: String
+
+    /**
+     * Specifies the root directory relative to the database
+     * @relation rootDir?: string;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var rootDir: String
+
+    /**
+     * Specifies whether to clean up dirty data that is synchronized to
+     * the local but deleted in the cloud.
+     * @relation autoCleanDirtyData?: boolean;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
+    ]
+    public var autoCleanDirtyData: Bool
+
+    /**
+     * Specifies whether database allows rebuild.
+     * @relation allowRebuild?: boolean;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var allowRebuild: Bool
+
+    /**
+     * Specifies whether the database opened is read-only.
+     * If isReadOnly is true, other configuration items will become invalid.
+     * @relation isReadOnly?: boolean;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var isReadOnly: Bool
+
+    /**
+     * Indicates the names of the shared library containing fts etc.
+     * @relation pluginLibs?: Array<string>;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var pluginLibs: Array<String>
+
+    /**
+     * Specifies the cryptographic parameters used when opening an encrypted database.
+     * @relation cryptoParam?: CryptoParam;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var cryptoParam: CryptoParam
+
+    /**
+     * Specifies whether the vector type is supported.
+     * @relation vector?: boolean;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var vector: Bool
+
+    /**
+     * Specifies the tokenizer type when using fts capability.
+     * @relation tokenizer?: Tokenizer;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var tokenizer: Tokenizer
+
+    /**
+     * Specifies whether the database need persistence.
+     * @relation persist?: boolean;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var persist: Bool
+
+    /**
+     * Specifies whether the database enable the capabilities for semantic indexing processing.
+     * @relation enableSemanticIndex?: boolean;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var enableSemanticIndex: Bool
+
+    /**
+     * StoreConfig constructor.
+     * 
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public init(securityLevel: SecurityLevel, name!: String = "",
+        encrypt!: Bool = false, dataGroupId!: String = "",
+        customDir!: String = "", rootDir!: String = "",
+        autoCleanDirtyData!: Bool = true, allowRebuild!: Bool = false,
+        isReadOnly!: Bool = false, pluginLibs!: Array<String> = Array<String>(),
+        cryptoParam!: CryptoParam = CryptoParam(), vector!: Bool = false,
+        tokenizer!: Tokenizer = Tokenizer.NoneTokenizer, persist!: Bool = true,
+        enableSemanticIndex!: Bool = false) {
         this.name = name
         this.securityLevel = securityLevel
         this.encrypt = encrypt
         this.dataGroupId = dataGroupId
         this.customDir = customDir
+        this.rootDir = rootDir
         this.autoCleanDirtyData = autoCleanDirtyData
+        this.allowRebuild = allowRebuild
+        this.isReadOnly = isReadOnly
+        this.pluginLibs = pluginLibs
+        this.cryptoParam = cryptoParam
+        this.vector = vector
+        this.tokenizer = tokenizer
+        this.persist = persist
+        this.enableSemanticIndex = enableSemanticIndex
     }
 }
 
+/**
+ * Describes the status of asset
+ *
+ * @relation enum AssetStatus
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum AssetStatus {
+    /**
+     * ASSET_NORMAL: means the status of asset is normal.
+     *
+     * @relation ASSET_NORMAL,
+     */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ASSET_NORMAL
-    | @!APILevel[
+    AssetNormal
+    |
+    /**
+     * ASSET_INSERT: means the asset needs to be inserted.
+     *
+     * @relation ASSET_INSERT,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ASSET_INSERT
-    | @!APILevel[
+    AssetInsert
+    |
+    /**
+     * ASSET_UPDATE: means the asset needs to be updated.
+     *
+     * @relation ASSET_UPDATE,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ASSET_UPDATE
-    | @!APILevel[
+    AssetUpdate
+    |
+    /**
+     * ASSET_DELETE: means the asset needs to be deleted.
+     *
+     * @relation ASSET_DELETE,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ASSET_DELETE
-    | @!APILevel[
+    AssetDelete
+    |
+    /**
+     * ASSET_ABNORMAL: means the status of asset is abnormal.
+     *
+     * @relation ASSET_ABNORMAL,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ASSET_ABNORMAL
-    | @!APILevel[
+    AssetAbnormal
+    |
+    /**
+     * ASSET_DOWNLOADING: means the status of asset is downloading.
+     *
+     * @relation ASSET_DOWNLOADING
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ASSET_DOWNLOADING
+    AssetDownloading
     | ...
 
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case ASSET_NORMAL => 1
-            case ASSET_INSERT => 2
-            case ASSET_UPDATE => 3
-            case ASSET_DELETE => 4
-            case ASSET_ABNORMAL => 5
-            case ASSET_DOWNLOADING => 6
+            case AssetNormal => 1
+            case AssetInsert => 2
+            case AssetUpdate => 3
+            case AssetDelete => 4
+            case AssetAbnormal => 5
+            case AssetDownloading => 6
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 
     static func parse(val: Int32): AssetStatus {
         match (val) {
-            case 1 => ASSET_NORMAL
-            case 2 => ASSET_INSERT
-            case 3 => ASSET_UPDATE
-            case 4 => ASSET_DELETE
-            case 5 => ASSET_ABNORMAL
-            case 6 => ASSET_DOWNLOADING
+            case 1 => AssetNormal
+            case 2 => AssetInsert
+            case 3 => AssetUpdate
+            case 4 => AssetDelete
+            case 5 => AssetAbnormal
+            case 6 => AssetDownloading
             case _ => throw IllegalArgumentException("Unknown value")
         }
     }
 }
 
+/**
+ * Enumerates the field.
+ *
+ * @relation enum Field
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
-    syscap: "SystemCapability.CloudSync.Client"
+    syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
 ]
 public enum Field {
+    /**
+     * Cursor field.
+     *
+     * @relation CURSOR_FIELD = '#_cursor',
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    CURSOR_FIELD
-    | @!APILevel[
+    CursorField
+    |
+    /**
+     * Origin field. For details, see {@link Origin}.
+     *
+     * @relation ORIGIN_FIELD = '#_origin',
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    ORIGIN_FIELD
-    | @!APILevel[
+    OriginField
+    |
+    /**
+     * Deleted flag field.
+     * Indicates whether data has deleted in cloud.
+     *
+     * @relation DELETED_FLAG_FIELD = '#_deleted_flag',
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    DELETED_FLAG_FIELD
-    | @!APILevel[
+    DeletedFlagField
+    |
+    /**
+     * Owner field.
+     *
+     * @relation OWNER_FIELD = '#_cloud_owner',
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    OWNER_FIELD
-    | @!APILevel[
+    OwnerField
+    |
+    /**
+     * Privilege field.
+     *
+     * @relation PRIVILEGE_FIELD = '#_cloud_privilege',
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    PRIVILEGE_FIELD
-    | @!APILevel[
+    PrivilegeField
+    |
+    /**
+     * Sharing resource field.
+     *
+     * @relation SHARING_RESOURCE_FIELD = '#_sharing_resource_field'
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    SHARING_RESOURCE_FIELD
+    SharingResourceField
     | ...
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
-    ]
-    public func getValue(): String {
+    func getValue(): String {
         match (this) {
-            case CURSOR_FIELD => "#_cursor"
-            case ORIGIN_FIELD => "#_origin"
-            case DELETED_FLAG_FIELD => "#_deleted_flag"
-            case OWNER_FIELD => "#_cloud_owner"
-            case PRIVILEGE_FIELD => "#_cloud_privilege"
-            case SHARING_RESOURCE_FIELD => "#_sharing_resource_field"
+            case CursorField => "#_cursor"
+            case OriginField => "#_origin"
+            case DeletedFlagField => "#_deleted_flag"
+            case OwnerField => "#_cloud_owner"
+            case PrivilegeField => "#_cloud_privilege"
+            case SharingResourceField => "#_sharing_resource_field"
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 }
 
+/**
+ * Describes the conflict resolutions to insert data into the table.
+ *
+ * @relation enum ConflictResolution
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ConflictResolution {
+    /**
+     * Implements no action when conflict occurs.
+     *
+     * @relation ON_CONFLICT_NONE = 0,
+     */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ON_CONFLICT_NONE
-    | @!APILevel[
+    OnConflictNone
+    |
+    /**
+     * Implements rollback operation when conflict occurs.
+     *
+     * @relation ON_CONFLICT_ROLLBACK = 1,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ON_CONFLICT_ROLLBACK
-    | @!APILevel[
+    OnConflictRollback
+    |
+    /**
+     * Implements abort operation when conflict occurs.
+     *
+     * @relation ON_CONFLICT_ABORT = 2,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ON_CONFLICT_ABORT
-    | @!APILevel[
+    OnConflictAbort
+    |
+    /**
+     * Implements fail operation when conflict occurs.
+     *
+     * @relation ON_CONFLICT_FAIL = 3,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ON_CONFLICT_FAIL
-    | @!APILevel[
+    OnConflictFail
+    |
+    /**
+     * Implements ignore operation when conflict occurs.
+     *
+     * @relation ON_CONFLICT_IGNORE = 4,
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ON_CONFLICT_IGNORE
-    | @!APILevel[
+    OnConflictIgnore
+    |
+    /**
+     * Implements replace operation operator when conflict occurs.
+     *
+     * @relation ON_CONFLICT_REPLACE = 5
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    ON_CONFLICT_REPLACE
+    OnConflictReplace
     | ...
 
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case ON_CONFLICT_NONE => 0
-            case ON_CONFLICT_ROLLBACK => 1
-            case ON_CONFLICT_ABORT => 2
-            case ON_CONFLICT_FAIL => 3
-            case ON_CONFLICT_IGNORE => 4
-            case ON_CONFLICT_REPLACE => 5
+            case OnConflictNone => 0
+            case OnConflictRollback => 1
+            case OnConflictAbort => 2
+            case OnConflictFail => 3
+            case OnConflictIgnore => 4
+            case OnConflictReplace => 5
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 }
 
+/**
+ * Records information of the asset.
+ *
+ * @relation interface Asset
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
-public struct Asset {
+public class Asset {
+    /**
+     * The name of asset.
+     *
+     * @relation name: string;
+     */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public let name: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let uri: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let path: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let createTime: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let modifyTime: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let size: String
-    @!APILevel[
-        21,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public let status: AssetStatus
+    public var name: String
 
+    /**
+     * The uri of asset.
+     *
+     * @relation uri: string;
+     */
     @!APILevel[
         21,
-        crossplatform: true,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var uri: String
+
+    /**
+     * The path of asset.
+     *
+     * @relation path: string;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var path: String
+
+    /**
+     * The create time of asset.
+     *
+     * @relation createTime: string;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var createTime: String
+
+    /**
+     * The modify time of asset.
+     *
+     * @relation modifyTime: string;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var modifyTime: String
+
+    /**
+     * The size of asset.
+     *
+     * @relation size: string;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var size: String
+
+    /**
+     * The status of asset.
+     *
+     * @relation status?: AssetStatus;
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var status: AssetStatus
+
+    /**
+     * Asset constructor.
+     * 
+     */
+    @!APILevel[
+        21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(name: String, uri: String, path: String, createTime: String, modifyTime: String, size: String,
-        status!: AssetStatus = AssetStatus.ASSET_NORMAL) {
+        status!: AssetStatus = AssetStatus.AssetNormal) {
         this.name = name
         this.uri = uri
         this.path = path
@@ -474,65 +1079,100 @@ public struct Asset {
     }
 }
 
+/**
+ * Indicates possible value types.
+ *
+ * @relation type ValueType = null | number | string | boolean | Uint8Array | Asset | Assets | Float32Array | bigint;
+ */
 @!APILevel[
     21,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ValueType {
+    /**
+     * Indicates null.
+     * 
+     */
     @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    null
-    | @!APILevel[
+    Null
+    |
+    /**
+     * Indicates Int64.
+     * 
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    integer(Int64)
-    | @!APILevel[
+    Integer(Int64)
+    |
+    /**
+     * Indicates Float64.
+     * 
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    double(Float64)
-    | @!APILevel[
+    Double(Float64)
+    |
+    /**
+     * Indicates String.
+     * 
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    string(String)
-    | @!APILevel[
+    StringValue(String)
+    |
+    /**
+     * Indicates Bool.
+     * 
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    boolean(Bool)
-    | @!APILevel[
+    Boolean(Bool)
+    |
+    /**
+     * Indicates Array<UInt8>.
+     * 
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Uint8Array(Array<UInt8>)
-    | @!APILevel[
+    |
+    /**
+     * Indicates Asset.
+     * 
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetEnum(Asset)
-    | @!APILevel[
+    |
+    /**
+     * Indicates Array<Asset>.
+     * 
+     */
+    @!APILevel[
         21,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
@@ -546,304 +1186,313 @@ enum DataPosition {
     | Float64Array(Array<Float64>)
 }
 
+/**
+ * Describes the distribution type of the tables.
+ *
+ * @relation enum DistributedType
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum DistributedType {
+    /**
+     * Indicates the table is distributed among the devices.
+     *
+     * @relation DISTRIBUTED_DEVICE,
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    DISTRIBUTED_DEVICE
-    | @!APILevel[
+    DistributedDevice
+    |
+    /**
+     * Indicates the table is distributed between the cloud and the devices.
+     *
+     * @relation DISTRIBUTED_CLOUD
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    DISTRIBUTED_CLOUD
+    DistributedCloud
     | ...
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case DISTRIBUTED_DEVICE => 0
-            case DISTRIBUTED_CLOUD => 1
+            case DistributedDevice => 0
+            case DistributedCloud => 1
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 }
 
+/**
+ * Indicates the database synchronization mode.
+ *
+ * @relation enum SyncMode
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SyncMode {
+    /**
+     * Indicates the data is pushed to remote device from local device.
+     *
+     * @relation SYNC_MODE_PUSH = 0,
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    SYNC_MODE_PUSH
-    | @!APILevel[
+    SyncModePush
+    |
+    /**
+     * Indicates the data is pulled from remote device to local device.
+     *
+     * @relation SYNC_MODE_PULL = 1,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    SYNC_MODE_PULL
-    | @!APILevel[
+    SyncModePull
+    |
+    /**
+     * Indicates the data is pulled from remote device to local device.
+     *
+     * @relation SYNC_MODE_TIME_FIRST,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    SYNC_MODE_TIME_FIRST
-    | @!APILevel[
+    SyncModeTimeFirst
+    | 
+    /**
+     * Indicates force push the native data to the cloud.
+     *
+     * @relation SYNC_MODE_NATIVE_FIRST,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    SYNC_MODE_NATIVE_FIRST
-    | @!APILevel[
+    SyncModeNativeFirst
+    |
+    /**
+     * Indicates the data is pulled from cloud to local device.
+     *
+     * @relation SYNC_MODE_CLOUD_FIRST
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    SYNC_MODE_CLOUD_FIRST
+    SyncModeCloudFirst
     | ...
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case SYNC_MODE_PUSH => 0
-            case SYNC_MODE_PULL => 1
-            case SYNC_MODE_TIME_FIRST => 4
-            case SYNC_MODE_NATIVE_FIRST => 5
-            case SYNC_MODE_CLOUD_FIRST => 6
+            case SyncModePush => 0
+            case SyncModePull => 1
+            case SyncModeTimeFirst => 4
+            case SyncModeNativeFirst => 5
+            case SyncModeCloudFirst => 6
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 }
 
+/**
+ * The cloud sync progress.
+ *
+ * @relation enum Progress
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum Progress {
+    /**
+     * ISYNC_BEGIN: means the sync process begin.
+     *
+     * @relation SYNC_BEGIN,
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    SYNC_BEGIN
-    | @!APILevel[
+    SyncBegin
+    |
+    /**
+     * SYNC_BEGIN: means the sync process is in progress.
+     *
+     * @relation SYNC_IN_PROGRESS,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    SYNC_IN_PROGRESS
-    | @!APILevel[
+    SyncInProgress
+    |
+    /**
+     * SYNC_BEGIN: means the sync process is finished.
+     *
+     * @relation SYNC_FINISH
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    SYNC_FINISH
+    SyncFinish
     | ...
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case SYNC_BEGIN => 0
-            case SYNC_IN_PROGRESS => 1
-            case SYNC_FINISH => 2
+            case SyncBegin => 0
+            case SyncInProgress => 1
+            case SyncFinish => 2
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 
     static func parse(val: Int32): Progress {
         match (val) {
-            case 0 => SYNC_BEGIN
-            case 1 => SYNC_IN_PROGRESS
-            case 2 => SYNC_FINISH
+            case 0 => SyncBegin
+            case 1 => SyncInProgress
+            case 2 => SyncFinish
             case _ => throw IllegalArgumentException("Unknown value")
         }
     }
 }
 
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-]
-public enum ProgressCode {
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    SUCCESS
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    UNKNOWN_ERROR
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    NETWORK_ERROR
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    CLOUD_DISABLED
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    LOCKED_BY_OTHERS
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    RECORD_LIMIT_EXCEEDED
-    | @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    NO_SPACE_FOR_ASSET
-    | ...
-
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
-        match (this) {
-            case SUCCESS => 0
-            case UNKNOWN_ERROR => 1
-            case NETWORK_ERROR => 2
-            case CLOUD_DISABLED => 3
-            case LOCKED_BY_OTHERS => 4
-            case RECORD_LIMIT_EXCEEDED => 5
-            case NO_SPACE_FOR_ASSET => 6
-            case _ => throw IllegalArgumentException("The type is not supported.")
-        }
-    }
-
-    static func parse(val: Int32): ProgressCode {
-        match (val) {
-            case 0 => SUCCESS
-            case 1 => UNKNOWN_ERROR
-            case 2 => NETWORK_ERROR
-            case 3 => CLOUD_DISABLED
-            case 4 => LOCKED_BY_OTHERS
-            case 5 => RECORD_LIMIT_EXCEEDED
-            case 6 => NO_SPACE_FOR_ASSET
-            case _ => throw IllegalArgumentException("Unknown value")
-        }
-    }
-}
-
+/**
+ * Describes the subscription type.
+ *
+ * @relation enum SubscribeType
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SubscribeType {
+    /**
+     * Subscription to remote data changes.
+     *
+     * @relation SUBSCRIBE_TYPE_REMOTE = 0,
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    SUBSCRIBE_TYPE_REMOTE
-    | @!APILevel[
+    SubscribeTypeRemote
+    |
+    /**
+     * Subscription to cloud data changes.
+     *
+     * @relation SUBSCRIBE_TYPE_CLOUD,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    SUBSCRIBE_TYPE_CLOUD
-    | @!APILevel[
+    SubscribeTypeCloud
+    |
+    /**
+     * Subscription to cloud data changes details.
+     *
+     * @relation SUBSCRIBE_TYPE_CLOUD_DETAILS,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.CloudSync.Client"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    SUBSCRIBE_TYPE_CLOUD_DETAILS
+    SubscribeTypeCloudDetails
     | ...
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case SUBSCRIBE_TYPE_REMOTE => 0
-            case SUBSCRIBE_TYPE_CLOUD => 1
-            case SUBSCRIBE_TYPE_CLOUD_DETAILS => 2
+            case SubscribeTypeRemote => 0
+            case SubscribeTypeCloud => 1
+            case SubscribeTypeCloudDetails => 2
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
 }
 
+/**
+ * Describes the data origin sources.
+ *
+ * @relation enum Origin
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
 ]
 public enum Origin {
+    /**
+     * Indicates the data source is local.
+     *
+     * @relation LOCAL,
+     */
     @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    LOCAL
-    | @!APILevel[
+    Local
+    |
+    /**
+     * Indicates the data source is cloud.
+     *
+     * @relation CLOUD,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    CLOUD
-    | @!APILevel[
+    Cloud
+    |
+    /**
+     * Indicates the data source is remote.
+     *
+     * @relation REMOTE,
+     */
+    @!APILevel[
         21,
         stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
-    REMOTE
+    Remote
     | ...
 
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public func getValue(): Int32 {
+    func getValue(): Int32 {
         match (this) {
-            case LOCAL => 0
-            case CLOUD => 1
-            case REMOTE => 2
+            case Local => 0
+            case Cloud => 1
+            case Remote => 2
             case _ => throw IllegalArgumentException("The type is not supported.")
         }
     }
@@ -952,7 +1601,7 @@ func freeValuesArray(valuesArray: CPointer<RetValueType>, i: Int64): Unit {
     }
 }
 
-func freeValuesBucketArray(arr: CPointer<ValuesBucket>, i: Int64): Unit {
+func freeValuesBucketArray(arr: CPointer<CValuesBucket>, i: Int64): Unit {
     if (arr.isNull()) {
         return
     }

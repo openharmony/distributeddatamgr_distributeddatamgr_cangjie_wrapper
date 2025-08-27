@@ -13,19 +13,26 @@
  * limitations under the License.
  */
 
-package ohos.distributed_kv_store
+package ohos.data.distributed_kv_store
 
+import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
 import ohos.ffi.*
 import ohos.hilog.*
-import ohos.base.*
 import ohos.labels.*
 import std.collection.*
 import std.sync.*
+import ohos.callback_invoke.CallbackObject
+import ohos.business_exception.BusinessException
 
 let KV_STORE_LOG = HilogChannel(0, 0xD001650, "CJ-DistributedKVStore")
 
 type StageContext = CPointer<Unit>
 
+/**
+ * Provider interfaces to create a {@link KVManager} instance.
+ *
+ * @relation declare namespace distributedKVStore
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -33,7 +40,12 @@ type StageContext = CPointer<Unit>
 ]
 public class DistributedKVStore {
     /**
-     * @brief  createKVManager(config: KVManagerConfig): KVManager
+     * Creates a {@link KVManager} instance based on the configuration information.
+     * <p>You must pass {@link KVManagerConfig} to provide configuration information
+     * to create a {@link KVManager} instance.
+     *
+     * @throws { IllegalArgumentException } - The context type is not supported. Only support UIAbilityContext.
+     * @relation function createKVManager(config: KVManagerConfig): KVManager;
      */
     @!APILevel[
         21,
@@ -42,14 +54,27 @@ public class DistributedKVStore {
     ]
     public static func createKVManager(config: KVManagerConfig): KVManager {
         unsafe {
+            let stageContext =  match(config.context) {
+                case ctx: UIAbilityContext => getStageContext(ctx)
+                case _ => throw IllegalArgumentException("only UIAbilityContext is supported")
+            }
+            if (stageContext.isNull()) {
+                throw IllegalArgumentException("only UIAbilityContext is supported")
+            }
             let cBoudleName = LibC.mallocCString(config.bundleName)
-            let codeId = FfiOHOSDistributedKVStoreCreateKVManager(cBoudleName, config.context)
+            let codeId = FfiOHOSDistributedKVStoreCreateKVManager(cBoudleName, stageContext)
             LibC.free(cBoudleName)
             return KVManager(codeId)
         }
     }
 }
 
+/**
+ * Provides interfaces to manage a {@code SingleKVStore} database, including obtaining, closing, and deleting the
+ * {@code SingleKVStore}.
+ *
+ * @relation interface KVManager
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -66,7 +91,7 @@ public class KVManager <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
-    private func getKVStoreId(storeId: String, options: Options, kVStoreType: KVStoreType): Int64 {
+    static func getKVStoreId(id: Int64 ,storeId: String, options: Options, kVStoreType: KVStoreType): Int64 {
         unsafe {
             var codeId = 0
             try (
@@ -74,7 +99,7 @@ public class KVManager <: RemoteDataLite {
                 cOptions = COptions(options, kVStoreType).asResource()
             ) {
                 var errCode: Int32 = 0
-                codeId = FfiOHOSDistributedKVStoreGetKVStore(getID(), cStoreId.value, cOptions.value, inout errCode)
+                codeId = FfiOHOSDistributedKVStoreGetKVStore(id, cStoreId.value, cOptions.value, inout errCode)
                 if (errCode != SUCCESS_CODE) {
                     KV_STORE_LOG.info("Failed to getKVStore. code: ${errCode}")
                     throw BusinessException(getErrorCode(errCode),
@@ -86,34 +111,40 @@ public class KVManager <: RemoteDataLite {
     }
 
     /**
-     * @brief  getKVStore<T>(storeId: string, options: Options, callback: AsyncCallback<T>): void
-     * @brief  getKVStore<T>(storeId: string, options: Options): Promise<T>
+     * Creates and obtains a KVStore database by specifying {@code Options} and {@code storeId}.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Incorrect parameters types;
+     * <br>3.Parameter verification failed.
+     * @throws { IllegalArgumentException } The type is not supported yet.
+     * @throws { BusinessException } 15100002 - Open existed database with changed options.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @relation getKVStore<T>(storeId: string, options: Options): Promise<T>
      */
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public func getSingleKVStore(storeId: String, options: Options): SingleKVStore {
-        SingleKVStore(getKVStoreId(storeId, options, SINGLE_VERSION))
+    public func getKVStore<T>(storeId: String, options: Options): T where T <: SingleKVStore {
+        let KVStore = match (T.getKVStore(getID(), storeId, options) as T) {
+            case Some(v) => v
+            case _ => throw IllegalArgumentException("The type is not supported yet.")
+        }
+        return KVStore
     }
 
     /**
-     * @brief  getKVStore<T>(storeId: string, options: Options, callback: AsyncCallback<T>): void
-     * @brief  getKVStore<T>(storeId: string, options: Options): Promise<T>
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    public func getDeviceKVStore(storeId: String, options: Options): DeviceKVStore {
-        return DeviceKVStore(getKVStoreId(storeId, options, DEVICE_COLLABORATION))
-    }
-
-    /**
-     * @brief  closeKVStore(appId: string, storeId: string, callback: AsyncCallback<void>): void
-     * @brief  closeKVStore(appId: string, storeId: string): Promise<void>
+     * Closes the KVStore database.
+     * <p>Warning: This method is not thread-safe. If you call this method to stop a KVStore database that is running,
+     * your thread may crash.
+     * <p>The KVStore database to close must be an object created by using the {@code getKVStore} method. Before using
+     * this method, release the resources created for the database, for example, {@code KVStoreResultSet} for KVStore,
+     * otherwise closing the database will fail.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Parameter verification failed.
+     * @relation closeKVStore(appId: string, storeId: string): Promise<void>
      */
     @!APILevel[
         21,
@@ -137,8 +168,15 @@ public class KVManager <: RemoteDataLite {
     }
 
     /**
-     * @brief  deleteKVStore(appId: string, storeId: string, callback: AsyncCallback<void>): void
-     * @brief  deleteKVStore(appId: string, storeId: string): Promise<void>
+     * Deletes the KVStore database identified by storeId.
+     * <p>Before using this method, close all KVStore instances in use that are identified by the same storeId.
+     * <p>You can use this method to delete a KVStore database not in use. After the database is deleted, all its data
+     * will be lost.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Parameter verification failed.
+     * @throws { BusinessException } 15100004 - Not found.
+     * @relation deleteKVStore(appId: string, storeId: string): Promise<void>
      */
     @!APILevel[
         21,
@@ -162,8 +200,12 @@ public class KVManager <: RemoteDataLite {
     }
 
     /**
-     * @brief  getAllKVStoreId(appId: string, callback: AsyncCallback<string[]>): void
-     * @brief  getAllKVStoreId(appId: string): Promise<string[]>
+     * Obtains the storeId of all KVStore databases that are created by using the {@code getKVStore} method and not
+     * deleted by calling the {@code deleteKVStore} method.
+     *
+     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
+     * <br>2.Parameter verification failed.
+     * @relation getAllKVStoreId(appId: string): Promise<string[]>
      */
     @!APILevel[
         21,

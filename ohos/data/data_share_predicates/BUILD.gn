@@ -14,7 +14,7 @@
 import("//build/ohos.gni")
 import("//build/cangjie/cjc.gni")
 
-ohos_cj_library("ohos.data_share_predicates") {
+ohos_cangjie_shared_library("ohos.data.data_share_predicates") {
   sources = [
     "data_share_predicates.cj",
     "data_share_predicates_common.cj",
@@ -24,17 +24,16 @@ ohos_cj_library("ohos.data_share_predicates") {
   external_deps = [ "data_share:cj_data_share_predicates_ffi" ]
 
   cj_external_deps = [
-    "arkui_cangjie_wrapper:ohos.base",
+    "cangjie_ark_interop:ohos.business_exception",
     "cangjie_ark_interop:ohos.ffi",
     "cangjie_ark_interop:ohos.labels",
     "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
 
   cj_deps = [
-    "../values_bucket:ohos.values_bucket",
+    "../values_bucket:ohos.data.values_bucket",
   ]
 
   subsystem_name = "distributeddatamgr"
   part_name = "distributeddatamgr_cangjie_wrapper"
-  lib_name = "data_share_predicates"
 }

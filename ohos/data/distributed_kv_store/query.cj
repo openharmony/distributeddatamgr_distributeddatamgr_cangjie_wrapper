@@ -13,13 +13,19 @@
  * limitations under the License.
  */
 
-package ohos.distributed_kv_store
+package ohos.data.distributed_kv_store
 
 import ohos.labels.*
-import std.collection.*
-import ohos.base.*
 import ohos.ffi.*
 
+/**
+ * Represents a database query using predicates.
+ * <p>This class provides a constructor used to create a {@code Query} instance, which is used to query data
+ * matching specified conditions in the database.
+ * <p>This class also provides methods to add predicates to the {@code Query} instance.
+ *
+ * @relation class Query
+ */
 @!APILevel[
     21,
     stagemodelonly: true,
@@ -27,7 +33,9 @@ import ohos.ffi.*
 ]
 public class Query <: RemoteDataLite {
     /**
-     * @brief  constructor()
+     * A constructor used to create a Query instance.
+     *
+     * @relation constructor()
      */
     @!APILevel[
         21,
