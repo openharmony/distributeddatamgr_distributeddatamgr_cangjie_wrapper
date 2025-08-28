@@ -24,17 +24,47 @@ foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 ├── figures          # 存放readme中的架构图
 ```
 
+## 约束
+
+当前开发的分布式数据管理仓颉接口仅支持standard设备。
+
+## 使用说明
+
+如架构图所示，分布式数据管理仓颉接口提供了以下功能，开发者可以根据使用诉求，综合使用一类或多类接口：
+
+-   数据共享谓词。
+-   分布式键值数据库。
+-   用户首选项。
+-   关系型数据库。
+-   数据集。
+
+与ArkTS相比，暂不支持以下功能：
+
+-   数据通用类型。
+-   DataAbility谓词。
+-   数据共享。
+-   分布式数据对象。
+-   共享用户首选项。
+-   共享关系型数据库。
+-   标准化数据通路。
+-   标准化数据结构。
+-   标准化数据定义与描述。
+-   智慧数据平台。
+-   数据共享扩展能力。
+-   端云服务。
+-   端云共享Extension。
+-   数据共享结果集。
+
+分布式数据管理相关API请参见
+1. [ohos.data.data_share_predicates](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkData/cj-apis-data_share_predicates.md)。
+2. [ohos.data.distributed_kv_store](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkData/cj-apis-distributed_kv_store.md)。
+3. [ohos.data.preferences](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkData/cj-apis-preferences.md)。
+4. [ohos.data.relational_store](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkData/cj-apis-relational_store.md)。
+5. [ohos.data.values_bucket](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/ArkData/cj-apis-values_bucket.md)。
+
+相关指导请参见[分布式数据管理开发指南](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/database)。
+
 ## 组件说明
-
-### 分布式数据对象
-
-分布式数据对象管理框架是一款面向对象的内存数据管理框架，向应用开发者提供内存对象的创建、查询、删除、修改、订阅等基本数据对象的管理能力，同时具备分布式能力，满足超级终端场景下，相同应用多设备间的数据对象协同需求。
-
-分布式数据对象提供JS接口，让开发者能以使用本地对象的方式使用分布式对象。分布式数据对象支持的数据类型包括数字型、字符型、布尔型等基本类型，同时也支持数组、基本类型嵌套等复杂类型。
-
-### 数据共享
-
-**数据共享（Data Share）** 提供了向其他应用共享以及管理其数据的方法，支持同个设备上不同应用之间的数据共享。
 
 ### Key-Value数据库
 
@@ -61,6 +91,10 @@ foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 **关系型数据库（Relational Database，RDB）** 是一种基于关系模型来管理数据的数据库。OpenHarmony关系型数据库基于SQLite组件提供了一套完整的对本地数据库进行管理的机制。
 
 OpenHarmony关系型数据库底层使用SQLite作为持久化存储引擎，支持SQLite具有的所有数据库特性，包括但不限于事务、索引、视图、触发器、外键、参数化查询和预编译SQL语句。
+
+## 参与贡献
+
+欢迎广大开发者贡献代码、文档等，具体的贡献流程和方式请参见[参与贡献](https://gitcode.com/openharmony/docs/blob/master/zh-cn/contribute/%E5%8F%82%E4%B8%8E%E8%B4%A1%E7%8C%AE.md)。
 
 ## 相关仓
 
