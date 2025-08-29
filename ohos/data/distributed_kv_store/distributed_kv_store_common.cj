@@ -237,13 +237,13 @@ public class KVManagerConfig {
 }
 
 enum KVStoreType {
-    | DEVICE_COLLABORATION
-    | SINGLE_VERSION
+    | DeviceCollaboration
+    | SingleVersion
 
     func getValue(): Int32 {
         match (this) {
-            case DEVICE_COLLABORATION => 0
-            case SINGLE_VERSION => 1
+            case DeviceCollaboration => 0
+            case SingleVersion => 1
         }
     }
 }

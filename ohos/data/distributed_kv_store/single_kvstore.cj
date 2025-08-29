@@ -35,7 +35,7 @@ class SingleKVStoreImpl {}
  * Provides methods related to single-version distributed databases.
  * <p>To create a {@code SingleKVStore} database,
  * you can use the {@link data.distributed.common.KVManager#getKVStore​(Options, String)} method
- * with {@code KVStoreType} set to {@code SINGLE_VERSION} for the input parameter {@code Options}.
+ * with {@code KVStoreType} set to {@code SingleVersion} for the input parameter {@code Options}.
  * This database synchronizes data to other databases in time sequence.
  * The {@code SingleKVStore} database does not support
  * synchronous transactions, or data search using snapshots.
@@ -60,7 +60,7 @@ public open class SingleKVStore <: RemoteDataLite {
     }
 
     static func getKVStore(id: Int64, storeId: String, options: Options): SingleKVStore {
-        SingleKVStore(KVManager.getKVStoreId(id, storeId, options, SINGLE_VERSION))
+        SingleKVStore(KVManager.getKVStoreId(id, storeId, options, SingleVersion))
     }
 
     /**
