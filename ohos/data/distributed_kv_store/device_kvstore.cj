@@ -24,7 +24,7 @@ import ohos.business_exception.BusinessException
  * Provides methods related to device-collaboration distributed databases.
  * <p>To create a {@code DeviceKVStore} database, you can use the
  * {@link data.distributed.common.KVManager.getKVStore(Options, String)}
- * method with {@code KVStoreType} set to {@code DEVICE_COLLABORATION} for the input parameter Options.
+ * method with {@code KVStoreType} set to {@code DeviceCollaboration} for the input parameter Options.
  * This database manages distributed
  * data by device, and cannot modify data synchronized from remote devices. When an application writes a
  * key-value pair entry
@@ -47,7 +47,7 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     static func getKVStore(id: Int64, storeId: String, options: Options): DeviceKVStore {
-        DeviceKVStore(KVManager.getKVStoreId(id, storeId, options, DEVICE_COLLABORATION))
+        DeviceKVStore(KVManager.getKVStoreId(id, storeId, options, DeviceCollaboration))
     }
     
     /**
