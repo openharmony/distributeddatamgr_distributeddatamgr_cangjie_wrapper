@@ -70,22 +70,6 @@ public class DeviceKVStore <: SingleKVStore {
         return get("", key)
     }
 
-    /**
-     * Obtains the value matching a specified device ID and key.
-     *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types;
-     * <br>3.Parameter verification failed.
-     * @throws { BusinessException } 15100003 - Database corrupted.
-     * @throws { BusinessException } 15100004 - Not found.
-     * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation get(deviceId: string, key: string): Promise<boolean | string | number | Uint8Array>
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
-    ]
     func get(deviceId: String, key: String): ValueType {
         unsafe {
             var result = ValueType.Integer(0)
@@ -205,26 +189,6 @@ public class DeviceKVStore <: SingleKVStore {
         return getResultSet("", keyPrefix)
     }
 
-    /**
-     * Obtains the {@code KVStoreResultSet} object matching the specified device ID and key prefix.
-     * <p>The {@code KVStoreResultSet} object can be used to query all key-value pairs that meet the search criteria.
-     * Each {@code DeviceKVStore}
-     * instance can have a maximum of four {@code KVStoreResultSet} objects at the same time. If you have created four
-     * objects, calling this method will return a failure. Therefore, you are advised to call the closeResultSet method to close
-     * unnecessary {@code KVStoreResultSet} objects in a timely manner.
-     *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
-     * @throws { BusinessException } 15100001 - Over max limits.
-     * @throws { BusinessException } 15100003 - Database corrupted.
-     * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSet(deviceId: string, keyPrefix: string): Promise<KVStoreResultSet>
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
-    ]
     func getResultSet(deviceId: String, keyPrefix: String): KVStoreResultSet {
         unsafe {
             var resultSetId = 0
@@ -264,21 +228,6 @@ public class DeviceKVStore <: SingleKVStore {
         return getResultSet("", query)
     }
 
-    /**
-     * Obtains the {@code KVStoreResultSet} object matching a specified device ID and {@code Query} object.
-     *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
-     * @throws { BusinessException } 15100001 - Over max limits.
-     * @throws { BusinessException } 15100003 - Database corrupted.
-     * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSet(deviceId: string, query: Query): Promise<KVStoreResultSet>
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
-    ]
     func getResultSet(deviceId: String, query: Query): KVStoreResultSet {
         unsafe {
             let cDeviceId = LibC.mallocCString(deviceId)
@@ -312,20 +261,6 @@ public class DeviceKVStore <: SingleKVStore {
         return getResultSize("", query)
     }
 
-    /**
-     * Obtains the number of results matching a specified device ID and {@code Query} object.
-     *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
-     * @throws { BusinessException } 15100003 - Database corrupted.
-     * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSize(deviceId: string, query: Query): Promise<number>
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
-    ]
     func getResultSize(deviceId: String, query: Query): Int32 {
         unsafe {
             let cDeviceId = LibC.mallocCString(deviceId)
