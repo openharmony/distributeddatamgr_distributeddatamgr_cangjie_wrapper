@@ -6,7 +6,7 @@ The distributeddatamgr_cangjie_wrapper is a Cangjie API encapsulated on OpenHarm
 
 ## System Architecture
 
-![](figures/distributeddatamgr_cangjie_wrapper_architecture_en.png)
+![Architecture of the distributeddatamgr_cangjie_wrapper](figures/distributeddatamgr_cangjie_wrapper_architecture_en.png)
 
 **Figure 1** Architecture of the distributeddatamgr_cangjie_wrapper
 
@@ -33,7 +33,8 @@ foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper
 ├── kit              # Cangjie kit code
 │   └── ArkData
 └── ohos             # Cangjie DistributedDataManager code
-    └── data
+│   └── data
+└── test             # Cangjie test cases
 ```
 
 ## Usage

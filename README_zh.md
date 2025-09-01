@@ -6,7 +6,7 @@
 
 ## 系统架构
 
-![](figures/distributeddatamgr_cangjie_wrapper_architecture.png)
+![分布式数据管理仓颉接口架构图](figures/distributeddatamgr_cangjie_wrapper_architecture.png)
 
 **图 1**  分布式数据管理仓颉接口架构图
 
@@ -33,7 +33,8 @@ foundation/communication/netmanager_cangjie_wrapper
 ├── kit              # 仓颉kit化代码
 │   └── ArkData
 └── ohos             # 仓颉分布式数据管理接口实现
-    └── data
+│   └── data
+└── test             # 测试代码
 ```
 
 ## 使用说明
