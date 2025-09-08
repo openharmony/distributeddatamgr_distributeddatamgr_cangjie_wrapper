@@ -29,45 +29,6 @@ let PREFERENCES_LOG = HilogChannel(0, 0xD002B25, "CJ-Preferences")
 type StageContext = CPointer<Unit>
 
 /**
- * Preferences change type.
- */
-@!APILevel[
-    21,
-    stagemodelonly: true,
-    syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
-]
-public enum PreferencesEvent {
-    /**
-     * change
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
-    ]
-    PreferencesChange
-    |
-    /**
-     * multiProcessChange
-     */
-    @!APILevel[
-        21,
-        stagemodelonly: true,
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
-    ]
-    PreferencesMultiProcessChange
-    | ...
-
-    func getValue(): String {
-        match (this) {
-            case PreferencesChange => "change"
-            case PreferencesMultiProcessChange => "multiProcessChange"
-            case _ => throw IllegalArgumentException("The type is not supported.")
-        }
-    }
-}
-
-/**
  * Provides interfaces to obtain and modify preferences data.
  *
  * @relation interface Preferences
@@ -475,33 +436,59 @@ public class Preferences <: RemoteDataLite {
         }
     }
 
-    private func checkType(tp: String): Unit {
-        if (tp != "change" && tp != "multiProcessChange") {
-            throw BusinessException(ERR_PARAMETER_ERROR, MESSAGE_TPYE_ERROR)
+    /**
+     * Registers an observer to listen for the change of a {@link Preferences} object.
+     *
+     * @param { Callback1Argument<String> } callback - Indicates the callback function.
+     * @throws { BusinessException } 15500000 - Inner error.
+     * @relation on(type: 'change', callback: Callback<string>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+    ]
+    public func onChange(callback: Callback1Argument<String>): Unit {
+        let tp = "change"
+        synchronized(onOffMutex) {
+            for (item in callbackList) {
+                if (refEq(callback, item[0])) {
+                    PREFERENCES_LOG.error("Preferences on failed: The same function is registered.")
+                    return
+                }
+            }
+            unsafe {
+                let wrapper = {value: CString => callback.invoke(None, value.toString())}
+                let lambdaData = Callback1Param<CString, Unit>(wrapper)
+                try (ctp = LibC.mallocCString(tp).asResource()) {
+                    let errCode = FfiOHOSPreferencesOn(getID(), ctp.value, lambdaData.getID())
+                    if (errCode != SUCCESS_CODE) {
+                        PREFERENCES_LOG.error(
+                            "Preferences on failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
+                        )
+                        throw BusinessException(getCJErrorCode(errCode),
+                            "Preferences on failed: ${getCJErrorMsg(errCode)}")
+                    }
+                    callbackList.add((callback, lambdaData.getID()))
+                }
+            }
         }
     }
 
     /**
      * Registers an observer to listen for the change of a {@link Preferences} object.
      *
-     * @param { String } tp - Indicates the callback when preferences changes.
      * @param { Callback1Argument<String> } callback - Indicates the callback function.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation on(type: 'change', callback: Callback<string>): void
      * @relation on(type: 'multiProcessChange', callback: Callback<string>): void
      */
-
     @!APILevel[
         21,
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public func on(event :PreferencesEvent, callback: Callback1Argument<String>): Unit {
-        let tp = event.getValue()
-        checkType(tp)
+    public func onMultiProcessChange(callback: Callback1Argument<String>): Unit {
+        let tp = "multiProcessChange"
         synchronized(onOffMutex) {
             for (item in callbackList) {
                 if (refEq(callback, item[0])) {
@@ -530,13 +517,28 @@ public class Preferences <: RemoteDataLite {
     /**
      * Unregisters an existing observer.
      *
-     * @param { String } tp - Indicates the callback when preferences changes.
      * @param { Callback1Argument<String> } callback - Indicates the callback function.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      * @relation off(type: 'change', callback?: Callback<string>): void
+     */
+    @!APILevel[
+        21,
+        stagemodelonly: true,
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+    ]
+    public func offChange(callback!: ?Callback1Argument<String> = None): Unit {
+        let tp = "change"
+        match (callback) {
+            case Some(v) => offImpl(tp, v)
+            case _ => offImpl(tp)
+        }
+    }
+
+    /**
+     * Unregisters an existing observer.
+     *
+     * @param { Callback1Argument<String> } callback - Indicates the callback function.
+     * @throws { BusinessException } 15500000 - Inner error.
      * @relation off(type: 'multiProcessChange', callback?: Callback<string>): void
      */
     @!APILevel[
@@ -544,8 +546,8 @@ public class Preferences <: RemoteDataLite {
         stagemodelonly: true,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public func off(event :PreferencesEvent, callback!: ?Callback1Argument<String> = None): Unit {
-        let tp = event.getValue()
+    public func offMultiProcessChange(callback!: ?Callback1Argument<String> = None): Unit {
+        let tp = "multiProcessChange"
         match (callback) {
             case Some(v) => offImpl(tp, v)
             case _ => offImpl(tp)
@@ -553,7 +555,6 @@ public class Preferences <: RemoteDataLite {
     }
 
     func offImpl(tp: String, callback: Callback1Argument<String>): Unit {
-        checkType(tp)
         let funcId = Box<Int64>(0)
         synchronized(onOffMutex) {
             callbackList.removeIf {
@@ -583,7 +584,6 @@ public class Preferences <: RemoteDataLite {
     }
 
     func offImpl(tp: String): Unit {
-        checkType(tp)
         unsafe {
             try (ctp = LibC.mallocCString(tp).asResource()) {
                 let errCode = FfiOHOSPreferencesOffAll(getID(), ctp.value)
