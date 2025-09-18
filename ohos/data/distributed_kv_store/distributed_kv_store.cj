@@ -34,8 +34,7 @@ type StageContext = CPointer<Unit>
  * @relation declare namespace distributedKVStore
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class DistributedKVStore {
@@ -48,8 +47,7 @@ public class DistributedKVStore {
      * @relation function createKVManager(config: KVManagerConfig): KVManager;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static func createKVManager(config: KVManagerConfig): KVManager {
@@ -76,8 +74,7 @@ public class DistributedKVStore {
  * @relation interface KVManager
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class KVManager <: RemoteDataLite {
@@ -122,8 +119,7 @@ public class KVManager <: RemoteDataLite {
      * @relation getKVStore<T>(storeId: string, options: Options): Promise<T>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getKVStore<T>(storeId: String, options: Options): T where T <: SingleKVStore {
@@ -147,8 +143,7 @@ public class KVManager <: RemoteDataLite {
      * @relation closeKVStore(appId: string, storeId: string): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func closeKVStore(appId: String, storeId: String): Unit {
@@ -179,8 +174,7 @@ public class KVManager <: RemoteDataLite {
      * @relation deleteKVStore(appId: string, storeId: string): Promise<void>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func deleteKVStore(appId: String, storeId: String): Unit {
@@ -208,8 +202,7 @@ public class KVManager <: RemoteDataLite {
      * @relation getAllKVStoreId(appId: string): Promise<string[]>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getAllKVStoreId(appId: String): Array<String> {
