@@ -33,8 +33,7 @@ import ohos.business_exception.BusinessException
  * @relation interface DeviceKVStore extends SingleKVStore
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class DeviceKVStore <: SingleKVStore {
@@ -62,8 +61,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @relation get(key: string): Promise<boolean | string | number | Uint8Array>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func get(key: String): ValueType {
@@ -101,8 +99,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @relation getEntries(keyPrefix: string): Promise<Entry[]>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getEntries(keyPrefix: String): Array<Entry> {
@@ -140,8 +137,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @relation getEntries(query: Query): Promise<Entry[]>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getEntries(query: Query): Array<Entry> {
@@ -181,8 +177,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @relation getResultSet(keyPrefix: string): Promise<KVStoreResultSet>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getResultSet(keyPrefix: String): KVStoreResultSet {
@@ -220,8 +215,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @relation getResultSet(query: Query): Promise<KVStoreResultSet>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getResultSet(query: Query): KVStoreResultSet {
@@ -253,8 +247,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @relation getResultSize(query: Query): Promise<number>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getResultSize(query: Query): Int32 {

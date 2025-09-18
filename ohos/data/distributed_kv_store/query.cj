@@ -27,8 +27,7 @@ import ohos.ffi.*
  * @relation class Query
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Query <: RemoteDataLite {
@@ -38,8 +37,7 @@ public class Query <: RemoteDataLite {
      * @relation constructor()
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init() {

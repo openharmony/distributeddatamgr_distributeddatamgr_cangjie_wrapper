@@ -26,8 +26,7 @@ import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
  * @relation interface ResultSet
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class ResultSet <: RemoteDataLite {
@@ -47,8 +46,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation columnNames: Array<string>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop columnNames: Array<String> {
@@ -80,8 +78,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation columnCount: number;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop columnCount: Int32 {
@@ -101,8 +98,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation rowCount: number;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop rowCount: Int32 {
@@ -123,8 +119,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation rowIndex: number;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop rowIndex: Int32 {
@@ -144,8 +139,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation isAtFirstRow: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop isAtFirstRow: Bool {
@@ -165,8 +159,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation isAtLastRow: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop isAtLastRow: Bool {
@@ -186,8 +179,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation isEnded: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop isEnded: Bool {
@@ -207,8 +199,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation isStarted: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop isStarted: Bool {
@@ -229,8 +220,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation isClosed: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public prop isClosed: Bool {
@@ -274,8 +264,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getDouble(columnIndex: number): number
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getDouble(columnIndex: Int32): Float64 {
@@ -293,8 +282,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation goToRow(position: number): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func goToRow(position: Int32): Bool {
@@ -311,8 +299,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation goToPreviousRow(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func goToPreviousRow(): Bool {
@@ -349,8 +336,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation goToLastRow(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func goToLastRow(): Bool {
@@ -390,8 +376,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getColumnName(columnIndex: number): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getColumnName(columnIndex: Int32): String {
@@ -437,8 +422,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation isColumnNull(columnIndex: number): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func isColumnNull(columnIndex: Int32): Bool {
@@ -480,8 +464,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getAsset(columnIndex: number): Asset
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getAsset(columnIndex: Int32): Asset {
@@ -515,8 +498,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation close(): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func close(): Unit {
@@ -553,8 +535,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getColumnIndex(columnName: string): number
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getColumnIndex(columnName: String): Int32 {
@@ -605,8 +586,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getString(columnIndex: number): string
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getString(columnIndex: Int32): String {
@@ -626,8 +606,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation goToFirstRow(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func goToFirstRow(): Bool {
@@ -669,8 +648,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getAssets(columnIndex: number): Assets
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getAssets(columnIndex: Int32): Assets {
@@ -731,8 +709,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getLong(columnIndex: number): number
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getLong(columnIndex: Int32): Int64 {
@@ -750,8 +727,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation goToNextRow(): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func goToNextRow(): Bool {
@@ -792,8 +768,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getBlob(columnIndex: number): Uint8Array
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getBlob(columnIndex: Int32): Array<UInt8> {
@@ -822,8 +797,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation goTo(offset: number): boolean
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func goTo(offset: Int32): Bool {
@@ -862,8 +836,7 @@ public class ResultSet <: RemoteDataLite {
      * @relation getRow(): ValuesBucket
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func getRow(): ValuesBucket {

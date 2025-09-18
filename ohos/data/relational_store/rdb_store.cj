@@ -29,8 +29,7 @@ import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
  * @relation interface RdbStore
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class RdbStore <: RemoteDataLite {
@@ -59,8 +58,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation query(predicates: RdbPredicates, columns?: Array<string>): Promise<ResultSet>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func query(predicates: RdbPredicates, columns!: Array<String> = []): ResultSet {
@@ -125,8 +123,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation delete(predicates: RdbPredicates): Promise<number>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func delete(predicates: RdbPredicates): Int64 {
@@ -166,8 +163,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation backup(destName: string): Promise<void>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func backup(destName: String): Unit {
@@ -211,8 +207,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation restore(srcName: string): Promise<void>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func restore(srcName: String): Unit {
@@ -255,8 +250,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation commit():void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func commit(): Unit {
@@ -290,8 +284,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation rollBack():void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func rollBack(): Unit {
@@ -326,8 +319,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation beginTransaction():void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func beginTransaction(): Unit {
@@ -378,8 +370,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation insertSync(table: string, values: ValuesBucket, conflict?: ConflictResolution): number;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func insert(table: String, values: ValuesBucket,
@@ -434,8 +425,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation updateSync(values: ValuesBucket, predicates: RdbPredicates, conflict?: ConflictResolution): number;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func update(values: ValuesBucket, predicates: RdbPredicates,
@@ -477,8 +467,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation batchInsert(table: string, values: Array<ValuesBucket>):Promise<number>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func batchInsert(table: String, values: Array<ValuesBucket>): Int64 {
@@ -533,8 +522,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation querySql(sql: string, bindArgs?: Array<ValueType>):Promise<ResultSet>
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func querySql(sql: String, bindArgs!: Array<ValueType> = []): ResultSet {
@@ -604,8 +592,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation executeSql(sql: string, bindArgs?: Array<ValueType>): Promise<void>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func executeSql(sql: String, bindArgs!: Array<ValueType> = []): Unit {
@@ -675,8 +662,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation on(event: string, interProcess: boolean, observer: Callback<void>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func on(event: String, interProcess: Bool, observer: Callback0Argument): Unit {
@@ -726,8 +712,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation off(event: string, interProcess: boolean, observer?: Callback<void>): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func off(event: String, interProcess: Bool, observer!: ?Callback0Argument = None): Unit {
@@ -811,8 +796,7 @@ public class RdbStore <: RemoteDataLite {
      * @relation emit(event: string): void
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func emit(event: String): Unit {
