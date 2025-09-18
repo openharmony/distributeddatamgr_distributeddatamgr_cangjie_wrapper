@@ -46,8 +46,7 @@ import ohos.labels.*
  * @relation function getRdbStore(context: Context, config: StoreConfig): Promise<RdbStore>;
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStore {
@@ -79,8 +78,7 @@ public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStor
  * @relation function deleteRdbStore(context: Context, name: string): Promise<void>;
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
@@ -112,8 +110,7 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
  * @relation function deleteRdbStore(context: Context, config: StoreConfig): Promise<void>;
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public func deleteRdbStore(context: UIAbilityContext, config: StoreConfig): Unit {

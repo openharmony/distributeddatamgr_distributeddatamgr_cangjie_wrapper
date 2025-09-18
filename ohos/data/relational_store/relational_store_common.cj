@@ -41,8 +41,7 @@ public type ValuesBucket = Map<String, ValueType>
  * @relation interface CryptoParam
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class CryptoParam {
@@ -52,8 +51,7 @@ public class CryptoParam {
      * @relation encryptionKey: Uint8Array;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var encryptionKey: Array<UInt8>
@@ -65,8 +63,7 @@ public class CryptoParam {
      * @relation iterationCount?: number;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var iterationCount: Int32
@@ -77,8 +74,7 @@ public class CryptoParam {
      * @relation encryptionAlgo?: EncryptionAlgo;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var encryptionAlgo: EncryptionAlgo
@@ -89,8 +85,7 @@ public class CryptoParam {
      * @relation hmacAlgo?: HmacAlgo;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var hmacAlgo: HmacAlgo
@@ -101,8 +96,7 @@ public class CryptoParam {
      * @relation kdfAlgo?: KdfAlgo;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var kdfAlgo: ?KdfAlgo
@@ -113,8 +107,7 @@ public class CryptoParam {
      * @relation cryptoPageSize?: number;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var cryptoPageSize: UInt32
@@ -123,8 +116,7 @@ public class CryptoParam {
      * CryptoParam constructor.
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(encryptionKey: Array<UInt8>, iterationCount!: Int32 = 10000,
@@ -145,8 +137,7 @@ public class CryptoParam {
  * @relation enum KdfAlgo
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum KdfAlgo {
@@ -155,8 +146,7 @@ public enum KdfAlgo {
      * @relation KDF_SHA1 = 0
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     KdfSha1
@@ -166,8 +156,7 @@ public enum KdfAlgo {
      * @relation KDF_SHA256
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     KdfSha256
@@ -177,8 +166,7 @@ public enum KdfAlgo {
      * @relation KDF_SHA512
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     KdfSha512
@@ -190,8 +178,7 @@ public enum KdfAlgo {
  * @relation enum HmacAlgo
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum HmacAlgo {
@@ -200,8 +187,7 @@ public enum HmacAlgo {
      * @relation SHA1 = 0
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Sha1
@@ -211,8 +197,7 @@ public enum HmacAlgo {
      * @relation SHA256
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Sha256
@@ -222,8 +207,7 @@ public enum HmacAlgo {
      * @relation SHA512
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Sha512
@@ -235,8 +219,7 @@ public enum HmacAlgo {
  * @relation enum EncryptionAlgo
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum EncryptionAlgo {
@@ -245,8 +228,7 @@ public enum EncryptionAlgo {
      * @relation AES_256_GCM = 0
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Aes256Gcm
@@ -256,8 +238,7 @@ public enum EncryptionAlgo {
      * @relation AES_256_CBC
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Aes256Cbc
@@ -269,8 +250,7 @@ public enum EncryptionAlgo {
  * @relation enum Tokenizer
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum Tokenizer {
@@ -279,8 +259,7 @@ public enum Tokenizer {
      * @relation NONE_TOKENIZER = 0
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     NoneTokenizer
@@ -290,8 +269,7 @@ public enum Tokenizer {
      * @relation ICU_TOKENIZER
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     IcuTokenizer
@@ -301,8 +279,7 @@ public enum Tokenizer {
      * @relation CUSTOM_TOKENIZER
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     CustomTokenizer
@@ -324,8 +301,7 @@ public enum Tokenizer {
  * @relation enum SecurityLevel
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SecurityLevel {
@@ -336,8 +312,7 @@ public enum SecurityLevel {
      * @relation S1 = 1,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S1
@@ -349,8 +324,7 @@ public enum SecurityLevel {
      * @relation S2 = 2,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S2
@@ -362,8 +336,7 @@ public enum SecurityLevel {
      * @relation S3 = 3,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S3
@@ -375,8 +348,7 @@ public enum SecurityLevel {
      * @relation S4 = 4
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S4
@@ -399,8 +371,7 @@ public enum SecurityLevel {
  * @relation enum ChangeType
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ChangeType {
@@ -410,8 +381,7 @@ public enum ChangeType {
      * @relation DATA_CHANGE,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     DataChange
@@ -422,8 +392,7 @@ public enum ChangeType {
      * @relation ASSET_CHANGE
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetChange
@@ -452,8 +421,7 @@ public enum ChangeType {
  * @relation interface StoreConfig
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class StoreConfig {
@@ -462,8 +430,7 @@ public class StoreConfig {
      * @relation name: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var name: String
@@ -473,8 +440,7 @@ public class StoreConfig {
      * @relation securityLevel: SecurityLevel;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var securityLevel: SecurityLevel
@@ -484,8 +450,7 @@ public class StoreConfig {
      * @relation encrypt?: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var encrypt: Bool
@@ -495,8 +460,7 @@ public class StoreConfig {
      * @relation dataGroupId?: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var dataGroupId: String
@@ -506,8 +470,7 @@ public class StoreConfig {
      * @relation customDir?: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var customDir: String
@@ -517,8 +480,7 @@ public class StoreConfig {
      * @relation rootDir?: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var rootDir: String
@@ -529,8 +491,7 @@ public class StoreConfig {
      * @relation autoCleanDirtyData?: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     public var autoCleanDirtyData: Bool
@@ -540,8 +501,7 @@ public class StoreConfig {
      * @relation allowRebuild?: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var allowRebuild: Bool
@@ -552,8 +512,7 @@ public class StoreConfig {
      * @relation isReadOnly?: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var isReadOnly: Bool
@@ -563,8 +522,7 @@ public class StoreConfig {
      * @relation pluginLibs?: Array<string>;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var pluginLibs: Array<String>
@@ -574,8 +532,7 @@ public class StoreConfig {
      * @relation cryptoParam?: CryptoParam;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var cryptoParam: CryptoParam
@@ -585,8 +542,7 @@ public class StoreConfig {
      * @relation vector?: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var vector: Bool
@@ -596,8 +552,7 @@ public class StoreConfig {
      * @relation tokenizer?: Tokenizer;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var tokenizer: Tokenizer
@@ -607,8 +562,7 @@ public class StoreConfig {
      * @relation persist?: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var persist: Bool
@@ -618,8 +572,7 @@ public class StoreConfig {
      * @relation enableSemanticIndex?: boolean;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var enableSemanticIndex: Bool
@@ -629,8 +582,7 @@ public class StoreConfig {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(securityLevel: SecurityLevel, name!: String = "",
@@ -665,8 +617,7 @@ public class StoreConfig {
  * @relation enum AssetStatus
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum AssetStatus {
@@ -676,8 +627,7 @@ public enum AssetStatus {
      * @relation ASSET_NORMAL,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetNormal
@@ -688,8 +638,7 @@ public enum AssetStatus {
      * @relation ASSET_INSERT,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetInsert
@@ -700,8 +649,7 @@ public enum AssetStatus {
      * @relation ASSET_UPDATE,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetUpdate
@@ -712,8 +660,7 @@ public enum AssetStatus {
      * @relation ASSET_DELETE,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetDelete
@@ -724,8 +671,7 @@ public enum AssetStatus {
      * @relation ASSET_ABNORMAL,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetAbnormal
@@ -736,8 +682,7 @@ public enum AssetStatus {
      * @relation ASSET_DOWNLOADING
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetDownloading
@@ -774,8 +719,7 @@ public enum AssetStatus {
  * @relation enum Field
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
 ]
 public enum Field {
@@ -785,8 +729,7 @@ public enum Field {
      * @relation CURSOR_FIELD = '#_cursor',
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     CursorField
@@ -797,8 +740,7 @@ public enum Field {
      * @relation ORIGIN_FIELD = '#_origin',
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     OriginField
@@ -810,8 +752,7 @@ public enum Field {
      * @relation DELETED_FLAG_FIELD = '#_deleted_flag',
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     DeletedFlagField
@@ -822,8 +763,7 @@ public enum Field {
      * @relation OWNER_FIELD = '#_cloud_owner',
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     OwnerField
@@ -834,8 +774,7 @@ public enum Field {
      * @relation PRIVILEGE_FIELD = '#_cloud_privilege',
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     PrivilegeField
@@ -846,8 +785,7 @@ public enum Field {
      * @relation SHARING_RESOURCE_FIELD = '#_sharing_resource_field'
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SharingResourceField
@@ -872,8 +810,7 @@ public enum Field {
  * @relation enum ConflictResolution
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ConflictResolution {
@@ -883,8 +820,7 @@ public enum ConflictResolution {
      * @relation ON_CONFLICT_NONE = 0,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictNone
@@ -895,8 +831,7 @@ public enum ConflictResolution {
      * @relation ON_CONFLICT_ROLLBACK = 1,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictRollback
@@ -907,8 +842,7 @@ public enum ConflictResolution {
      * @relation ON_CONFLICT_ABORT = 2,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictAbort
@@ -919,8 +853,7 @@ public enum ConflictResolution {
      * @relation ON_CONFLICT_FAIL = 3,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictFail
@@ -931,8 +864,7 @@ public enum ConflictResolution {
      * @relation ON_CONFLICT_IGNORE = 4,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictIgnore
@@ -943,8 +875,7 @@ public enum ConflictResolution {
      * @relation ON_CONFLICT_REPLACE = 5
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictReplace
@@ -969,8 +900,7 @@ public enum ConflictResolution {
  * @relation interface Asset
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class Asset {
@@ -980,8 +910,7 @@ public class Asset {
      * @relation name: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var name: String
@@ -992,8 +921,7 @@ public class Asset {
      * @relation uri: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var uri: String
@@ -1004,8 +932,7 @@ public class Asset {
      * @relation path: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var path: String
@@ -1016,8 +943,7 @@ public class Asset {
      * @relation createTime: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var createTime: String
@@ -1028,8 +954,7 @@ public class Asset {
      * @relation modifyTime: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var modifyTime: String
@@ -1040,8 +965,7 @@ public class Asset {
      * @relation size: string;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var size: String
@@ -1052,8 +976,7 @@ public class Asset {
      * @relation status?: AssetStatus;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var status: AssetStatus
@@ -1063,8 +986,7 @@ public class Asset {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(name: String, uri: String, path: String, createTime: String, modifyTime: String, size: String,
@@ -1085,8 +1007,7 @@ public class Asset {
  * @relation type ValueType = null | number | string | boolean | Uint8Array | Asset | Assets | Float32Array | bigint;
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ValueType {
@@ -1095,8 +1016,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Null
@@ -1106,8 +1026,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Integer(Int64)
@@ -1117,8 +1036,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Double(Float64)
@@ -1128,8 +1046,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     StringValue(String)
@@ -1139,8 +1056,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Boolean(Bool)
@@ -1150,8 +1066,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Uint8Array(Array<UInt8>)
@@ -1161,8 +1076,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetEnum(Asset)
@@ -1172,8 +1086,7 @@ public enum ValueType {
      * 
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetsEnum(Array<Asset>)
@@ -1192,8 +1105,7 @@ enum DataPosition {
  * @relation enum DistributedType
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum DistributedType {
@@ -1203,8 +1115,7 @@ public enum DistributedType {
      * @relation DISTRIBUTED_DEVICE,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     DistributedDevice
@@ -1215,8 +1126,7 @@ public enum DistributedType {
      * @relation DISTRIBUTED_CLOUD
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     DistributedCloud
@@ -1237,8 +1147,7 @@ public enum DistributedType {
  * @relation enum SyncMode
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SyncMode {
@@ -1248,8 +1157,7 @@ public enum SyncMode {
      * @relation SYNC_MODE_PUSH = 0,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncModePush
@@ -1260,8 +1168,7 @@ public enum SyncMode {
      * @relation SYNC_MODE_PULL = 1,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncModePull
@@ -1272,8 +1179,7 @@ public enum SyncMode {
      * @relation SYNC_MODE_TIME_FIRST,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SyncModeTimeFirst
@@ -1284,8 +1190,7 @@ public enum SyncMode {
      * @relation SYNC_MODE_NATIVE_FIRST,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SyncModeNativeFirst
@@ -1296,8 +1201,7 @@ public enum SyncMode {
      * @relation SYNC_MODE_CLOUD_FIRST
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SyncModeCloudFirst
@@ -1321,8 +1225,7 @@ public enum SyncMode {
  * @relation enum Progress
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum Progress {
@@ -1332,8 +1235,7 @@ public enum Progress {
      * @relation SYNC_BEGIN,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncBegin
@@ -1344,8 +1246,7 @@ public enum Progress {
      * @relation SYNC_IN_PROGRESS,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncInProgress
@@ -1356,8 +1257,7 @@ public enum Progress {
      * @relation SYNC_FINISH
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncFinish
@@ -1388,8 +1288,7 @@ public enum Progress {
  * @relation enum SubscribeType
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SubscribeType {
@@ -1399,8 +1298,7 @@ public enum SubscribeType {
      * @relation SUBSCRIBE_TYPE_REMOTE = 0,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SubscribeTypeRemote
@@ -1411,8 +1309,7 @@ public enum SubscribeType {
      * @relation SUBSCRIBE_TYPE_CLOUD,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SubscribeTypeCloud
@@ -1423,8 +1320,7 @@ public enum SubscribeType {
      * @relation SUBSCRIBE_TYPE_CLOUD_DETAILS,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SubscribeTypeCloudDetails
@@ -1446,8 +1342,7 @@ public enum SubscribeType {
  * @relation enum Origin
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
 ]
 public enum Origin {
@@ -1457,8 +1352,7 @@ public enum Origin {
      * @relation LOCAL,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     Local
@@ -1469,8 +1363,7 @@ public enum Origin {
      * @relation CLOUD,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     Cloud
@@ -1481,8 +1374,7 @@ public enum Origin {
      * @relation REMOTE,
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     Remote

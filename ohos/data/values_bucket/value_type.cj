@@ -23,39 +23,34 @@ import ohos.labels.APILevel
  * @relation export type ValueType = number | string | boolean;
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
 public enum ValueType {
     /* Integer */ 
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Integer(Int64)
     |
         /* Double */ 
         @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Double(Float64)
     |
         /* StringValue */ 
         @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     StringValue(String)
     |
         /* Boolean */ 
         @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Boolean(Bool)
