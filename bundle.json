@@ -28,7 +28,6 @@
         "deps": {
             "components": [
                 "ability_cangjie_wrapper",
-                "arkui_cangjie_wrapper",
                 "cangjie_ark_interop",
                 "data_share",
                 "hiviewdfx_cangjie_wrapper",
