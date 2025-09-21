@@ -30,7 +30,6 @@ ohos_cangjie_shared_library("ohos.data.distributed_kv_store") {
   cj_external_deps = [
     "ability_cangjie_wrapper:ohos.app.ability",
     "ability_cangjie_wrapper:ohos.app.ability.ui_ability",
-    "arkui_cangjie_wrapper:ohos.base",
     "cangjie_ark_interop:ohos.callback_invoke",
     "cangjie_ark_interop:ohos.business_exception",
     "cangjie_ark_interop:ohos.ffi",
