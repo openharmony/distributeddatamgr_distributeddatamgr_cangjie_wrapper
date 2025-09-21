@@ -40,6 +40,11 @@ foundation/communication/netmanager_cangjie_wrapper
 │       ├── relational_store          # Relational database module
 │       └── values_bucket             # Value bucket module
 └── test             # Cangjie distributed data management test cases
+    └── APILevel22
+        ├── data_share_predicates # Data share predicates test cases
+        ├── distributed_kv_store  # Distributed key-value database test cases
+        ├── preferences           # User preferences test cases
+        └── relational_store      # Relational database test cases
 ```
 
 ## Usage
@@ -52,7 +57,7 @@ As shown in the architecture diagram, the distributed data management Cangjie AP
 - RDB Store.
 - Value Bucket.
 
-Compared to ArkTS, the following functions are not supported:
+Compared to ArkTS API, the following functions are not supported:
 
 - Common Data Types.
 - DataAbility Predicates.
@@ -86,9 +91,15 @@ Developers are welcome to contribute code, documentation, etc. For specific cont
 ## Repositories Involved
 
 [ability_ability_cangjie_wrapper](https://gitcode.com/openharmony-sig/ability_ability_cangjie_wrapper)
+
 [arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
+
 [distributeddatamgr_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share)
+
 [distributeddatamgr_kv_store](https://gitee.com/openharmony/distributeddatamgr_kv_store)
+
 [distributeddatamgr_preferences](https://gitee.com/openharmony/distributeddatamgr_preferences)
+
 [distributeddatamgr_relational_store](https://gitee.com/openharmony/distributeddatamgr_relational_store)
+
 [hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
