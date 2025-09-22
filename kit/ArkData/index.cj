@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package kit.ArkData
+package ArkData
 
 public import ohos.data.*
 public import ohos.data.data_share_predicates.*
