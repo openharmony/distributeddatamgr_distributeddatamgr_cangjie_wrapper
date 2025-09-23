@@ -43,7 +43,7 @@ class SingleKVStoreImpl {}
  * @relation interface SingleKVStore
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public open class SingleKVStore <: RemoteDataLite {
@@ -76,7 +76,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation put(key: string, value: Uint8Array | string | number | boolean): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func put(key: String, value: ValueType): Unit {
@@ -104,7 +104,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation putBatch(entries: Entry[]): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func putBatch(entries: Array<Entry>): Unit {
@@ -131,7 +131,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation delete(key: string): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func delete(key: String): Unit {
@@ -158,7 +158,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation deleteBatch(keys: string[]): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func deleteBatch(keys: Array<String>): Unit {
@@ -185,7 +185,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation get(key: string): Promise<boolean | string | number | Uint8Array>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func get(key: String): ValueType {
@@ -213,7 +213,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation backup(file:string): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func backup(file: String): Unit {
@@ -237,7 +237,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation restore(file:string): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func restore(file: String): Unit {
@@ -260,7 +260,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation startTransaction(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func startTransaction(): Unit {
@@ -281,7 +281,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation commit(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func commit(): Unit {
@@ -301,7 +301,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation rollback(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func rollback(): Unit {
@@ -322,7 +322,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation enableSync(enabled: boolean): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func enableSync(enabled: Bool): Unit {
@@ -344,7 +344,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @relation setSyncParam(defaultAllowedDelayMs: number): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func setSyncParam(defaultAllowedDelayMs: UInt32): Unit {
