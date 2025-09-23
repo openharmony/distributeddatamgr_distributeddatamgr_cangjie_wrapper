@@ -22,6 +22,9 @@
 - KV数据库部件：提供不同设备间数据库的分布式协同能力 ，封装C语言接口提供给仓颉进行互操作。
 - 首选项部件：提供Key-Value键值型的数据处理能力，封装C语言接口提供给仓颉进行互操作。
 - 关系型数据库部件：提供本地数据库管理机制，封装C语言接口提供给仓颉进行互操作。
+- ability_cangjie_wrapper：负责提供应用上下文接口，用于访问当前应用的数据库资源等。
+- hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径打印日志。
+- cangjie_ark_interop：负责提供仓颉注解定义，用于对API进行标注，以及提供抛向用户的BusinessException异常类定义。
 
 ## 目录
 
@@ -40,11 +43,10 @@ foundation/communication/netmanager_cangjie_wrapper
 │       ├── relational_store          # 关系型数据库模块
 │       └── values_bucket             # 数据集模块
 └── test             # 测试用例
-    └── APILevel22
-        ├── data_share_predicates # 数据共享谓词测试用例
-        ├── distributed_kv_store  # 分布式键值数据库测试用例
-        ├── preferences           # 用户首选项测试用例
-        └── relational_store      # 关系型数据库测试用例
+    ├── data_share_predicates # 数据共享谓词测试用例
+    ├── distributed_kv_store  # 分布式键值数据库测试用例
+    ├── preferences           # 用户首选项测试用例
+    └── relational_store      # 关系型数据库测试用例
 ```
 
 ## 使用说明
