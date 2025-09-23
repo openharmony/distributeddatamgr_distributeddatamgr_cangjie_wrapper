@@ -42,7 +42,7 @@ private func createDataSharePredicates(): Int64 {
  * @relation class DataSharePredicates
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
 public class DataSharePredicates <: RemoteDataLite {
@@ -50,7 +50,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * DataSharePredicates constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public init() {
@@ -74,7 +74,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @relation equalTo(field: string, value: ValueType): DataSharePredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func equalTo(field: String, value: ValueType): DataSharePredicates {
@@ -104,7 +104,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @relation and(): DataSharePredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func and(): DataSharePredicates {
@@ -126,7 +126,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @relation orderByAsc(field: string): DataSharePredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func orderByAsc(field: String): DataSharePredicates {
@@ -154,7 +154,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @relation orderByDesc(field: string): DataSharePredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func orderByDesc(field: String): DataSharePredicates {
@@ -183,7 +183,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @relation limit(total: number, offset: number): DataSharePredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func limit(total: Int32, offset: Int32): DataSharePredicates {
@@ -211,7 +211,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @relation in(field: string, value: Array<ValueType>): DataSharePredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func `in`(field: String, value: Array<ValueType>): DataSharePredicates {

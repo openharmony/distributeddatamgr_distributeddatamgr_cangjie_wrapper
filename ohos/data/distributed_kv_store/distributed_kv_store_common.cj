@@ -26,7 +26,7 @@ import std.collection.*
  * @relation interface Constants
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Constants {
@@ -35,7 +35,7 @@ public class Constants {
      * @relation readonly MAX_KEY_LENGTH: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_KEY_LENGTH: Int32 = 1024
@@ -45,7 +45,7 @@ public class Constants {
      * @relation readonly MAX_VALUE_LENGTH: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_VALUE_LENGTH: Int32 = 4194303
@@ -55,7 +55,7 @@ public class Constants {
      * @relation readonly MAX_KEY_LENGTH_DEVICE: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_KEY_LENGTH_DEVICE: Int32 = 896
@@ -65,7 +65,7 @@ public class Constants {
      * @relation readonly MAX_STORE_ID_LENGTH: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_STORE_ID_LENGTH: Int32 = 128
@@ -75,7 +75,7 @@ public class Constants {
      * @relation readonly MAX_QUERY_LENGTH: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_QUERY_LENGTH: Int32 = 512000
@@ -85,7 +85,7 @@ public class Constants {
      * @relation readonly MAX_BATCH_SIZE: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_BATCH_SIZE: Int32 = 128
@@ -99,7 +99,7 @@ public class Constants {
  * @relation enum ValueType
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public enum ValueType {
@@ -109,7 +109,7 @@ public enum ValueType {
      * @relation STRING,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     StringValue(String)
@@ -120,7 +120,7 @@ public enum ValueType {
      * @relation INTEGER,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Integer(Int32)
@@ -131,7 +131,7 @@ public enum ValueType {
      * @relation FLOAT,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Float(Float32)
@@ -142,7 +142,7 @@ public enum ValueType {
      * @relation BYTE_ARRAY,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     ByteArray(Array<Byte>)
@@ -153,7 +153,7 @@ public enum ValueType {
      * @relation BOOLEAN,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Boolean(Bool)
@@ -164,7 +164,7 @@ public enum ValueType {
      * @relation DOUBLE
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Double(Float64)
@@ -178,7 +178,7 @@ public enum ValueType {
  * @relation interface KVManagerConfig
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class KVManagerConfig {
@@ -188,7 +188,7 @@ public class KVManagerConfig {
      * @relation context: BaseContext
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var context: BaseContext
@@ -199,7 +199,7 @@ public class KVManagerConfig {
      * @relation bundleName: string
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var bundleName: String
@@ -209,7 +209,7 @@ public class KVManagerConfig {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init(context: BaseContext, bundleName: String) {
@@ -236,7 +236,7 @@ enum KVStoreType {
  * @relation enum SecurityLevel
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public enum SecurityLevel {
@@ -247,7 +247,7 @@ public enum SecurityLevel {
      * @relation S1,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S1
@@ -259,7 +259,7 @@ public enum SecurityLevel {
      * @relation S2,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S2
@@ -271,7 +271,7 @@ public enum SecurityLevel {
      * @relation S3,
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S3
@@ -283,7 +283,7 @@ public enum SecurityLevel {
      * @relation S4
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S4
@@ -320,7 +320,7 @@ public enum SecurityLevel {
  * @relation class FieldNode
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class FieldNode {
@@ -330,7 +330,7 @@ public class FieldNode {
      * @relation nullable: boolean;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var nullable: Bool
@@ -341,7 +341,7 @@ public class FieldNode {
      * @relation default: string;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var default: String
@@ -352,7 +352,7 @@ public class FieldNode {
      * @relation type: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var nodeType: Int32
@@ -362,7 +362,7 @@ public class FieldNode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public init(name: String, nullable: Bool, default: String, nodeType: Int32) {
@@ -379,7 +379,7 @@ public class FieldNode {
  * @relation class Schema
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class Schema {
@@ -389,7 +389,7 @@ public class Schema {
      * @relation root: FieldNode;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var root: FieldNode
@@ -400,7 +400,7 @@ public class Schema {
      * @relation indexes: Array<string>;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var indexes: Array<String>
@@ -411,7 +411,7 @@ public class Schema {
      * @relation mode: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var mode: Int32
@@ -422,7 +422,7 @@ public class Schema {
      * @relation skip: number;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var skip: Int32
@@ -432,7 +432,7 @@ public class Schema {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public init(root: FieldNode, indexes: Array<String>, mode: Int32, skip: Int32) {
@@ -449,7 +449,7 @@ public class Schema {
  * @relation interface Options
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Options {
@@ -459,7 +459,7 @@ public class Options {
      * @relation createIfMissing?: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var createIfMissing: Bool
@@ -469,7 +469,7 @@ public class Options {
      * @relation encrypt?: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var encrypt: Bool
@@ -479,7 +479,7 @@ public class Options {
      * @relation backup?: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var backup: Bool
@@ -489,7 +489,7 @@ public class Options {
      * @relation autoSync?: boolean
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.DISTRIBUTED_DATASYNC",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
@@ -500,7 +500,7 @@ public class Options {
      * @relation securityLevel: SecurityLevel
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var securityLevel: SecurityLevel
@@ -510,7 +510,7 @@ public class Options {
      * @relation schema?: Schema
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var schema: ?Schema
@@ -520,7 +520,7 @@ public class Options {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init(securityLevel: SecurityLevel, createIfMissing!: Bool = true, encrypt!: Bool = false,
@@ -540,7 +540,7 @@ public class Options {
  * @relation interface Entry
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Entry {
@@ -550,7 +550,7 @@ public class Entry {
      * @relation key: string;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var key: String
@@ -561,7 +561,7 @@ public class Entry {
      * @relation value: Value;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var value: ValueType
@@ -571,7 +571,7 @@ public class Entry {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init(key: String, value: ValueType) {

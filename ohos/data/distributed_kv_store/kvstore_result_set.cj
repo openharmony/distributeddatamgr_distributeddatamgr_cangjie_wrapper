@@ -27,7 +27,7 @@ import ohos.ffi.*
  * @relation interface KVStoreResultSet
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class KVStoreResultSet <: RemoteDataLite {
@@ -45,7 +45,7 @@ public class KVStoreResultSet <: RemoteDataLite {
      * @relation getCount(): number
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getCount(): Int32 {

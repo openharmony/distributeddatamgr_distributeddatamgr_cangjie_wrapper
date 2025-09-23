@@ -25,7 +25,7 @@ import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
  * @relation class RdbPredicates
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class RdbPredicates <: RemoteDataLite {
@@ -35,7 +35,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation constructor(name: string);
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(name: String) {
@@ -53,7 +53,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation inAllDevices(): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func inAllDevices(): RdbPredicates {
@@ -71,7 +71,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation beginWrap(): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func beginWrap(): RdbPredicates {
@@ -89,7 +89,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation endWrap(): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func endWrap(): RdbPredicates {
@@ -107,7 +107,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation or(): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func or(): RdbPredicates {
@@ -125,7 +125,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation and(): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func and(): RdbPredicates {
@@ -146,7 +146,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation contains(field: string, value: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func contains(field: String, value: String): RdbPredicates {
@@ -175,7 +175,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation beginsWith(field: string, value: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func beginsWith(field: String, value: String): RdbPredicates {
@@ -203,7 +203,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation endsWith(field: string, value: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func endsWith(field: String, value: String): RdbPredicates {
@@ -231,7 +231,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation isNull(field: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func isNull(field: String): RdbPredicates {
@@ -259,7 +259,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation isNotNull(field: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func isNotNull(field: String): RdbPredicates {
@@ -288,7 +288,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation like(field: string, value: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func like(field: String, value: String): RdbPredicates {
@@ -317,7 +317,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation glob(field: string, value: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func glob(field: String, value: String): RdbPredicates {
@@ -345,7 +345,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation orderByAsc(field: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func orderByAsc(field: String): RdbPredicates {
@@ -373,7 +373,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation orderByDesc(field: string): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func orderByDesc(field: String): RdbPredicates {
@@ -398,7 +398,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation distinct(): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func distinct(): RdbPredicates {
@@ -418,7 +418,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation limitAs(value: number): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func limitAs(value: Int32): RdbPredicates {
@@ -438,7 +438,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation offsetAs(rowOffset: number): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func offsetAs(rowOffset: Int32): RdbPredicates {
@@ -457,7 +457,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation groupBy(fields: Array<string>): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func groupBy(fields: Array<String>): RdbPredicates {
@@ -495,7 +495,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation lessThanOrEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func lessThanOrEqualTo(field: String, value: ValueType): RdbPredicates {
@@ -529,7 +529,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation equalTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func equalTo(field: String, value: ValueType): RdbPredicates {
@@ -560,7 +560,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation greaterThanOrEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func greaterThanOrEqualTo(field: String, value: ValueType): RdbPredicates {
@@ -592,7 +592,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation greaterThan(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func greaterThan(field: String, value: ValueType): RdbPredicates {
@@ -624,7 +624,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation lessThan(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func lessThan(field: String, value: ValueType): RdbPredicates {
@@ -657,7 +657,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation notEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func notEqualTo(field: String, value: ValueType): RdbPredicates {
@@ -689,7 +689,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation notBetween(field: string, low: ValueType, high: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func notBetween(field: String, low: ValueType, high: ValueType): RdbPredicates {
@@ -729,7 +729,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation between(field: string, low: ValueType, high: ValueType): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func between(field: String, low: ValueType, high: ValueType): RdbPredicates {
@@ -769,7 +769,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation in(field: string, value: Array<ValueType>): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func `in`(field: String, value: Array<ValueType>): RdbPredicates {
@@ -818,7 +818,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @relation notIn(field: string, value: Array<ValueType>): RdbPredicates
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func notIn(field: String, value: Array<ValueType>): RdbPredicates {

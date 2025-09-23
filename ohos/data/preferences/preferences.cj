@@ -32,7 +32,7 @@ type StageContext = CPointer<Unit>
  * Preferences change type.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public enum PreferencesEvent {
@@ -40,7 +40,7 @@ public enum PreferencesEvent {
      * change
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     PreferencesChange
@@ -49,7 +49,7 @@ public enum PreferencesEvent {
      * multiProcessChange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     PreferencesMultiProcessChange
@@ -70,7 +70,7 @@ public enum PreferencesEvent {
  * @relation interface Preferences
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public class Preferences <: RemoteDataLite {
@@ -117,7 +117,7 @@ public class Preferences <: RemoteDataLite {
      * @relation function getPreferences(context: Context, name: string, callback: AsyncCallback<Preferences>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func getPreferences(context: UIAbilityContext, name: String): Preferences {
@@ -142,7 +142,7 @@ public class Preferences <: RemoteDataLite {
      * @relation function getPreferences(context: Context, options: Options, callback: AsyncCallback<Preferences>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func getPreferences(context: UIAbilityContext, options: Options): Preferences {
@@ -166,7 +166,7 @@ public class Preferences <: RemoteDataLite {
      * @relation function deletePreferences(context: Context, name: string): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func deletePreferences(context: UIAbilityContext, name: String): Unit {
@@ -190,7 +190,7 @@ public class Preferences <: RemoteDataLite {
      * @relation function deletePreferences(context: Context, options: Options): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func deletePreferences(context: UIAbilityContext, options: Options): Unit {
@@ -233,7 +233,7 @@ public class Preferences <: RemoteDataLite {
      * @relation function removePreferencesFromCacheSync(context: Context, name: string): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, name: String): Unit {
@@ -261,7 +261,7 @@ public class Preferences <: RemoteDataLite {
     * @relation function removePreferencesFromCacheSync(context: Context, options: Options): void
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, options: Options): Unit {
@@ -296,7 +296,7 @@ public class Preferences <: RemoteDataLite {
      * @relation flush(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func flush(): Unit {
@@ -312,7 +312,7 @@ public class Preferences <: RemoteDataLite {
      * @relation clear(): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func clear(): Unit {
@@ -334,7 +334,7 @@ public class Preferences <: RemoteDataLite {
      * @relation get(key: string, defValue: ValueType): Promise<ValueType>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func get(key: String, defValue: ValueType): ValueType {
@@ -363,7 +363,7 @@ public class Preferences <: RemoteDataLite {
      * @relation put(key: string, value: ValueType): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func put(key: String, value: ValueType): Unit {
@@ -392,7 +392,7 @@ public class Preferences <: RemoteDataLite {
      * @relation getAllSync(): Object;
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func getAll(): HashMap<String, ValueType> {
@@ -415,7 +415,7 @@ public class Preferences <: RemoteDataLite {
      * @relation delete(key: string): Promise<void>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func delete(key: String): Unit {
@@ -445,7 +445,7 @@ public class Preferences <: RemoteDataLite {
      * @relation has(key: string): Promise<boolean>
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func has(key: String): Bool {
@@ -478,7 +478,7 @@ public class Preferences <: RemoteDataLite {
      */
 
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func on(event :PreferencesEvent, callback: Callback1Argument<String>): Unit {
@@ -522,7 +522,7 @@ public class Preferences <: RemoteDataLite {
      * @relation off(type: 'multiProcessChange', callback?: Callback<string>): void
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func off(event :PreferencesEvent, callback!: ?Callback1Argument<String> = None): Unit {
