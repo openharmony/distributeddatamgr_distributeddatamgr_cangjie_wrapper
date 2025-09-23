@@ -18,10 +18,13 @@ As shown in the architecture diagram:
 - RDB Store: Provide a complete mechanism for managing local databases.
 - Value Bucket: Provide a collection of data to be inserted into the database.
 - Cangjie distributed data management FFI interface definition: Define C language interoperability Cangjie interfaces, used to implement Cangjie distributed data management capabilities.
-- DataShare Component: Provide data sharing predicate capabilities, encapsulating C interfaces for interoperation with Cangjie.
-- KV Store Component: Provide distributed collaboration capabilities for databases between different devices, encapsulating C interfaces for interoperation with Cangjie.
-- Preferences Component: Provide Key-Value type data processing capabilities, encapsulating C interfaces for interoperation with Cangjie.
-- Relational Database: Provide local database management mechanisms, encapsulating C interfaces for interoperation with Cangjie.
+- data_share: Provide data sharing predicate capabilities, encapsulating C interfaces for interoperation with Cangjie.
+- kv_store: Provide distributed collaboration capabilities for databases between different devices, encapsulating C interfaces for interoperation with Cangjie.
+- preferences: Provide Key-Value type data processing capabilities, encapsulating C interfaces for interoperation with Cangjie.
+- relational_store: Provide local database management mechanisms, encapsulating C interfaces for interoperation with Cangjie.
+- ability_cangjie_wrapper: Responsible for providing UiAbilityContext, which is used to access the current application's database resources.
+- hiviewdfx_cangjie_wrapper: Provides logging interfaces for printing logs on critical paths.
+- cangjie_ark_interop: Provides Cangjie annotation definitions for API annotation and BusinessException exception class definition for user-facing exceptions.
 
 ## Directory Structure
 
@@ -40,11 +43,10 @@ foundation/communication/netmanager_cangjie_wrapper
 │       ├── relational_store          # Relational database module
 │       └── values_bucket             # Value bucket module
 └── test             # Cangjie distributed data management test cases
-    └── APILevel22
-        ├── data_share_predicates # Data share predicates test cases
-        ├── distributed_kv_store  # Distributed key-value database test cases
-        ├── preferences           # User preferences test cases
-        └── relational_store      # Relational database test cases
+    ├── data_share_predicates # Data share predicates test cases
+    ├── distributed_kv_store  # Distributed key-value database test cases
+    ├── preferences           # User preferences test cases
+    └── relational_store      # Relational database test cases
 ```
 
 ## Usage
