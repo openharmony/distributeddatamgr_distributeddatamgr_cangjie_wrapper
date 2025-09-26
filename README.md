@@ -1,30 +1,39 @@
-# distributeddatamgr_cangjie_wrapper
+# distributeddatamgr_distributeddatamgr_cangjie_wrapper
 
 ## Introduction
 
-The distributeddatamgr_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the capabilities of the DistributedDataManager Subsystem. The DistributedDataManager subsystem implements persistence of a variety of structured data on a single device and data sync and sharing across devices. It allows application data to be seamlessly processed across devices, ensuring consistent user experience for the same application across devices.The distributeddatamgr cangjie interface currently under development only supports standard devices.
+The distributeddatamgr_distributeddatamgr_cangjie_wrapper is a capability provided on OpenHarmony for developers using the Cangjie programming language to develop applications. It enables the persistence of various structured data, as well as the synchronization and sharing of data across devices. By leveraging the Cangjie-encapsulated distributed data management, developers can easily achieve seamless connection of application data across different terminal devices, satisfying users' need for a consistent experience when using data across devices.The distributeddatamgr_distributeddatamgr_cangjie_wrapper currently under development only supports standard devices.
 
 ## System Architecture
 
-![Architecture of the distributeddatamgr_cangjie_wrapper](figures/distributeddatamgr_cangjie_wrapper_architecture_en.png)
+**Figure 1** distributeddatamgr_cangjie_wrapper architecture
 
-**Figure 1** Architecture of the distributeddatamgr_cangjie_wrapper
+![Architecture of the distributeddatamgr_distributeddatamgr_cangjie_wrapper](figures/distributeddatamgr_cangjie_wrapper_architecture_en.png)
 
 As shown in the architecture diagram:
 
-- DataShare Predicates: Provide data sharing predicates for implementing different query methods.
-- Distributed KV Store: Provide distributed collaboration capabilities for databases between different devices.
-- User Preferences: Provide Key-Value type data processing capabilities.
-- RDB Store: Provide a complete mechanism for managing local databases.
-- Value Bucket: Provide a collection of data to be inserted into the database.
-- Cangjie distributed data management FFI interface definition: Define C language interoperability Cangjie interfaces, used to implement Cangjie distributed data management capabilities.
-- data_share: Provide data sharing predicate capabilities, encapsulating C interfaces for interoperation with Cangjie.
-- kv_store: Provide distributed collaboration capabilities for databases between different devices, encapsulating C interfaces for interoperation with Cangjie.
-- preferences: Provide Key-Value type data processing capabilities, encapsulating C interfaces for interoperation with Cangjie.
-- relational_store: Provide local database management mechanisms, encapsulating C interfaces for interoperation with Cangjie.
-- ability_cangjie_wrapper: Responsible for providing UiAbilityContext, which is used to access the current application's database resources.
-- hiviewdfx_cangjie_wrapper: Provides logging interfaces for printing logs on critical paths.
-- cangjie_ark_interop: Provides Cangjie annotation definitions for API annotation and BusinessException exception class definition for user-facing exceptions.
+Interface Layer:
+- DataShare Predicates: Provides developers with data sharing predicates for implementing different query methods.
+- Distributed KV Store: Offers developers the capability to manage key-value pair data.
+- User Preferences: Supplies developers with lightweight Key-Value operations, supporting local applications in storing small amounts of data.
+- RDB Store: Provides developers with a complete mechanism for managing local databases based on the SQLite component.
+- Value Bucket: Gives developers data collections that can be inserted into the database.
+
+Framework Layer:
+- DataShare Predicates Wrapper: Based on the underlying data_share, it implements predicates—filter conditions used for querying data in the database. Predicates can be used to update, delete, and query data.
+- Distributed KV Store Wrapper: Built on the underlying kv_store, it enables distributed collaboration capabilities for databases across different devices. It allows data to be stored in the distributed key-value database and supports operations such as adding, deleting, modifying, querying, and end-to-end synchronization of data in the distributed key-value database.
+- User Preferences Wrapper: Relying on the underlying preferences, it realizes Key-Value data processing capabilities, supporting persistent storage of lightweight data as well as modification and query of such data.
+- RDB Store Wrapper: Based on the underlying relational_store, it implements a database that manages data using a relational model. It provides a series of interfaces for adding, deleting, modifying, and querying data, and also allows direct execution of user-input SQL statements to meet the needs of complex scenarios.
+- Value Bucket Wrapper: Implements data collections that Cangjie applications can insert into the database.
+
+Dependencies Introduction in Architecture:
+- data_share: The DataShare Predicates Wrapper depends on the data_share, which is used to implement the filter conditions for querying data in the database.
+- kv_store: The Distributed KV Store Wrapper relies on the kv_store to achieve distributed collaboration capabilities for databases across different devices.
+- preferences: The User Preferences Wrapper depends on the preferences, which is used to implement lightweight local Key-Value data processing capabilities.
+- relational_store: The RDB Store Wrapper relies on the relational_store to implement the local relational database management mechanism.
+- ability_cangjie_wrapper: The Distributed KV Store Wrapper, User Preferences Wrapper, and RDB Store Wrapper depend on the application context capability of ability_cangjie_wrapper, which is used for accessing database resources of the current application, among other purposes.
+- hiviewdfx_cangjie_wrapper: Depends on HiLog capabilities for printing logs at key points.
+- cangjie_ark_interop: Depends on APILevel class definitions and BusinessException class definitions for API annotation and throwing exceptions to users in error branches.
 
 ## Directory Structure
 
@@ -85,6 +94,26 @@ For distributed data management related APIs, please refer to:
 5. [ohos.data.values_bucket](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/ArkData/cj-apis-values_bucket.md)
 
 For related guidance, please refer to [Distributed Data Management Development Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/database)
+
+## Constraints
+
+Compared to ArkTS API, the following functions are not supported:
+
+- Common Data Types.
+- DataAbility Predicates.
+- DataShare.
+- Distributed Data Object.
+- Shared User Preferences.
+- Shared RDB Store.
+- Unified Data Channel.
+- Uniform Data Structs.
+- Uniform Data Definition and Description.
+- ArkData Intelligence Platform.
+- DataShare ExtensionAbility.
+- Device-Cloud Service.
+- Device-Cloud Sharing Extension.
+- DataShare Result Set.
+- Pasteboard.
 
 ## Code Contribution
 
