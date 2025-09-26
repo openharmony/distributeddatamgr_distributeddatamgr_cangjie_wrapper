@@ -540,7 +540,7 @@ public class ResultSet <: RemoteDataLite {
     ]
     public func getColumnIndex(columnName: String): Int32 {
         unsafe {
-            if (columnName.isEmpty()) {
+            if (columnName.isEmpty() || columnName.startsWith("\0")) {
                 RELATIONAL_STORE_LOG.error(
                     "ResultSet getColumnIndex failed: ${paramError("columnName", "not empty string")}")
                 throw BusinessException(getErrorCode(ERR_PARAMETER_ERROR),
