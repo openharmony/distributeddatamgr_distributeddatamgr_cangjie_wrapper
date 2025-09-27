@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The distributeddatamgr_distributeddatamgr_cangjie_wrapper provides persistence of various structured data and synchronization and sharing functions of data between different devices for developers using the Cangjie language for application development on OpenHarmony. Through the Distributed Data Management Cangjie Wrapper, developers can easily achieve seamless connection of application data between different terminal devices, meeting users' consistent experience when using data across devices. The distributeddatamgr_distributeddatamgr_cangjie_wrapper currently under development only supports standard devices.
+The distributeddatamgr_distributeddatamgr_cangjie_wrapper provides persistence of various structured data and synchronization and sharing functions of data between different devices for developers using the Cangjie language for application development on OpenHarmony. The distributeddatamgr_distributeddatamgr_cangjie_wrapper currently under development only supports standard devices.
 
 ## System Architecture
 
@@ -32,8 +32,8 @@ Dependencies Introduction in Architecture:
 - preferences: The User Preferences Wrapper depends on the preferences, which is used to implement lightweight local Key-Value type data processing capabilities.
 - relational_store: The RDB Store Wrapper relies on the relational_store to implement local relational database management mechanisms.
 - ability_cangjie_wrapper: The Distributed KV Store Wrapper, User Preferences Wrapper, and RDB Store Wrapper depend on the application context capability of ability_cangjie_wrapper, which is used for accessing database resources of the current application, among other purposes.
-- hiviewdfx_cangjie_wrapper: Depends on HiLog capabilities for printing logs at key points.
-- cangjie_ark_interop: Depends on APILevel class definitions and BusinessException class definitions for API annotation and throwing exceptions to users in error branches.
+- hiviewdfx_cangjie_wrapper: Framework Layer depends on HiLog capabilities for printing logs at key points.
+- cangjie_ark_interop: Framework Layer depends on APILevel class definitions and BusinessException class definitions for API annotation and throwing exceptions to users in error branches.
 
 ## Directory Structure
 
@@ -60,7 +60,7 @@ foundation/communication/netmanager_cangjie_wrapper
 
 ## Usage
 
-As shown in the architecture diagram, the distributeddatamgr_distributeddatamgr_cangjie_wrapper provides the following functions:
+The distributeddatamgr_distributeddatamgr_cangjie_wrapper provides the following functions:
 
 - DataShare Predicates.
 - Distributed KV Store.
@@ -80,21 +80,22 @@ For related guidance, please refer to [Distributed Data Management Development G
 
 ## Constraints
 
-Compared to ArkTS API:
+Compared to ArkTS API，the following functions are not supported:
 
-- RDB Store does not currently support the following functions:
+- Common Data Types.
+- DataAbility Predicates.
+- DataShare.
+- Distributed Data Object.
+- Shared User Preferences.
+- Shared RDB Store.
+- Unified Data Channel.
+- Uniform Data Structs.
+- Uniform Data Definition and Description.
+- ArkData Intelligence Platform.
+- Device-Cloud Service.
+
+RDB Store does not currently support the following functions:
   - Transactions.
-- Common Data Types is not currently supported.
-- DataAbility Predicates is not currently supported.
-- DataShare is not currently supported.
-- Distributed Data Object is not currently supported.
-- Shared User Preferences is not currently supported.
-- Shared RDB Store is not currently supported.
-- Unified Data Channel is not currently supported.
-- Uniform Data Structs is not currently supported.
-- Uniform Data Definition and Description is not currently supported.
-- ArkData Intelligence Platform is not currently supported.
-- Device-Cloud Service is not currently supported.
 
 ## Code Contribution
 
@@ -106,12 +107,12 @@ Developers are welcome to contribute code, documentation, etc. For specific cont
 
 [arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
-[distributeddatamgr_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share)
+[distributeddatamgr\_data_share](https://gitcode.com/openharmony/distributeddatamgr_data_share)
 
-[distributeddatamgr_kv_store](https://gitee.com/openharmony/distributeddatamgr_kv_store)
+[distributeddatamgr\_kv_store](https://gitcode.com/openharmony/distributeddatamgr_kv_store)
 
-[distributeddatamgr_preferences](https://gitee.com/openharmony/distributeddatamgr_preferences)
+[distributeddatamgr\_preferences](https://gitcode.com/openharmony/distributeddatamgr_preferences)
 
-[distributeddatamgr_relational_store](https://gitee.com/openharmony/distributeddatamgr_relational_store)
+[distributeddatamgr\_relational_store](https://gitcode.com/openharmony/distributeddatamgr_relational_store)
 
 [hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
