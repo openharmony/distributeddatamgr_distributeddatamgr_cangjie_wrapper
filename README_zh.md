@@ -2,7 +2,7 @@
 
 ## 简介
 
-分布式数据管理仓颉封装是在OpenHarmony上面向开发者使用仓颉语言进行应用开发时提供的各种结构化数据的持久化，以及跨设备之间数据的同步、共享功能。开发者通过分布式数据管理仓颉封装，能够方便地完成应用程序数据在不同终端设备间的无缝衔接，满足用户跨设备使用数据的一致性体验。当前开发的分布式数据管理仓颉封装仅支持standard设备。
+分布式数据管理仓颉封装是在OpenHarmony上面向开发者使用仓颉语言进行应用开发时提供的各种结构化数据持久化，以及跨设备之间数据的同步、共享功能。当前开发的分布式数据管理仓颉封装仅支持standard设备。
 
 ## 系统架构
 
@@ -14,11 +14,11 @@
 
 接口层：
 
-- 数据共享谓词：面向开发者提供查询数据库中数据所使用的筛选条件，包括比较谓词等于条件，逻辑谓词与条件，范围谓词包含条件以及结果集的递增排序和递减排序。
+- 数据共享谓词：面向开发者提供查询数据库中数据时所使用的筛选条件，包括比较谓词等于条件，逻辑谓词与条件，范围谓词包含条件以及结果集的递增排序和递减排序。
 - 分布式键值数据库：面向开发者提供不同设备间数据库的分布式协同能力，能够将数据保存到分布式键值数据库中，并可对分布式键值数据库中的数据进行增加、删除、修改、查询、端端同步等操作。
 - 用户首选项：面向开发者提供Key-Value键值型的数据处理能力，支持应用持久化轻量级数据，并对其修改和查询。
-- 关系型数据库：面向开发者提供了一套基于SQLite组件完整的对本地数据库进行管理的机制，对外提供了一系列的增、删、改、查等接口，也支持直接运行用户输入的SQL语句。
-- 数据集：面向开发者提供可向数据库插入的数据集合。
+- 关系型数据库：面向开发者提供了一套基于SQLite组件的对本地数据库进行管理的完整机制，包括一系列的增、删、改、查等接口，也支持直接运行用户输入的SQL语句。
+- 数据集：面向开发者提供可向数据库插入的数据类型集合。
 
 框架层：
 
@@ -26,7 +26,7 @@
 - 分布式键值数据库封装：基于底层KV数据库部件实现分布式键值数据库封装，提供键值对数据管理能力。
 - 用户首选项封装：基于底层首选项部件实现用户首选项封装，提供轻量级Key-Value操作，支持本地应用存储少量数据。
 - 关系型数据库封装：基于底层关系型数据库部件实现关系型数据库封装，提供一种基于关系模型来管理数据的数据库。
-- 数据集封装：实现了可向数据库插入的数据集合。
+- 数据集封装：实现了可向数据库插入的数据类型集合。
 
 架构图中依赖部件引入说明：
 
@@ -35,8 +35,8 @@
 - 首选项部件：用户首选项封装依赖首选项部件，用于实现轻量级的本地Key-Value键值型数据处理能力。
 - 关系型数据库部件：关系型数据库封装依赖关系型数据库部件，用于实现本地关系型数据库管理机制。
 - ability_cangjie_wrapper：分布式键值数据库封装、用户首选项封装以及关系型数据库封装依赖ability_cangjie_wrapper的应用上下文能力，用于访问当前应用的数据库资源等。
-- hiviewdfx_cangjie_wrapper：依赖hiviewdfx_cangjie_wrapper提供的HiLog日志能力，用于在关键路径打印日志。
-- cangjie_ark_interop：依赖cangjie_ark_interop提供的仓颉注解类定义和BusinessException异常类定义，用于对API进行标注，及在错误分支向用户抛出异常。
+- hiviewdfx_cangjie_wrapper：框架层依赖hiviewdfx_cangjie_wrapper提供的HiLog日志能力，用于在关键路径打印日志。
+- cangjie_ark_interop：框架层依赖cangjie_ark_interop提供的仓颉注解类定义和BusinessException异常类定义，用于对API进行标注，及在错误分支向用户抛出异常。
 
 ## 目录
 
@@ -63,7 +63,7 @@ foundation/communication/netmanager_cangjie_wrapper
 
 ## 使用说明
 
-如架构图所示，分布式数据管理仓颉封装提供了以下功能：
+分布式数据管理仓颉封装提供了以下功能：
 
 - 数据共享谓词。
 - 分布式键值数据库。
@@ -83,21 +83,22 @@ foundation/communication/netmanager_cangjie_wrapper
 
 ## 约束
 
-与ArkTS提供的API能力相比：
+与ArkTS提供的API能力相比，暂不支持以下功能：
 
-- 关系型数据库暂不支持以下功能：
+- 数据共享。
+- 数据通用类型。
+- DataAbility谓词。
+- 分布式数据对象。
+- 共享用户首选项。
+- 共享关系型数据库。
+- 标准化数据通路。
+- 标准化数据结构。
+- 标准化数据定义与描述。
+- 智慧数据平台。
+- 端云服务。
+
+关系型数据库暂不支持以下功能：
   - 事务。
-- 暂不支持数据共享。
-- 暂不支持数据通用类型。
-- 暂不支持DataAbility谓词。
-- 暂不支持分布式数据对象。
-- 暂不支持共享用户首选项。
-- 暂不支持共享关系型数据库。
-- 暂不支持标准化数据通路。
-- 暂不支持标准化数据结构。
-- 暂不支持标准化数据定义与描述。
-- 暂不支持智慧数据平台。
-- 暂不支持端云服务。
 
 ## 参与贡献
 
@@ -109,12 +110,12 @@ foundation/communication/netmanager_cangjie_wrapper
 
 [arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
+[distributeddatamgr\_data_share](https://gitcode.com/openharmony/distributeddatamgr_data_share)
+
+[distributeddatamgr\_kv_store](https://gitcode.com/openharmony/distributeddatamgr_kv_store)
+
+[distributeddatamgr\_preferences](https://gitcode.com/openharmony/distributeddatamgr_preferences)
+
+[distributeddatamgr\_relational_store](https://gitcode.com/openharmony/distributeddatamgr_relational_store)
+
 [hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
-
-[distributeddatamgr\_data_share](https://gitee.com/openharmony/distributeddatamgr_data_share/blob/master/README_zh.md)
-
-[distributeddatamgr\_kv_store](https://gitee.com/openharmony/distributeddatamgr_kv_store/blob/master/README_zh.md)
-
-[distributeddatamgr\_preferences](https://gitee.com/openharmony/distributeddatamgr_preferences/blob/master/README_zh.md)
-
-[distributeddatamgr\_relational_store](https://gitee.com/openharmony/distributeddatamgr_relational_store/blob/master/README_zh.md)
