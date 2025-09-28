@@ -21,9 +21,6 @@ internal import std.collection.*
 import std.unittest.testmacro.*
 
 import ArkData.*
-import ohos.data.distributed_kv_store.Options as KVOptions
-import ohos.data.distributed_kv_store.SecurityLevel as KVSecurityLevel
-import ohos.data.distributed_kv_store.ValueType as KVValueType
 import ohos.data.distributed_kv_store.Entry as KVEntry
 
 import ohos.data.distributed_kv_store.*

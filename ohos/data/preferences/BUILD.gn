@@ -16,7 +16,7 @@ import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.data.preferences") {
   sources = [
-    "options.cj",
+    "preferences_options.cj",
     "preferences.cj",
     "preferences_ffi.cj",
   ]

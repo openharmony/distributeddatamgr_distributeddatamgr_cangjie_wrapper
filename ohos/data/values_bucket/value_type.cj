@@ -26,7 +26,7 @@ import ohos.labels.APILevel
     22,
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
-public enum ValueType {
+public enum VBValueType {
     /* Integer */ 
     @!APILevel[
         22,
@@ -75,7 +75,7 @@ protected struct CValueType {
     var string: CPointer<UInt8> = CPointer<UInt8>()
     var tag: UInt8 = 0
 
-    protected init(value: ValueType) {
+    protected init(value: VBValueType) {
         match (value) {
             case Integer(n) =>
                 tag = 1

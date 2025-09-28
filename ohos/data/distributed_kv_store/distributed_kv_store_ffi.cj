@@ -234,7 +234,7 @@ struct CKVValueType {
     var double: Float64
     var tag: UInt8
 
-    init(value: ValueType) {
+    init(value: KVValueType) {
         string = CPointer<UInt8>()
         integer = 0
         float = 0.0
@@ -272,24 +272,24 @@ struct CKVValueType {
         }
     }
 
-    func toValueType(): ValueType {
+    func toValueType(): KVValueType {
         match (this.tag) {
-            case 0 => return ValueType.StringValue(CString(this.string).toString())
-            case 1 => return ValueType.Integer(this.integer)
-            case 2 => return ValueType.Float(this.float)
+            case 0 => return KVValueType.StringValue(CString(this.string).toString())
+            case 1 => return KVValueType.Integer(this.integer)
+            case 2 => return KVValueType.Float(this.float)
             case 3 =>
                 let ptr = this.byteArray.head
                 let size = this.byteArray.size
                 if (ptr.isNull()) {
-                    return ValueType.ByteArray(Array<UInt8>())
+                    return KVValueType.ByteArray(Array<UInt8>())
                 }
                 let result = unsafe { Array<UInt8>(size, {i => ptr.read(i)}) }
-                return ValueType.ByteArray(result)
-            case 4 => return ValueType.Boolean(this.bool)
-            case 5 => return ValueType.Double(this.double)
+                return KVValueType.ByteArray(result)
+            case 4 => return KVValueType.Boolean(this.bool)
+            case 5 => return KVValueType.Double(this.double)
             case _ =>
                 KV_STORE_LOG.info("WARNING: Blob have no data!")
-                return ValueType.Integer(-1)
+                return KVValueType.Integer(-1)
         }
     }
 
@@ -373,7 +373,7 @@ struct COptions {
     var securityLevel: Int32
     var schema: CSchema
 
-    init(options: Options, kvStoreType: KVStoreType) {
+    init(options: KVOptions, kvStoreType: KVStoreType) {
         createIfMissing = options.createIfMissing
         encrypt = options.encrypt
         backup = options.backup

@@ -132,7 +132,7 @@ public class Preferences <: RemoteDataLite {
      * Obtains a {@link Preferences} instance matching a specified preferences file name.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
-     * @param { Options } options - Indicates the {@link Options} option of preferences file position.
+     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences file position.
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
@@ -145,7 +145,7 @@ public class Preferences <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public static func getPreferences(context: UIAbilityContext, options: Options): Preferences {
+    public static func getPreferences(context: UIAbilityContext, options: PreferencesOptions): Preferences {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
             throw IllegalArgumentException("The context is invalid.")
@@ -170,14 +170,14 @@ public class Preferences <: RemoteDataLite {
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func deletePreferences(context: UIAbilityContext, name: String): Unit {
-        deletePreferences(context, Options(name))
+        deletePreferences(context, PreferencesOptions(name))
     }
 
     /**
      * Deletes a {@link Preferences} instance matching a specified preferences file name.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
-     * @param { Options } options - Indicates the {@link Options} option of preferences file position.
+     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences file position.
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
@@ -193,7 +193,7 @@ public class Preferences <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public static func deletePreferences(context: UIAbilityContext, options: Options): Unit {
+    public static func deletePreferences(context: UIAbilityContext, options: PreferencesOptions): Unit {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
             throw IllegalArgumentException("The context is invalid.")
@@ -237,7 +237,7 @@ public class Preferences <: RemoteDataLite {
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, name: String): Unit {
-        removePreferencesFromCache(context, Options(name))
+        removePreferencesFromCache(context, PreferencesOptions(name))
     }
 
    /**
@@ -248,7 +248,7 @@ public class Preferences <: RemoteDataLite {
     * will occur.
     *
     * @param { UIAbilityContext } context - Indicates the context of application or capability.
-    * @param { Options } options - Indicates the {@link Options} option of preferences file position.
+    * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences file position.
     * @throws { BusinessException } 401 - Parameter error. Possible causes:
     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
     * <br>3. Parameter verification failed.
@@ -264,7 +264,7 @@ public class Preferences <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public static func removePreferencesFromCache(context: UIAbilityContext, options: Options): Unit {
+    public static func removePreferencesFromCache(context: UIAbilityContext, options: PreferencesOptions): Unit {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
             throw IllegalArgumentException("The context is invalid.")
@@ -320,13 +320,13 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Obtains the value of a preferences in the ValueType format.
-     * <p>If the value is {@code null} or not in the ValueType format, the default value is returned.
+     * Obtains the value of a preferences in the PreferencesValueType format.
+     * <p>If the value is {@code null} or not in the PreferencesValueType format, the default value is returned.
      *
      * @param { String } key - Indicates the key of the preferences. It cannot be {@code null} or empty.
      * <tt>MAX_KEY_LENGTH</tt>.
-     * @param { ValueType } defValue - Indicates the default value to return.
-     * @returns { ValueType } The value matching the specified key if it is found;
+     * @param { PreferencesValueType } defValue - Indicates the default value to return.
+     * @returns { PreferencesValueType } The value matching the specified key if it is found;
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
@@ -337,9 +337,9 @@ public class Preferences <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public func get(key: String, defValue: ValueType): ValueType {
+    public func get(key: String, defValue: PreferencesValueType): PreferencesValueType {
         unsafe {
-            var result = ValueType.Integer(0)
+            var result = PreferencesValueType.Integer(0)
             try (cKey = LibC.mallocCString(key).asResource()) {
                 let cDefValue = CPreferencesValueType(defValue)
                 let cPreferencesValueType = FfiOHOSPreferencesGet(getID(), cKey.value, cDefValue)
@@ -355,7 +355,7 @@ public class Preferences <: RemoteDataLite {
      * Sets an int value for the key in the {@link Preferences} object.
      *
      * @param { String } key - Indicates the key of the preferences to modify. It cannot be {@code null} or empty.
-     * @param { ValueType } value - Indicates the value of the preferences.
+     * @param { PreferencesValueType } value - Indicates the value of the preferences.
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
@@ -366,7 +366,7 @@ public class Preferences <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public func put(key: String, value: ValueType): Unit {
+    public func put(key: String, value: PreferencesValueType): Unit {
         unsafe {
             try (cKey = LibC.mallocCString(key).asResource()) {
                 let cValue = CPreferencesValueType(value)
@@ -386,7 +386,7 @@ public class Preferences <: RemoteDataLite {
     /**
      * Obtains all the keys and values of a preferences in an HashMap.
      *
-     * @returns { HashMap<String, ValueType> } The values and keys in an HashMap.
+     * @returns { HashMap<String, PreferencesValueType> } The values and keys in an HashMap.
      * @throws { BusinessException } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessException } 15500000 - Inner error.
      * @relation getAllSync(): Object;
@@ -395,7 +395,7 @@ public class Preferences <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public func getAll(): HashMap<String, ValueType> {
+    public func getAll(): HashMap<String, PreferencesValueType> {
         unsafe {
             let cValues = FfiOHOSPreferencesGetAll(getID())
             let result = CPreferencesValueTypes.parse(cValues)

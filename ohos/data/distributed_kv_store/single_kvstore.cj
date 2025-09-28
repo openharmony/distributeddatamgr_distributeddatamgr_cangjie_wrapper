@@ -34,8 +34,8 @@ class SingleKVStoreImpl {}
 /**
  * Provides methods related to single-version distributed databases.
  * <p>To create a {@code SingleKVStore} database,
- * you can use the {@link data.distributed.common.KVManager#getKVStore​(Options, String)} method
- * with {@code KVStoreType} set to {@code SingleVersion} for the input parameter {@code Options}.
+ * you can use the {@link data.distributed.common.KVManager#getKVStore​(KVOptions, String)} method
+ * with {@code KVStoreType} set to {@code SingleVersion} for the input parameter {@code KVOptions}.
  * This database synchronizes data to other databases in time sequence.
  * The {@code SingleKVStore} database does not support
  * synchronous transactions, or data search using snapshots.
@@ -58,7 +58,7 @@ public open class SingleKVStore <: RemoteDataLite {
         finalizer = SingleKVStoreFinalizer(id)
     }
 
-    static func getKVStore(id: Int64, storeId: String, options: Options): SingleKVStore {
+    static func getKVStore(id: Int64, storeId: String, options: KVOptions): SingleKVStore {
         SingleKVStore(KVManager.getKVStoreId(id, storeId, options, SingleVersion))
     }
 
@@ -79,7 +79,7 @@ public open class SingleKVStore <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public open func put(key: String, value: ValueType): Unit {
+    public open func put(key: String, value: KVValueType): Unit {
         unsafe {
             try (
                 cKey = LibC.mallocCString(key).asResource(),
@@ -188,7 +188,7 @@ public open class SingleKVStore <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public open func get(key: String): ValueType {
+    public open func get(key: String): KVValueType {
         unsafe {
             let cKey = LibC.mallocCString(key)
             var errCode: Int32 = 0

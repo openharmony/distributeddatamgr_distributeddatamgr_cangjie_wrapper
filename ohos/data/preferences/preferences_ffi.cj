@@ -59,7 +59,7 @@ struct CPreferencesValueType {
     var stringArray: CArrString = CArrString(CPointer<CString>(), 0)
     var tag: UInt8 = 0
 
-    init(value: ValueType) {
+    init(value: PreferencesValueType) {
         unsafe {
             match (value) {
                 case Integer(n) =>
@@ -96,34 +96,34 @@ struct CPreferencesValueType {
         }
     }
 
-    static func parse(cPreferencesValueType: CPreferencesValueType): ValueType {
+    static func parse(cPreferencesValueType: CPreferencesValueType): PreferencesValueType {
         match (cPreferencesValueType.tag) {
-            case 0 => return ValueType.Integer(cPreferencesValueType.integer)
-            case 1 => return ValueType.Double(cPreferencesValueType.double)
-            case 2 => return ValueType.StringData(CString(cPreferencesValueType.string).toString())
-            case 3 => return ValueType.BoolData(cPreferencesValueType.bool)
+            case 0 => return PreferencesValueType.Integer(cPreferencesValueType.integer)
+            case 1 => return PreferencesValueType.Double(cPreferencesValueType.double)
+            case 2 => return PreferencesValueType.StringData(CString(cPreferencesValueType.string).toString())
+            case 3 => return PreferencesValueType.BoolData(cPreferencesValueType.bool)
             case 4 =>
                 let ptr = cPreferencesValueType.boolArray.head
                 let size = cPreferencesValueType.boolArray.size
                 let result = unsafe { Array<Bool>(size, {i => ptr.read(i)}) }
-                return ValueType.BoolArray(result)
+                return PreferencesValueType.BoolArray(result)
             case 5 =>
                 let ptr = cPreferencesValueType.doubleArray.head
                 let size = cPreferencesValueType.doubleArray.size
                 let result = unsafe { Array<Float64>(size, {i => ptr.read(i)}) }
-                return ValueType.DoubleArray(result)
+                return PreferencesValueType.DoubleArray(result)
             case 6 =>
                 let ptr = cPreferencesValueType.stringArray.head
                 let size = cPreferencesValueType.stringArray.size
                 let result = unsafe { Array<String>(size, {i => ptr.read(i).toString()}) }
-                return ValueType.StringArray(result)
+                return PreferencesValueType.StringArray(result)
             case _ =>
                 PREFERENCES_LOG.info("WARNING: Shouldn't have walked here")
-                return ValueType.Integer(-1)
+                return PreferencesValueType.Integer(-1)
         }
     }
 
-    func toValueType(): ValueType {
+    func toValueType(): PreferencesValueType {
         return parse(this)
     }
 
@@ -170,8 +170,8 @@ struct CPreferencesValueTypes {
         this.size = size
     }
 
-    static func parse(cPreferencesValueTypes: CPreferencesValueTypes): HashMap<String, ValueType> {
-        var result = HashMap<String, ValueType>()
+    static func parse(cPreferencesValueTypes: CPreferencesValueTypes): HashMap<String, PreferencesValueType> {
+        var result = HashMap<String, PreferencesValueType>()
         var typeSize = cPreferencesValueTypes.size
         for (i in 0..typeSize) {
             let pStr = cPreferencesValueTypes.key

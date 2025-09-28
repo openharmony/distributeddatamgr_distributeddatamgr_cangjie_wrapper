@@ -88,7 +88,7 @@ public class KVManager <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
-    static func getKVStoreId(id: Int64 ,storeId: String, options: Options, kVStoreType: KVStoreType): Int64 {
+    static func getKVStoreId(id: Int64 ,storeId: String, options: KVOptions, kVStoreType: KVStoreType): Int64 {
         unsafe {
             var codeId = 0
             try (
@@ -108,7 +108,7 @@ public class KVManager <: RemoteDataLite {
     }
 
     /**
-     * Creates and obtains a KVStore database by specifying {@code Options} and {@code storeId}.
+     * Creates and obtains a KVStore database by specifying {@code KVOptions} and {@code storeId}.
      *
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types;
@@ -122,7 +122,7 @@ public class KVManager <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public func getKVStore<T>(storeId: String, options: Options): T where T <: SingleKVStore {
+    public func getKVStore<T>(storeId: String, options: KVOptions): T where T <: SingleKVStore {
         let KVStore = match (T.getKVStore(getID(), storeId, options) as T) {
             case Some(v) => v
             case _ => throw IllegalArgumentException("The type is not supported yet.")

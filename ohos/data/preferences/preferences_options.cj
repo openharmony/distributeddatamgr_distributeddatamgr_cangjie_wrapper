@@ -60,7 +60,7 @@ public enum StorageType {
     22,
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
-public enum ValueType {
+public enum PreferencesValueType {
     /**
      * Type for Int64.
      */   
@@ -249,7 +249,7 @@ func getCJErrorCode(code: Int32): Int32 {
     22,
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
-public class Options {
+public class PreferencesOptions {
     /**
      * The preferences file name.
      *
@@ -284,7 +284,7 @@ public class Options {
     public var storageType: StorageType
 
     /**
-     * Options constructor.
+     * PreferencesOptions constructor.
      */
     @!APILevel[
         22,

@@ -23,8 +23,8 @@ import ohos.business_exception.BusinessException
 /**
  * Provides methods related to device-collaboration distributed databases.
  * <p>To create a {@code DeviceKVStore} database, you can use the
- * {@link data.distributed.common.KVManager.getKVStore(Options, String)}
- * method with {@code KVStoreType} set to {@code DeviceCollaboration} for the input parameter Options.
+ * {@link data.distributed.common.KVManager.getKVStore(KVOptions, String)}
+ * method with {@code KVStoreType} set to {@code DeviceCollaboration} for the input parameter KVOptions.
  * This database manages distributed
  * data by device, and cannot modify data synchronized from remote devices. When an application writes a
  * key-value pair entry
@@ -45,7 +45,7 @@ public class DeviceKVStore <: SingleKVStore {
         releaseFFIData(myDataId)
     }
 
-    static func getKVStore(id: Int64, storeId: String, options: Options): DeviceKVStore {
+    static func getKVStore(id: Int64, storeId: String, options: KVOptions): DeviceKVStore {
         DeviceKVStore(KVManager.getKVStoreId(id, storeId, options, DeviceCollaboration))
     }
     
@@ -64,13 +64,13 @@ public class DeviceKVStore <: SingleKVStore {
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public func get(key: String): ValueType {
+    public func get(key: String): KVValueType {
         return get("", key)
     }
 
-    func get(deviceId: String, key: String): ValueType {
+    func get(deviceId: String, key: String): KVValueType {
         unsafe {
-            var result = ValueType.Integer(0)
+            var result = KVValueType.Integer(0)
             try (
                 cDeviceId = LibC.mallocCString(deviceId).asResource(),
                 cKey = LibC.mallocCString(key).asResource()

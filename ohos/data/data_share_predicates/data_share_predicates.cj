@@ -62,12 +62,12 @@ public class DataSharePredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure the DataSharePredicates to match the field whose data type is ValueType and value is equal
+     * Configure the DataSharePredicates to match the field whose data type is VBValueType and value is equal
      * to a specified value.
      * This method is similar to = of the SQL statement.
      *
      * @param { String } field - Indicates the column name in the database table.
-     * @param { ValueType } value - Indicates the value to match with the DataSharePredicates.
+     * @param { VBValueType } value - Indicates the value to match with the DataSharePredicates.
      * @returns { DataSharePredicates } Returns the DataSharePredicates that match the specified field.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } -1 - Instance invalid.
@@ -77,7 +77,7 @@ public class DataSharePredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
-    public func equalTo(field: String, value: ValueType): DataSharePredicates {
+    public func equalTo(field: String, value: VBValueType): DataSharePredicates {
         if (field.isEmpty()) {
             LOG.error("DataSharePredicates equalTo failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
             throw BusinessException(ERR_PARAMETER_ERROR,
@@ -200,11 +200,11 @@ public class DataSharePredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure {@code DataSharePredicates} to match the specified field whose data type is ValueType array and values
+     * Configure {@code DataSharePredicates} to match the specified field whose data type is VBValueType array and values
      * are within a given range.
      *
      * @param { String } field - Indicates the column name in the database table.
-     * @param { Array<ValueType> } values - Indicates the values to match with DataSharePredicates.
+     * @param { Array<VBValueType> } values - Indicates the values to match with DataSharePredicates.
      * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } -1 - Instance invalid.
@@ -214,14 +214,14 @@ public class DataSharePredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
-    public func `in`(field: String, value: Array<ValueType>): DataSharePredicates {
+    public func `in`(field: String, value: Array<VBValueType>): DataSharePredicates {
         if (field.isEmpty() || value.isEmpty()) {
             LOG.error("DataSharePredicates in failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
             throw BusinessException(ERR_PARAMETER_ERROR,
                 "DataSharePredicates in failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
         }
 
-        // The ValueType types in value ​​must all be consistent
+        // The VBValueType types in value ​​must all be consistent
         let tag = value[0].get()
         for (idx in 1..value.size) {
             if (value[idx].get() != tag) {
