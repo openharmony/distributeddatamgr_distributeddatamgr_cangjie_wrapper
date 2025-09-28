@@ -13,20 +13,23 @@ The distributeddatamgr_distributeddatamgr_cangjie_wrapper provides persistence o
 As shown in the architecture diagram:
 
 Interface Layer:
+
 - DataShare Predicates: Provides developers with filtering conditions used to query data in databases, including comparison predicate equal conditions, logical predicate AND conditions, range predicate contains conditions, and ascending and descending sorting of result sets.
-- Distributed KV Store: Provides developers with distributed collaboration capabilities of databases between different devices, enabling data to be saved to distributed key-value databases, and allowing operations such as adding, deleting, modifying, querying, and end-to-end synchronization of data in distributed key-value databases.
-- User Preferences: Provides developers with Key-Value type data processing capabilities, supporting application persistence of lightweight data, and modification and query of such data.
-- RDB Store: Provides developers with a complete mechanism based on SQLite components for managing local databases, offering a series of interfaces for adding, deleting, modifying, and querying, and also supporting direct execution of user-input SQL statements.
-- Value Bucket: Provides developers with a data collection that can be inserted into databases.
+- Distributed KV Store: Provides cross-device distributed data collaboration capabilities for developers, supporting seamless synchronization and sharing of data across multiple devices. This interface can persistently store data in a distributed key-value database and provides comprehensive data operation interfaces, including core functions such as data creation, deletion, modification, querying, end-to-end synchronization, data subscription, and notifications, meeting the strict requirements of distributed applications for data consistency and real-time performance.
+- User Preferences: Provides lightweight Key-Value data processing capabilities for developers, specifically designed for persistent storage of application configuration information and user preferences. It supports atomic data modifications and efficient query operations, making it suitable for storing simple configuration parameters, user settings, and other small-scale data with characteristics of low resource consumption and fast read-write speeds.
+- RDB Store: Provides developers with a complete local database management mechanism based on SQLite components, supporting standard relational data models. It offers rich data operation interfaces, including advanced functions such as data record creation, deletion, modification, querying, transaction processing, and index optimization. It also supports direct execution of user-defined SQL statements, meeting data management requirements in complex business scenarios.
+- Value Bucket: Provides developers with standardized data field type enumerations for defining and operating on data structures that can be inserted into databases. Through predefined data types, it ensures data consistency and validity, simplifies data operation processes, and improves development efficiency and code quality.
 
 Framework Layer:
+
 - DataShare Predicates Wrapper: Implements data share predicates wrapper based on the underlying data sharing component, providing data share predicates for different query methods.
 - Distributed KV Store Wrapper: Implements distributed key-value database wrapper based on the underlying KV database component, providing key-value pair data management capabilities.
 - User Preferences Wrapper: Implements preferences wrapper based on the underlying preferences component, providing lightweight Key-Value operations and supporting local applications to store small amounts of data.
 - RDB Store Wrapper: Implements relational database wrapper based on the underlying relational database component, providing a database that manages data based on the relational model.
-- Value Bucket Wrapper: Implements a data collection that can be inserted into databases.
+- Value Bucket Wrapper: Implements standardized data field type enumerations.
 
 Dependencies Introduction in Architecture:
+
 - data_share: The DataShare Predicates Wrapper depends on the data_share, which is used to implement filtering conditions for querying data in databases.
 - kv_store: The Distributed KV Store Wrapper relies on the kv_store implement distributed collaboration capabilities of databases between different devices.
 - preferences: The User Preferences Wrapper depends on the preferences, which is used to implement lightweight local Key-Value type data processing capabilities.
