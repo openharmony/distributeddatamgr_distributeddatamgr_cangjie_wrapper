@@ -15,7 +15,7 @@
 
 package ohos_app_cangjie_entry
 
-import ArkData.*
+import kit.ArkData.*
 import ohos.data.relational_store.ValueType as RelationalStoreValueType
 import ohos.data.relational_store.SecurityLevel as RelationalStoreSecurityLevel
 
