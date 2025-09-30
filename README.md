@@ -6,19 +6,43 @@ The distributeddatamgr_distributeddatamgr_cangjie_wrapper provides persistence o
 
 ## System Architecture
 
-**Figure 1** distributeddatamgr_cangjie_wrapper architecture
+**Figure 1** Distributed Data Management Cangjie Wrapper Architecture Diagram
 
-![Architecture of the distributeddatamgr_distributeddatamgr_cangjie_wrapper](figures/distributeddatamgr_cangjie_wrapper_architecture_en.png)
+![Distributed Data Management Cangjie Wrapper Architecture Diagram](figures/distributeddatamgr_cangjie_wrapper_architecture.png)
 
 As shown in the architecture diagram:
 
 Interface Layer:
 
-- DataShare Predicates: Provides developers with filtering conditions used to query data in databases, including comparison predicate equal conditions, logical predicate AND conditions, range predicate contains conditions, and ascending and descending sorting of result sets.
-- Distributed KV Store: Provides cross-device distributed data collaboration capabilities for developers, supporting seamless synchronization and sharing of data across multiple devices. This interface can persistently store data in a distributed key-value database and provides comprehensive data operation interfaces, including core functions such as data creation, deletion, modification, querying, end-to-end synchronization, data subscription, and notifications, meeting the strict requirements of distributed applications for data consistency and real-time performance.
-- User Preferences: Provides lightweight Key-Value data processing capabilities for developers, specifically designed for persistent storage of application configuration information and user preferences. It supports atomic data modifications and efficient query operations, making it suitable for storing simple configuration parameters, user settings, and other small-scale data with characteristics of low resource consumption and fast read-write speeds.
-- RDB Store: Provides developers with a complete local database management mechanism based on SQLite components, supporting standard relational data models. It offers rich data operation interfaces, including advanced functions such as data record creation, deletion, modification, querying, transaction processing, and index optimization. It also supports direct execution of user-defined SQL statements, meeting data management requirements in complex business scenarios.
-- Value Bucket: Provides developers with standardized data field type enumerations for defining and operating on data structures that can be inserted into databases. Through predefined data types, it ensures data consistency and validity, simplifies data operation processes, and improves development efficiency and code quality.
+- DataShare Predicates: Provides developers with data query filtering capabilities, supporting the construction of complex query conditions.
+  - Comparison Predicates: Supports equal-to conditions.
+  - Logical Predicates: Supports AND conditions.
+  - Range Predicates: Supports IN conditions.
+  - Sorting Functions: Supports ascending and descending order of result sets.
+  - Other Functions: Supports pagination queries.
+  When developers need to retrieve data without focusing on specific database types, data share predicates can be used as general query conditions, such as [retrieval of photos and videos in albums](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/media/medialibrary/cj-photoAccessHelper-systemAlbum-guidelines.md).
+
+- Distributed KV Database: Provides developers with cross-device distributed data collaboration capabilities, supporting seamless synchronization and sharing of data between multiple devices.
+  - Database Management: Supports database creation, closure, deletion, and obtaining identifier IDs of all created databases.
+  - Database Operations: Supports database backup and restore operations.
+  - Data Operations: Supports addition, deletion, modification, and query of data records.
+  - Transaction Support: Supports transaction enabling, commit, and rollback.
+  - Data Subscription: Supports subscription and unsubscription of specified types of data changes.
+  - Synchronization Function: Supports end-to-end database synchronization.
+
+- User Preferences: Provides developers with lightweight Key-Value data processing capabilities, specifically for persistent storage of application configuration information and user preferences.
+  - Database Management: Supports database acquisition, deletion, and removal from cache.
+  - Database Operations: Supports clearing all data, obtaining all data, and data persistence.
+  - Data Operations: Supports data writing, searching, and deletion.
+  - Data Subscription: Supports subscription and unsubscription of data changes based on Key or Value values, with callback triggering after persistent file changes.
+
+- RDB Store: Provides developers with a complete local database management mechanism based on SQLite components, supporting standard relational data models.
+  - Database Management: Supports database creation and deletion.
+  - Database Operations: Supports database backup and restore operations.
+  - Data Operations: Provides addition, deletion, modification, and query of data records.
+  - SQL Execution: Supports direct execution of user-defined SQL statements, including table structure definition and data manipulation for complex database operations. Currently, only the creation and deletion of tables via SQL statements are supported.
+
+- Value Bucket: Provides developers with standardized data field type enumeration classes, including Integer, Double, StringValue, and Boolean.
 
 Framework Layer:
 
