@@ -25,7 +25,7 @@ package ohos_app_cangjie_entry
 import ohos.data.preferences.Options as PreferencesOptions
 import ohos.data.preferences.ValueType as PreferencesValueType
 
-import ArkData.*
+import kit.ArkData.*
 
 import std.runtime.*
 import std.sync.*
