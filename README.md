@@ -1,4 +1,4 @@
-# distributeddatamgr_distributeddatamgr_cangjie_wrapper
+# distributeddatamgr_distributeddatamgr_cangjie_wrapper(beta feature)
 
 ## Introduction
 
