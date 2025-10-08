@@ -32,8 +32,6 @@ type StageContext = CPointer<Unit>
 
 /**
  * Provider interfaces to create a {@link KVManager} instance.
- *
- * @relation declare namespace distributedKVStore
  */
 @!APILevel[
     22,
@@ -46,7 +44,6 @@ public class DistributedKVStore {
      * to create a {@link KVManager} instance.
      *
      * @throws { IllegalArgumentException } - The context type is not supported. Only support UIAbilityContext.
-     * @relation function createKVManager(config: KVManagerConfig): KVManager;
      */
     @!APILevel[
         22,
@@ -72,8 +69,6 @@ public class DistributedKVStore {
 /**
  * Provides interfaces to manage a {@code SingleKVStore} database, including obtaining, closing, and deleting the
  * {@code SingleKVStore}.
- *
- * @relation interface KVManager
  */
 @!APILevel[
     22,
@@ -118,7 +113,6 @@ public class KVManager <: RemoteDataLite {
      * @throws { IllegalArgumentException } The type is not supported yet.
      * @throws { BusinessException } 15100002 - Open existed database with changed options.
      * @throws { BusinessException } 15100003 - Database corrupted.
-     * @relation getKVStore<T>(storeId: string, options: Options): Promise<T>
      */
     @!APILevel[
         22,
@@ -142,7 +136,6 @@ public class KVManager <: RemoteDataLite {
      *
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
-     * @relation closeKVStore(appId: string, storeId: string): Promise<void>
      */
     @!APILevel[
         22,
@@ -173,7 +166,6 @@ public class KVManager <: RemoteDataLite {
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
      * @throws { BusinessException } 15100004 - Not found.
-     * @relation deleteKVStore(appId: string, storeId: string): Promise<void>
      */
     @!APILevel[
         22,
@@ -201,7 +193,6 @@ public class KVManager <: RemoteDataLite {
      *
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
-     * @relation getAllKVStoreId(appId: string): Promise<string[]>
      */
     @!APILevel[
         22,

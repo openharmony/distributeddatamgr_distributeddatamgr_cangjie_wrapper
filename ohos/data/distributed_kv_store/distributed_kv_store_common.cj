@@ -25,7 +25,6 @@ import std.collection.*
 
 /**
  * KVStore constants
- * @relation interface Constants
  */
 @!APILevel[
     22,
@@ -34,7 +33,6 @@ import std.collection.*
 public class Constants {
     /**
      * Max key length is 1024.
-     * @relation readonly MAX_KEY_LENGTH: number;
      */
     @!APILevel[
         22,
@@ -44,7 +42,6 @@ public class Constants {
 
     /**
      * Max value length is 4194303.
-     * @relation readonly MAX_VALUE_LENGTH: number;
      */
     @!APILevel[
         22,
@@ -54,7 +51,6 @@ public class Constants {
 
     /**
      * Max device coordinate key length is 896.
-     * @relation readonly MAX_KEY_LENGTH_DEVICE: number;
      */
     @!APILevel[
         22,
@@ -64,7 +60,6 @@ public class Constants {
 
     /**
      * Max store id length is 128.
-     * @relation readonly MAX_STORE_ID_LENGTH: number;
      */
     @!APILevel[
         22,
@@ -74,7 +69,6 @@ public class Constants {
 
     /**
      * Max query length is 512000.
-     * @relation readonly MAX_QUERY_LENGTH: number;
      */
     @!APILevel[
         22,
@@ -84,7 +78,6 @@ public class Constants {
 
     /**
      * Max batch operation size is 128.
-     * @relation readonly MAX_BATCH_SIZE: number;
      */
     @!APILevel[
         22,
@@ -97,8 +90,6 @@ public class Constants {
 
 /**
  * Indicates the {@code ValueType}.
- *
- * @relation enum ValueType
  */
 @!APILevel[
     22,
@@ -107,8 +98,6 @@ public class Constants {
 public enum ValueType {
     /**
      * Indicates that the value type is string.
-     *
-     * @relation STRING,
      */
     @!APILevel[
         22,
@@ -118,8 +107,6 @@ public enum ValueType {
     |
     /**
      * Indicates that the value type is int.
-     *
-     * @relation INTEGER,
      */
     @!APILevel[
         22,
@@ -129,8 +116,6 @@ public enum ValueType {
     |
     /**
      * Indicates that the value type is float.
-     *
-     * @relation FLOAT,
      */
     @!APILevel[
         22,
@@ -140,8 +125,6 @@ public enum ValueType {
     |
     /**
      * Indicates that the value type is byte array.
-     *
-     * @relation BYTE_ARRAY,
      */
     @!APILevel[
         22,
@@ -151,8 +134,6 @@ public enum ValueType {
     |
     /**
      * Indicates that the value type is boolean.
-     *
-     * @relation BOOLEAN,
      */
     @!APILevel[
         22,
@@ -162,8 +143,6 @@ public enum ValueType {
     |
     /**
      * Indicates that the value type is double.
-     *
-     * @relation DOUBLE
      */
     @!APILevel[
         22,
@@ -176,8 +155,6 @@ public enum ValueType {
 /**
  * Provides configuration information to create a {@link KVManager} instance,
  * which includes the caller's package name and ability or hap context.
- *
- * @relation interface KVManagerConfig
  */
 @!APILevel[
     22,
@@ -186,8 +163,6 @@ public enum ValueType {
 public class KVManagerConfig {
     /**
      * Indicates the ability or hap context
-     *
-     * @relation context: BaseContext
      */
     @!APILevel[
         22,
@@ -197,8 +172,6 @@ public class KVManagerConfig {
 
     /**
      * Indicates the bundleName
-     *
-     * @relation bundleName: string
      */
     @!APILevel[
         22,
@@ -234,8 +207,6 @@ enum KVStoreType {
 
 /**
  * Describes the KVStore security level.
- *
- * @relation enum SecurityLevel
  */
 @!APILevel[
     22,
@@ -245,8 +216,6 @@ public enum SecurityLevel {
     /**
      * S1: means the db is in the low security level
      * There are some low impact when the data is leaked.
-     *
-     * @relation S1,
      */
     @!APILevel[
         22,
@@ -257,8 +226,6 @@ public enum SecurityLevel {
     /**
      * S2: means the db is in the middle security level
      * There are some major impact when the data is leaked.
-     *
-     * @relation S2,
      */
     @!APILevel[
         22,
@@ -269,8 +236,6 @@ public enum SecurityLevel {
     /**
      * S3: means the db is in the high security level
      * There are some severity impact when the data is leaked.
-     *
-     * @relation S3,
      */
     @!APILevel[
         22,
@@ -281,8 +246,6 @@ public enum SecurityLevel {
     /**
      * S4: means the db is in the critical security level
      * There are some critical impact when the data is leaked.
-     *
-     * @relation S4
      */
     @!APILevel[
         22,
@@ -318,8 +281,6 @@ public enum SecurityLevel {
  * <p>With a {@link Schema} instance, you can define the value fields which stored in the database.
  * <p>A FieldNode of the {@link Schema} instance is either a leaf or a non-leaf node.
  * <p>The leaf node must have a value; the non-leaf node must have a child {@code FieldNode}.
- *
- * @relation class FieldNode
  */
 @!APILevel[
     22,
@@ -328,8 +289,6 @@ public enum SecurityLevel {
 public class FieldNode {
     /**
      * Indicates the nullable of database field.
-     *
-     * @relation nullable: boolean;
      */
     @!APILevel[
         22,
@@ -339,8 +298,6 @@ public class FieldNode {
 
     /**
      * Indicates the default value of field node.
-     *
-     * @relation default: string;
      */
     @!APILevel[
         22,
@@ -350,8 +307,6 @@ public class FieldNode {
 
     /**
      * Indicates the type of value.
-     *
-     * @relation type: number;
      */
     @!APILevel[
         22,
@@ -377,8 +332,6 @@ public class FieldNode {
 /**
  * Represents the database schema.
  * You can set the schema object in options when create or open the database.
- *
- * @relation class Schema
  */
 @!APILevel[
     22,
@@ -387,8 +340,6 @@ public class FieldNode {
 public class Schema {
     /**
      * Indicates the root json object.
-     *
-     * @relation root: FieldNode;
      */
     @!APILevel[
         22,
@@ -398,8 +349,6 @@ public class Schema {
 
     /**
      * Indicates the string array of json.
-     *
-     * @relation indexes: Array<string>;
      */
     @!APILevel[
         22,
@@ -409,8 +358,6 @@ public class Schema {
 
     /**
      * Indicates the mode of schema.
-     *
-     * @relation mode: number;
      */
     @!APILevel[
         22,
@@ -420,8 +367,6 @@ public class Schema {
 
     /**
      * Indicates the skip size of schema.
-     *
-     * @relation skip: number;
      */
     @!APILevel[
         22,
@@ -447,8 +392,6 @@ public class Schema {
 
 /**
  * Provides configuration options to create a {@code SingleKVStore} or {@code DeviceKVStore}.
- *
- * @relation interface Options
  */
 @!APILevel[
     22,
@@ -458,7 +401,6 @@ public class Options {
 
     /**
      * Indicates whether to create a database when the database file does not exist
-     * @relation createIfMissing?: boolean
      */
     @!APILevel[
         22,
@@ -468,7 +410,6 @@ public class Options {
 
     /**
      * Indicates whether database files to be encrypted
-     * @relation encrypt?: boolean
      */
     @!APILevel[
         22,
@@ -478,7 +419,6 @@ public class Options {
 
     /**
      * Indicates whether to back up database files
-     * @relation backup?: boolean
      */
     @!APILevel[
         22,
@@ -488,7 +428,6 @@ public class Options {
 
     /**
      * Indicates whether database files are automatically synchronized
-     * @relation autoSync?: boolean
      */
     @!APILevel[
         22,
@@ -499,7 +438,6 @@ public class Options {
 
     /**
      * Indicates the database security level
-     * @relation securityLevel: SecurityLevel
      */
     @!APILevel[
         22,
@@ -509,7 +447,6 @@ public class Options {
 
     /**
      * Indicates the database schema
-     * @relation schema?: Schema
      */
     @!APILevel[
         22,
@@ -538,8 +475,6 @@ public class Options {
 
 /**
  * Provides key-value pairs stored in the distributedKVStore.
- *
- * @relation interface Entry
  */
 @!APILevel[
     22,
@@ -548,8 +483,6 @@ public class Options {
 public class Entry {
     /**
      * Indicates the key.
-     *
-     * @relation key: string;
      */
     @!APILevel[
         22,
@@ -559,8 +492,6 @@ public class Entry {
 
     /**
      * Indicates the value.
-     *
-     * @relation value: Value;
      */
     @!APILevel[
         22,
