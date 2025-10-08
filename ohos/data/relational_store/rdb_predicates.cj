@@ -23,8 +23,6 @@ import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 
 /**
  * Manages relational database configurations.
- *
- * @relation class RdbPredicates
  */
 @!APILevel[
     22,
@@ -33,8 +31,6 @@ import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 public class RdbPredicates <: RemoteDataLite {
     /**
      * A parameterized constructor used to create a RdbPredicates instance.
-     *
-     * @relation constructor(name: string);
      */
     @!APILevel[
         22,
@@ -51,8 +47,6 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Specifies all remote devices which connect to local device when syncing distributed database.
      * When query database, this function should not be called.
-     *
-     * @relation inAllDevices(): RdbPredicates
      */
     @!APILevel[
         22,
@@ -69,8 +63,6 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds a left parenthesis to the RdbPredicates.
      * This method is similar to ( of the SQL statement and needs to be used together with endWrap().
-     *
-     * @relation beginWrap(): RdbPredicates
      */
     @!APILevel[
         22,
@@ -87,8 +79,6 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds a right parenthesis to the RdbPredicates.
      * This method is similar to ) of the SQL statement and needs to be used together with beginWrap().
-     *
-     * @relation endWrap(): RdbPredicates
      */
     @!APILevel[
         22,
@@ -105,8 +95,6 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds an or condition to the RdbPredicates.
      * This method is similar to or of the SQL statement.
-     *
-     * @relation or(): RdbPredicates
      */
     @!APILevel[
         22,
@@ -123,8 +111,6 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds an and condition to the RdbPredicates.
      * This method is similar to and of the SQL statement.
-     *
-     * @relation and(): RdbPredicates
      */
     @!APILevel[
         22,
@@ -145,7 +131,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation contains(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -174,7 +159,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation beginsWith(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -202,7 +186,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation endsWith(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -230,7 +213,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation isNull(field: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -258,7 +240,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation isNotNull(field: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -287,7 +268,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation like(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -316,7 +296,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation glob(field: string, value: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -344,7 +323,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation orderByAsc(field: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -372,7 +350,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation orderByDesc(field: string): RdbPredicates
      */
     @!APILevel[
         22,
@@ -396,8 +373,6 @@ public class RdbPredicates <: RemoteDataLite {
 
     /**
      * Restricts each row of the query result to be unique.
-     *
-     * @relation distinct(): RdbPredicates
      */
     @!APILevel[
         22,
@@ -417,7 +392,6 @@ public class RdbPredicates <: RemoteDataLite {
      * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation limitAs(value: number): RdbPredicates
      */
     @!APILevel[
         22,
@@ -437,7 +411,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation offsetAs(rowOffset: number): RdbPredicates
      */
     @!APILevel[
         22,
@@ -456,7 +429,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation groupBy(fields: Array<string>): RdbPredicates
      */
     @!APILevel[
         22,
@@ -494,7 +466,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation lessThanOrEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -528,7 +499,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation equalTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -559,7 +529,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation greaterThanOrEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -591,7 +560,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation greaterThan(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -623,7 +591,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation lessThan(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -656,7 +623,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation notEqualTo(field: string, value: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -688,7 +654,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation notBetween(field: string, low: ValueType, high: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -728,7 +693,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation between(field: string, low: ValueType, high: ValueType): RdbPredicates
      */
     @!APILevel[
         22,
@@ -768,7 +732,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation in(field: string, value: Array<ValueType>): RdbPredicates
      */
     @!APILevel[
         22,
@@ -817,7 +780,6 @@ public class RdbPredicates <: RemoteDataLite {
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      * <br>2. Incorrect parameter types.
-     * @relation notIn(field: string, value: Array<ValueType>): RdbPredicates
      */
     @!APILevel[
         22,

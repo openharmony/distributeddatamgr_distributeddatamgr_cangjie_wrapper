@@ -31,8 +31,6 @@ import ohos.business_exception.BusinessException
  * data by device, and cannot modify data synchronized from remote devices. When an application writes a
  * key-value pair entry
  * into the database, the system automatically adds the ID of the device running the application to the key.
- *
- * @relation interface DeviceKVStore extends SingleKVStore
  */
 @!APILevel[
     22,
@@ -60,7 +58,6 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100004 - Not found.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation get(key: string): Promise<boolean | string | number | Uint8Array>
      */
     @!APILevel[
         22,
@@ -98,7 +95,6 @@ public class DeviceKVStore <: SingleKVStore {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getEntries(keyPrefix: string): Promise<Entry[]>
      */
     @!APILevel[
         22,
@@ -136,7 +132,6 @@ public class DeviceKVStore <: SingleKVStore {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getEntries(query: Query): Promise<Entry[]>
      */
     @!APILevel[
         22,
@@ -176,7 +171,6 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100001 - Over max limits.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSet(keyPrefix: string): Promise<KVStoreResultSet>
      */
     @!APILevel[
         22,
@@ -214,7 +208,6 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100001 - Over max limits.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSet(query: Query): Promise<KVStoreResultSet>
      */
     @!APILevel[
         22,
@@ -246,7 +239,6 @@ public class DeviceKVStore <: SingleKVStore {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSize(query: Query): Promise<number>
      */
     @!APILevel[
         22,

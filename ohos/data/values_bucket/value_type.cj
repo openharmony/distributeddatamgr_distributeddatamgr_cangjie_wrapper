@@ -22,7 +22,6 @@ import ohos.labels.APILevel
 
 /**
  * Indicates possible value types
- * @relation export type ValueType = number | string | boolean;
  */
 @!APILevel[
     22,

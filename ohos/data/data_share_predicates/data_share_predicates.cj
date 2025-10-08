@@ -40,8 +40,6 @@ private func createDataSharePredicates(): Int64 {
 
 /**
  * Manages relational database configurations.
- *
- * @relation class DataSharePredicates
  */
 @!APILevel[
     22,
@@ -73,7 +71,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @returns { DataSharePredicates } Returns the DataSharePredicates that match the specified field.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } -1 - Instance invalid.
-     * @relation equalTo(field: string, value: ValueType): DataSharePredicates
      */
     @!APILevel[
         22,
@@ -103,7 +100,6 @@ public class DataSharePredicates <: RemoteDataLite {
      *
      * @returns { DataSharePredicates } Returns the DataSharePredicates with the and condition.
      * @throws { BusinessException } -1 - Instance invalid.
-     * @relation and(): DataSharePredicates
      */
     @!APILevel[
         22,
@@ -125,7 +121,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } -1 - Instance invalid.
-     * @relation orderByAsc(field: string): DataSharePredicates
      */
     @!APILevel[
         22,
@@ -153,7 +148,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } -1 - Instance invalid.
-     * @relation orderByDesc(field: string): DataSharePredicates
      */
     @!APILevel[
         22,
@@ -182,7 +176,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @returns { DataSharePredicates } Returns the query object.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } -1 - Instance invalid.
-     * @relation limit(total: number, offset: number): DataSharePredicates
      */
     @!APILevel[
         22,
@@ -210,7 +203,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
      * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } -1 - Instance invalid.
-     * @relation in(field: string, value: Array<ValueType>): DataSharePredicates
      */
     @!APILevel[
         22,
