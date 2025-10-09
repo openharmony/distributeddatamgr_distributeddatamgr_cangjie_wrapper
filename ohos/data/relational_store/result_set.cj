@@ -771,8 +771,6 @@ public class ResultSet <: RemoteDataLite {
 
     /**
      * Obtains the values of all columns in the specified row.
-     * Inserting an empty blob, after API14 and API14, the obtained value is an empty blob; Before API 14,
-     * the obtained value was null.
      *
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
