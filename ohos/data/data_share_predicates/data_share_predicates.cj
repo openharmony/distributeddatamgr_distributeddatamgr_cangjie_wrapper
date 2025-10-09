@@ -195,8 +195,8 @@ public class DataSharePredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure {@code DataSharePredicates} to match the specified field whose data type is VBValueType array and values
-     * are within a given range.
+     * Configure {@code DataSharePredicates} to match the specified field whose data type is VBValueType array
+     * and values are within a given range.
      *
      * @param { String } field - Indicates the column name in the database table.
      * @param { Array<VBValueType> } values - Indicates the values to match with DataSharePredicates.
