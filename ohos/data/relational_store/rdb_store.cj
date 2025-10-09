@@ -514,7 +514,7 @@ public class RdbStore <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func querySql(sql: String, bindArgs!: Array<ValueType> = []): ResultSet {
+    public func querySql(sql: String, bindArgs!: Array<RelationalStoreValueType> = []): ResultSet {
         unsafe {
             if (sql.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore querySql failed: ${paramError("sql", "not empty string")}")
@@ -583,7 +583,7 @@ public class RdbStore <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func executeSql(sql: String, bindArgs!: Array<ValueType> = []): Unit {
+    public func executeSql(sql: String, bindArgs!: Array<RelationalStoreValueType> = []): Unit {
         if (bindArgs.size == 0) {
             executeSqlImpl(sql)
         } else {
@@ -591,7 +591,7 @@ public class RdbStore <: RemoteDataLite {
         }
     }
 
-    func executeSqlImpl(sql: String, bindArgs: Array<ValueType>): Unit {
+    func executeSqlImpl(sql: String, bindArgs: Array<RelationalStoreValueType>): Unit {
         unsafe {
             if (sql.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore executeSql failed: ${paramError("sql", "not empty string")}")

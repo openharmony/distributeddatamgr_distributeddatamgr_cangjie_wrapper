@@ -471,7 +471,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func lessThanOrEqualTo(field: String, value: ValueType): RdbPredicates {
+    public func lessThanOrEqualTo(field: String, value: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error(
@@ -493,7 +493,7 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure the RdbPredicates to match the field whose data type is ValueType and value is equal
+     * Configure the RdbPredicates to match the field whose data type is RelationalStoreValueType and value is equal
      * to a specified value.
      * This method is similar to = of the SQL statement.
      *
@@ -504,7 +504,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func equalTo(field: String, value: ValueType): RdbPredicates {
+    public func equalTo(field: String, value: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates equalTo failed: ${paramError("field", "not empty string")}")
@@ -534,7 +534,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func greaterThanOrEqualTo(field: String, value: ValueType): RdbPredicates {
+    public func greaterThanOrEqualTo(field: String, value: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error(
@@ -565,7 +565,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func greaterThan(field: String, value: ValueType): RdbPredicates {
+    public func greaterThan(field: String, value: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error(
@@ -596,7 +596,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func lessThan(field: String, value: ValueType): RdbPredicates {
+    public func lessThan(field: String, value: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates lessThan failed: ${paramError("field", "not empty string")}")
@@ -617,7 +617,7 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure the RdbPredicates to match the field whose data type is ValueType and value is not equal to
+     * Configure the RdbPredicates to match the field whose data type is RelationalStoreValueType and value is not equal to
      * a specified value.
      * This method is similar to != of the SQL statement.
      *
@@ -628,7 +628,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func notEqualTo(field: String, value: ValueType): RdbPredicates {
+    public func notEqualTo(field: String, value: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error(
@@ -659,7 +659,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func notBetween(field: String, low: ValueType, high: ValueType): RdbPredicates {
+    public func notBetween(field: String, low: RelationalStoreValueType, high: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error(
@@ -698,7 +698,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func between(field: String, low: ValueType, high: ValueType): RdbPredicates {
+    public func between(field: String, low: RelationalStoreValueType, high: RelationalStoreValueType): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates between failed: ${paramError("field", "not empty string")}")
@@ -727,7 +727,7 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure RdbPredicates to match the specified field whose data type is ValueType array and values
+     * Configure RdbPredicates to match the specified field whose data type is RelationalStoreValueType array and values
      * are within a given range.
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -737,7 +737,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func `in`(field: String, value: Array<ValueType>): RdbPredicates {
+    public func `in`(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates in failed: ${paramError("field", "not empty string")}")
@@ -775,7 +775,7 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure RdbPredicates to match the specified field whose data type is ValueType array and values
+     * Configure RdbPredicates to match the specified field whose data type is RelationalStoreValueType array and values
      * are out of a given range.
      *
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -785,7 +785,7 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func notIn(field: String, value: Array<ValueType>): RdbPredicates {
+    public func notIn(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbPredicates notIn failed: ${paramError("field", "not empty string")}")

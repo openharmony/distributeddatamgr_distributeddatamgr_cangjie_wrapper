@@ -22,8 +22,7 @@ import std.collection.ArrayList
 import std.collection.HashMap
 import ohos.base.*
 import std.unittest.testmacro.*
-import kit.ArkData.*
-import ohos.data.values_bucket.ValueType as DataSharePredicatesValueType
+import ArkData.*
 
 import std.unittest.*
 import std.unittest.common.*

@@ -34,7 +34,7 @@ public type Assets = Array<Asset>
 /**
  * Values in buckets are stored in key-value pairs
  */
-public type ValuesBucket = Map<String, ValueType>
+public type ValuesBucket = Map<String, RelationalStoreValueType>
 
 /**
  * Specifies the cryptographic parameters used when opening an encrypted database.
@@ -280,7 +280,7 @@ public enum Tokenizer {
     22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
-public enum SecurityLevel {
+public enum RelationalStoreSecurityLevel {
     /**
      * S1: means the db is low level security
      * There are some low impact, when the data is leaked.
@@ -401,7 +401,7 @@ public class StoreConfig {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public var securityLevel: SecurityLevel
+    public var securityLevel: RelationalStoreSecurityLevel
 
     /**
      * Specifies whether the database is encrypted.
@@ -530,7 +530,7 @@ public class StoreConfig {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public init(securityLevel: SecurityLevel, name!: String = "",
+    public init(securityLevel: RelationalStoreSecurityLevel, name!: String = "",
         encrypt!: Bool = false, dataGroupId!: String = "",
         customDir!: String = "", rootDir!: String = "",
         autoCleanDirtyData!: Bool = true, allowRebuild!: Bool = false,
@@ -895,7 +895,7 @@ public class Asset {
     22,
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
-public enum ValueType {
+public enum RelationalStoreValueType {
     /**
      * Indicates null.
      * 

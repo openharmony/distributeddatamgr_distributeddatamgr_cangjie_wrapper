@@ -89,13 +89,13 @@ public class Constants {
 }
 
 /**
- * Indicates the {@code ValueType}.
+ * Indicates the {@code KVValueType}.
  */
 @!APILevel[
     22,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
-public enum ValueType {
+public enum KVValueType {
     /**
      * Indicates that the value type is string.
      */
@@ -212,7 +212,7 @@ enum KVStoreType {
     22,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
-public enum SecurityLevel {
+public enum KVSecurityLevel {
     /**
      * S1: means the db is in the low security level
      * There are some low impact when the data is leaked.
@@ -254,7 +254,7 @@ public enum SecurityLevel {
     S4
     | ...
 
-    static func parse(securityLevel: Int32): SecurityLevel {
+    static func parse(securityLevel: Int32): KVSecurityLevel {
         match (securityLevel) {
             case 2 => S1
             case 3 => S2
@@ -397,7 +397,7 @@ public class Schema {
     22,
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
-public class Options {
+public class KVOptions {
 
     /**
      * Indicates whether to create a database when the database file does not exist
@@ -443,7 +443,7 @@ public class Options {
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public var securityLevel: SecurityLevel
+    public var securityLevel: KVSecurityLevel
 
     /**
      * Indicates the database schema
@@ -455,14 +455,14 @@ public class Options {
     public var schema: ?Schema
 
     /**
-     * Options constructor.
+     * KVOptions constructor.
      *
      */
     @!APILevel[
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public init(securityLevel: SecurityLevel, createIfMissing!: Bool = true, encrypt!: Bool = false,
+    public init(securityLevel: KVSecurityLevel, createIfMissing!: Bool = true, encrypt!: Bool = false,
         backup!: Bool = true, autoSync!: Bool = false, schema!: ?Schema = None) {
         this.createIfMissing = createIfMissing
         this.encrypt = encrypt
@@ -497,7 +497,7 @@ public class Entry {
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public var value: ValueType
+    public var value: KVValueType
 
     /**
      * Entry constructor.
@@ -507,7 +507,7 @@ public class Entry {
         22,
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public init(key: String, value: ValueType) {
+    public init(key: String, value: KVValueType) {
         this.key = key
         this.value = value
     }

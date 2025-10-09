@@ -20,10 +20,7 @@ internal import ohos.base.*
 internal import std.collection.*
 import std.unittest.testmacro.*
 
-import kit.ArkData.*
-import ohos.data.distributed_kv_store.Options as KVOptions
-import ohos.data.distributed_kv_store.SecurityLevel as KVSecurityLevel
-import ohos.data.distributed_kv_store.ValueType as KVValueType
+import ArkData.*
 import ohos.data.distributed_kv_store.Entry as KVEntry
 
 import ohos.data.distributed_kv_store.*

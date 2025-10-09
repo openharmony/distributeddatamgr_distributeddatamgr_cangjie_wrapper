@@ -438,7 +438,7 @@ struct RetValueType {
         var tag: UInt8
     ) {}
 
-    static func create(value: ValueType): Option<RetValueType> {
+    static func create(value: RelationalStoreValueType): Option<RetValueType> {
         var (integer, double, string, boolean, Uint8Array, asset, assets) = (0, 0.0, CPointer<UInt8>(), false, CArrUI8(
                 CPointer<UInt8>(), 0), RetAsset(), RetAssets(CPointer<RetAsset>(), 0))
         var tag: UInt8 = 0
@@ -533,7 +533,7 @@ struct RetValueType {
     }
 }
 
-func convert(value: RetValueType): ValueType {
+func convert(value: RetValueType): RelationalStoreValueType {
     unsafe {
         let tag = value.tag
         let integer = value.integer
@@ -546,22 +546,22 @@ func convert(value: RetValueType): ValueType {
         let assets = value.assets.head
         let assetsSize = value.assets.size
         match (tag) {
-            case 0 => ValueType.Null
-            case 1 => ValueType.Integer(integer)
-            case 2 => ValueType.Double(double)
-            case 3 => ValueType.StringValue(CString(string).toString())
-            case 4 => ValueType.Boolean(boolean)
+            case 0 => RelationalStoreValueType.Null
+            case 1 => RelationalStoreValueType.Integer(integer)
+            case 2 => RelationalStoreValueType.Double(double)
+            case 3 => RelationalStoreValueType.StringValue(CString(string).toString())
+            case 4 => RelationalStoreValueType.Boolean(boolean)
             case 5 =>
                 if (uint8Array.isNull()) {
-                    return ValueType.Uint8Array(Array<UInt8>())
+                    return RelationalStoreValueType.Uint8Array(Array<UInt8>())
                 }
-                return ValueType.Uint8Array(Array<UInt8>(uint8ArrSize, {i => uint8Array.read(i)}))
-            case 6 => ValueType.AssetEnum(convert(asset))
+                return RelationalStoreValueType.Uint8Array(Array<UInt8>(uint8ArrSize, {i => uint8Array.read(i)}))
+            case 6 => RelationalStoreValueType.AssetEnum(convert(asset))
             case 7 =>
                 if (assets.isNull()) {
-                    return ValueType.AssetsEnum(Array<Asset>())
+                    return RelationalStoreValueType.AssetsEnum(Array<Asset>())
                 }
-                ValueType.AssetsEnum(Array<Asset>(assetsSize, {i => convert(assets.read(i))}))
+                RelationalStoreValueType.AssetsEnum(Array<Asset>(assetsSize, {i => convert(assets.read(i))}))
             case _ => throw Exception("Unknown error.")
         }
     }
@@ -587,7 +587,7 @@ struct CValuesBucket {
         let size: Int64
     ) {}
 
-    static func create(map: Map<String, ValueType>): Option<CValuesBucket> {
+    static func create(map: Map<String, RelationalStoreValueType>): Option<CValuesBucket> {
         unsafe {
             let size = map.size
             let key = calloc<CString>(count: size)
@@ -649,12 +649,12 @@ struct CValuesBucket {
     }
 }
 
-func convert(value: CValuesBucket): HashMap<String, ValueType> {
+func convert(value: CValuesBucket): HashMap<String, RelationalStoreValueType> {
     if (value.size < 0) {
-        return HashMap<String, ValueType>()
+        return HashMap<String, RelationalStoreValueType>()
     }
     unsafe {
-        let map = HashMap<String, ValueType>()
+        let map = HashMap<String, RelationalStoreValueType>()
         if (value.key.isNull() || value.value.isNull()) {
             return map
         }
