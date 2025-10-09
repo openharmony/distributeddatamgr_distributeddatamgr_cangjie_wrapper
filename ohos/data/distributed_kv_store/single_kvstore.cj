@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.distributed_kv_store
 
 import std.sync.*
@@ -39,8 +41,6 @@ class SingleKVStoreImpl {}
  * This database synchronizes data to other databases in time sequence.
  * The {@code SingleKVStore} database does not support
  * synchronous transactions, or data search using snapshots.
- *
- * @relation interface SingleKVStore
  */
 @!APILevel[
     22,
@@ -73,7 +73,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
-     * @relation put(key: string, value: Uint8Array | string | number | boolean): Promise<void>
      */
     @!APILevel[
         22,
@@ -101,7 +100,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation putBatch(entries: Entry[]): Promise<void>
      */
     @!APILevel[
         22,
@@ -128,7 +126,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
-     * @relation delete(key: string): Promise<void>
      */
     @!APILevel[
         22,
@@ -155,7 +152,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
-     * @relation deleteBatch(keys: string[]): Promise<void>
      */
     @!APILevel[
         22,
@@ -182,7 +178,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100004 - Not found.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation get(key: string): Promise<boolean | string | number | Uint8Array>
      */
     @!APILevel[
         22,
@@ -210,7 +205,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation backup(file:string): Promise<void>
      */
     @!APILevel[
         22,
@@ -234,7 +228,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation restore(file:string): Promise<void>
      */
     @!APILevel[
         22,
@@ -257,7 +250,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * <p>After the database transaction is started, you can submit or roll back the operation.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation startTransaction(): Promise<void>
      */
     @!APILevel[
         22,
@@ -278,7 +270,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * Submits a transaction operation in the {@code SingleKVStore} database.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation commit(): Promise<void>
      */
     @!APILevel[
         22,
@@ -298,7 +289,6 @@ public open class SingleKVStore <: RemoteDataLite {
      * Rolls back a transaction operation in the {@code SingleKVStore} database.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation rollback(): Promise<void>
      */
     @!APILevel[
         22,
@@ -319,7 +309,6 @@ public open class SingleKVStore <: RemoteDataLite {
      *
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
-     * @relation enableSync(enabled: boolean): Promise<void>
      */
     @!APILevel[
         22,
@@ -341,7 +330,6 @@ public open class SingleKVStore <: RemoteDataLite {
      *
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
-     * @relation setSyncParam(defaultAllowedDelayMs: number): Promise<void>
      */
     @!APILevel[
         22,

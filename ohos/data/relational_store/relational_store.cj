@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.relational_store
 
 import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
@@ -42,8 +44,6 @@ import ohos.labels.*
  * @throws { BusinessException  } 14800029 - SQLite: The database is full.
  * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
  * @throws { IllegalArgumentException } - The context is invalid.
- *
- * @relation function getRdbStore(context: Context, config: StoreConfig): Promise<RdbStore>;
  */
 @!APILevel[
     22,
@@ -74,8 +74,6 @@ public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStor
  * @throws { BusinessException  } 14800000 - Inner error.
  * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
  * @throws { IllegalArgumentException } - The context is invalid.
- *
- * @relation function deleteRdbStore(context: Context, name: string): Promise<void>;
  */
 @!APILevel[
     22,
@@ -106,8 +104,6 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
  * @throws { BusinessException  } 14801001 - The operation is supported in the stage model only.
  * @throws { BusinessException  } 14801002 - Invalid data group ID.
  * @throws { IllegalArgumentException } - The context is invalid.
- *
- * @relation function deleteRdbStore(context: Context, config: StoreConfig): Promise<void>;
  */
 @!APILevel[
     22,

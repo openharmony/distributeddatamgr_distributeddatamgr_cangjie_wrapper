@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.values_bucket
 
 import ohos.ffi.CTypeResource
@@ -20,7 +22,6 @@ import ohos.labels.APILevel
 
 /**
  * Indicates possible value types
- * @relation export type ValueType = number | string | boolean;
  */
 @!APILevel[
     22,

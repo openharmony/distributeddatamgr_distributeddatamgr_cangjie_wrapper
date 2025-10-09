@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.distributed_kv_store
 
 import ohos.labels.*
@@ -23,8 +25,6 @@ import ohos.ffi.*
  * <p>This class provides a constructor used to create a {@code Query} instance, which is used to query data
  * matching specified conditions in the database.
  * <p>This class also provides methods to add predicates to the {@code Query} instance.
- *
- * @relation class Query
  */
 @!APILevel[
     22,
@@ -33,8 +33,6 @@ import ohos.ffi.*
 public class Query <: RemoteDataLite {
     /**
      * A constructor used to create a Query instance.
-     *
-     * @relation constructor()
      */
     @!APILevel[
         22,

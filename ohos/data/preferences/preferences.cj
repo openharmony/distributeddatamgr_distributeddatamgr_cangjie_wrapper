@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.preferences
 
 import ohos.ffi.*
@@ -66,8 +68,6 @@ public enum PreferencesEvent {
 
 /**
  * Provides interfaces to obtain and modify preferences data.
- *
- * @relation interface Preferences
  */
 @!APILevel[
     22,
@@ -113,8 +113,6 @@ public class Preferences <: RemoteDataLite {
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      * @throws { IllegalArgumentException } - The context is invalid.
-     *
-     * @relation function getPreferences(context: Context, name: string, callback: AsyncCallback<Preferences>): void
      */
     @!APILevel[
         22,
@@ -138,8 +136,6 @@ public class Preferences <: RemoteDataLite {
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      * @throws { IllegalArgumentException } - The context is invalid.
-     *
-     * @relation function getPreferences(context: Context, options: Options, callback: AsyncCallback<Preferences>): void
      */
     @!APILevel[
         22,
@@ -163,7 +159,6 @@ public class Preferences <: RemoteDataLite {
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      * @throws { BusinessException } 15500010 - Failed to delete the user preferences persistence file.
-     * @relation function deletePreferences(context: Context, name: string): Promise<void>
      */
     @!APILevel[
         22,
@@ -186,8 +181,6 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
      * @throws { BusinessException } 15501002 - Invalid dataGroupId.
      * @throws { IllegalArgumentException } - The context is invalid.
-     *
-     * @relation function deletePreferences(context: Context, options: Options): Promise<void>
      */
     @!APILevel[
         22,
@@ -230,7 +223,6 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation function removePreferencesFromCacheSync(context: Context, name: string): void
      */
     @!APILevel[
         22,
@@ -257,8 +249,6 @@ public class Preferences <: RemoteDataLite {
     * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
     * @throws { BusinessException } 15501002 - Invalid dataGroupId.
     * @throws { IllegalArgumentException } - The context is invalid.
-    *
-    * @relation function removePreferencesFromCacheSync(context: Context, options: Options): void
     */
     @!APILevel[
         22,
@@ -293,7 +283,6 @@ public class Preferences <: RemoteDataLite {
      *
      * @throws { BusinessException } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation flush(): Promise<void>
      */
     @!APILevel[
         22,
@@ -309,7 +298,6 @@ public class Preferences <: RemoteDataLite {
      *
      * @throws { BusinessException } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation clear(): Promise<void>
      */
     @!APILevel[
         22,
@@ -331,7 +319,6 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation get(key: string, defValue: ValueType): Promise<ValueType>
      */
     @!APILevel[
         22,
@@ -360,7 +347,6 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation put(key: string, value: ValueType): Promise<void>
      */
     @!APILevel[
         22,
@@ -389,7 +375,6 @@ public class Preferences <: RemoteDataLite {
      * @returns { HashMap<String, PreferencesValueType> } The values and keys in an HashMap.
      * @throws { BusinessException } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation getAllSync(): Object;
      */
     @!APILevel[
         22,
@@ -412,7 +397,6 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation delete(key: string): Promise<void>
      */
     @!APILevel[
         22,
@@ -442,7 +426,6 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation has(key: string): Promise<boolean>
      */
     @!APILevel[
         22,
@@ -473,8 +456,6 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation on(type: 'change', callback: Callback<string>): void
-     * @relation on(type: 'multiProcessChange', callback: Callback<string>): void
      */
 
     @!APILevel[
@@ -518,8 +499,6 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @relation off(type: 'change', callback?: Callback<string>): void
-     * @relation off(type: 'multiProcessChange', callback?: Callback<string>): void
      */
     @!APILevel[
         22,

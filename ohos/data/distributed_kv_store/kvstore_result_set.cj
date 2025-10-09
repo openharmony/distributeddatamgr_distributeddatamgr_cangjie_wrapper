@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.distributed_kv_store
 
 import ohos.labels.*
@@ -23,8 +25,6 @@ import ohos.ffi.*
  * <p>The result set is created by using the {@code getResultSet} method in the {@code SingleKVStore} or
  * {@code DeviceKVStore} class. This interface also provides methods to move the data read
  * position in the result set.
- *
- * @relation interface KVStoreResultSet
  */
 @!APILevel[
     22,
@@ -41,8 +41,6 @@ public class KVStoreResultSet <: RemoteDataLite {
 
     /**
      * Obtains the number of lines in a result set.
-     *
-     * @relation getCount(): number
      */
     @!APILevel[
         22,

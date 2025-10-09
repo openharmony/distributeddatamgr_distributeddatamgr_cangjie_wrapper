@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.preferences
 
 import ohos.labels.*
@@ -22,7 +24,6 @@ import std.collection.*
 
 /**
  * the storage type
- * @relation enum StorageType
  */
 @!APILevel[
     22,
@@ -31,7 +32,6 @@ import std.collection.*
 public enum StorageType {
     /**
      * XML storage type
-     * @relation XML = 0
      */   
     @!APILevel[
         22,
@@ -42,7 +42,6 @@ public enum StorageType {
     
     /**
      * GSKV storage type
-     * @relation GSKV
      */  
     @!APILevel[
         22,
@@ -134,8 +133,6 @@ public enum PreferencesValueType {
 
 /**
  * The Max length of key.
- *
- * @relation const MAX_KEY_LENGTH: number
  */
 @!APILevel[
     22,
@@ -145,8 +142,6 @@ public const MAX_KEY_LENGTH: UInt32 = 1024
 
 /**
  * The Max length of value.
- *
- * @relation const MAX_VALUE_LENGTH: number
  */
 @!APILevel[
     22,
@@ -242,8 +237,6 @@ func getCJErrorCode(code: Int32): Int32 {
 
 /**
  * Manages preferences file configurations.
- *
- * @relation interface Options
  */
 @!APILevel[
     22,
@@ -252,8 +245,6 @@ func getCJErrorCode(code: Int32): Int32 {
 public class PreferencesOptions {
     /**
      * The preferences file name.
-     *
-     * @relation name: string
      */
     @!APILevel[
         22,
@@ -263,8 +254,6 @@ public class PreferencesOptions {
 
     /**
      * Application Group Id.
-     *
-     * @relation dataGroupId?: string | null | undefined
      */
     @!APILevel[
         22,
@@ -274,8 +263,6 @@ public class PreferencesOptions {
 
     /**
      * The preferences storage type.
-     *
-     * @relation storageType?: StorageType | null | undefined;
      */
     @!APILevel[
         22,

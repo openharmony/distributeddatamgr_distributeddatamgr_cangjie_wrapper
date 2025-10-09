@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.relational_store
 
 import ohos.ffi.*
@@ -26,19 +28,16 @@ let RELATIONAL_STORE_LOG = HilogChannel(0, 0xD001650, "CJ-Relational_Store")
 
 /**
  * Indicates several assets in one column
- * @relation type Assets = Asset[]
  */
 public type Assets = Array<Asset>
 
 /**
  * Values in buckets are stored in key-value pairs
- * @relation type ValuesBucket = Record<string, ValueType>
  */
 public type ValuesBucket = Map<String, RelationalStoreValueType>
 
 /**
  * Specifies the cryptographic parameters used when opening an encrypted database.
- * @relation interface CryptoParam
  */
 @!APILevel[
     22,
@@ -48,7 +47,6 @@ public class CryptoParam {
     /**
      * Specifies the key used when opening an encrypted database.
      * When finished passing the key to the database, its content should be set to all-zero.
-     * @relation encryptionKey: Uint8Array;
      */
     @!APILevel[
         22,
@@ -60,7 +58,6 @@ public class CryptoParam {
      * Specifies the number of KDF iterations used when opening an encrypted database.
      * Default number is 10000.
      * When the number is set to 0, use default iteration number and encryption algorithm.
-     * @relation iterationCount?: number;
      */
     @!APILevel[
         22,
@@ -71,7 +68,6 @@ public class CryptoParam {
     /**
      * Specifies the encryption algorithm when opening an encrypted database.
      * Default encryption algorithm is AES_256_GCM.
-     * @relation encryptionAlgo?: EncryptionAlgo;
      */
     @!APILevel[
         22,
@@ -82,7 +78,6 @@ public class CryptoParam {
     /**
      * Specifies the HMAC algorithm when opening an encrypted database.
      * Default HMAC algorithm is SHA256.
-     * @relation hmacAlgo?: HmacAlgo;
      */
     @!APILevel[
         22,
@@ -93,7 +88,6 @@ public class CryptoParam {
     /**
      * Specifies the KDF algorithm when opening an encrypted database.
      * Default KDF SHA algorithm is the same as HMAC algorithm.
-     * @relation kdfAlgo?: KdfAlgo;
      */
     @!APILevel[
         22,
@@ -104,7 +98,6 @@ public class CryptoParam {
     /**
      * Specifies the page size used when opening an encrypted database.
      * Default crypto page size is 1024.
-     * @relation cryptoPageSize?: number;
      */
     @!APILevel[
         22,
@@ -134,7 +127,6 @@ public class CryptoParam {
 
 /**
  * Enumerates the supported KDF algorithm when opening a database.
- * @relation enum KdfAlgo
  */
 @!APILevel[
     22,
@@ -143,7 +135,6 @@ public class CryptoParam {
 public enum KdfAlgo {
     /**
      * KDF_SHA1: PBKDF2_HMAC_SHA1 algorithm.
-     * @relation KDF_SHA1 = 0
      */
     @!APILevel[
         22,
@@ -153,7 +144,6 @@ public enum KdfAlgo {
     |
     /**
      * PBKDF2_HMAC_SHA256 algorithm.
-     * @relation KDF_SHA256
      */
     @!APILevel[
         22,
@@ -163,7 +153,6 @@ public enum KdfAlgo {
     |
     /**
      * PBKDF2_HMAC_SHA512 algorithm.
-     * @relation KDF_SHA512
      */
     @!APILevel[
         22,
@@ -175,7 +164,6 @@ public enum KdfAlgo {
 
 /**
  * Enumerates the supported HMAC algorithm when opening a database.
- * @relation enum HmacAlgo
  */
 @!APILevel[
     22,
@@ -184,7 +172,6 @@ public enum KdfAlgo {
 public enum HmacAlgo {
     /**
      * HMAC_SHA1 algorithm.
-     * @relation SHA1 = 0
      */
     @!APILevel[
         22,
@@ -194,7 +181,6 @@ public enum HmacAlgo {
     |
     /**
      * HMAC_SHA256 algorithm.
-     * @relation SHA256
      */
     @!APILevel[
         22,
@@ -204,7 +190,6 @@ public enum HmacAlgo {
     |
     /**
      * HMAC_SHA512 algorithm.
-     * @relation SHA512
      */
     @!APILevel[
         22,
@@ -216,7 +201,6 @@ public enum HmacAlgo {
 
 /**
  * Enumerates the supported encryption algorithm when opening a database.
- * @relation enum EncryptionAlgo
  */
 @!APILevel[
     22,
@@ -225,7 +209,6 @@ public enum HmacAlgo {
 public enum EncryptionAlgo {
     /**
      * Database is encrypted using AES_256_GCM.
-     * @relation AES_256_GCM = 0
      */
     @!APILevel[
         22,
@@ -235,7 +218,6 @@ public enum EncryptionAlgo {
     |
     /**
      * Database is encrypted using AES_256_CBC.
-     * @relation AES_256_CBC
      */
     @!APILevel[
         22,
@@ -247,7 +229,6 @@ public enum EncryptionAlgo {
 
 /**
  * Enumerates the supported tokenizer when opening a database.
- * @relation enum Tokenizer
  */
 @!APILevel[
     22,
@@ -256,7 +237,6 @@ public enum EncryptionAlgo {
 public enum Tokenizer {
     /**
      * not use tokenizer.
-     * @relation NONE_TOKENIZER = 0
      */
     @!APILevel[
         22,
@@ -266,7 +246,6 @@ public enum Tokenizer {
     |
     /**
      * native icu tokenizer.
-     * @relation ICU_TOKENIZER
      */
     @!APILevel[
         22,
@@ -276,7 +255,6 @@ public enum Tokenizer {
     |
     /**
      * self-developed enhance tokenizer.
-     * @relation CUSTOM_TOKENIZER
      */
     @!APILevel[
         22,
@@ -297,8 +275,6 @@ public enum Tokenizer {
 
 /**
  * Describes the {@code RdbStore} type.
- *
- * @relation enum SecurityLevel
  */
 @!APILevel[
     22,
@@ -308,8 +284,6 @@ public enum RelationalStoreSecurityLevel {
     /**
      * S1: means the db is low level security
      * There are some low impact, when the data is leaked.
-     *
-     * @relation S1 = 1,
      */
     @!APILevel[
         22,
@@ -320,8 +294,6 @@ public enum RelationalStoreSecurityLevel {
     /**
      * S2: means the db is middle level security
      * There are some major impact, when the data is leaked.
-     *
-     * @relation S2 = 2,
      */
     @!APILevel[
         22,
@@ -332,8 +304,6 @@ public enum RelationalStoreSecurityLevel {
     /**
      * S3: means the db is high level security
      * There are some severity impact, when the data is leaked.
-     *
-     * @relation S3 = 3,
      */
     @!APILevel[
         22,
@@ -344,8 +314,6 @@ public enum RelationalStoreSecurityLevel {
     /**
      * S4: means the db is critical level security
      * There are some critical impact, when the data is leaked.
-     *
-     * @relation S4 = 4
      */
     @!APILevel[
         22,
@@ -367,8 +335,6 @@ public enum RelationalStoreSecurityLevel {
 
 /**
  * Describes the change type.
- *
- * @relation enum ChangeType
  */
 @!APILevel[
     22,
@@ -377,8 +343,6 @@ public enum RelationalStoreSecurityLevel {
 public enum ChangeType {
     /**
      * Means the change type is data change.
-     *
-     * @relation DATA_CHANGE,
      */
     @!APILevel[
         22,
@@ -388,8 +352,6 @@ public enum ChangeType {
     |
     /**
      * Means the change type is asset change.
-     *
-     * @relation ASSET_CHANGE
      */
     @!APILevel[
         22,
@@ -417,8 +379,6 @@ public enum ChangeType {
 
 /**
  * Manages relational database configurations.
- *
- * @relation interface StoreConfig
  */
 @!APILevel[
     22,
@@ -427,7 +387,6 @@ public enum ChangeType {
 public class StoreConfig {
     /**
      * The database name.
-     * @relation name: string;
      */
     @!APILevel[
         22,
@@ -437,7 +396,6 @@ public class StoreConfig {
 
     /**
      * Specifies the security level of the database.
-     * @relation securityLevel: SecurityLevel;
      */
     @!APILevel[
         22,
@@ -447,7 +405,6 @@ public class StoreConfig {
 
     /**
      * Specifies whether the database is encrypted.
-     * @relation encrypt?: boolean;
      */
     @!APILevel[
         22,
@@ -457,7 +414,6 @@ public class StoreConfig {
 
     /**
      * The data group id of application.
-     * @relation dataGroupId?: string;
      */
     @!APILevel[
         22,
@@ -467,7 +423,6 @@ public class StoreConfig {
 
     /**
      * Specifies the directory relative to the database directory obtained from context.
-     * @relation customDir?: string;
      */
     @!APILevel[
         22,
@@ -477,7 +432,6 @@ public class StoreConfig {
 
     /**
      * Specifies the root directory relative to the database
-     * @relation rootDir?: string;
      */
     @!APILevel[
         22,
@@ -488,7 +442,6 @@ public class StoreConfig {
     /**
      * Specifies whether to clean up dirty data that is synchronized to
      * the local but deleted in the cloud.
-     * @relation autoCleanDirtyData?: boolean;
      */
     @!APILevel[
         22,
@@ -498,7 +451,6 @@ public class StoreConfig {
 
     /**
      * Specifies whether database allows rebuild.
-     * @relation allowRebuild?: boolean;
      */
     @!APILevel[
         22,
@@ -509,7 +461,6 @@ public class StoreConfig {
     /**
      * Specifies whether the database opened is read-only.
      * If isReadOnly is true, other configuration items will become invalid.
-     * @relation isReadOnly?: boolean;
      */
     @!APILevel[
         22,
@@ -519,7 +470,6 @@ public class StoreConfig {
 
     /**
      * Indicates the names of the shared library containing fts etc.
-     * @relation pluginLibs?: Array<string>;
      */
     @!APILevel[
         22,
@@ -529,7 +479,6 @@ public class StoreConfig {
 
     /**
      * Specifies the cryptographic parameters used when opening an encrypted database.
-     * @relation cryptoParam?: CryptoParam;
      */
     @!APILevel[
         22,
@@ -539,7 +488,6 @@ public class StoreConfig {
 
     /**
      * Specifies whether the vector type is supported.
-     * @relation vector?: boolean;
      */
     @!APILevel[
         22,
@@ -549,7 +497,6 @@ public class StoreConfig {
 
     /**
      * Specifies the tokenizer type when using fts capability.
-     * @relation tokenizer?: Tokenizer;
      */
     @!APILevel[
         22,
@@ -559,7 +506,6 @@ public class StoreConfig {
 
     /**
      * Specifies whether the database need persistence.
-     * @relation persist?: boolean;
      */
     @!APILevel[
         22,
@@ -569,7 +515,6 @@ public class StoreConfig {
 
     /**
      * Specifies whether the database enable the capabilities for semantic indexing processing.
-     * @relation enableSemanticIndex?: boolean;
      */
     @!APILevel[
         22,
@@ -613,8 +558,6 @@ public class StoreConfig {
 
 /**
  * Describes the status of asset
- *
- * @relation enum AssetStatus
  */
 @!APILevel[
     22,
@@ -623,8 +566,6 @@ public class StoreConfig {
 public enum AssetStatus {
     /**
      * ASSET_NORMAL: means the status of asset is normal.
-     *
-     * @relation ASSET_NORMAL,
      */
     @!APILevel[
         22,
@@ -634,8 +575,6 @@ public enum AssetStatus {
     |
     /**
      * ASSET_INSERT: means the asset needs to be inserted.
-     *
-     * @relation ASSET_INSERT,
      */
     @!APILevel[
         22,
@@ -645,8 +584,6 @@ public enum AssetStatus {
     |
     /**
      * ASSET_UPDATE: means the asset needs to be updated.
-     *
-     * @relation ASSET_UPDATE,
      */
     @!APILevel[
         22,
@@ -656,8 +593,6 @@ public enum AssetStatus {
     |
     /**
      * ASSET_DELETE: means the asset needs to be deleted.
-     *
-     * @relation ASSET_DELETE,
      */
     @!APILevel[
         22,
@@ -667,8 +602,6 @@ public enum AssetStatus {
     |
     /**
      * ASSET_ABNORMAL: means the status of asset is abnormal.
-     *
-     * @relation ASSET_ABNORMAL,
      */
     @!APILevel[
         22,
@@ -678,8 +611,6 @@ public enum AssetStatus {
     |
     /**
      * ASSET_DOWNLOADING: means the status of asset is downloading.
-     *
-     * @relation ASSET_DOWNLOADING
      */
     @!APILevel[
         22,
@@ -715,8 +646,6 @@ public enum AssetStatus {
 
 /**
  * Enumerates the field.
- *
- * @relation enum Field
  */
 @!APILevel[
     22,
@@ -725,8 +654,6 @@ public enum AssetStatus {
 public enum Field {
     /**
      * Cursor field.
-     *
-     * @relation CURSOR_FIELD = '#_cursor',
      */
     @!APILevel[
         22,
@@ -736,8 +663,6 @@ public enum Field {
     |
     /**
      * Origin field. For details, see {@link Origin}.
-     *
-     * @relation ORIGIN_FIELD = '#_origin',
      */
     @!APILevel[
         22,
@@ -748,8 +673,6 @@ public enum Field {
     /**
      * Deleted flag field.
      * Indicates whether data has deleted in cloud.
-     *
-     * @relation DELETED_FLAG_FIELD = '#_deleted_flag',
      */
     @!APILevel[
         22,
@@ -759,8 +682,6 @@ public enum Field {
     |
     /**
      * Owner field.
-     *
-     * @relation OWNER_FIELD = '#_cloud_owner',
      */
     @!APILevel[
         22,
@@ -770,8 +691,6 @@ public enum Field {
     |
     /**
      * Privilege field.
-     *
-     * @relation PRIVILEGE_FIELD = '#_cloud_privilege',
      */
     @!APILevel[
         22,
@@ -781,8 +700,6 @@ public enum Field {
     |
     /**
      * Sharing resource field.
-     *
-     * @relation SHARING_RESOURCE_FIELD = '#_sharing_resource_field'
      */
     @!APILevel[
         22,
@@ -806,8 +723,6 @@ public enum Field {
 
 /**
  * Describes the conflict resolutions to insert data into the table.
- *
- * @relation enum ConflictResolution
  */
 @!APILevel[
     22,
@@ -816,8 +731,6 @@ public enum Field {
 public enum ConflictResolution {
     /**
      * Implements no action when conflict occurs.
-     *
-     * @relation ON_CONFLICT_NONE = 0,
      */
     @!APILevel[
         22,
@@ -827,8 +740,6 @@ public enum ConflictResolution {
     |
     /**
      * Implements rollback operation when conflict occurs.
-     *
-     * @relation ON_CONFLICT_ROLLBACK = 1,
      */
     @!APILevel[
         22,
@@ -838,8 +749,6 @@ public enum ConflictResolution {
     |
     /**
      * Implements abort operation when conflict occurs.
-     *
-     * @relation ON_CONFLICT_ABORT = 2,
      */
     @!APILevel[
         22,
@@ -849,8 +758,6 @@ public enum ConflictResolution {
     |
     /**
      * Implements fail operation when conflict occurs.
-     *
-     * @relation ON_CONFLICT_FAIL = 3,
      */
     @!APILevel[
         22,
@@ -860,8 +767,6 @@ public enum ConflictResolution {
     |
     /**
      * Implements ignore operation when conflict occurs.
-     *
-     * @relation ON_CONFLICT_IGNORE = 4,
      */
     @!APILevel[
         22,
@@ -871,8 +776,6 @@ public enum ConflictResolution {
     |
     /**
      * Implements replace operation operator when conflict occurs.
-     *
-     * @relation ON_CONFLICT_REPLACE = 5
      */
     @!APILevel[
         22,
@@ -896,8 +799,6 @@ public enum ConflictResolution {
 
 /**
  * Records information of the asset.
- *
- * @relation interface Asset
  */
 @!APILevel[
     22,
@@ -906,8 +807,6 @@ public enum ConflictResolution {
 public class Asset {
     /**
      * The name of asset.
-     *
-     * @relation name: string;
      */
     @!APILevel[
         22,
@@ -917,8 +816,6 @@ public class Asset {
 
     /**
      * The uri of asset.
-     *
-     * @relation uri: string;
      */
     @!APILevel[
         22,
@@ -928,8 +825,6 @@ public class Asset {
 
     /**
      * The path of asset.
-     *
-     * @relation path: string;
      */
     @!APILevel[
         22,
@@ -939,8 +834,6 @@ public class Asset {
 
     /**
      * The create time of asset.
-     *
-     * @relation createTime: string;
      */
     @!APILevel[
         22,
@@ -950,8 +843,6 @@ public class Asset {
 
     /**
      * The modify time of asset.
-     *
-     * @relation modifyTime: string;
      */
     @!APILevel[
         22,
@@ -961,8 +852,6 @@ public class Asset {
 
     /**
      * The size of asset.
-     *
-     * @relation size: string;
      */
     @!APILevel[
         22,
@@ -972,8 +861,6 @@ public class Asset {
 
     /**
      * The status of asset.
-     *
-     * @relation status?: AssetStatus;
      */
     @!APILevel[
         22,
@@ -1003,8 +890,6 @@ public class Asset {
 
 /**
  * Indicates possible value types.
- *
- * @relation type ValueType = null | number | string | boolean | Uint8Array | Asset | Assets | Float32Array | bigint;
  */
 @!APILevel[
     22,
@@ -1101,8 +986,6 @@ enum DataPosition {
 
 /**
  * Describes the distribution type of the tables.
- *
- * @relation enum DistributedType
  */
 @!APILevel[
     22,
@@ -1111,8 +994,6 @@ enum DataPosition {
 public enum DistributedType {
     /**
      * Indicates the table is distributed among the devices.
-     *
-     * @relation DISTRIBUTED_DEVICE,
      */
     @!APILevel[
         22,
@@ -1122,8 +1003,6 @@ public enum DistributedType {
     |
     /**
      * Indicates the table is distributed between the cloud and the devices.
-     *
-     * @relation DISTRIBUTED_CLOUD
      */
     @!APILevel[
         22,
@@ -1143,8 +1022,6 @@ public enum DistributedType {
 
 /**
  * Indicates the database synchronization mode.
- *
- * @relation enum SyncMode
  */
 @!APILevel[
     22,
@@ -1153,8 +1030,6 @@ public enum DistributedType {
 public enum SyncMode {
     /**
      * Indicates the data is pushed to remote device from local device.
-     *
-     * @relation SYNC_MODE_PUSH = 0,
      */
     @!APILevel[
         22,
@@ -1164,8 +1039,6 @@ public enum SyncMode {
     |
     /**
      * Indicates the data is pulled from remote device to local device.
-     *
-     * @relation SYNC_MODE_PULL = 1,
      */
     @!APILevel[
         22,
@@ -1175,8 +1048,6 @@ public enum SyncMode {
     |
     /**
      * Indicates the data is pulled from remote device to local device.
-     *
-     * @relation SYNC_MODE_TIME_FIRST,
      */
     @!APILevel[
         22,
@@ -1186,8 +1057,6 @@ public enum SyncMode {
     | 
     /**
      * Indicates force push the native data to the cloud.
-     *
-     * @relation SYNC_MODE_NATIVE_FIRST,
      */
     @!APILevel[
         22,
@@ -1197,8 +1066,6 @@ public enum SyncMode {
     |
     /**
      * Indicates the data is pulled from cloud to local device.
-     *
-     * @relation SYNC_MODE_CLOUD_FIRST
      */
     @!APILevel[
         22,
@@ -1221,8 +1088,6 @@ public enum SyncMode {
 
 /**
  * The cloud sync progress.
- *
- * @relation enum Progress
  */
 @!APILevel[
     22,
@@ -1231,8 +1096,6 @@ public enum SyncMode {
 public enum Progress {
     /**
      * ISYNC_BEGIN: means the sync process begin.
-     *
-     * @relation SYNC_BEGIN,
      */
     @!APILevel[
         22,
@@ -1242,8 +1105,6 @@ public enum Progress {
     |
     /**
      * SYNC_BEGIN: means the sync process is in progress.
-     *
-     * @relation SYNC_IN_PROGRESS,
      */
     @!APILevel[
         22,
@@ -1253,8 +1114,6 @@ public enum Progress {
     |
     /**
      * SYNC_BEGIN: means the sync process is finished.
-     *
-     * @relation SYNC_FINISH
      */
     @!APILevel[
         22,
@@ -1284,8 +1143,6 @@ public enum Progress {
 
 /**
  * Describes the subscription type.
- *
- * @relation enum SubscribeType
  */
 @!APILevel[
     22,
@@ -1294,8 +1151,6 @@ public enum Progress {
 public enum SubscribeType {
     /**
      * Subscription to remote data changes.
-     *
-     * @relation SUBSCRIBE_TYPE_REMOTE = 0,
      */
     @!APILevel[
         22,
@@ -1305,8 +1160,6 @@ public enum SubscribeType {
     |
     /**
      * Subscription to cloud data changes.
-     *
-     * @relation SUBSCRIBE_TYPE_CLOUD,
      */
     @!APILevel[
         22,
@@ -1316,8 +1169,6 @@ public enum SubscribeType {
     |
     /**
      * Subscription to cloud data changes details.
-     *
-     * @relation SUBSCRIBE_TYPE_CLOUD_DETAILS,
      */
     @!APILevel[
         22,
@@ -1338,8 +1189,6 @@ public enum SubscribeType {
 
 /**
  * Describes the data origin sources.
- *
- * @relation enum Origin
  */
 @!APILevel[
     22,
@@ -1348,8 +1197,6 @@ public enum SubscribeType {
 public enum Origin {
     /**
      * Indicates the data source is local.
-     *
-     * @relation LOCAL,
      */
     @!APILevel[
         22,
@@ -1359,8 +1206,6 @@ public enum Origin {
     |
     /**
      * Indicates the data source is cloud.
-     *
-     * @relation CLOUD,
      */
     @!APILevel[
         22,
@@ -1370,8 +1215,6 @@ public enum Origin {
     |
     /**
      * Indicates the data source is remote.
-     *
-     * @relation REMOTE,
      */
     @!APILevel[
         22,

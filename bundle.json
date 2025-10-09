@@ -16,8 +16,7 @@
             "SystemCapability.DistributedDataManager.DataShare.Core",
             "SystemCapability.DistributedDataManager.KVStore.Core",
             "SystemCapability.DistributedDataManager.Preferences.Core",
-            "SystemCapability.DistributedDataManager.RelationalStore.Core",
-            "SystemCapability.DistributedDataManager.DataShare.Core"
+            "SystemCapability.DistributedDataManager.RelationalStore.Core"
         ],
         "features": [],
         "adapted_system_type": [
@@ -43,7 +42,7 @@
                 "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/preferences:ohos.data.preferences",
                 "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/relational_store:ohos.data.relational_store",
                 "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/values_bucket:ohos.data.values_bucket",
-                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/kit/ArkData:ArkData"
+                "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/kit/ArkData:kit.ArkData"
             ],
             "inner_kits": [
                 {

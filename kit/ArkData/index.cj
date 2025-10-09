@@ -13,7 +13,9 @@
  * limitations under the License.
  */
 
-package ArkData
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
+package kit.ArkData
 
 public import ohos.data.*
 public import ohos.data.data_share_predicates.*

@@ -1,4 +1,4 @@
-# distributeddatamgr_distributeddatamgr_cangjie_wrapper
+# distributeddatamgr_distributeddatamgr_cangjie_wrapper(beta feature)
 
 ## Introduction
 
@@ -6,27 +6,54 @@ The distributeddatamgr_distributeddatamgr_cangjie_wrapper provides persistence o
 
 ## System Architecture
 
-**Figure 1** distributeddatamgr_cangjie_wrapper architecture
+**Figure 1** Distributed Data Management Cangjie Wrapper Architecture Diagram
 
-![Architecture of the distributeddatamgr_distributeddatamgr_cangjie_wrapper](figures/distributeddatamgr_cangjie_wrapper_architecture_en.png)
+![Distributed Data Management Cangjie Wrapper Architecture Diagram](figures/distributeddatamgr_cangjie_wrapper_architecture.png)
 
 As shown in the architecture diagram:
 
 Interface Layer:
-- DataShare Predicates: Provides developers with filtering conditions used to query data in databases, including comparison predicate equal conditions, logical predicate AND conditions, range predicate contains conditions, and ascending and descending sorting of result sets.
-- Distributed KV Store: Provides developers with distributed collaboration capabilities of databases between different devices, enabling data to be saved to distributed key-value databases, and allowing operations such as adding, deleting, modifying, querying, and end-to-end synchronization of data in distributed key-value databases.
-- User Preferences: Provides developers with Key-Value type data processing capabilities, supporting application persistence of lightweight data, and modification and query of such data.
-- RDB Store: Provides developers with a complete mechanism based on SQLite components for managing local databases, offering a series of interfaces for adding, deleting, modifying, and querying, and also supporting direct execution of user-input SQL statements.
-- Value Bucket: Provides developers with a data collection that can be inserted into databases.
+
+- DataShare Predicates: Provides developers with data query filtering capabilities, supporting the construction of complex query conditions.
+  - Comparison Predicates: Supports equal-to conditions.
+  - Logical Predicates: Supports AND conditions.
+  - Range Predicates: Supports IN conditions.
+  - Sorting Functions: Supports ascending and descending order of result sets.
+  - Other Functions: Supports pagination queries.
+  When developers need to retrieve data without focusing on specific database types, data share predicates can be used as general query conditions, such as [retrieval of photos and videos in albums](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/media/medialibrary/cj-photoAccessHelper-systemAlbum-guidelines.md).
+
+- Distributed KV Database: Provides developers with cross-device distributed data collaboration capabilities, supporting seamless synchronization and sharing of data between multiple devices.
+  - Database Management: Supports database creation, closure, deletion, and obtaining identifier IDs of all created databases.
+  - Database Operations: Supports database backup and restore operations.
+  - Data Operations: Supports addition, deletion, modification, and query of data records.
+  - Transaction Support: Supports transaction enabling, commit, and rollback.
+  - Data Subscription: Supports subscription and unsubscription of specified types of data changes.
+  - Synchronization Function: Supports end-to-end database synchronization.
+
+- User Preferences: Provides developers with lightweight Key-Value data processing capabilities, specifically for persistent storage of application configuration information and user preferences.
+  - Database Management: Supports database acquisition, deletion, and removal from cache.
+  - Database Operations: Supports clearing all data, obtaining all data, and data persistence.
+  - Data Operations: Supports data writing, searching, and deletion.
+  - Data Subscription: Supports subscription and unsubscription of data changes based on Key or Value values, with callback triggering after persistent file changes.
+
+- RDB Store: Provides developers with a complete local database management mechanism based on SQLite components, supporting standard relational data models.
+  - Database Management: Supports database creation and deletion.
+  - Database Operations: Supports database backup and restore operations.
+  - Data Operations: Provides addition, deletion, modification, and query of data records.
+  - SQL Execution: Supports direct execution of user-defined SQL statements, including table structure definition and data manipulation for complex database operations. Currently, only the creation and deletion of tables via SQL statements are supported.
+
+- Value Bucket: Provides developers with standardized data field type enumeration classes, including Integer, Double, StringValue, and Boolean.
 
 Framework Layer:
+
 - DataShare Predicates Wrapper: Implements data share predicates wrapper based on the underlying data sharing component, providing data share predicates for different query methods.
 - Distributed KV Store Wrapper: Implements distributed key-value database wrapper based on the underlying KV database component, providing key-value pair data management capabilities.
 - User Preferences Wrapper: Implements preferences wrapper based on the underlying preferences component, providing lightweight Key-Value operations and supporting local applications to store small amounts of data.
 - RDB Store Wrapper: Implements relational database wrapper based on the underlying relational database component, providing a database that manages data based on the relational model.
-- Value Bucket Wrapper: Implements a data collection that can be inserted into databases.
+- Value Bucket Wrapper: Implements standardized data field type enumerations.
 
 Dependencies Introduction in Architecture:
+
 - data_share: The DataShare Predicates Wrapper depends on the data_share, which is used to implement filtering conditions for querying data in databases.
 - kv_store: The Distributed KV Store Wrapper relies on the kv_store implement distributed collaboration capabilities of databases between different devices.
 - preferences: The User Preferences Wrapper depends on the preferences, which is used to implement lightweight local Key-Value type data processing capabilities.
