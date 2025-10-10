@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.values_bucket
 
 import ohos.ffi.CTypeResource
@@ -20,13 +22,12 @@ import ohos.labels.APILevel
 
 /**
  * Indicates possible value types
- * @relation export type ValueType = number | string | boolean;
  */
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
-public enum ValueType {
+public enum VBValueType {
     /* Integer */ 
     @!APILevel[
         since: "22",
@@ -75,7 +76,7 @@ protected struct CValueType {
     var string: CPointer<UInt8> = CPointer<UInt8>()
     var tag: UInt8 = 0
 
-    protected init(value: ValueType) {
+    protected init(value: VBValueType) {
         match (value) {
             case Integer(n) =>
                 tag = 1

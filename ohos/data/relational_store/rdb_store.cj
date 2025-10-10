@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.relational_store
 
 import ohos.ffi.*
@@ -25,8 +27,6 @@ import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 /**
  * Provides methods for managing the relational database (RDB).
  * This class provides methods for creating, querying, updating, and deleting RDBs.
- *
- * @relation interface RdbStore
  */
 @!APILevel[
     since: "22",
@@ -55,7 +55,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
      * @throws { BusinessException  } 14800015 - The database does not respond.
-     * @relation query(predicates: RdbPredicates, columns?: Array<string>): Promise<ResultSet>
      */
     @!APILevel[
         since: "22",
@@ -120,7 +119,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
      * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
-     * @relation delete(predicates: RdbPredicates): Promise<number>;
      */
     @!APILevel[
         since: "22",
@@ -160,7 +158,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
-     * @relation backup(destName: string): Promise<void>;
      */
     @!APILevel[
         since: "22",
@@ -204,7 +201,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
-     * @relation restore(srcName: string): Promise<void>;
      */
     @!APILevel[
         since: "22",
@@ -247,7 +243,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
-     * @relation commit():void
      */
     @!APILevel[
         since: "22",
@@ -281,7 +276,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
-     * @relation rollBack():void
      */
     @!APILevel[
         since: "22",
@@ -316,7 +310,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
      * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
-     * @relation beginTransaction():void
      */
     @!APILevel[
         since: "22",
@@ -367,7 +360,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
      * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
-     * @relation insertSync(table: string, values: ValuesBucket, conflict?: ConflictResolution): number;
      */
     @!APILevel[
         since: "22",
@@ -422,7 +414,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
      * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
-     * @relation updateSync(values: ValuesBucket, predicates: RdbPredicates, conflict?: ConflictResolution): number;
      */
     @!APILevel[
         since: "22",
@@ -464,7 +455,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
-     * @relation batchInsert(table: string, values: Array<ValuesBucket>):Promise<number>
      */
     @!APILevel[
         since: "22",
@@ -519,13 +509,12 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
      * @throws { BusinessException  } 14800015 - The database does not respond.
-     * @relation querySql(sql: string, bindArgs?: Array<ValueType>):Promise<ResultSet>
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func querySql(sql: String, bindArgs!: Array<ValueType> = []): ResultSet {
+    public func querySql(sql: String, bindArgs!: Array<RelationalStoreValueType> = []): ResultSet {
         unsafe {
             if (sql.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore querySql failed: ${paramError("sql", "not empty string")}")
@@ -589,13 +578,12 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
      * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
      * @throws { BusinessException  } 14800047 - The WAL file size exceeds the default limit.
-     * @relation executeSql(sql: string, bindArgs?: Array<ValueType>): Promise<void>;
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func executeSql(sql: String, bindArgs!: Array<ValueType> = []): Unit {
+    public func executeSql(sql: String, bindArgs!: Array<RelationalStoreValueType> = []): Unit {
         if (bindArgs.size == 0) {
             executeSqlImpl(sql)
         } else {
@@ -603,7 +591,7 @@ public class RdbStore <: RemoteDataLite {
         }
     }
 
-    func executeSqlImpl(sql: String, bindArgs: Array<ValueType>): Unit {
+    func executeSqlImpl(sql: String, bindArgs: Array<RelationalStoreValueType>): Unit {
         unsafe {
             if (sql.isEmpty()) {
                 RELATIONAL_STORE_LOG.error("RdbStore executeSql failed: ${paramError("sql", "not empty string")}")
@@ -659,7 +647,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
      * @throws { BusinessException  } 14800050 - Failed to obtain the subscription service.
-     * @relation on(event: string, interProcess: boolean, observer: Callback<void>): void
      */
     @!APILevel[
         since: "22",
@@ -709,7 +696,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
      * @throws { BusinessException  } 14800050 - Failed to obtain the subscription service.
-     * @relation off(event: string, interProcess: boolean, observer?: Callback<void>): void
      */
     @!APILevel[
         since: "22",
@@ -793,7 +779,6 @@ public class RdbStore <: RemoteDataLite {
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
      * @throws { BusinessException  } 14800050 - Failed to obtain the subscription service.
-     * @relation emit(event: string): void
      */
     @!APILevel[
         since: "22",
