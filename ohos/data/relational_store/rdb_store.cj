@@ -50,8 +50,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Queries data in the database based on specified conditions.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
      * @throws { BusinessException  } 14800015 - The database does not respond.
@@ -97,8 +97,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Deletes data from the database based on a specified instance object of RdbPredicates.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -137,8 +137,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Backs up a database in a specified name.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -180,8 +180,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Restores a database from a specified database file.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -338,8 +338,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Inserts a row of data into the target table.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -392,8 +392,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Updates data in the database based on a specified instance object of RdbPredicates.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -438,8 +438,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Inserts a batch of data into the target table.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -504,8 +504,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Queries data in the database based on SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
      * @throws { BusinessException  } 14800015 - The database does not respond.
@@ -555,8 +555,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Executes a SQL statement that contains specified parameters but returns no value.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 801 - Capability not supported the sql(attach,begin,commit,rollback etc.).
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
@@ -641,8 +641,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Registers an observer for the database.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 801 - Capability not supported.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -690,8 +690,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Remove specified observer of specified type from the database.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 801 - Capability not supported.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
@@ -773,8 +773,8 @@ public class RdbStore <: RemoteDataLite {
     /**
      * Notifies the registered observers of a change to the data resource specified by Uri.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 801 - Capability not supported.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.

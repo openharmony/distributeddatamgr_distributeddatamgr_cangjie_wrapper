@@ -129,7 +129,8 @@ public class RdbPredicates <: RemoteDataLite {
      * contains a specified value.
      * This method is similar to contains of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters
+     * are left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -157,7 +158,8 @@ public class RdbPredicates <: RemoteDataLite {
      * with a specified string.
      * This method is similar to value% of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -184,7 +186,8 @@ public class RdbPredicates <: RemoteDataLite {
      * ends with a specified string.
      * This method is similar to %value of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -211,7 +214,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure the RdbPredicates to match the fields whose value is null.
      * This method is similar to is null of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -238,7 +242,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure the RdbPredicates to match the specified fields whose value is not null.
      * This method is similar to is not null of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -266,7 +271,8 @@ public class RdbPredicates <: RemoteDataLite {
      * similar to a specified string.
      * This method is similar to like of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -294,7 +300,8 @@ public class RdbPredicates <: RemoteDataLite {
      * a wildcard.
      * Different from like, the input parameters of this method are case-sensitive.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -321,7 +328,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Restricts the ascending order of the return list. When there are several orders,
      * the one close to the head has the highest priority.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -348,7 +356,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Restricts the descending order of the return list. When there are several orders,
      * the one close to the head has the highest priority.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -390,7 +399,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Restricts the max number of return records.
      *
      * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -409,7 +419,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure RdbPredicates to specify the start position of the returned result.
      * Use this method together with limit(number).
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -427,7 +438,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Configure RdbPredicates to group query results by specified columns.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -464,7 +476,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be smaller than or equal to the specified value.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -497,7 +510,8 @@ public class RdbPredicates <: RemoteDataLite {
      * to a specified value.
      * This method is similar to = of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -527,7 +541,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be greater than or equal to the specified value.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -558,7 +573,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be greater than the specified value.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -589,7 +605,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be smaller than the specified value.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -617,11 +634,12 @@ public class RdbPredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure the RdbPredicates to match the field whose data type is RelationalStoreValueType and value is not equal to
-     * a specified value.
+     * Configure the RdbPredicates to match the field whose data type is RelationalStoreValueType and value is not
+     * equal to a specified value.
      * This method is similar to != of the SQL statement.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -652,7 +670,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Configure RdbPredicates to match the specified field whose value is out of a given range.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
@@ -691,8 +710,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Configure RdbPredicates to match the specified field whose value is within a given range.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
+     * unspecified;<br>2. Incorrect parameter types.
      */
     @!APILevel[
         22,
@@ -730,8 +749,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure RdbPredicates to match the specified field whose data type is RelationalStoreValueType array and values
      * are within a given range.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      */
     @!APILevel[
         22,
@@ -778,8 +797,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure RdbPredicates to match the specified field whose data type is RelationalStoreValueType array and values
      * are out of a given range.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      */
     @!APILevel[
         22,
