@@ -221,8 +221,8 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null, the specified column is not of the double type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -327,8 +327,8 @@ public class ResultSet <: RemoteDataLite {
      * Obtains the column name based on the specified column index.
      * The column index is passed as an input parameter.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800013 - Resultset is empty or column index is out of bounds.
@@ -372,8 +372,8 @@ public class ResultSet <: RemoteDataLite {
     /**
      * Checks whether the value of the specified column in the current row is null.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -413,8 +413,8 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null or the specified column is not of the Asset type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -482,8 +482,8 @@ public class ResultSet <: RemoteDataLite {
      * Obtains the column index based on the specified column name.
      * The column name is passed as an input parameter.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800013 - Resultset is empty or column index is out of bounds.
@@ -532,8 +532,8 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null or the specified column is not of the string type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -591,8 +591,8 @@ public class ResultSet <: RemoteDataLite {
      * in the current row is null or the specified column is not of the Assets type.
      *
      * @returns { Assets } The value of the specified column as assets.
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -651,8 +651,8 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null, the specified column is not of the integer type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -707,8 +707,8 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null or the specified column is not of the Blob type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.

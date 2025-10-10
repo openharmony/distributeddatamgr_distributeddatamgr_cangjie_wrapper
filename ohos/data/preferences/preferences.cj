@@ -130,7 +130,8 @@ public class Preferences <: RemoteDataLite {
      * Obtains a {@link Preferences} instance matching a specified preferences file name.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
-     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences file position.
+     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences
+     * file position.
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
@@ -172,7 +173,8 @@ public class Preferences <: RemoteDataLite {
      * Deletes a {@link Preferences} instance matching a specified preferences file name.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
-     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences file position.
+     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences
+     * file position.
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
@@ -240,7 +242,8 @@ public class Preferences <: RemoteDataLite {
     * will occur.
     *
     * @param { UIAbilityContext } context - Indicates the context of application or capability.
-    * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences file position.
+    * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences
+    * file position.
     * @throws { BusinessException } 401 - Parameter error. Possible causes:
     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
     * <br>3. Parameter verification failed.
