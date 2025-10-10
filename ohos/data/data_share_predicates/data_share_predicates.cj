@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.data_share_predicates
 
 import ohos.data.values_bucket.*
@@ -24,7 +26,6 @@ import ohos.business_exception.{BusinessException, ERR_PARAMETER_ERROR}
  * Create an DataSharePredicates.
  *
  * @returns { Int64 } Returns Id.
- * @throws { BusinessException } -1 - Instance invalid.
  * @throws { IllegalMemoryException } - Out of memory.
  */
 private func createDataSharePredicates(): Int64 {
@@ -38,8 +39,6 @@ private func createDataSharePredicates(): Int64 {
 
 /**
  * Manages relational database configurations.
- *
- * @relation class DataSharePredicates
  */
 @!APILevel[
     since: "22",
@@ -62,22 +61,20 @@ public class DataSharePredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure the DataSharePredicates to match the field whose data type is ValueType and value is equal
+     * Configure the DataSharePredicates to match the field whose data type is VBValueType and value is equal
      * to a specified value.
      * This method is similar to = of the SQL statement.
      *
      * @param { String } field - Indicates the column name in the database table.
-     * @param { ValueType } value - Indicates the value to match with the DataSharePredicates.
+     * @param { VBValueType } value - Indicates the value to match with the DataSharePredicates.
      * @returns { DataSharePredicates } Returns the DataSharePredicates that match the specified field.
      * @throws { BusinessException } 401 - Parameter error.
-     * @throws { BusinessException } -1 - Instance invalid.
-     * @relation equalTo(field: string, value: ValueType): DataSharePredicates
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
-    public func equalTo(field: String, value: ValueType): DataSharePredicates {
+    public func equalTo(field: String, value: VBValueType): DataSharePredicates {
         if (field.isEmpty()) {
             LOG.error("DataSharePredicates equalTo failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
             throw BusinessException(ERR_PARAMETER_ERROR,
@@ -100,8 +97,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * This method is similar to and of the SQL statement.
      *
      * @returns { DataSharePredicates } Returns the DataSharePredicates with the and condition.
-     * @throws { BusinessException } -1 - Instance invalid.
-     * @relation and(): DataSharePredicates
      */
     @!APILevel[
         since: "22",
@@ -122,8 +117,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @param { String } field - Indicates the column name for sorting the return list.
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
      * @throws { BusinessException } 401 - Parameter error.
-     * @throws { BusinessException } -1 - Instance invalid.
-     * @relation orderByAsc(field: string): DataSharePredicates
      */
     @!APILevel[
         since: "22",
@@ -150,8 +143,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @param { String } field - Indicates the column name for sorting the return list.
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
      * @throws { BusinessException } 401 - Parameter error.
-     * @throws { BusinessException } -1 - Instance invalid.
-     * @relation orderByDesc(field: string): DataSharePredicates
      */
     @!APILevel[
         since: "22",
@@ -179,8 +170,6 @@ public class DataSharePredicates <: RemoteDataLite {
      * @param { Int32 } offset - Indicates the starting position.
      * @returns { DataSharePredicates } Returns the query object.
      * @throws { BusinessException } 401 - Parameter error.
-     * @throws { BusinessException } -1 - Instance invalid.
-     * @relation limit(total: number, offset: number): DataSharePredicates
      */
     @!APILevel[
         since: "22",
@@ -200,28 +189,26 @@ public class DataSharePredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure {@code DataSharePredicates} to match the specified field whose data type is ValueType array and values
+     * Configure {@code DataSharePredicates} to match the specified field whose data type is VBValueType array and values
      * are within a given range.
      *
      * @param { String } field - Indicates the column name in the database table.
-     * @param { Array<ValueType> } values - Indicates the values to match with DataSharePredicates.
+     * @param { Array<VBValueType> } values - Indicates the values to match with DataSharePredicates.
      * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
      * @throws { BusinessException } 401 - Parameter error.
-     * @throws { BusinessException } -1 - Instance invalid.
-     * @relation in(field: string, value: Array<ValueType>): DataSharePredicates
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
-    public func `in`(field: String, value: Array<ValueType>): DataSharePredicates {
+    public func `in`(field: String, value: Array<VBValueType>): DataSharePredicates {
         if (field.isEmpty() || value.isEmpty()) {
             LOG.error("DataSharePredicates in failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
             throw BusinessException(ERR_PARAMETER_ERROR,
                 "DataSharePredicates in failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
         }
 
-        // The ValueType types in value ​​must all be consistent
+        // The VBValueType types in value ​​must all be consistent
         let tag = value[0].get()
         for (idx in 1..value.size) {
             if (value[idx].get() != tag) {

@@ -23,7 +23,6 @@ import std.collection.HashMap
 import ohos.base.*
 import std.unittest.testmacro.*
 import ArkData.*
-import ohos.data.values_bucket.ValueType as DataSharePredicatesValueType
 
 import std.unittest.*
 import std.unittest.common.*

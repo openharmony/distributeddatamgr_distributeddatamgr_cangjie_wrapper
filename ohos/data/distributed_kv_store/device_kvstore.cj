@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.distributed_kv_store
 
 import ohos.labels.*
@@ -23,14 +25,12 @@ import ohos.business_exception.BusinessException
 /**
  * Provides methods related to device-collaboration distributed databases.
  * <p>To create a {@code DeviceKVStore} database, you can use the
- * {@link data.distributed.common.KVManager.getKVStore(Options, String)}
- * method with {@code KVStoreType} set to {@code DeviceCollaboration} for the input parameter Options.
+ * {@link data.distributed.common.KVManager.getKVStore(KVOptions, String)}
+ * method with {@code KVStoreType} set to {@code DeviceCollaboration} for the input parameter KVOptions.
  * This database manages distributed
  * data by device, and cannot modify data synchronized from remote devices. When an application writes a
  * key-value pair entry
  * into the database, the system automatically adds the ID of the device running the application to the key.
- *
- * @relation interface DeviceKVStore extends SingleKVStore
  */
 @!APILevel[
     since: "22",
@@ -45,7 +45,7 @@ public class DeviceKVStore <: SingleKVStore {
         releaseFFIData(myDataId)
     }
 
-    static func getKVStore(id: Int64, storeId: String, options: Options): DeviceKVStore {
+    static func getKVStore(id: Int64, storeId: String, options: KVOptions): DeviceKVStore {
         DeviceKVStore(KVManager.getKVStoreId(id, storeId, options, DeviceCollaboration))
     }
     
@@ -58,19 +58,18 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100004 - Not found.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation get(key: string): Promise<boolean | string | number | Uint8Array>
      */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
-    public func get(key: String): ValueType {
+    public func get(key: String): KVValueType {
         return get("", key)
     }
 
-    func get(deviceId: String, key: String): ValueType {
+    func get(deviceId: String, key: String): KVValueType {
         unsafe {
-            var result = ValueType.Integer(0)
+            var result = KVValueType.Integer(0)
             try (
                 cDeviceId = LibC.mallocCString(deviceId).asResource(),
                 cKey = LibC.mallocCString(key).asResource()
@@ -96,7 +95,6 @@ public class DeviceKVStore <: SingleKVStore {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getEntries(keyPrefix: string): Promise<Entry[]>
      */
     @!APILevel[
         since: "22",
@@ -134,7 +132,6 @@ public class DeviceKVStore <: SingleKVStore {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getEntries(query: Query): Promise<Entry[]>
      */
     @!APILevel[
         since: "22",
@@ -174,7 +171,6 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100001 - Over max limits.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSet(keyPrefix: string): Promise<KVStoreResultSet>
      */
     @!APILevel[
         since: "22",
@@ -212,7 +208,6 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100001 - Over max limits.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSet(query: Query): Promise<KVStoreResultSet>
      */
     @!APILevel[
         since: "22",
@@ -244,7 +239,6 @@ public class DeviceKVStore <: SingleKVStore {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
-     * @relation getResultSize(query: Query): Promise<number>
      */
     @!APILevel[
         since: "22",

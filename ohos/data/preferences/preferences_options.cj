@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.data.preferences
 
 import ohos.labels.*
@@ -22,7 +24,6 @@ import std.collection.*
 
 /**
  * the storage type
- * @relation enum StorageType
  */
 @!APILevel[
     since: "22",
@@ -31,7 +32,6 @@ import std.collection.*
 public enum StorageType {
     /**
      * XML storage type
-     * @relation XML = 0
      */   
     @!APILevel[
         since: "22",
@@ -42,7 +42,6 @@ public enum StorageType {
     
     /**
      * GSKV storage type
-     * @relation GSKV
      */  
     @!APILevel[
         since: "22",
@@ -60,7 +59,7 @@ public enum StorageType {
     since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
-public enum ValueType {
+public enum PreferencesValueType {
     /**
      * Type for Int64.
      */   
@@ -134,8 +133,6 @@ public enum ValueType {
 
 /**
  * The Max length of key.
- *
- * @relation const MAX_KEY_LENGTH: number
  */
 @!APILevel[
     since: "22",
@@ -145,8 +142,6 @@ public const MAX_KEY_LENGTH: UInt32 = 1024
 
 /**
  * The Max length of value.
- *
- * @relation const MAX_VALUE_LENGTH: number
  */
 @!APILevel[
     since: "22",
@@ -242,18 +237,14 @@ func getCJErrorCode(code: Int32): Int32 {
 
 /**
  * Manages preferences file configurations.
- *
- * @relation interface Options
  */
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
-public class Options {
+public class PreferencesOptions {
     /**
      * The preferences file name.
-     *
-     * @relation name: string
      */
     @!APILevel[
         since: "22",
@@ -263,8 +254,6 @@ public class Options {
 
     /**
      * Application Group Id.
-     *
-     * @relation dataGroupId?: string | null | undefined
      */
     @!APILevel[
         since: "22",
@@ -274,8 +263,6 @@ public class Options {
 
     /**
      * The preferences storage type.
-     *
-     * @relation storageType?: StorageType | null | undefined;
      */
     @!APILevel[
         since: "22",
@@ -284,7 +271,7 @@ public class Options {
     public var storageType: StorageType
 
     /**
-     * Options constructor.
+     * PreferencesOptions constructor.
      */
     @!APILevel[
         since: "22",
