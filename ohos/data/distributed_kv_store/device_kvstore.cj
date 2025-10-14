@@ -52,6 +52,9 @@ public class DeviceKVStore <: SingleKVStore {
     /**
      * Obtains the value matching the local device ID and specified key.
      *
+     * @param { String } key - Indicates the key. The length must be less than {@code MAX_KEY_LENGTH}.
+     * @returns { KVValueType } KVValueType - the returned value specified by the key.
+     *
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types;
      * <br>3.Parameter verification failed.
@@ -91,6 +94,8 @@ public class DeviceKVStore <: SingleKVStore {
     /**
      * Obtains all key-value pairs that match the local device ID and specified key prefix.
      *
+     * @param { String } keyPrefix - Indicates the key prefix to match.
+     * @returns { Array<Entry> } Array<Entry> - the list of all key-value pairs that match the specified key prefix.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
@@ -128,6 +133,9 @@ public class DeviceKVStore <: SingleKVStore {
     /**
      * Obtains the list of key-value pairs matching the local device ID and specified {@code Query} object.
      *
+     * @param { Query } query - Indicates the {@code Query} object.
+     * @returns { Array<Entry> } Array<Entry> - the list of all key-value pairs matching the
+     * specified {@code Query} object.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
@@ -166,6 +174,9 @@ public class DeviceKVStore <: SingleKVStore {
      * If you have created four objects, calling this method will return a failure. Therefore, you are advised to
      * call the closeResultSet method to close unnecessary {@code KVStoreResultSet} objects in a timely manner.
      *
+     * @param { String } keyPrefix - Indicates the key prefix to match.
+     * @returns { KVStoreResultSet } KVStoreResultSet - the {@code KVStoreResultSet}
+     * object matching the specified keyPrefix.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100001 - Over max limits.
@@ -203,6 +214,9 @@ public class DeviceKVStore <: SingleKVStore {
     /**
      * Obtains the {@code KVStoreResultSet} object matching the local device ID and specified {@code Query} object.
      *
+     * @param { Query } query - Indicates the {@code Query} object.
+     * @returns { KVStoreResultSet } KVStoreResultSet - the {@code KVStoreResultSet}
+     * object matching the specified {@code Query} object.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100001 - Over max limits.
@@ -235,6 +249,8 @@ public class DeviceKVStore <: SingleKVStore {
     /**
      * Obtains the number of results matching the local device ID and specified {@code Query} object.
      *
+     * @param { Query } query - Indicates the {@code Query} object.
+     * @returns { Int32 } Int32 - the number of results matching the specified {@code Query} object.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.

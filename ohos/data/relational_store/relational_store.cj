@@ -26,6 +26,9 @@ import ohos.labels.*
  * You can set parameters of the RDB store as required. In general, this method is recommended
  * to obtain a rdb store.
  *
+ * @param { UIAbilityContext } context - The context that initiates the request.
+ * @param { StoreConfig } config - Configuration for the RDB store.
+ * @returns { RdbStore } Returns the RDB store instance.
  * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
  * <br>2. Incorrect parameter types; 3. Parameter verification failed. 
  * @throws { BusinessException  } 14800000 - Inner error.
@@ -43,7 +46,7 @@ import ohos.labels.*
  * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
  * @throws { BusinessException  } 14800029 - SQLite: The database is full.
  * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
- * @throws { IllegalArgumentException } - The context is invalid.
+ *
  */
 @!APILevel[
     since: "22",
@@ -52,7 +55,7 @@ import ohos.labels.*
 public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStore {
     let stageContext = getStageContext(context)
     if (stageContext.isNull()) {
-        throw IllegalArgumentException("The context is invalid.")
+        throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
     }
     unsafe {
         let retStoreConfig = RetStoreConfig.create(config)
@@ -69,11 +72,13 @@ public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStor
  * Deletes the database with a specified store config.
  * When specify custom directory, this function should be called.
  *
+ * @param { UIAbilityContext } context - The context that initiates the request.
+ * @param { String } name - Name of the database to delete.
  * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
  * <br>2. Incorrect parameter types.
  * @throws { BusinessException  } 14800000 - Inner error.
  * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
- * @throws { IllegalArgumentException } - The context is invalid.
+ *
  */
 @!APILevel[
     since: "22",
@@ -82,7 +87,7 @@ public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStor
 public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
     let stageContext = getStageContext(context)
     if (stageContext.isNull()) {
-        throw IllegalArgumentException("The context is invalid.")
+        throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
     }
     let cName = unsafe { LibC.mallocCString(name) }
     var errCode: Int32 = 0
@@ -97,13 +102,15 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
  * Deletes the database with a specified store config.
  * When specify custom directory, this function should be called.
  *
+ * @param { UIAbilityContext } context - The context that initiates the request.
+ * @param { StoreConfig } config - Configuration for the RDB store to delete.
  * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
  * <br>2. Incorrect parameter types.
  * @throws { BusinessException  } 14800000 - Inner error.
  * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
  * @throws { BusinessException  } 14801001 - The operation is supported in the stage model only.
  * @throws { BusinessException  } 14801002 - Invalid data group ID.
- * @throws { IllegalArgumentException } - The context is invalid.
+ *
  */
 @!APILevel[
     since: "22",
@@ -112,7 +119,7 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
 public func deleteRdbStore(context: UIAbilityContext, config: StoreConfig): Unit {
     let stageContext = getStageContext(context)
     if (stageContext.isNull()) {
-        throw IllegalArgumentException("The context is invalid.")
+        throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
     }
     unsafe {
         let retStoreConfig = RetStoreConfig.create(config)

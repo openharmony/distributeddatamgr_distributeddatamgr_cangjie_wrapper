@@ -43,7 +43,9 @@ public class DistributedKVStore {
      * <p>You must pass {@link KVManagerConfig} to provide configuration information
      * to create a {@link KVManager} instance.
      *
-     * @throws { IllegalArgumentException } - The context type is not supported. Only support UIAbilityContext.
+     * @param { KVManagerConfig } config - Indicates the configuration information, including the bundle name and context.
+     * @returns { KVManager } Returns the KVManager instance.
+     * @throws { BusinessException } 401 - The context type is not supported. Only support UIAbilityContext.
      */
     @!APILevel[
         since: "22",
@@ -53,10 +55,10 @@ public class DistributedKVStore {
         unsafe {
             let stageContext =  match(config.context) {
                 case ctx: UIAbilityContext => getStageContext(ctx)
-                case _ => throw IllegalArgumentException("only UIAbilityContext is supported")
+                case _ => throw BusinessException(401, "Parameter error.")
             }
             if (stageContext.isNull()) {
-                throw IllegalArgumentException("only UIAbilityContext is supported")
+                throw BusinessException(401, "Parameter error.")
             }
             let cBoudleName = LibC.mallocCString(config.bundleName)
             let codeId = FfiOHOSDistributedKVStoreCreateKVManager(cBoudleName, stageContext)
@@ -107,10 +109,12 @@ public class KVManager <: RemoteDataLite {
     /**
      * Creates and obtains a KVStore database by specifying {@code KVOptions} and {@code storeId}.
      *
+     * @param { String } storeId - Identifies the KVStore, which must be unique for the same application.
+     * @param { Options } options - Indicates the configuration information, including createIfMissing, encrypt, backup, autoSync, kvStoreType, schema, and dataGroupId.
+     * @returns { T } Returns the created KVStore instance.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Incorrect parameters types;
      * <br>3.Parameter verification failed.
-     * @throws { IllegalArgumentException } The type is not supported yet.
      * @throws { BusinessException } 15100002 - Open existed database with changed options.
      * @throws { BusinessException } 15100003 - Database corrupted.
      */
@@ -121,7 +125,7 @@ public class KVManager <: RemoteDataLite {
     public func getKVStore<T>(storeId: String, options: KVOptions): T where T <: SingleKVStore {
         let KVStore = match (T.getKVStore(getID(), storeId, options) as T) {
             case Some(v) => v
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(15100002, "Open existed database with changed options.")
         }
         return KVStore
     }
@@ -134,6 +138,8 @@ public class KVManager <: RemoteDataLite {
      * this method, release the resources created for the database, for example, {@code KVStoreResultSet} for KVStore,
      * otherwise closing the database will fail.
      *
+     * @param { String } appId - Indicates the bundle name of the app that invokes the KVStore.
+     * @param { String } storeId - Identifies the KVStore, which must be unique for the same application.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
      */
@@ -163,6 +169,10 @@ public class KVManager <: RemoteDataLite {
      * <p>You can use this method to delete a KVStore database not in use. After the database is deleted, all its data
      * will be lost.
      *
+     * @param { String } appId - Identifies the application that the database belong to, and cannot exceed 256
+     * characters.
+     * @param { String } storeId - Identifies the KVStore database to delete. The storeId can consist of only letters,
+     * digits, and underscores (_), and cannot exceed 128 characters.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
      * @throws { BusinessException } 15100004 - Not found.
@@ -191,6 +201,9 @@ public class KVManager <: RemoteDataLite {
      * Obtains the storeId of all KVStore databases that are created by using the {@code getKVStore} method and not
      * deleted by calling the {@code deleteKVStore} method.
      *
+     * @param { String } appId - Identifies the application that obtains the databases, and cannot exceed 256
+     * characters.
+     * @returns { Array<String> } Array<String> - the storeId of all created KVStore databases.
      * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
      * <br>2.Parameter verification failed.
      */

@@ -221,8 +221,10 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null, the specified column is not of the double type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { Int32 } columnIndex - Indicates the specified column index, which starts from 0.
+     * @returns { Float64 } The value of the specified column as a double.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -259,6 +261,9 @@ public class ResultSet <: RemoteDataLite {
 
     /**
      * Go to the specified row of the result set.
+     *
+     * @param { Int32 } position - Indicates the index of the specified row, which starts from 0.
+     * @returns { Bool } True if the result set is moved successfully; Returns false otherwise.
      */
     @!APILevel[
         since: "22",
@@ -274,6 +279,9 @@ public class ResultSet <: RemoteDataLite {
 
     /**
      * Go to the previous row of the result set.
+     *
+     * @returns { Bool } True if the result set is moved successfully;
+     * Returns false otherwise, for example, if the result set is already in the first row.
      */
     @!APILevel[
         since: "22",
@@ -290,26 +298,8 @@ public class ResultSet <: RemoteDataLite {
     /**
      * Go to the last row of the result set.
      *
-     * @throws { BusinessException  } 14800000 - Inner error.
-     * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
-     * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
-     * @throws { BusinessException  } 14800014 - The RdbStore or ResultSet is already closed.
-     * @throws { BusinessException  } 14800019 - The SQL must be a query statement.
-     * @throws { BusinessException  } 14800021 - SQLite: Generic error.
-     * Possible causes: Insert failed or the updated data does not exist.
-     * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
-     * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
-     * @throws { BusinessException  } 14800024 - SQLite: The database file is locked.
-     * @throws { BusinessException  } 14800025 - SQLite: A table in the database is locked.
-     * @throws { BusinessException  } 14800026 - SQLite: The database is out of memory.
-     * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
-     * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
-     * @throws { BusinessException  } 14800029 - SQLite: The database is full.
-     * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
-     * @throws { BusinessException  } 14800031 - SQLite: TEXT or BLOB exceeds size limit.
-     * @throws { BusinessException  } 14800032 - SQLite: Abort due to constraint violation.
-     * @throws { BusinessException  } 14800033 - SQLite: Data type mismatch.
-     * @throws { BusinessException  } 14800034 - SQLite: Library used incorrectly.
+     * @returns { Bool } True if the result set is moved successfully;
+     * Returns false otherwise, for example, if the result set is empty.
      */
     @!APILevel[
         since: "22",
@@ -327,8 +317,10 @@ public class ResultSet <: RemoteDataLite {
      * Obtains the column name based on the specified column index.
      * The column index is passed as an input parameter.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { Int32 } columnIndex - Indicates the index of the specified column in the result set.
+     * @returns { String } The name of the specified column.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800013 - Resultset is empty or column index is out of bounds.
@@ -372,8 +364,11 @@ public class ResultSet <: RemoteDataLite {
     /**
      * Checks whether the value of the specified column in the current row is null.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { Int32 } columnIndex - Indicates the specified column index, which starts from 0.
+     * @returns { Bool } True if the value of the specified column in the current row is null;
+     * Returns false otherwise.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -413,8 +408,10 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null or the specified column is not of the Asset type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { Int32 } columnIndex - Indicates the specified column index, which starts from 0.
+     * @returns { Asset } The value of the specified column as an asset.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -482,8 +479,10 @@ public class ResultSet <: RemoteDataLite {
      * Obtains the column index based on the specified column name.
      * The column name is passed as an input parameter.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { String } columnName - Indicates the name of the specified column in the result set.
+     * @returns { Int32 } The index of the specified column.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800013 - Resultset is empty or column index is out of bounds.
@@ -532,8 +531,10 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null or the specified column is not of the string type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { Int32 } columnIndex - Indicates the specified column index, which starts from 0.
+     * @returns { String } The value of the specified column as a string.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -572,6 +573,9 @@ public class ResultSet <: RemoteDataLite {
 
     /**
      * Go to the first row of the result set.
+     *
+     * @returns { Bool } True if the result set is moved successfully;
+     * Returns false otherwise, for example, if the result set is empty.
      */
     @!APILevel[
         since: "22",
@@ -590,9 +594,10 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null or the specified column is not of the Assets type.
      *
+     * @param { Int32 } columnIndex - Indicates the specified column index, which starts from 0.
      * @returns { Assets } The value of the specified column as assets.
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -651,8 +656,10 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null, the specified column is not of the integer type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { Int32 } columnIndex - Indicates the specified column index, which starts from 0.
+     * @returns { Int64 } The value of the specified column as a long.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -689,6 +696,9 @@ public class ResultSet <: RemoteDataLite {
 
     /**
      * Go to the next row of the result set.
+     *
+     * @returns { Bool } True if the result set is moved successfully;
+     * Returns false otherwise, for example, if the result set is already in the last row.
      */
     @!APILevel[
         since: "22",
@@ -707,8 +717,10 @@ public class ResultSet <: RemoteDataLite {
      * The implementation class determines whether to throw an exception if the value of the specified column
      * in the current row is null or the specified column is not of the Blob type.
      *
-     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
+     * @param { Int32 } columnIndex - Indicates the specified column index, which starts from 0.
+     * @returns { Array<UInt8> } The value of the specified column as a byte array.
+     * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
+     * left unspecified;<br>2. Incorrect parameter types.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -756,6 +768,10 @@ public class ResultSet <: RemoteDataLite {
     /**
      * Go to the specified row of the result set forwards or backwards by an offset relative to its current position.
      * A positive offset indicates moving backwards, and a negative offset indicates moving forwards.
+     *
+     * @param { Int32 } offset - Indicates the offset relative to the current position.
+     * @returns { Bool } True if the result set is moved successfully and does not go beyond the range;
+     * Returns false otherwise.
      */
     @!APILevel[
         since: "22",
@@ -771,7 +787,9 @@ public class ResultSet <: RemoteDataLite {
 
     /**
      * Obtains the values of all columns in the specified row.
+     * Inserting an empty blob, after API14 and API14, the obtained value is an empty blob.
      *
+     * @returns { ValuesBucket } Indicates the row of data to be inserted into the table.
      * @throws { BusinessException  } 14800000 - Inner error.
      * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
      * @throws { BusinessException  } 14800012 - ResultSet is empty or pointer index is out of bounds.

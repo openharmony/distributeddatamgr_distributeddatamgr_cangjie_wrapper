@@ -41,6 +41,8 @@ public class KVStoreResultSet <: RemoteDataLite {
 
     /**
      * Obtains the number of lines in a result set.
+     *
+     * @returns { Int32 } Returns the number of lines.
      */
     @!APILevel[
         since: "22",
