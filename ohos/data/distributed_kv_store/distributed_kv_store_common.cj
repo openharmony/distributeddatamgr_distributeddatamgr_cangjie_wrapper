@@ -19,7 +19,7 @@ package ohos.data.distributed_kv_store
 
 import ohos.app.ability.BaseContext
 import ohos.labels.*
-import ohos.business_exception.getUniversalErrorMsg
+import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 
 import std.collection.*
 
@@ -260,7 +260,7 @@ public enum KVSecurityLevel {
             case 3 => S2
             case 5 => S3
             case 6 => S4
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(401, "Parameter error.")
         }
     }
 
@@ -270,7 +270,7 @@ public enum KVSecurityLevel {
             case S2 => 3
             case S3 => 5
             case S4 => 6
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(401, "Parameter error.")
         }
     }
 }

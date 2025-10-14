@@ -18,8 +18,8 @@
 package ohos.data.distributed_kv_store
 
 import ohos.ffi.*
-
 import std.collection.*
+import ohos.business_exception.BusinessException
 
 foreign {
     func FfiOHOSDistributedKVStoreCreateKVManager(boudleName: CString, context: StageContext): Int64
@@ -270,7 +270,7 @@ struct CKVValueType {
             case Double(v) =>
                 double = v
                 tag = 5
-            case _ => throw IllegalArgumentException("The type is not supported yet.")
+            case _ => throw BusinessException(401, "Parameter error.")
         }
     }
 
