@@ -26,6 +26,37 @@ import ohos.business_exception.{ BusinessException, UNIVERSAL_ERROR_MAP, getUniv
 const UINT64_MAX: UInt64 = 0xffff_ffff_ffff_ffff
 let RELATIONAL_STORE_LOG = HilogChannel(0, 0xD001650, "CJ-Relational_Store")
 
+const E_INNER_ERROR: Int32 = 14800000
+const E_BASE: Int32 = 27394048
+const E_NOT_SELECT: Int32 = (E_BASE + 7)
+const E_COLUMN_OUT_RANGE: Int32 = (E_BASE + 8)
+const E_INVALID_FILE_PATH: Int32 = (E_BASE + 11)
+const E_ROW_OUT_RANGE: Int32 = (E_BASE + 13)
+const E_NO_ROW_IN_QUERY: Int32 = (E_BASE + 18)
+const E_ALREADY_CLOSED: Int32 = (E_BASE + 30)
+const E_DATABASE_BUSY: Int32 = (E_BASE + 34)
+const E_WAL_SIZE_OVER_LIMIT: Int32 = (E_BASE + 47)
+const E_GET_DATAOBSMGRCLIENT_FAIL: Int32 = (E_BASE + 50)
+const E_TYPE_MISMATCH: Int32 = (E_BASE + 51)
+const E_SQLITE_FULL: Int32 = (E_BASE + 52)
+const E_ATTACHED_DATABASE_EXIST: Int32 = (E_BASE + 54)
+const E_SQLITE_ERROR: Int32 = (E_BASE + 55)
+const E_SQLITE_CORRUPT: Int32 = (E_BASE + 56)
+const E_SQLITE_ABORT: Int32 = (E_BASE + 58)
+const E_SQLITE_PERM: Int32 = (E_BASE + 59)
+const E_SQLITE_BUSY: Int32 = (E_BASE + 60)
+const E_SQLITE_LOCKED: Int32 = (E_BASE + 61)
+const E_SQLITE_NOMEM: Int32 = (E_BASE + 62)
+const E_SQLITE_READONLY: Int32 = (E_BASE + 63)
+const E_SQLITE_IOERR: Int32 = (E_BASE + 64)
+const E_SQLITE_CANTOPEN: Int32 = (E_BASE + 65)
+const E_SQLITE_TOOBIG: Int32 = (E_BASE + 66)
+const E_SQLITE_CONSTRAINT: Int32 = (E_BASE + 67)
+const E_SQLITE_MISMATCH: Int32 = (E_BASE + 68)
+const E_SQLITE_MISUSE: Int32 = (E_BASE + 69)
+const E_CONFIG_INVALID_CHANGE: Int32 = (E_BASE + 70)
+const MEMORY_ERROR: Int32 = -1
+
 /**
  * Indicates several assets in one column
  */
@@ -268,7 +299,7 @@ public enum Tokenizer {
             case NoneTokenizer => 0
             case IcuTokenizer => 1
             case CustomTokenizer => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -328,7 +359,7 @@ public enum RelationalStoreSecurityLevel {
             case S2 => 2
             case S3 => 3
             case S4 => 4
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -364,7 +395,7 @@ public enum ChangeType {
         match (this) {
             case DataChange => 0
             case AssetChange => 1
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 
@@ -372,7 +403,7 @@ public enum ChangeType {
         match (val) {
             case 0 => DataChange
             case 1 => AssetChange
-            case _ => throw IllegalArgumentException("Unknown value.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -627,7 +658,7 @@ public enum AssetStatus {
             case AssetDelete => 4
             case AssetAbnormal => 5
             case AssetDownloading => 6
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 
@@ -639,7 +670,7 @@ public enum AssetStatus {
             case 4 => AssetDelete
             case 5 => AssetAbnormal
             case 6 => AssetDownloading
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -716,7 +747,7 @@ public enum Field {
             case OwnerField => "#_cloud_owner"
             case PrivilegeField => "#_cloud_privilege"
             case SharingResourceField => "#_sharing_resource_field"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -792,7 +823,7 @@ public enum ConflictResolution {
             case OnConflictFail => 3
             case OnConflictIgnore => 4
             case OnConflictReplace => 5
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -1015,7 +1046,7 @@ public enum DistributedType {
         match (this) {
             case DistributedDevice => 0
             case DistributedCloud => 1
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -1081,7 +1112,7 @@ public enum SyncMode {
             case SyncModeTimeFirst => 4
             case SyncModeNativeFirst => 5
             case SyncModeCloudFirst => 6
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -1127,7 +1158,7 @@ public enum Progress {
             case SyncBegin => 0
             case SyncInProgress => 1
             case SyncFinish => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 
@@ -1136,7 +1167,7 @@ public enum Progress {
             case 0 => SyncBegin
             case 1 => SyncInProgress
             case 2 => SyncFinish
-            case _ => throw IllegalArgumentException("Unknown value")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -1182,7 +1213,7 @@ public enum SubscribeType {
             case SubscribeTypeRemote => 0
             case SubscribeTypeCloud => 1
             case SubscribeTypeCloudDetails => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -1228,41 +1259,11 @@ public enum Origin {
             case Local => 0
             case Cloud => 1
             case Remote => 2
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
     }
 }
 
-const E_INNER_ERROR: Int32 = 14800000
-const E_BASE: Int32 = 27394048
-const E_NOT_SELECT: Int32 = (E_BASE + 7)
-const E_COLUMN_OUT_RANGE: Int32 = (E_BASE + 8)
-const E_INVALID_FILE_PATH: Int32 = (E_BASE + 11)
-const E_ROW_OUT_RANGE: Int32 = (E_BASE + 13)
-const E_NO_ROW_IN_QUERY: Int32 = (E_BASE + 18)
-const E_ALREADY_CLOSED: Int32 = (E_BASE + 30)
-const E_DATABASE_BUSY: Int32 = (E_BASE + 34)
-const E_WAL_SIZE_OVER_LIMIT: Int32 = (E_BASE + 47)
-const E_GET_DATAOBSMGRCLIENT_FAIL: Int32 = (E_BASE + 50)
-const E_TYPE_MISMATCH: Int32 = (E_BASE + 51)
-const E_SQLITE_FULL: Int32 = (E_BASE + 52)
-const E_ATTACHED_DATABASE_EXIST: Int32 = (E_BASE + 54)
-const E_SQLITE_ERROR: Int32 = (E_BASE + 55)
-const E_SQLITE_CORRUPT: Int32 = (E_BASE + 56)
-const E_SQLITE_ABORT: Int32 = (E_BASE + 58)
-const E_SQLITE_PERM: Int32 = (E_BASE + 59)
-const E_SQLITE_BUSY: Int32 = (E_BASE + 60)
-const E_SQLITE_LOCKED: Int32 = (E_BASE + 61)
-const E_SQLITE_NOMEM: Int32 = (E_BASE + 62)
-const E_SQLITE_READONLY: Int32 = (E_BASE + 63)
-const E_SQLITE_IOERR: Int32 = (E_BASE + 64)
-const E_SQLITE_CANTOPEN: Int32 = (E_BASE + 65)
-const E_SQLITE_TOOBIG: Int32 = (E_BASE + 66)
-const E_SQLITE_CONSTRAINT: Int32 = (E_BASE + 67)
-const E_SQLITE_MISMATCH: Int32 = (E_BASE + 68)
-const E_SQLITE_MISUSE: Int32 = (E_BASE + 69)
-const E_CONFIG_INVALID_CHANGE: Int32 = (E_BASE + 70)
-const MEMORY_ERROR: Int32 = -1
 let ERROR_CODE_MAP = HashMap<Int32, (Int32, String)>(
     [
         (14801001, (14801001, "Only supported in stage mode.")),

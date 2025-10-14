@@ -35,7 +35,7 @@ func getErrorMsg(code: Int32): String {
 func throwIfNotSuccess(code: Int32): Unit {
     if (code != SUCCESS_CODE) {
         if (code == MEMORY_ERROR) {
-            throw IllegalMemoryException("Out of memory.")
+            throw BusinessException(16000050, "Internal error.")
         }
         throw BusinessException(code, getErrorMsg(code))
     }

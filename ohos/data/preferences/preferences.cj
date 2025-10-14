@@ -61,7 +61,7 @@ public enum PreferencesEvent {
         match (this) {
             case PreferencesChange => "change"
             case PreferencesMultiProcessChange => "multiProcessChange"
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
         }
     }
 }
@@ -108,11 +108,12 @@ public class Preferences <: RemoteDataLite {
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
      * @param { String } name - Indicates the preferences file name.
+     * @returns { Preferences } Returns the Preferences instance.
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @throws { IllegalArgumentException } - The context is invalid.
+     *
      */
     @!APILevel[
         22,
@@ -121,7 +122,7 @@ public class Preferences <: RemoteDataLite {
     public static func getPreferences(context: UIAbilityContext, name: String): Preferences {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
-            throw IllegalArgumentException("The context is invalid.")
+            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
         }
         return Preferences(stageContext, name, String.empty)
     }
@@ -132,11 +133,12 @@ public class Preferences <: RemoteDataLite {
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
      * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences
      * file position.
+     * @returns { Preferences } Returns the Preferences instance.
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
-     * @throws { IllegalArgumentException } - The context is invalid.
+     *
      */
     @!APILevel[
         22,
@@ -145,7 +147,7 @@ public class Preferences <: RemoteDataLite {
     public static func getPreferences(context: UIAbilityContext, options: PreferencesOptions): Preferences {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
-            throw IllegalArgumentException("The context is invalid.")
+            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
         }
         return Preferences(stageContext, options.name, options.dataGroupId)
     }
@@ -182,7 +184,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500010 - Failed to delete the user preferences persistence file.
      * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
      * @throws { BusinessException } 15501002 - Invalid dataGroupId.
-     * @throws { IllegalArgumentException } - The context is invalid.
+     *
      */
     @!APILevel[
         22,
@@ -191,7 +193,7 @@ public class Preferences <: RemoteDataLite {
     public static func deletePreferences(context: UIAbilityContext, options: PreferencesOptions): Unit {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
-            throw IllegalArgumentException("The context is invalid.")
+            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
         }
         var errCode: Int32 = 0
         unsafe {
@@ -251,7 +253,7 @@ public class Preferences <: RemoteDataLite {
     * @throws { BusinessException } 15500000 - Inner error.
     * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
     * @throws { BusinessException } 15501002 - Invalid dataGroupId.
-    * @throws { IllegalArgumentException } - The context is invalid.
+    *
     */
     @!APILevel[
         22,
@@ -260,7 +262,7 @@ public class Preferences <: RemoteDataLite {
     public static func removePreferencesFromCache(context: UIAbilityContext, options: PreferencesOptions): Unit {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
-            throw IllegalArgumentException("The context is invalid.")
+            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
         }
         var errCode: Int32 = 0
         unsafe {

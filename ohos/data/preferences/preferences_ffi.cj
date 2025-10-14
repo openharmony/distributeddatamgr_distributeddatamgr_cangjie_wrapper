@@ -18,8 +18,8 @@
 package ohos.data.preferences
 
 import ohos.ffi.*
-
 import std.collection.*
+import ohos.business_exception.BusinessException
 
 foreign {
     func FfiOHOSPreferencesGetPreferences(context: StageContext, name: CString, dataGroupId: CString,
@@ -93,7 +93,7 @@ struct CPreferencesValueType {
                         cstr => LibC.free(cstr)
                     }
                     stringArray = CArrString(sArr, sArrsize)
-                case _ => throw IllegalArgumentException("The type is not supported.")
+                case _ => throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
             }
         }
     }

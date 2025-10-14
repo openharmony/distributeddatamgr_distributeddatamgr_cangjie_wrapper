@@ -47,6 +47,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Specifies all remote devices which connect to local device when syncing distributed database.
      * When query database, this function should not be called.
+     *
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
         22,
@@ -63,6 +65,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds a left parenthesis to the RdbPredicates.
      * This method is similar to ( of the SQL statement and needs to be used together with endWrap().
+     *
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
         22,
@@ -79,6 +83,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds a right parenthesis to the RdbPredicates.
      * This method is similar to ) of the SQL statement and needs to be used together with beginWrap().
+     *
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
         22,
@@ -95,6 +101,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds an or condition to the RdbPredicates.
      * This method is similar to or of the SQL statement.
+     *
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
         22,
@@ -111,6 +119,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Adds an and condition to the RdbPredicates.
      * This method is similar to and of the SQL statement.
+     *
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
         22,
@@ -129,6 +139,9 @@ public class RdbPredicates <: RemoteDataLite {
      * contains a specified value.
      * This method is similar to contains of the SQL statement.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { String } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters
      * are left unspecified;
      * <br>2. Incorrect parameter types.
@@ -158,6 +171,9 @@ public class RdbPredicates <: RemoteDataLite {
      * with a specified string.
      * This method is similar to value% of the SQL statement.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { String } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -186,6 +202,9 @@ public class RdbPredicates <: RemoteDataLite {
      * ends with a specified string.
      * This method is similar to %value of the SQL statement.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { String } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -214,6 +233,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure the RdbPredicates to match the fields whose value is null.
      * This method is similar to is null of the SQL statement.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -242,6 +263,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure the RdbPredicates to match the specified fields whose value is not null.
      * This method is similar to is not null of the SQL statement.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -271,6 +294,10 @@ public class RdbPredicates <: RemoteDataLite {
      * similar to a specified string.
      * This method is similar to like of the SQL statement.
      *
+     *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { String } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The {@link RdbPredicates} that match the specified field.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -300,6 +327,9 @@ public class RdbPredicates <: RemoteDataLite {
      * a wildcard.
      * Different from like, the input parameters of this method are case-sensitive.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { String } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The SQL statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -328,6 +358,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Restricts the ascending order of the return list. When there are several orders,
      * the one close to the head has the highest priority.
      *
+     * @param { String } field - Indicates the column name for sorting the return list.
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -356,6 +388,8 @@ public class RdbPredicates <: RemoteDataLite {
      * Restricts the descending order of the return list. When there are several orders,
      * the one close to the head has the highest priority.
      *
+     * @param { String } field - Indicates the column name for sorting the return list.
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -382,6 +416,8 @@ public class RdbPredicates <: RemoteDataLite {
 
     /**
      * Restricts each row of the query result to be unique.
+     *
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      */
     @!APILevel[
         22,
@@ -398,6 +434,7 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the max number of return records.
      *
+     * @param { Int32 } value - Indicates the max length of the return list.
      * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
@@ -419,6 +456,9 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure RdbPredicates to specify the start position of the returned result.
      * Use this method together with limit(number).
      *
+     * @param { Int32 } rowOffset - Indicates the start position of the returned result.
+     * The value is a positive integer.
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -438,6 +478,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Configure RdbPredicates to group query results by specified columns.
      *
+     * @param { Array<String> } fields - Indicates the specified columns by which query results are grouped.
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -476,6 +518,8 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be smaller than or equal to the specified value.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { RelationalStoreValueType } value - Indicates the value to match with the {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -510,6 +554,8 @@ public class RdbPredicates <: RemoteDataLite {
      * to a specified value.
      * This method is similar to = of the SQL statement.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { RelationalStoreValueType } value - Indicates the value to match with the {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -541,6 +587,9 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be greater than or equal to the specified value.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { RelationalStoreValueType } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -573,6 +622,9 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be greater than the specified value.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { RelationalStoreValueType } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -605,6 +657,9 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Restricts the value of the field to be smaller than the specified value.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { RelationalStoreValueType } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;
      * <br>2. Incorrect parameter types.
@@ -638,6 +693,9 @@ public class RdbPredicates <: RemoteDataLite {
      * equal to a specified value.
      * This method is similar to != of the SQL statement.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { RelationalStoreValueType } value - Indicates the value to match with the {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
      * unspecified;
      * <br>2. Incorrect parameter types.
@@ -670,6 +728,10 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Configure RdbPredicates to match the specified field whose value is out of a given range.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { RelationalStoreValueType } low - Indicates the minimum value.
+     * @param { RelationalStoreValueType } high - Indicates the maximum value.
+     * @returns { RdbPredicates } - The SQL statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
      * unspecified;
      * <br>2. Incorrect parameter types.
@@ -710,6 +772,10 @@ public class RdbPredicates <: RemoteDataLite {
     /**
      * Configure RdbPredicates to match the specified field whose value is within a given range.
      *
+     * @param { String } field - Indicates the column name.
+     * @param { RelationalStoreValueType } low - Indicates the minimum value.
+     * @param { RelationalStoreValueType } high - Indicates the maximum value.
+     * @returns { RdbPredicates } - The SQL statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left
      * unspecified;<br>2. Incorrect parameter types.
      */
@@ -749,6 +815,9 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure RdbPredicates to match the specified field whose data type is RelationalStoreValueType array and values
      * are within a given range.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { Array<RelationalStoreValueType> } value - Indicates the values to match with {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The SQL statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;<br>2. Incorrect parameter types.
      */
@@ -797,6 +866,9 @@ public class RdbPredicates <: RemoteDataLite {
      * Configure RdbPredicates to match the specified field whose data type is RelationalStoreValueType array and values
      * are out of a given range.
      *
+     * @param { String } field - Indicates the column name in the database table.
+     * @param { Array<RelationalStoreValueType> } value - Indicates the values to match with {@link RdbPredicates}.
+     * @returns { RdbPredicates } - The SQL statement with the specified {@link RdbPredicates}.
      * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are
      * left unspecified;<br>2. Incorrect parameter types.
      */

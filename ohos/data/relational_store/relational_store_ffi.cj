@@ -19,6 +19,7 @@ package ohos.data.relational_store
 
 import ohos.ffi.*
 import std.collection.*
+import ohos.business_exception.BusinessException
 
 type StageContext = CPointer<Unit>
 
@@ -485,7 +486,7 @@ struct RetValueType {
                     return None
                 }
                 assets = RetAssets(assetArray, a.size)
-            case _ => throw IllegalArgumentException("The type is not supported.")
+            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
         }
         return RetValueType(integer, double, string, boolean, Uint8Array, asset, assets, tag)
     }
