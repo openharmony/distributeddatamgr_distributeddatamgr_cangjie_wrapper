@@ -825,12 +825,12 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func `in`(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
+    public func inValues(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
-                RELATIONAL_STORE_LOG.error("RdbPredicates in failed: ${paramError("field", "not empty string")}")
+                RELATIONAL_STORE_LOG.error("RdbPredicates inValues failed: ${paramError("field", "not empty string")}")
                 throw BusinessException(getErrorCode(ERR_PARAMETER_ERROR),
-                    "RdbPredicates in failed: ${paramError("field", "not empty string")}")
+                    "RdbPredicates inValues failed: ${paramError("field", "not empty string")}")
             }
             let cfield = LibC.mallocCString(field)
             let valuesSize = value.size
@@ -839,12 +839,12 @@ public class RdbPredicates <: RemoteDataLite {
             } else {
                 LibC.malloc<RetValueType>(count: valuesSize)
             }
-            throwIfOOM(valuesSize != 0 && valuesArray.isNull(), "RdbPredicates", "in") {
+            throwIfOOM(valuesSize != 0 && valuesArray.isNull(), "RdbPredicates", "inValues") {
                 LibC.free(cfield)
             }
             for (i in 0..valuesSize) {
                 let valueType = RetValueType.create(value[i])
-                throwIfOOM(valueType.isNone(), "RdbPredicates", "in") {
+                throwIfOOM(valueType.isNone(), "RdbPredicates", "inValues") {
                     freeValuesArray(valuesArray, i)
                     LibC.free<RetValueType>(valuesArray)
                     LibC.free(cfield)
@@ -857,7 +857,7 @@ public class RdbPredicates <: RemoteDataLite {
             }
             LibC.free<RetValueType>(valuesArray)
             LibC.free(cfield)
-            throwIfNotSuccess(code, "RdbPredicates", "in")
+            throwIfNotSuccess(code, "RdbPredicates", "inValues")
         }
         return this
     }
@@ -876,12 +876,12 @@ public class RdbPredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
-    public func notIn(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
+    public func notInValues(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
         unsafe {
             if (field.isEmpty()) {
-                RELATIONAL_STORE_LOG.error("RdbPredicates notIn failed: ${paramError("field", "not empty string")}")
+                RELATIONAL_STORE_LOG.error("RdbPredicates notInValues failed: ${paramError("field", "not empty string")}")
                 throw BusinessException(getErrorCode(ERR_PARAMETER_ERROR),
-                    "RdbPredicates notIn failed: ${paramError("field", "not empty string")}")
+                    "RdbPredicates notInValues failed: ${paramError("field", "not empty string")}")
             }
             let cfield = LibC.mallocCString(field)
             let valuesSize = value.size
@@ -890,12 +890,12 @@ public class RdbPredicates <: RemoteDataLite {
             } else {
                 LibC.malloc<RetValueType>(count: valuesSize)
             }
-            throwIfOOM(valuesArray.isNull() && valuesSize != 0, "RdbPredicates", "notIn") {
+            throwIfOOM(valuesArray.isNull() && valuesSize != 0, "RdbPredicates", "notInValues") {
                 LibC.free(cfield)
             }
             for (i in 0..valuesSize) {
                 let valueType = RetValueType.create(value[i])
-                throwIfOOM(valueType.isNone(), "RdbPredicates", "notIn") {
+                throwIfOOM(valueType.isNone(), "RdbPredicates", "notInValues") {
                     freeValuesArray(valuesArray, i)
                     LibC.free<RetValueType>(valuesArray)
                     LibC.free(cfield)
@@ -908,7 +908,7 @@ public class RdbPredicates <: RemoteDataLite {
             }
             LibC.free<RetValueType>(valuesArray)
             LibC.free(cfield)
-            throwIfNotSuccess(code, "RdbPredicates", "notIn")
+            throwIfNotSuccess(code, "RdbPredicates", "notInValues")
         }
         return this
     }

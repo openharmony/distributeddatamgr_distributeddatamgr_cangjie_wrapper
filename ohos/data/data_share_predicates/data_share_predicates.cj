@@ -207,11 +207,11 @@ public class DataSharePredicates <: RemoteDataLite {
         22,
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
-    public func `in`(field: String, value: Array<VBValueType>): DataSharePredicates {
+    public func inValues(field: String, value: Array<VBValueType>): DataSharePredicates {
         if (field.isEmpty() || value.isEmpty()) {
-            LOG.error("DataSharePredicates in failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+            LOG.error("DataSharePredicates inValues failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
             throw BusinessException(ERR_PARAMETER_ERROR,
-                "DataSharePredicates in failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+                "DataSharePredicates inValues failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
         }
 
         // The VBValueType types in value ​​must all be consistent
@@ -219,7 +219,7 @@ public class DataSharePredicates <: RemoteDataLite {
         for (idx in 1..value.size) {
             if (value[idx].get() != tag) {
                 throw BusinessException(ERR_PARAMETER_ERROR,
-                    "DataSharePredicates in failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
+                    "DataSharePredicates inValues failed: ${getErrorMsg(ERR_PARAMETER_ERROR)}")
             }
         }
 
