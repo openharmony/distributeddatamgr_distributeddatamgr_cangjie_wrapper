@@ -20,7 +20,7 @@ internal import ohos.base.*
 internal import std.collection.*
 import std.unittest.testmacro.*
 
-import ArkData.*
+import kit.ArkData.*
 import ohos.data.distributed_kv_store.Entry as KVEntry
 
 import ohos.data.distributed_kv_store.*
