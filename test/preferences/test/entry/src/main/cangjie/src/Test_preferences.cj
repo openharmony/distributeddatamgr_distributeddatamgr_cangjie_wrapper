@@ -21,7 +21,7 @@
  */
 package ohos_app_cangjie_entry
 
-import ArkData.*
+import kit.ArkData.*
 
 import std.runtime.*
 import std.sync.*

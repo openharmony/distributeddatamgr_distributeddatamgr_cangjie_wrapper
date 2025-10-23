@@ -15,7 +15,7 @@
 
 package ohos_app_cangjie_entry
 
-import ArkData.*
+import kit.ArkData.*
 
 internal import ohos.base.*
 import std.unittest.testmacro.*
