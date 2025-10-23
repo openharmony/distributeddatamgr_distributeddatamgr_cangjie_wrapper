@@ -22,7 +22,7 @@ import std.collection.ArrayList
 import std.collection.HashMap
 import ohos.base.*
 import std.unittest.testmacro.*
-import ArkData.*
+import kit.ArkData.*
 
 import std.unittest.*
 import std.unittest.common.*
@@ -51,7 +51,7 @@ class Test_dataSharePredicates {
      */
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_create_dataSharePredicates(): Unit {
         // 一般来说，创建一个 DataSharePredicates 对象不会出现意外
         try {
@@ -65,13 +65,13 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_equalTo(): Unit {
         // equalTo方法测试
         var predicates = DataSharePredicates()
         // 测试列名为空的情况
         try {
-            predicates.equalTo("", DataSharePredicatesValueType.StringValue("Peter"))
+            predicates.equalTo("", VBValueType.StringValue("Peter"))
             @Expect(false)
             println(DEBUG_HEAD + "test_equalTo with empty field error. It should throw an exception.")
         } catch (e: BusinessException) {
@@ -82,7 +82,7 @@ class Test_dataSharePredicates {
 
         // 测试不存在列名的情况，DataSharePredicates和数据库是没有直接的操作关系，只是存储一些值，因此理论应该不会抛出错误
         try {
-            predicates.equalTo("FIELD_NOT_EXIST", DataSharePredicatesValueType.StringValue("Peter"))
+            predicates.equalTo("FIELD_NOT_EXIST", VBValueType.StringValue("Peter"))
             @Expect(true)
             println(DEBUG_HEAD + "test_equalTo with field not exist success.")
         } catch (e: BusinessException) {
@@ -93,13 +93,13 @@ class Test_dataSharePredicates {
         // 测试正常的情况
         try {
             // Int64
-            predicates.equalTo("AGE", DataSharePredicatesValueType.Integer(25))
+            predicates.equalTo("AGE", VBValueType.Integer(25))
             // Float64
-            predicates.equalTo("SALARY", DataSharePredicatesValueType.Double(1000.5))
+            predicates.equalTo("SALARY", VBValueType.Double(1000.5))
             // String
-            predicates.equalTo("NAME", DataSharePredicatesValueType.StringValue("Peter"))
+            predicates.equalTo("NAME", VBValueType.StringValue("Peter"))
             // Bool
-            predicates.equalTo("CODES", DataSharePredicatesValueType.Boolean(true))
+            predicates.equalTo("CODES", VBValueType.Boolean(true))
 
             @Expect(true)
             println(DEBUG_HEAD + "test_equalTo with normal situation success.")
@@ -110,7 +110,7 @@ class Test_dataSharePredicates {
         // 测试错误查询
         try {
             predicates = DataSharePredicates()
-            predicates.equalTo("AGE", DataSharePredicatesValueType.Integer(17))
+            predicates.equalTo("AGE", VBValueType.Integer(17))
             @Expect(true)
             println(DEBUG_HEAD + "test_equalTo with incorrect value, pass.")
         } catch (e: BusinessException) {
@@ -121,20 +121,20 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_create_and(): Unit {
         // equalTo方法测试
         // 测试链式编程
         try {
             var predicates = DataSharePredicates()
             predicates
-                .equalTo("AGE", DataSharePredicatesValueType.Integer(18))
+                .equalTo("AGE", VBValueType.Integer(18))
                 .and()
-                .equalTo("NAME", DataSharePredicatesValueType.StringValue("Lisa"))
+                .equalTo("NAME", VBValueType.StringValue("Lisa"))
                 .and()
-                .equalTo("SALARY", DataSharePredicatesValueType.Double(100.5))
+                .equalTo("SALARY", VBValueType.Double(100.5))
                 .and()
-                .equalTo("CODES", DataSharePredicatesValueType.Boolean(true))
+                .equalTo("CODES", VBValueType.Boolean(true))
             println(DEBUG_HEAD + "test_and success.")
             @Expect(true)
         } catch (e: BusinessException) {
@@ -144,7 +144,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_orderByAsc() {
 
         // 测试列名为空的情况
@@ -172,7 +172,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_orderByDesc(): Unit {
         // 测试列名为空的情况
         try {
@@ -198,7 +198,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_limit(): Unit {
         // 测试输入负数的情况
         try {
@@ -247,15 +247,15 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_in(): Unit {
-        let array = ArrayList<DataSharePredicatesValueType>(5, {i => DataSharePredicatesValueType.StringValue("hello ${i}")})
-        let emptyArray = ArrayList<DataSharePredicatesValueType>(0)
-        let multiTypeArray: Array<DataSharePredicatesValueType> = [
-            DataSharePredicatesValueType.Integer(1),
-            DataSharePredicatesValueType.StringValue("hello"),
-            DataSharePredicatesValueType.Double(0.01),
-            DataSharePredicatesValueType.Boolean(false)
+        let array = ArrayList<VBValueType>(5, {i => VBValueType.StringValue("hello ${i}")})
+        let emptyArray = ArrayList<VBValueType>(0)
+        let multiTypeArray: Array<VBValueType> = [
+            VBValueType.Integer(1),
+            VBValueType.StringValue("hello"),
+            VBValueType.Double(0.01),
+            VBValueType.Boolean(false)
         ]
 
         // 测试列名为空，array正常
