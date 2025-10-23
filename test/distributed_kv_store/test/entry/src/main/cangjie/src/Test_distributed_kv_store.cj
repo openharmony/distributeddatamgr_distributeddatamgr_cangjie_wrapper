@@ -56,7 +56,7 @@ class Test_distributed_kv_store {
         }
     }
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_context() {
         @Expect(Constants.MAX_KEY_LENGTH, 1024)
         @Expect(Constants.MAX_VALUE_LENGTH, 4194303)
@@ -67,7 +67,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_creatKVManager() {
         let kvstore = DistributedKVStore()
         let kvstoreName = "com.example.myapplication"
@@ -76,7 +76,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getSingleKVStore_deleteKVStore() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -85,7 +85,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getDeviceKVStore_deleteKVStore() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -94,7 +94,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_closeKVStore() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -111,7 +111,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getAllKVStoreId() {
         var list = kvManager.getAllKVStoreId(bundleName)
         Hilog.info(0, "test", "list size is ${list.size}")
@@ -137,7 +137,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_put_get() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -157,7 +157,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_putBatch() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -181,7 +181,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_delete() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -200,7 +200,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_backup_restore() {
         let kvstoreName = "myStoreId"
         let fileName = "backfile"
@@ -229,7 +229,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_startTransaction() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -259,7 +259,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_common_S1S2S3() {
         let kvstoreName = "myStoreId"
         let opt0 = KVOptions(KVSecurityLevel.S1,)
@@ -272,7 +272,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_singleKVStore_deleteBatch() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -290,7 +290,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_singleKVStore_enableSync() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -300,7 +300,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_singleKVStore_setSyncParam() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -310,7 +310,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_DeviceKVStore_getEntries() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -323,7 +323,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_Valuetype() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -345,7 +345,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_DeviceKVStore_getEntries_query() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
@@ -356,7 +356,7 @@ class Test_distributed_kv_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_DeviceKVStore_getResultSize_query() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
