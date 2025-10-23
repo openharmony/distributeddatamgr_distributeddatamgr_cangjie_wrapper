@@ -51,7 +51,7 @@ class Test_dataSharePredicates {
      */
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_create_dataSharePredicates(): Unit {
         // 一般来说，创建一个 DataSharePredicates 对象不会出现意外
         try {
@@ -65,7 +65,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_equalTo(): Unit {
         // equalTo方法测试
         var predicates = DataSharePredicates()
@@ -121,7 +121,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_create_and(): Unit {
         // equalTo方法测试
         // 测试链式编程
@@ -144,7 +144,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_orderByAsc() {
 
         // 测试列名为空的情况
@@ -172,7 +172,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_orderByDesc(): Unit {
         // 测试列名为空的情况
         try {
@@ -198,7 +198,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_limit(): Unit {
         // 测试输入负数的情况
         try {
@@ -247,7 +247,7 @@ class Test_dataSharePredicates {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_in(): Unit {
         let array = ArrayList<VBValueType>(5, {i => VBValueType.StringValue("hello ${i}")})
         let emptyArray = ArrayList<VBValueType>(0)

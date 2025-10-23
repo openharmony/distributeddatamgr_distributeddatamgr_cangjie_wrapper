@@ -107,7 +107,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getRdbStoreExceptionBr() {
         var exceptionStore: Option<RdbStore> = None
         try {
@@ -119,7 +119,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_initException() {
         try {
             RdbPredicates("")
@@ -130,27 +130,27 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_inAllDevices() {
         rdbPridecates.inAllDevices()
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_wrap() {
         rdbPridecates.beginWrap()
         rdbPridecates.endWrap()
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_andOr() {
         rdbPridecates.and()
         rdbPridecates.or()
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_contains() {
         rdbPridecates.contains("test", "test")
 
@@ -165,7 +165,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_beginsWith() {
         rdbPridecates.beginsWith("test", "test")
 
@@ -180,7 +180,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_endsWith() {
         rdbPridecates.endsWith("test", "test")
 
@@ -195,7 +195,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_isNull() {
         rdbPridecates.isNull("test")
 
@@ -208,7 +208,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_isNotNull() {
         rdbPridecates.isNotNull("test")
 
@@ -221,7 +221,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_like() {
         rdbPridecates.like("test", "test")
 
@@ -236,7 +236,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_glob() {
         rdbPridecates.glob("test", "test")
 
@@ -251,7 +251,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_orderByDesc() {
         rdbPridecates.orderByDesc("test")
 
@@ -264,28 +264,28 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_limitAs() {
         rdbPridecates.limitAs(1)
         rdbPridecates.limitAs(-1)
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_offsetAs() {
         rdbPridecates.offsetAs(1)
         rdbPridecates.offsetAs(-1)
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_groupBy() {
         rdbPridecates.groupBy(Array<String>())
         rdbPridecates.groupBy(["test"])
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_lessThanOrEqualTo() {
         rdbPridecates.lessThanOrEqualTo("test", RelationalStoreValueType.StringValue("test"))
 
@@ -298,7 +298,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_equalTo() {
         rdbPridecates.equalTo("test", RelationalStoreValueType.StringValue("test"))
 
@@ -311,7 +311,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_greaterThanOrEqualTo() {
         rdbPridecates.greaterThanOrEqualTo("test", RelationalStoreValueType.StringValue("test"))
 
@@ -324,7 +324,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_greaterThan() {
         rdbPridecates.greaterThan("test", RelationalStoreValueType.StringValue("test"))
 
@@ -337,7 +337,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_lessThan() {
         rdbPridecates.lessThan("test", RelationalStoreValueType.StringValue("test"))
 
@@ -350,7 +350,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_notEqualTo() {
         rdbPridecates.notEqualTo("test", RelationalStoreValueType.StringValue("test"))
 
@@ -363,7 +363,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_notBetween() {
         rdbPridecates.notBetween("test", RelationalStoreValueType.StringValue(""), RelationalStoreValueType.StringValue("test"))
 
@@ -376,7 +376,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_between() {
         rdbPridecates.between("test", RelationalStoreValueType.StringValue(""), RelationalStoreValueType.StringValue("test"))
         try {
@@ -388,7 +388,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_in() {
         rdbPridecates.inValues("test", allValueTypes)
         rdbPridecates.inValues("test", Array<RelationalStoreValueType>())
@@ -401,7 +401,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_notIn() {
         rdbPridecates.notInValues("test", allValueTypes)
         rdbPridecates.notInValues("test", Array<RelationalStoreValueType>())
@@ -414,7 +414,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_restore() {
         let rdbStore = store.getOrThrow()
         rdbStore.backup("dbBackup_11.db")
@@ -429,7 +429,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_delete() {
         let rdbStore = store.getOrThrow()
         rdbStore.executeSql(
@@ -462,7 +462,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_backup_exception() {
         let exceptionRdbStore = store.getOrThrow()
         try {
@@ -474,7 +474,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_restore_exception() {
         let exceptionRdbStore = store.getOrThrow()
         try {
@@ -493,7 +493,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_transaction() {
         let rdbStore = store.getOrThrow()
         rdbStore.executeSql("CREATE TABLE THING(ID int NOT NULL, NAME varchar(255) NOT NULL, PRIMARY KEY (Id))")
@@ -531,7 +531,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_querySql() {
         let rdbStore = store.getOrThrow()
         var resultSet = rdbStore.querySql("SELECT * FROM EMPLOYEE WHERE NAME = 'Peter'")
@@ -550,7 +550,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getRow() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -603,7 +603,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_on() {
         let rdbStore = store.getOrThrow()
         let testCallback1 = TestCallback({=> tag++})
@@ -624,7 +624,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_off_unregistered() {
         let rdbStore = store.getOrThrow()
         let testCallback1 = TestCallback({=> ()})
@@ -633,7 +633,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_emit() {
         let rdbStore = store.getOrThrow()
         let testCallback1 = TestCallback({=> tag++})
@@ -653,7 +653,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_distinct() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -671,7 +671,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_update() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -690,7 +690,7 @@ class Test_relational_store {
 
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_resultSet() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -718,7 +718,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_batchInsert() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -759,7 +759,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_goto() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -794,7 +794,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_get() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -870,7 +870,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_executeSql() {
         let rdbStore = store.getOrThrow()
         try {
@@ -900,7 +900,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_insertExceptionBr() {
         let rdbStore = store.getOrThrow()
         var values = HashMap<String, RelationalStoreValueType>()
@@ -926,7 +926,7 @@ class Test_relational_store {
 
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_orderByAsc_exception() {
         let rdbStore = store.getOrThrow()
         let predicates = RdbPredicates("EMPLOYEE")
@@ -939,7 +939,7 @@ class Test_relational_store {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_getColumnIndex_exception() {
         let rdbStore = store.getOrThrow()
         var resultSet = rdbStore.querySql("SELECT * FROM EMPLOYEE WHERE NAME = 'Peter';")
