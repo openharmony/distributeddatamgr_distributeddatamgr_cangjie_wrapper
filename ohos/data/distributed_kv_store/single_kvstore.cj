@@ -100,6 +100,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         22,
@@ -250,6 +251,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * <p>After the database transaction is started, you can submit or roll back the operation.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         22,

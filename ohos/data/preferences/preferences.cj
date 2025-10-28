@@ -137,7 +137,10 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 401 - Parameter error. Possible causes:
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
+     * @throws { BusinessException } 801 - Capability not supported.
      * @throws { BusinessException } 15500000 - Inner error.
+     * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
+     * @throws { BusinessException } 15501002 - Invalid dataGroupId.
      *
      */
     @!APILevel[
@@ -181,6 +184,7 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 801 - Capability not supported.
+     * @throws { BusinessException } 15500000 - Inner error.
      * @throws { BusinessException } 15500010 - Failed to delete the user preferences persistence file.
      * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
      * @throws { BusinessException } 15501002 - Invalid dataGroupId.
@@ -461,13 +465,14 @@ public class Preferences <: RemoteDataLite {
      * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
      * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
+     * @throws { BusinessException } 15500019 - Failed to obtain the subscription service.
      */
 
     @!APILevel[
         22,
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
-    public func on(event :PreferencesEvent, callback: Callback1Argument<String>): Unit {
+    public func on(event: PreferencesEvent, callback: Callback1Argument<String>): Unit {
         let tp = event.getValue()
         checkType(tp)
         synchronized(onOffMutex) {
