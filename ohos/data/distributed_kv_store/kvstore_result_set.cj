@@ -17,8 +17,8 @@
 
 package ohos.data.distributed_kv_store
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
  * Provides methods to operate the result set of the {@code SingleKVStore} or {@code DeviceKVStore} database.

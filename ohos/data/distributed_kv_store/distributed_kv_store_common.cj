@@ -18,10 +18,10 @@
 package ohos.data.distributed_kv_store
 
 import ohos.app.ability.BaseContext
-import ohos.labels.*
+import ohos.labels.APILevel
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 
-import std.collection.*
+import std.collection.HashMap
 
 /**
  * KVStore constants

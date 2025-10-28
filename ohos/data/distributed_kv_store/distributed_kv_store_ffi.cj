@@ -17,8 +17,8 @@
 
 package ohos.data.distributed_kv_store
 
-import ohos.ffi.*
-import std.collection.*
+import ohos.ffi.{CArrString, CTypeResource, safeMalloc, cjArr2CArr, FUNCTION_S2CS, FUNCTION_CS_FREE}
+import std.collection.ArrayList
 import ohos.business_exception.BusinessException
 
 foreign {

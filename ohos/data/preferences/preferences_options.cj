@@ -17,10 +17,10 @@
 
 package ohos.data.preferences
 
-import ohos.labels.*
+import ohos.labels.APILevel
 import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR, ERR_NOT_SUPPOERTED, getUniversalErrorMsg }
 
-import std.collection.*
+import std.collection.HashMap
 
 /**
  * the storage type
