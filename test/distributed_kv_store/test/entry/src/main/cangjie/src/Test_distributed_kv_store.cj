@@ -334,6 +334,8 @@ class Test_distributed_kv_store {
         kvStore.put("myKey04", KVValueType.Boolean(true))
         kvStore.put("myKey05", KVValueType.Double(123.45))
         kvStore.put("myKey06", KVValueType.ByteArray([1, 2, 3]))
+        let resultSet = kvStore.getResultSet("myKey")
+        @Expect(resultSet.getCount(), 6)
         var key1 = kvStore.get("myKey01")
         var key2 = kvStore.get("myKey02")
         var key3 = kvStore.get("myKey03")
@@ -369,5 +371,4 @@ class Test_distributed_kv_store {
         kvManager.closeKVStore(bundleName, kvstoreName)
         kvManager.deleteKVStore(bundleName, kvstoreName)
     }
-
 }
