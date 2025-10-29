@@ -154,6 +154,7 @@ let MESSAGE_TPYE_ERROR = "The type should be change or multiProcessChange."
 // The error code for common exceptions.
 const ERROR_BASE = 27656192i32
 const E_INNER_ERROR = 15500000i32
+const E_NOT_STAGE_MODE = 15501001i32
 const E_DATA_GROUP_ID_INVALID = 15501002i32
 const E_GET_DATAOBSMGRCLIENT_FAIL = 15500019i32
 const E_DELETE_FILE_FAIL = 15500010i32
@@ -167,6 +168,7 @@ let NATIVE_ERROR_MSG = HashMap<Int32, String>(
         (ERROR_BASE + 14, "Value exceeds the max length (16 * 1024 * 1024)."),
         (ERROR_BASE + 19, "Failed to get DataObsMgrClient."),
         (ERROR_BASE + 801, "The capability not supported."),
+        (E_NOT_STAGE_MODE, "The operations is supported in stage mode only."),
         (E_DATA_GROUP_ID_INVALID, "The data group id is not valid.")
     ]
 )
@@ -175,6 +177,7 @@ let CJ_ERROR_MSG = HashMap<Int32, String>(
         (E_INNER_ERROR, "Inner error."),
         (E_DELETE_FILE_FAIL, "Failed to delete preferences file."),
         (E_GET_DATAOBSMGRCLIENT_FAIL, "Failed to obtain subscription service."),
+        (E_NOT_STAGE_MODE, "The operations is supported in stage mode only.")
         (E_DATA_GROUP_ID_INVALID, "The data group id is not valid.")
     ]
 )
@@ -188,6 +191,7 @@ let NATIVE_ERR_TO_CJ_ERR_MAP = HashMap<Int32, Int32>(
         (ERROR_BASE + 14, ERR_PARAMETER_ERROR),
         (ERROR_BASE + 19, E_GET_DATAOBSMGRCLIENT_FAIL),
         (ERROR_BASE + 801, ERR_NOT_SUPPOERTED),
+        (E_NOT_STAGE_MODE, E_NOT_STAGE_MODE),
         (E_DATA_GROUP_ID_INVALID, E_DATA_GROUP_ID_INVALID)
     ]
 )
