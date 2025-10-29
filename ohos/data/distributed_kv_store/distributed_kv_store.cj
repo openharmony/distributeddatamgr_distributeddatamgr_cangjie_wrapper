@@ -18,11 +18,11 @@
 package ohos.data.distributed_kv_store
 
 import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
-import ohos.ffi.*
-import ohos.hilog.*
-import ohos.labels.*
-import std.collection.*
-import std.sync.*
+import ohos.ffi.{RemoteDataLite, releaseFFIData, SUCCESS_CODE}
+import ohos.hilog.HilogChannel
+import ohos.labels.APILevel
+import std.collection.ArrayList
+import std.sync.Mutex
 import ohos.callback_invoke.CallbackObject
 import ohos.business_exception.BusinessException
 

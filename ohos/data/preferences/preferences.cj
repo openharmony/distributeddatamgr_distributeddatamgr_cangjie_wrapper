@@ -17,12 +17,12 @@
 
 package ohos.data.preferences
 
-import ohos.ffi.*
-import ohos.hilog.*
+import ohos.ffi.{RemoteDataLite, releaseFFIData, SUCCESS_CODE, Callback1Param}
+import ohos.hilog.HilogChannel
 import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
-import std.sync.*
-import std.collection.*
-import ohos.labels.*
+import std.sync.Mutex
+import std.collection.{ArrayList, HashMap}
+import ohos.labels.APILevel
 import ohos.callback_invoke.{ Callback1Argument, CallbackObject }
 import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 

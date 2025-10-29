@@ -17,10 +17,10 @@
 
 package ohos.data.relational_store
 
-import ohos.ffi.*
-import ohos.hilog.*
-import ohos.labels.*
-import std.collection.*
+import ohos.ffi.SUCCESS_CODE
+import ohos.hilog.HilogChannel
+import ohos.labels.APILevel
+import std.collection.{HashMap, Map}
 import ohos.business_exception.{ BusinessException, UNIVERSAL_ERROR_MAP, getUniversalErrorMsg}
 
 const UINT64_MAX: UInt64 = 0xffff_ffff_ffff_ffff

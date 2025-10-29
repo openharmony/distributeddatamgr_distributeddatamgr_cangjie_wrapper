@@ -17,9 +17,8 @@
 
 package ohos.data.relational_store
 
-import ohos.labels.*
-import ohos.ffi.*
-import std.collection.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData, CArrString}
 import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 
 /**

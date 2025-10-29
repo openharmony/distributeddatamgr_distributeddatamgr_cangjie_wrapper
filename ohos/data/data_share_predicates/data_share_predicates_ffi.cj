@@ -17,7 +17,7 @@
 
 package ohos.data.data_share_predicates
 
-import ohos.data.values_bucket.*
+import ohos.data.values_bucket.CValueType
 
 foreign {
     func FfiOHOSDataSharePredicatesCreateDataSharePredicates(): Int64

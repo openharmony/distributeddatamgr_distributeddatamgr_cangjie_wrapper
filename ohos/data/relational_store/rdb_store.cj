@@ -17,10 +17,10 @@
 
 package ohos.data.relational_store
 
-import ohos.ffi.*
-import std.collection.*
-import std.sync.*
-import ohos.labels.*
+import ohos.ffi.{RemoteDataLite, releaseFFIData, Callback0Param}
+import std.collection.{HashMap, ArrayList}
+import std.sync.Mutex
+import ohos.labels.APILevel
 import ohos.callback_invoke.{Callback0Argument, CallbackObject}
 import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
 

@@ -19,7 +19,7 @@ package ohos.data.relational_store
 
 import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
 import ohos.business_exception.BusinessException
-import ohos.labels.*
+import ohos.labels.APILevel
 
 /**
  * Obtains a RDB store.

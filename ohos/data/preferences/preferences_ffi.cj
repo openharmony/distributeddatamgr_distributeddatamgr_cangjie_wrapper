@@ -17,8 +17,8 @@
 
 package ohos.data.preferences
 
-import ohos.ffi.*
-import std.collection.*
+import ohos.ffi.{CArrBool, CArrDouble, CArrString, cjArr2CArr}
+import std.collection.HashMap
 import ohos.business_exception.BusinessException
 
 foreign {
