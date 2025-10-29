@@ -17,8 +17,8 @@
 
 package ohos.data.relational_store
 
-import ohos.ffi.*
-import std.collection.*
+import ohos.ffi.{CArrString, CArrUI8}
+import std.collection.{HashMap, Map, ArrayList}
 import ohos.business_exception.BusinessException
 
 type StageContext = CPointer<Unit>

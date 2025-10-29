@@ -18,10 +18,10 @@
 package ohos.data.distributed_kv_store
 
 import ohos.app.ability.BaseContext
-import ohos.labels.*
+import ohos.labels.APILevel
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 
-import std.collection.*
+import std.collection.HashMap
 
 /**
  * KVStore constants
@@ -519,7 +519,8 @@ let ERROR_CODE_MAP = HashMap<Int32, String>(
         (15100002, "Open existed database with changed options."),
         (15100003, "Database corrupted."),
         (15100004, "Not found."),
-        (15100005, "Database or result set already closed.")
+        (15100005, "Database or result set already closed."),
+        (14800047, "The WAL file size exceeds the default limit.")
     ]
 )
 

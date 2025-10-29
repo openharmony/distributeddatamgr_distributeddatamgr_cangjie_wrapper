@@ -17,7 +17,7 @@
 
 package ohos.data.data_share_predicates
 
-import ohos.hilog.*
+import ohos.hilog.HilogChannel
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 
 const SUCCESS_CODE: Int32 = 0

@@ -17,10 +17,10 @@
 
 package ohos.data.distributed_kv_store
 
-import std.sync.*
-import ohos.labels.*
-import std.collection.*
-import ohos.ffi.*
+import std.sync.Mutex
+import ohos.labels.APILevel
+import std.collection.ArrayList
+import ohos.ffi.{releaseFFIData, RemoteDataLite, SUCCESS_CODE, toArrayCString}
 import ohos.business_exception.BusinessException
 import ohos.callback_invoke.CallbackObject
 
@@ -100,6 +100,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         since: "22",
@@ -250,6 +251,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * <p>After the database transaction is started, you can submit or roll back the operation.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
+     * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         since: "22",

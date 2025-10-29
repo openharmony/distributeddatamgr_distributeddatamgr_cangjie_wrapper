@@ -17,8 +17,8 @@
 
 package ohos.data.distributed_kv_store
 
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
  * Represents a database query using predicates.

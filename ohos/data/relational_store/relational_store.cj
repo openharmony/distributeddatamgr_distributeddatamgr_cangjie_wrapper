@@ -19,7 +19,7 @@ package ohos.data.relational_store
 
 import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
 import ohos.business_exception.BusinessException
-import ohos.labels.*
+import ohos.labels.APILevel
 
 /**
  * Obtains a RDB store.
@@ -29,23 +29,23 @@ import ohos.labels.*
  * @param { UIAbilityContext } context - The context that initiates the request.
  * @param { StoreConfig } config - Configuration for the RDB store.
  * @returns { RdbStore } Returns the RDB store instance.
- * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+ * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
  * <br>2. Incorrect parameter types; 3. Parameter verification failed. 
- * @throws { BusinessException  } 14800000 - Inner error.
- * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
- * @throws { BusinessException  } 14800011 - Failed to open the database because it is corrupted.
- * @throws { BusinessException  } 14801001 - The operation is supported in the stage model only.
- * @throws { BusinessException  } 14801002 - Invalid data group ID.
- * @throws { BusinessException  } 14800017 - StoreConfig is changed.
- * @throws { BusinessException  } 14800020 - The secret key is corrupted or lost.
- * @throws { BusinessException  } 14800021 - SQLite: Generic error.
+ * @throws { BusinessException } 14800000 - Inner error.
+ * @throws { BusinessException } 14800010 - Failed to open or delete the database by an invalid database path.
+ * @throws { BusinessException } 14800011 - Failed to open the database because it is corrupted.
+ * @throws { BusinessException } 14801001 - The operation is supported in the stage model only.
+ * @throws { BusinessException } 14801002 - Invalid data group ID.
+ * @throws { BusinessException } 14800017 - StoreConfig is changed.
+ * @throws { BusinessException } 14800020 - The secret key is corrupted or lost.
+ * @throws { BusinessException } 14800021 - SQLite: Generic error.
  * Possible causes: Insert failed or the updated data does not exist.
- * @throws { BusinessException  } 14800022 - SQLite: Callback routine requested an abort.
- * @throws { BusinessException  } 14800023 - SQLite: Access permission denied.
- * @throws { BusinessException  } 14800027 - SQLite: Attempt to write a readonly database.
- * @throws { BusinessException  } 14800028 - SQLite: Some kind of disk I/O error occurred.
- * @throws { BusinessException  } 14800029 - SQLite: The database is full.
- * @throws { BusinessException  } 14800030 - SQLite: Unable to open the database file.
+ * @throws { BusinessException } 14800022 - SQLite: Callback routine requested an abort.
+ * @throws { BusinessException } 14800023 - SQLite: Access permission denied.
+ * @throws { BusinessException } 14800027 - SQLite: Attempt to write a readonly database.
+ * @throws { BusinessException } 14800028 - SQLite: Some kind of disk I/O error occurred.
+ * @throws { BusinessException } 14800029 - SQLite: The database is full.
+ * @throws { BusinessException } 14800030 - SQLite: Unable to open the database file.
  *
  */
 @!APILevel[
@@ -74,10 +74,14 @@ public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStor
  *
  * @param { UIAbilityContext } context - The context that initiates the request.
  * @param { String } name - Name of the database to delete.
- * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+ * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
  * <br>2. Incorrect parameter types.
- * @throws { BusinessException  } 14800000 - Inner error.
- * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
+ * @throws { BusinessException } 801 - Capability not supported.
+ * @throws { BusinessException } 14800000 - Inner error.
+ * @throws { BusinessException } 14800010 - Failed to open or delete the database by an invalid database path.
+ * @throws { BusinessException } 14801001 - The operation is supported in the stage model only.
+ * @throws { BusinessException } 14801002 - Invalid data group ID.
+
  *
  */
 @!APILevel[
@@ -104,12 +108,13 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
  *
  * @param { UIAbilityContext } context - The context that initiates the request.
  * @param { StoreConfig } config - Configuration for the RDB store to delete.
- * @throws { BusinessException  } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+ * @throws { BusinessException } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
  * <br>2. Incorrect parameter types.
- * @throws { BusinessException  } 14800000 - Inner error.
- * @throws { BusinessException  } 14800010 - Failed to open or delete the database by an invalid database path.
- * @throws { BusinessException  } 14801001 - The operation is supported in the stage model only.
- * @throws { BusinessException  } 14801002 - Invalid data group ID.
+ * @throws { BusinessException } 801 - Capability not supported.
+ * @throws { BusinessException } 14800000 - Inner error.
+ * @throws { BusinessException } 14800010 - Failed to open or delete the database by an invalid database path.
+ * @throws { BusinessException } 14801001 - The operation is supported in the stage model only.
+ * @throws { BusinessException } 14801002 - Invalid data group ID.
  *
  */
 @!APILevel[

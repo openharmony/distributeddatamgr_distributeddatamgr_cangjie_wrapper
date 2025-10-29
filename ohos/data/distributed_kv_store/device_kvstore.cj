@@ -17,9 +17,8 @@
 
 package ohos.data.distributed_kv_store
 
-import ohos.labels.*
-import ohos.ffi.*
-import std.collection.*
+import ohos.labels.APILevel
+import ohos.ffi.{releaseFFIData, SUCCESS_CODE}
 import ohos.business_exception.BusinessException
 
 /**

@@ -17,9 +17,9 @@
 
 package ohos.data.data_share_predicates
 
-import ohos.data.values_bucket.*
-import ohos.labels.*
-import ohos.ffi.*
+import ohos.data.values_bucket.{VBValueType, CValueType}
+import ohos.labels.APILevel
+import ohos.ffi.{RemoteDataLite, releaseFFIData, safeMalloc}
 import ohos.business_exception.{BusinessException, ERR_PARAMETER_ERROR}
 
 /**
