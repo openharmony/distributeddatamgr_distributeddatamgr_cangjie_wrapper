@@ -329,7 +329,8 @@ class Test_distributed_kv_store_error {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
         let kvStore = kvManager.getKVStore<DeviceKVStore>("myStoreId", opt)
-        sleepFor(1.second)
+        kvManager.closeKVStore(bundleName, kvstoreName)
+        sleepFor(2.second)
         try {
             let value = kvStore.getResultSet(Query())
         } catch (e: BusinessException) {
@@ -345,14 +346,14 @@ class Test_distributed_kv_store_error {
         let opt = KVOptions(KVSecurityLevel.S4,)
         let kvStore = kvManager.getKVStore<DeviceKVStore>("myStoreId", opt)
         kvManager.closeKVStore(bundleName, kvstoreName)
-        kvManager.deleteKVStore(bundleName, kvstoreName)
-
+        sleepFor(2.second)
         try {
             kvStore.getResultSize(Query())
             @Expect(true)
         } catch (e: BusinessException) {
             Hilog.info(0, "test", "test_DeviceKVStore_getResultSize_query_error: ${e.message}")
         }
+        kvManager.deleteKVStore(bundleName, kvstoreName)
     }
 
 }
