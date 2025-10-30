@@ -24,34 +24,34 @@ import ohos.labels.APILevel
  * Indicates possible value types
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
 public enum VBValueType {
     /* Integer */ 
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Integer(Int64)
     |
         /* Double */ 
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Double(Float64)
     |
         /* StringValue */ 
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     StringValue(String)
     |
         /* Boolean */ 
         @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Boolean(Bool)

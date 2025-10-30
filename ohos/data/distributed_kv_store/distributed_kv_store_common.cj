@@ -27,7 +27,7 @@ import std.collection.HashMap
  * KVStore constants
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Constants {
@@ -35,7 +35,7 @@ public class Constants {
      * Max key length is 1024.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_KEY_LENGTH: Int32 = 1024
@@ -44,7 +44,7 @@ public class Constants {
      * Max value length is 4194303.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_VALUE_LENGTH: Int32 = 4194303
@@ -53,7 +53,7 @@ public class Constants {
      * Max device coordinate key length is 896.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_KEY_LENGTH_DEVICE: Int32 = 896
@@ -62,7 +62,7 @@ public class Constants {
      * Max store id length is 128.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_STORE_ID_LENGTH: Int32 = 128
@@ -71,7 +71,7 @@ public class Constants {
      * Max query length is 512000.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_QUERY_LENGTH: Int32 = 512000
@@ -80,7 +80,7 @@ public class Constants {
      * Max batch operation size is 128.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static let MAX_BATCH_SIZE: Int32 = 128
@@ -92,7 +92,7 @@ public class Constants {
  * Indicates the {@code KVValueType}.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public enum KVValueType {
@@ -100,7 +100,7 @@ public enum KVValueType {
      * Indicates that the value type is string.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     StringValue(String)
@@ -109,7 +109,7 @@ public enum KVValueType {
      * Indicates that the value type is int.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Integer(Int32)
@@ -118,7 +118,7 @@ public enum KVValueType {
      * Indicates that the value type is float.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Float(Float32)
@@ -127,7 +127,7 @@ public enum KVValueType {
      * Indicates that the value type is byte array.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     ByteArray(Array<Byte>)
@@ -136,7 +136,7 @@ public enum KVValueType {
      * Indicates that the value type is boolean.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Boolean(Bool)
@@ -145,7 +145,7 @@ public enum KVValueType {
      * Indicates that the value type is double.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     Double(Float64)
@@ -157,7 +157,7 @@ public enum KVValueType {
  * which includes the caller's package name and ability or hap context.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class KVManagerConfig {
@@ -165,7 +165,7 @@ public class KVManagerConfig {
      * Indicates the ability or hap context
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var context: BaseContext
@@ -174,7 +174,7 @@ public class KVManagerConfig {
      * Indicates the bundleName
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var bundleName: String
@@ -184,7 +184,7 @@ public class KVManagerConfig {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init(context: BaseContext, bundleName: String) {
@@ -209,7 +209,7 @@ enum KVStoreType {
  * Describes the KVStore security level.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public enum KVSecurityLevel {
@@ -218,7 +218,7 @@ public enum KVSecurityLevel {
      * There are some low impact when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S1
@@ -228,7 +228,7 @@ public enum KVSecurityLevel {
      * There are some major impact when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S2
@@ -238,7 +238,7 @@ public enum KVSecurityLevel {
      * There are some severity impact when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S3
@@ -248,7 +248,7 @@ public enum KVSecurityLevel {
      * There are some critical impact when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     S4
@@ -283,7 +283,7 @@ public enum KVSecurityLevel {
  * <p>The leaf node must have a value; the non-leaf node must have a child {@code FieldNode}.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class FieldNode {
@@ -291,7 +291,7 @@ public class FieldNode {
      * Indicates the nullable of database field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var nullable: Bool
@@ -300,7 +300,7 @@ public class FieldNode {
      * Indicates the default value of field node.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var default: String
@@ -309,7 +309,7 @@ public class FieldNode {
      * Indicates the type of value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var nodeType: Int32
@@ -319,7 +319,7 @@ public class FieldNode {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public init(name: String, nullable: Bool, default: String, nodeType: Int32) {
@@ -334,7 +334,7 @@ public class FieldNode {
  * You can set the schema object in options when create or open the database.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class Schema {
@@ -342,7 +342,7 @@ public class Schema {
      * Indicates the root json object.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var root: FieldNode
@@ -351,7 +351,7 @@ public class Schema {
      * Indicates the string array of json.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var indexes: Array<String>
@@ -360,7 +360,7 @@ public class Schema {
      * Indicates the mode of schema.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var mode: Int32
@@ -369,7 +369,7 @@ public class Schema {
      * Indicates the skip size of schema.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var skip: Int32
@@ -379,7 +379,7 @@ public class Schema {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public init(root: FieldNode, indexes: Array<String>, mode: Int32, skip: Int32) {
@@ -394,7 +394,7 @@ public class Schema {
  * Provides configuration options to create a {@code SingleKVStore} or {@code DeviceKVStore}.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class KVOptions {
@@ -403,7 +403,7 @@ public class KVOptions {
      * Indicates whether to create a database when the database file does not exist
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var createIfMissing: Bool
@@ -412,7 +412,7 @@ public class KVOptions {
      * Indicates whether database files to be encrypted
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var encrypt: Bool
@@ -421,7 +421,7 @@ public class KVOptions {
      * Indicates whether to back up database files
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var backup: Bool
@@ -430,7 +430,7 @@ public class KVOptions {
      * Indicates whether database files are automatically synchronized
      */
     @!APILevel[
-        22,
+        since: "22",
         permission: "ohos.permission.DISTRIBUTED_DATASYNC",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
@@ -440,7 +440,7 @@ public class KVOptions {
      * Indicates the database security level
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var securityLevel: KVSecurityLevel
@@ -449,7 +449,7 @@ public class KVOptions {
      * Indicates the database schema
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var schema: ?Schema
@@ -459,7 +459,7 @@ public class KVOptions {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init(securityLevel: KVSecurityLevel, createIfMissing!: Bool = true, encrypt!: Bool = false,
@@ -477,7 +477,7 @@ public class KVOptions {
  * Provides key-value pairs stored in the distributedKVStore.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Entry {
@@ -485,7 +485,7 @@ public class Entry {
      * Indicates the key.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var key: String
@@ -494,7 +494,7 @@ public class Entry {
      * Indicates the value.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var value: KVValueType
@@ -504,7 +504,7 @@ public class Entry {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init(key: String, value: KVValueType) {

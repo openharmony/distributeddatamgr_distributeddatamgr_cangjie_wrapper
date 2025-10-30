@@ -27,7 +27,7 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData}
  * position in the result set.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class KVStoreResultSet <: RemoteDataLite {
@@ -45,7 +45,7 @@ public class KVStoreResultSet <: RemoteDataLite {
      * @returns { Int32 } Returns the number of lines.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getCount(): Int32 {

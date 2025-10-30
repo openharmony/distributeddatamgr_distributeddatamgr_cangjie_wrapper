@@ -43,7 +43,7 @@ class SingleKVStoreImpl {}
  * synchronous transactions, or data search using snapshots.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public open class SingleKVStore <: RemoteDataLite {
@@ -75,7 +75,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func put(key: String, value: KVValueType): Unit {
@@ -103,7 +103,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func putBatch(entries: Array<Entry>): Unit {
@@ -129,7 +129,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func delete(key: String): Unit {
@@ -155,7 +155,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func deleteBatch(keys: Array<String>): Unit {
@@ -181,7 +181,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func get(key: String): KVValueType {
@@ -208,7 +208,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func backup(file: String): Unit {
@@ -231,7 +231,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func restore(file: String): Unit {
@@ -254,7 +254,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func startTransaction(): Unit {
@@ -274,7 +274,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func commit(): Unit {
@@ -293,7 +293,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func rollback(): Unit {
@@ -313,7 +313,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * <br>2.Incorrect parameters types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func enableSync(enabled: Bool): Unit {
@@ -334,7 +334,7 @@ public open class SingleKVStore <: RemoteDataLite {
      * <br>2.Incorrect parameters types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public open func setSyncParam(defaultAllowedDelayMs: UInt32): Unit {

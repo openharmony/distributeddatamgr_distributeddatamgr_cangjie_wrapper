@@ -25,7 +25,7 @@ import ohos.business_exception.{ BusinessException, ERR_PARAMETER_ERROR }
  * Manages relational database configurations.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class RdbPredicates <: RemoteDataLite {
@@ -33,7 +33,7 @@ public class RdbPredicates <: RemoteDataLite {
      * A parameterized constructor used to create a RdbPredicates instance.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(name: String) {
@@ -51,7 +51,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func inAllDevices(): RdbPredicates {
@@ -69,7 +69,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func beginWrap(): RdbPredicates {
@@ -87,7 +87,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func endWrap(): RdbPredicates {
@@ -105,7 +105,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func or(): RdbPredicates {
@@ -123,7 +123,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @returns { RdbPredicates } - The {@link RdbPredicates} self.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func and(): RdbPredicates {
@@ -147,7 +147,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func contains(field: String, value: String): RdbPredicates {
@@ -179,7 +179,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func beginsWith(field: String, value: String): RdbPredicates {
@@ -210,7 +210,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func endsWith(field: String, value: String): RdbPredicates {
@@ -240,7 +240,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func isNull(field: String): RdbPredicates {
@@ -270,7 +270,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func isNotNull(field: String): RdbPredicates {
@@ -303,7 +303,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func like(field: String, value: String): RdbPredicates {
@@ -335,7 +335,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func glob(field: String, value: String): RdbPredicates {
@@ -365,7 +365,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func orderByAsc(field: String): RdbPredicates {
@@ -395,7 +395,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func orderByDesc(field: String): RdbPredicates {
@@ -420,7 +420,7 @@ public class RdbPredicates <: RemoteDataLite {
      * @returns { RdbPredicates } - The SQL query statement with the specified {@link RdbPredicates}.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func distinct(): RdbPredicates {
@@ -441,7 +441,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func limitAs(value: Int32): RdbPredicates {
@@ -464,7 +464,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func offsetAs(rowOffset: Int32): RdbPredicates {
@@ -485,7 +485,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func groupBy(fields: Array<String>): RdbPredicates {
@@ -525,7 +525,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func lessThanOrEqualTo(field: String, value: RelationalStoreValueType): RdbPredicates {
@@ -561,7 +561,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func equalTo(field: String, value: RelationalStoreValueType): RdbPredicates {
@@ -595,7 +595,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func greaterThanOrEqualTo(field: String, value: RelationalStoreValueType): RdbPredicates {
@@ -630,7 +630,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func greaterThan(field: String, value: RelationalStoreValueType): RdbPredicates {
@@ -665,7 +665,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func lessThan(field: String, value: RelationalStoreValueType): RdbPredicates {
@@ -701,7 +701,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func notEqualTo(field: String, value: RelationalStoreValueType): RdbPredicates {
@@ -737,7 +737,7 @@ public class RdbPredicates <: RemoteDataLite {
      * <br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func notBetween(field: String, low: RelationalStoreValueType, high: RelationalStoreValueType): RdbPredicates {
@@ -780,7 +780,7 @@ public class RdbPredicates <: RemoteDataLite {
      * unspecified;<br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func between(field: String, low: RelationalStoreValueType, high: RelationalStoreValueType): RdbPredicates {
@@ -822,7 +822,7 @@ public class RdbPredicates <: RemoteDataLite {
      * left unspecified;<br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func inValues(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
@@ -873,7 +873,7 @@ public class RdbPredicates <: RemoteDataLite {
      * left unspecified;<br>2. Incorrect parameter types.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public func notInValues(field: String, value: Array<RelationalStoreValueType>): RdbPredicates {
