@@ -177,7 +177,7 @@ let CJ_ERROR_MSG = HashMap<Int32, String>(
         (E_INNER_ERROR, "Inner error."),
         (E_DELETE_FILE_FAIL, "Failed to delete preferences file."),
         (E_GET_DATAOBSMGRCLIENT_FAIL, "Failed to obtain subscription service."),
-        (E_NOT_STAGE_MODE, "The operations is supported in stage mode only.")
+        (E_NOT_STAGE_MODE, "The operations is supported in stage mode only."),
         (E_DATA_GROUP_ID_INVALID, "The data group id is not valid.")
     ]
 )
