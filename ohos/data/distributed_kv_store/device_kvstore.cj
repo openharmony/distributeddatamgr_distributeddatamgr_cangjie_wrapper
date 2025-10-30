@@ -32,7 +32,7 @@ import ohos.business_exception.BusinessException
  * into the database, the system automatically adds the ID of the device running the application to the key.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class DeviceKVStore <: SingleKVStore {
@@ -62,7 +62,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func get(key: String): KVValueType {
@@ -101,7 +101,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getEntries(keyPrefix: String): Array<Entry> {
@@ -141,7 +141,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getEntries(query: Query): Array<Entry> {
@@ -183,7 +183,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getResultSet(keyPrefix: String): KVStoreResultSet {
@@ -223,7 +223,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getResultSet(query: Query): KVStoreResultSet {
@@ -256,7 +256,7 @@ public class DeviceKVStore <: SingleKVStore {
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getResultSize(query: Query): Int32 {

@@ -49,7 +49,7 @@ import ohos.labels.APILevel
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStore {
@@ -85,7 +85,7 @@ public func getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStor
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
@@ -118,7 +118,7 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public func deleteRdbStore(context: UIAbilityContext, config: StoreConfig): Unit {

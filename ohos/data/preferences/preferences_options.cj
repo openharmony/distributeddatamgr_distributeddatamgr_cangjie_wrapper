@@ -26,7 +26,7 @@ import std.collection.HashMap
  * the storage type
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public enum StorageType {
@@ -34,7 +34,7 @@ public enum StorageType {
      * XML storage type
      */   
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     Xml
@@ -44,7 +44,7 @@ public enum StorageType {
      * GSKV storage type
      */  
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     Gskv
@@ -56,7 +56,7 @@ public enum StorageType {
  * Enumeration implements a collection of basic data types.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public enum PreferencesValueType {
@@ -64,7 +64,7 @@ public enum PreferencesValueType {
      * Type for Int64.
      */   
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     Integer(Int64)
@@ -74,7 +74,7 @@ public enum PreferencesValueType {
      * Type for Float64.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     Double(Float64)
@@ -84,7 +84,7 @@ public enum PreferencesValueType {
      * Type for String.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     StringData(String)
@@ -94,7 +94,7 @@ public enum PreferencesValueType {
      * Type for Bool.
      */    
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     BoolData(Bool)
@@ -104,7 +104,7 @@ public enum PreferencesValueType {
      * Type for Array<Bool>.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     BoolArray(Array<Bool>)
@@ -114,7 +114,7 @@ public enum PreferencesValueType {
      * Type for Float64.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     DoubleArray(Array<Float64>)
@@ -124,7 +124,7 @@ public enum PreferencesValueType {
      * Type for Array<String>.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     StringArray(Array<String>)
@@ -135,7 +135,7 @@ public enum PreferencesValueType {
  * The Max length of key.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public const MAX_KEY_LENGTH: UInt32 = 1024
@@ -144,7 +144,7 @@ public const MAX_KEY_LENGTH: UInt32 = 1024
  * The Max length of value.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public const MAX_VALUE_LENGTH: UInt32 = 16 * 1024 * 1024
@@ -243,7 +243,7 @@ func getCJErrorCode(code: Int32): Int32 {
  * Manages preferences file configurations.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public class PreferencesOptions {
@@ -251,7 +251,7 @@ public class PreferencesOptions {
      * The preferences file name.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public var name: String
@@ -260,7 +260,7 @@ public class PreferencesOptions {
      * Application Group Id.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public var dataGroupId: String
@@ -269,7 +269,7 @@ public class PreferencesOptions {
      * The preferences storage type.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public var storageType: StorageType
@@ -278,7 +278,7 @@ public class PreferencesOptions {
      * PreferencesOptions constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public init(name: String, dataGroupId!: String = String.empty,

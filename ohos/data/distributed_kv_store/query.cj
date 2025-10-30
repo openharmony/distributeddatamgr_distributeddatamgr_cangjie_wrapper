@@ -27,7 +27,7 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData}
  * <p>This class also provides methods to add predicates to the {@code Query} instance.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class Query <: RemoteDataLite {
@@ -35,7 +35,7 @@ public class Query <: RemoteDataLite {
      * A constructor used to create a Query instance.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public init() {

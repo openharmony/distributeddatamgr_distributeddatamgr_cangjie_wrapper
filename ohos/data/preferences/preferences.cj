@@ -34,7 +34,7 @@ type StageContext = CPointer<Unit>
  * Preferences change type.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public enum PreferencesEvent {
@@ -42,7 +42,7 @@ public enum PreferencesEvent {
      * change
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     PreferencesChange
@@ -51,7 +51,7 @@ public enum PreferencesEvent {
      * multiProcessChange
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     PreferencesMultiProcessChange
@@ -70,7 +70,7 @@ public enum PreferencesEvent {
  * Provides interfaces to obtain and modify preferences data.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
 ]
 public class Preferences <: RemoteDataLite {
@@ -116,7 +116,7 @@ public class Preferences <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func getPreferences(context: UIAbilityContext, name: String): Preferences {
@@ -144,7 +144,7 @@ public class Preferences <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func getPreferences(context: UIAbilityContext, options: PreferencesOptions): Preferences {
@@ -167,7 +167,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500010 - Failed to delete the user preferences persistence file.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func deletePreferences(context: UIAbilityContext, name: String): Unit {
@@ -191,7 +191,7 @@ public class Preferences <: RemoteDataLite {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func deletePreferences(context: UIAbilityContext, options: PreferencesOptions): Unit {
@@ -233,7 +233,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, name: String): Unit {
@@ -260,7 +260,7 @@ public class Preferences <: RemoteDataLite {
     *
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, options: PreferencesOptions): Unit {
@@ -294,7 +294,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func flush(): Unit {
@@ -309,7 +309,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func clear(): Unit {
@@ -330,7 +330,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func get(key: String, defValue: PreferencesValueType): PreferencesValueType {
@@ -358,7 +358,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func put(key: String, value: PreferencesValueType): Unit {
@@ -386,7 +386,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func getAll(): HashMap<String, PreferencesValueType> {
@@ -408,7 +408,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func delete(key: String): Unit {
@@ -437,7 +437,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func has(key: String): Bool {
@@ -469,7 +469,7 @@ public class Preferences <: RemoteDataLite {
      */
 
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func on(event: PreferencesEvent, callback: Callback1Argument<String>): Unit {
@@ -511,7 +511,7 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public func off(event :PreferencesEvent, callback!: ?Callback1Argument<String> = None): Unit {

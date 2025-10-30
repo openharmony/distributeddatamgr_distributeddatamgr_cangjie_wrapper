@@ -34,7 +34,7 @@ type StageContext = CPointer<Unit>
  * Provider interfaces to create a {@link KVManager} instance.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class DistributedKVStore {
@@ -48,7 +48,7 @@ public class DistributedKVStore {
      * @throws { BusinessException } 401 - The context type is not supported. Only support UIAbilityContext.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public static func createKVManager(config: KVManagerConfig): KVManager {
@@ -73,7 +73,7 @@ public class DistributedKVStore {
  * {@code SingleKVStore}.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
 ]
 public class KVManager <: RemoteDataLite {
@@ -119,7 +119,7 @@ public class KVManager <: RemoteDataLite {
      * @throws { BusinessException } 15100003 - Database corrupted.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getKVStore<T>(storeId: String, options: KVOptions): T where T <: SingleKVStore {
@@ -144,7 +144,7 @@ public class KVManager <: RemoteDataLite {
      * <br>2.Parameter verification failed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func closeKVStore(appId: String, storeId: String): Unit {
@@ -178,7 +178,7 @@ public class KVManager <: RemoteDataLite {
      * @throws { BusinessException } 15100004 - Not found.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func deleteKVStore(appId: String, storeId: String): Unit {
@@ -208,7 +208,7 @@ public class KVManager <: RemoteDataLite {
      * <br>2.Parameter verification failed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public func getAllKVStoreId(appId: String): Array<String> {

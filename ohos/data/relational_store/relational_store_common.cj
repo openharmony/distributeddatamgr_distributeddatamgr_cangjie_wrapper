@@ -71,7 +71,7 @@ public type ValuesBucket = Map<String, RelationalStoreValueType>
  * Specifies the cryptographic parameters used when opening an encrypted database.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class CryptoParam {
@@ -80,7 +80,7 @@ public class CryptoParam {
      * When finished passing the key to the database, its content should be set to all-zero.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var encryptionKey: Array<UInt8>
@@ -91,7 +91,7 @@ public class CryptoParam {
      * When the number is set to 0, use default iteration number and encryption algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var iterationCount: Int32
@@ -101,7 +101,7 @@ public class CryptoParam {
      * Default encryption algorithm is AES_256_GCM.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var encryptionAlgo: EncryptionAlgo
@@ -111,7 +111,7 @@ public class CryptoParam {
      * Default HMAC algorithm is SHA256.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var hmacAlgo: HmacAlgo
@@ -121,7 +121,7 @@ public class CryptoParam {
      * Default KDF SHA algorithm is the same as HMAC algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var kdfAlgo: ?KdfAlgo
@@ -131,7 +131,7 @@ public class CryptoParam {
      * Default crypto page size is 1024.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var cryptoPageSize: UInt32
@@ -140,7 +140,7 @@ public class CryptoParam {
      * CryptoParam constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(encryptionKey: Array<UInt8>, iterationCount!: Int32 = 10000,
@@ -160,7 +160,7 @@ public class CryptoParam {
  * Enumerates the supported KDF algorithm when opening a database.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum KdfAlgo {
@@ -168,7 +168,7 @@ public enum KdfAlgo {
      * KDF_SHA1: PBKDF2_HMAC_SHA1 algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     KdfSha1
@@ -177,7 +177,7 @@ public enum KdfAlgo {
      * PBKDF2_HMAC_SHA256 algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     KdfSha256
@@ -186,7 +186,7 @@ public enum KdfAlgo {
      * PBKDF2_HMAC_SHA512 algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     KdfSha512
@@ -197,7 +197,7 @@ public enum KdfAlgo {
  * Enumerates the supported HMAC algorithm when opening a database.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum HmacAlgo {
@@ -205,7 +205,7 @@ public enum HmacAlgo {
      * HMAC_SHA1 algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Sha1
@@ -214,7 +214,7 @@ public enum HmacAlgo {
      * HMAC_SHA256 algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Sha256
@@ -223,7 +223,7 @@ public enum HmacAlgo {
      * HMAC_SHA512 algorithm.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Sha512
@@ -234,7 +234,7 @@ public enum HmacAlgo {
  * Enumerates the supported encryption algorithm when opening a database.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum EncryptionAlgo {
@@ -242,7 +242,7 @@ public enum EncryptionAlgo {
      * Database is encrypted using AES_256_GCM.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Aes256Gcm
@@ -251,7 +251,7 @@ public enum EncryptionAlgo {
      * Database is encrypted using AES_256_CBC.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Aes256Cbc
@@ -262,7 +262,7 @@ public enum EncryptionAlgo {
  * Enumerates the supported tokenizer when opening a database.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum Tokenizer {
@@ -270,7 +270,7 @@ public enum Tokenizer {
      * not use tokenizer.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     NoneTokenizer
@@ -279,7 +279,7 @@ public enum Tokenizer {
      * native icu tokenizer.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     IcuTokenizer
@@ -288,7 +288,7 @@ public enum Tokenizer {
      * self-developed enhance tokenizer.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     CustomTokenizer
@@ -308,7 +308,7 @@ public enum Tokenizer {
  * Describes the {@code RdbStore} type.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum RelationalStoreSecurityLevel {
@@ -317,7 +317,7 @@ public enum RelationalStoreSecurityLevel {
      * There are some low impact, when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S1
@@ -327,7 +327,7 @@ public enum RelationalStoreSecurityLevel {
      * There are some major impact, when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S2
@@ -337,7 +337,7 @@ public enum RelationalStoreSecurityLevel {
      * There are some severity impact, when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S3
@@ -347,7 +347,7 @@ public enum RelationalStoreSecurityLevel {
      * There are some critical impact, when the data is leaked.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     S4
@@ -368,7 +368,7 @@ public enum RelationalStoreSecurityLevel {
  * Describes the change type.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ChangeType {
@@ -376,7 +376,7 @@ public enum ChangeType {
      * Means the change type is data change.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     DataChange
@@ -385,7 +385,7 @@ public enum ChangeType {
      * Means the change type is asset change.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetChange
@@ -412,7 +412,7 @@ public enum ChangeType {
  * Manages relational database configurations.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class StoreConfig {
@@ -420,7 +420,7 @@ public class StoreConfig {
      * The database name.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var name: String
@@ -429,7 +429,7 @@ public class StoreConfig {
      * Specifies the security level of the database.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var securityLevel: RelationalStoreSecurityLevel
@@ -438,7 +438,7 @@ public class StoreConfig {
      * Specifies whether the database is encrypted.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var encrypt: Bool
@@ -447,7 +447,7 @@ public class StoreConfig {
      * The data group id of application.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var dataGroupId: String
@@ -456,7 +456,7 @@ public class StoreConfig {
      * Specifies the directory relative to the database directory obtained from context.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var customDir: String
@@ -465,7 +465,7 @@ public class StoreConfig {
      * Specifies the root directory relative to the database
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var rootDir: String
@@ -475,7 +475,7 @@ public class StoreConfig {
      * the local but deleted in the cloud.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     public var autoCleanDirtyData: Bool
@@ -484,7 +484,7 @@ public class StoreConfig {
      * Specifies whether database allows rebuild.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var allowRebuild: Bool
@@ -494,7 +494,7 @@ public class StoreConfig {
      * If isReadOnly is true, other configuration items will become invalid.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var isReadOnly: Bool
@@ -503,7 +503,7 @@ public class StoreConfig {
      * Indicates the names of the shared library containing fts etc.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var pluginLibs: Array<String>
@@ -512,7 +512,7 @@ public class StoreConfig {
      * Specifies the cryptographic parameters used when opening an encrypted database.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var cryptoParam: CryptoParam
@@ -521,7 +521,7 @@ public class StoreConfig {
      * Specifies whether the vector type is supported.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var vector: Bool
@@ -530,7 +530,7 @@ public class StoreConfig {
      * Specifies the tokenizer type when using fts capability.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var tokenizer: Tokenizer
@@ -539,7 +539,7 @@ public class StoreConfig {
      * Specifies whether the database need persistence.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var persist: Bool
@@ -548,7 +548,7 @@ public class StoreConfig {
      * Specifies whether the database enable the capabilities for semantic indexing processing.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var enableSemanticIndex: Bool
@@ -558,7 +558,7 @@ public class StoreConfig {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(securityLevel: RelationalStoreSecurityLevel, name!: String = "",
@@ -591,7 +591,7 @@ public class StoreConfig {
  * Describes the status of asset
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum AssetStatus {
@@ -599,7 +599,7 @@ public enum AssetStatus {
      * ASSET_NORMAL: means the status of asset is normal.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetNormal
@@ -608,7 +608,7 @@ public enum AssetStatus {
      * ASSET_INSERT: means the asset needs to be inserted.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetInsert
@@ -617,7 +617,7 @@ public enum AssetStatus {
      * ASSET_UPDATE: means the asset needs to be updated.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetUpdate
@@ -626,7 +626,7 @@ public enum AssetStatus {
      * ASSET_DELETE: means the asset needs to be deleted.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetDelete
@@ -635,7 +635,7 @@ public enum AssetStatus {
      * ASSET_ABNORMAL: means the status of asset is abnormal.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetAbnormal
@@ -644,7 +644,7 @@ public enum AssetStatus {
      * ASSET_DOWNLOADING: means the status of asset is downloading.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetDownloading
@@ -679,7 +679,7 @@ public enum AssetStatus {
  * Enumerates the field.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
 ]
 public enum Field {
@@ -687,7 +687,7 @@ public enum Field {
      * Cursor field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     CursorField
@@ -696,7 +696,7 @@ public enum Field {
      * Origin field. For details, see {@link Origin}.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     OriginField
@@ -706,7 +706,7 @@ public enum Field {
      * Indicates whether data has deleted in cloud.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     DeletedFlagField
@@ -715,7 +715,7 @@ public enum Field {
      * Owner field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     OwnerField
@@ -724,7 +724,7 @@ public enum Field {
      * Privilege field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     PrivilegeField
@@ -733,7 +733,7 @@ public enum Field {
      * Sharing resource field.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SharingResourceField
@@ -756,7 +756,7 @@ public enum Field {
  * Describes the conflict resolutions to insert data into the table.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum ConflictResolution {
@@ -764,7 +764,7 @@ public enum ConflictResolution {
      * Implements no action when conflict occurs.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictNone
@@ -773,7 +773,7 @@ public enum ConflictResolution {
      * Implements rollback operation when conflict occurs.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictRollback
@@ -782,7 +782,7 @@ public enum ConflictResolution {
      * Implements abort operation when conflict occurs.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictAbort
@@ -791,7 +791,7 @@ public enum ConflictResolution {
      * Implements fail operation when conflict occurs.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictFail
@@ -800,7 +800,7 @@ public enum ConflictResolution {
      * Implements ignore operation when conflict occurs.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictIgnore
@@ -809,7 +809,7 @@ public enum ConflictResolution {
      * Implements replace operation operator when conflict occurs.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     OnConflictReplace
@@ -832,7 +832,7 @@ public enum ConflictResolution {
  * Records information of the asset.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public class Asset {
@@ -840,7 +840,7 @@ public class Asset {
      * The name of asset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var name: String
@@ -849,7 +849,7 @@ public class Asset {
      * The uri of asset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var uri: String
@@ -858,7 +858,7 @@ public class Asset {
      * The path of asset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var path: String
@@ -867,7 +867,7 @@ public class Asset {
      * The create time of asset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var createTime: String
@@ -876,7 +876,7 @@ public class Asset {
      * The modify time of asset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var modifyTime: String
@@ -885,7 +885,7 @@ public class Asset {
      * The size of asset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var size: String
@@ -894,7 +894,7 @@ public class Asset {
      * The status of asset.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var status: AssetStatus
@@ -904,7 +904,7 @@ public class Asset {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public init(name: String, uri: String, path: String, createTime: String, modifyTime: String, size: String,
@@ -923,7 +923,7 @@ public class Asset {
  * Indicates possible value types.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum RelationalStoreValueType {
@@ -932,7 +932,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Null
@@ -942,7 +942,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Integer(Int64)
@@ -952,7 +952,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Double(Float64)
@@ -962,7 +962,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     StringValue(String)
@@ -972,7 +972,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Boolean(Bool)
@@ -982,7 +982,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Uint8Array(Array<UInt8>)
@@ -992,7 +992,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetEnum(Asset)
@@ -1002,7 +1002,7 @@ public enum RelationalStoreValueType {
      * 
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetsEnum(Array<Asset>)
@@ -1019,7 +1019,7 @@ enum DataPosition {
  * Describes the distribution type of the tables.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum DistributedType {
@@ -1027,7 +1027,7 @@ public enum DistributedType {
      * Indicates the table is distributed among the devices.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     DistributedDevice
@@ -1036,7 +1036,7 @@ public enum DistributedType {
      * Indicates the table is distributed between the cloud and the devices.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     DistributedCloud
@@ -1055,7 +1055,7 @@ public enum DistributedType {
  * Indicates the database synchronization mode.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SyncMode {
@@ -1063,7 +1063,7 @@ public enum SyncMode {
      * Indicates the data is pushed to remote device from local device.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncModePush
@@ -1072,7 +1072,7 @@ public enum SyncMode {
      * Indicates the data is pulled from remote device to local device.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncModePull
@@ -1081,7 +1081,7 @@ public enum SyncMode {
      * Indicates the data is pulled from remote device to local device.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SyncModeTimeFirst
@@ -1090,7 +1090,7 @@ public enum SyncMode {
      * Indicates force push the native data to the cloud.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SyncModeNativeFirst
@@ -1099,7 +1099,7 @@ public enum SyncMode {
      * Indicates the data is pulled from cloud to local device.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SyncModeCloudFirst
@@ -1121,7 +1121,7 @@ public enum SyncMode {
  * The cloud sync progress.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum Progress {
@@ -1129,7 +1129,7 @@ public enum Progress {
      * ISYNC_BEGIN: means the sync process begin.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncBegin
@@ -1138,7 +1138,7 @@ public enum Progress {
      * SYNC_BEGIN: means the sync process is in progress.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncInProgress
@@ -1147,7 +1147,7 @@ public enum Progress {
      * SYNC_BEGIN: means the sync process is finished.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SyncFinish
@@ -1176,7 +1176,7 @@ public enum Progress {
  * Describes the subscription type.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
 ]
 public enum SubscribeType {
@@ -1184,7 +1184,7 @@ public enum SubscribeType {
      * Subscription to remote data changes.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     SubscribeTypeRemote
@@ -1193,7 +1193,7 @@ public enum SubscribeType {
      * Subscription to cloud data changes.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SubscribeTypeCloud
@@ -1202,7 +1202,7 @@ public enum SubscribeType {
      * Subscription to cloud data changes details.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SubscribeTypeCloudDetails
@@ -1222,7 +1222,7 @@ public enum SubscribeType {
  * Describes the data origin sources.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
 ]
 public enum Origin {
@@ -1230,7 +1230,7 @@ public enum Origin {
      * Indicates the data source is local.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     Local
@@ -1239,7 +1239,7 @@ public enum Origin {
      * Indicates the data source is cloud.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     Cloud
@@ -1248,7 +1248,7 @@ public enum Origin {
      * Indicates the data source is remote.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     Remote

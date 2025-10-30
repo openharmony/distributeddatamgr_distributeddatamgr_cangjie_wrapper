@@ -41,7 +41,7 @@ private func createDataSharePredicates(): Int64 {
  * Manages relational database configurations.
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
 public class DataSharePredicates <: RemoteDataLite {
@@ -49,7 +49,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * DataSharePredicates constructor.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public init() {
@@ -72,7 +72,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func equalTo(field: String, value: VBValueType): DataSharePredicates {
@@ -101,7 +101,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func and(): DataSharePredicates {
@@ -122,7 +122,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func orderByAsc(field: String): DataSharePredicates {
@@ -149,7 +149,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func orderByDesc(field: String): DataSharePredicates {
@@ -177,7 +177,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func limit(total: Int32, offset: Int32): DataSharePredicates {
@@ -204,7 +204,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     public func inValues(field: String, value: Array<VBValueType>): DataSharePredicates {
