@@ -69,6 +69,11 @@ public class DeviceKVStore <: SingleKVStore {
         return get("", key)
     }
 
+    /**
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100004 - Not found.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     */
     func get(deviceId: String, key: String): KVValueType {
         unsafe {
             var result = KVValueType.Integer(0)
@@ -108,6 +113,10 @@ public class DeviceKVStore <: SingleKVStore {
         return getEntries("", keyPrefix)
     }
 
+    /**
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     */
     func getEntries(deviceId: String, keyPrefix: String): Array<Entry> {
         unsafe {
             var entries = Array<Entry>()
@@ -148,6 +157,10 @@ public class DeviceKVStore <: SingleKVStore {
         return getEntries("", query)
     }
 
+    /**
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     */
     func getEntries(deviceId: String, query: Query): Array<Entry> {
         unsafe {
             let cDeviceId = LibC.mallocCString(deviceId)
@@ -190,6 +203,11 @@ public class DeviceKVStore <: SingleKVStore {
         return getResultSet("", keyPrefix)
     }
 
+    /**
+     * @throws { BusinessException } 15100001 - Over max limits.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     */
     func getResultSet(deviceId: String, keyPrefix: String): KVStoreResultSet {
         unsafe {
             var resultSetId = 0
@@ -230,6 +248,11 @@ public class DeviceKVStore <: SingleKVStore {
         return getResultSet("", query)
     }
 
+    /**
+     * @throws { BusinessException } 15100001 - Over max limits.
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     */
     func getResultSet(deviceId: String, query: Query): KVStoreResultSet {
         unsafe {
             let cDeviceId = LibC.mallocCString(deviceId)
@@ -263,6 +286,10 @@ public class DeviceKVStore <: SingleKVStore {
         return getResultSize("", query)
     }
 
+    /**
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     * @throws { BusinessException } 15100005 - Database or result set already closed.
+     */
     func getResultSize(deviceId: String, query: Query): Int32 {
         unsafe {
             let cDeviceId = LibC.mallocCString(deviceId)

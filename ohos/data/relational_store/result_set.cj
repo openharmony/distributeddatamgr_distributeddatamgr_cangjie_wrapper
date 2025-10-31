@@ -712,7 +712,7 @@ public class ResultSet <: RemoteDataLite {
             let assets = FfiOHOSRelationalStoreGetAssets(getID(), columnIndex, inout errCode)
             var result = Array<Asset>()
             if (assets.size == -1) {
-                throw Exception("Failed malloc in C code!")
+                throw BusinessException(14800026, "Failed malloc in C code!")
             }
             if (assets.head.isNotNull()) {
                 let ptr = assets.head
@@ -856,7 +856,7 @@ public class ResultSet <: RemoteDataLite {
             let arr = FfiOHOSRelationalStoreGetBlob(getID(), columnIndex, inout errCode)
             var result = Array<UInt8>()
             if (arr.size == -1) {
-                throw Exception("Failed malloc in C code!")
+                throw BusinessException(14800026, "Failed malloc in C code!")
             }
             if (arr.head.isNotNull()) {
                 let ptr = arr.head

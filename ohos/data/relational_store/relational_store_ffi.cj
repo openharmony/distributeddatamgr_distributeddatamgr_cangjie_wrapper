@@ -534,36 +534,45 @@ struct RetValueType {
     }
 }
 
+/*
+ * @throws { BusinessException } 14800000 - Inner error.
+ */
 func convert(value: RetValueType): RelationalStoreValueType {
     unsafe {
         let tag = value.tag
-        let integer = value.integer
-        let double = value.double
-        let string = value.string
-        let boolean = value.boolean
-        let uint8Array = value.Uint8Array.head
-        let uint8ArrSize = value.Uint8Array.size
-        let asset = value.asset
-        let assets = value.assets.head
-        let assetsSize = value.assets.size
         match (tag) {
-            case 0 => RelationalStoreValueType.Null
-            case 1 => RelationalStoreValueType.Integer(integer)
-            case 2 => RelationalStoreValueType.Double(double)
-            case 3 => RelationalStoreValueType.StringValue(CString(string).toString())
-            case 4 => RelationalStoreValueType.Boolean(boolean)
+            case 0 =>
+                RelationalStoreValueType.Null
+            case 1 =>
+                let integer = value.integer
+                RelationalStoreValueType.Integer(integer)
+            case 2 =>
+                let double = value.double
+                RelationalStoreValueType.Double(double)
+            case 3 =>
+                let string = value.string
+                RelationalStoreValueType.StringValue(CString(string).toString())
+            case 4 =>
+                let boolean = value.boolean
+                RelationalStoreValueType.Boolean(boolean)
             case 5 =>
+                let uint8Array = value.Uint8Array.head
+                let uint8ArrSize = value.Uint8Array.size
                 if (uint8Array.isNull()) {
                     return RelationalStoreValueType.Uint8Array(Array<UInt8>())
                 }
                 return RelationalStoreValueType.Uint8Array(Array<UInt8>(uint8ArrSize, {i => uint8Array.read(i)}))
-            case 6 => RelationalStoreValueType.AssetEnum(convert(asset))
+            case 6 =>
+                let asset = value.asset
+                RelationalStoreValueType.AssetEnum(convert(asset))
             case 7 =>
+                let assets = value.assets.head
+                let assetsSize = value.assets.size
                 if (assets.isNull()) {
                     return RelationalStoreValueType.AssetsEnum(Array<Asset>())
                 }
                 RelationalStoreValueType.AssetsEnum(Array<Asset>(assetsSize, {i => convert(assets.read(i))}))
-            case _ => throw Exception("Unknown error.")
+            case _ => throw BusinessException(14800000, "Inner error.")
         }
     }
 }

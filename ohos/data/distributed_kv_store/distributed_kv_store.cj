@@ -69,8 +69,8 @@ public class DistributedKVStore {
 }
 
 /**
- * Provides interfaces to manage a {@code SingleKVStore} database, including obtaining, closing, and deleting the
- * {@code SingleKVStore}.
+ * Provides interfaces to manage a SingleKVStore database, including obtaining, closing, and deleting the
+ * SingleKVStore.
  */
 @!APILevel[
     since: "22",
@@ -87,6 +87,9 @@ public class KVManager <: RemoteDataLite {
         releaseFFIData(myDataId)
     }
 
+    /*
+     * @throws { BusinessException } 15100003 - Database corrupted.
+     */
     static func getKVStoreId(id: Int64 ,storeId: String, options: KVOptions, kVStoreType: KVStoreType): Int64 {
         unsafe {
             var codeId = 0

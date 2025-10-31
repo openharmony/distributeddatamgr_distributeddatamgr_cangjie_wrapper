@@ -20,8 +20,6 @@ package ohos.data.data_share_predicates
 import ohos.hilog.HilogChannel
 import ohos.business_exception.{BusinessException, getUniversalErrorMsg}
 
-const SUCCESS_CODE: Int32 = 0
-const MEMORY_ERROR: Int32 = -1
 let LOG = HilogChannel(0, 0xD001651, "CJ-dataSharePredicates")
 
 func getErrorMsg(code: Int32): String {
@@ -33,8 +31,8 @@ func getErrorMsg(code: Int32): String {
 }
 
 func throwIfNotSuccess(code: Int32): Unit {
-    if (code != SUCCESS_CODE) {
-        if (code == MEMORY_ERROR) {
+    if (code != 0) {
+        if (code == -1) {
             throw BusinessException(16000050, "Internal error.")
         }
         throw BusinessException(code, getErrorMsg(code))
