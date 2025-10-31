@@ -207,6 +207,9 @@ func isInErrCodeMap(code: Int32): Bool {
     }
 }
 
+/*
+ * @throws { BusinessException } 15501002 - The data group id is not valid.
+ */
 func checkCodeAndThrow(errCode: Int32, funcName: String) {
     if (!isInErrCodeMap(errCode)) {
         PREFERENCES_LOG.error("Preferences ${funcName} failed: ${getCJErrorMsg(E_DATA_GROUP_ID_INVALID)} code: ${getCJErrorCode(E_DATA_GROUP_ID_INVALID)}")
