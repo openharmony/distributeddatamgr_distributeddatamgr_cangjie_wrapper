@@ -87,12 +87,10 @@ public class Preferences <: RemoteDataLite {
                     var errCode = 0i32
                     codeId = FfiOHOSPreferencesGetPreferences(context, cName.value, cDataGroupId.value, inout errCode)
                     if (errCode != SUCCESS_CODE) {
-                        checkCodeAndThrow(errCode, "getPreferences")
                         PREFERENCES_LOG.error(
                             "Preferences getPreferences failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
                         )
-                        throw BusinessException(getCJErrorCode(errCode),
-                            "Preferences getPreferences failed: ${getCJErrorMsg(errCode)}")
+                        checkCodeAndThrow(errCode, "getPreferences")
                     }
                 }
                 codeId
@@ -522,6 +520,9 @@ public class Preferences <: RemoteDataLite {
         }
     }
 
+    /*
+     * @throws { BusinessException } 15500000 - Inner error.
+     */
     func offImpl(tp: String, callback: Callback1Argument<String>): Unit {
         checkType(tp)
         let funcId = Box<Int64>(0)
@@ -552,6 +553,9 @@ public class Preferences <: RemoteDataLite {
         }
     }
 
+    /*
+     * @throws { BusinessException } 15500000 - Inner error.
+     */
     func offImpl(tp: String): Unit {
         checkType(tp)
         unsafe {

@@ -31,7 +31,6 @@ import ohos.business_exception.{BusinessException, ERR_PARAMETER_ERROR}
 private func createDataSharePredicates(): Int64 {
     let id = unsafe { FfiOHOSDataSharePredicatesCreateDataSharePredicates() }
     if (id < 0) {
-        LOG.error("DataSharePredicates init failed: ${getErrorMsg(MEMORY_ERROR)}")
         throw BusinessException(16000050, "Internal error.")
     }
     return id

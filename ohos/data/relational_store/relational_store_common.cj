@@ -399,6 +399,9 @@ public enum ChangeType {
         }
     }
 
+    /*
+     * @throws { BusinessException } 14800000 - Invalid instance.
+     */
     static func parse(val: Int32): ChangeType {
         match (val) {
             case 0 => DataChange
@@ -662,6 +665,9 @@ public enum AssetStatus {
         }
     }
 
+    /*
+     * @throws { BusinessException } 14800000 - Invalid instance.
+     */
     static func parse(val: Int32): AssetStatus {
         match (val) {
             case 1 => AssetNormal
@@ -1162,6 +1168,9 @@ public enum Progress {
         }
     }
 
+    /*
+     * @throws { BusinessException } 14800000 - Invalid instance.
+     */
     static func parse(val: Int32): Progress {
         match (val) {
             case 0 => SyncBegin
@@ -1346,6 +1355,9 @@ func freeValuesBucketArray(arr: CPointer<CValuesBucket>, i: Int64): Unit {
     }
 }
 
+/*
+ * @throws { BusinessException } 14800000 - Invalid instance.
+ */
 func createFieldValue(field: String, value: String, funcName: String): (CString, CString) {
     let cfield = mallocCString(field)
     let cvalue = mallocCString(value)
