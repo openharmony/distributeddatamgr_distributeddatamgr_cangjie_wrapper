@@ -19,8 +19,9 @@ package ohos.data.relational_store
 
 import ohos.ffi.SUCCESS_CODE
 import ohos.hilog.HilogChannel
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import std.collection.{HashMap, Map}
+import std.math.numeric.BigInt
 import ohos.business_exception.{ BusinessException, UNIVERSAL_ERROR_MAP, getUniversalErrorMsg}
 
 const UINT64_MAX: UInt64 = 0xffff_ffff_ffff_ffff
@@ -255,6 +256,9 @@ public enum EncryptionAlgo {
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     Aes256Cbc
+    |
+    @!Hide
+    PlainText
     | ...
 }
 
@@ -480,6 +484,9 @@ public class StoreConfig {
     ]
     public var autoCleanDirtyData: Bool
 
+    @!Hide
+    internal var isSearchable: Bool = true
+
     /**
      * Specifies whether database allows rebuild.
      */
@@ -507,6 +514,9 @@ public class StoreConfig {
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var pluginLibs: Array<String>
+
+    @!Hide
+    internal var haMode: HAMode = HAMode.Single
 
     /**
      * Specifies the cryptographic parameters used when opening an encrypted database.
@@ -710,6 +720,9 @@ public enum Field {
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     DeletedFlagField
+    |
+    @!Hide
+    DataStatusField
     |
     /**
      * Owner field.
@@ -1006,6 +1019,12 @@ public enum RelationalStoreValueType {
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     AssetsEnum(Array<Asset>)
+    |
+    @!Hide
+    Float32Array(Array<Float32>)
+    |
+    @!Hide
+    BigIntValue(BigInt)
     | ...
 }
 
@@ -1206,6 +1225,9 @@ public enum SubscribeType {
         syscap: "SystemCapability.DistributedDataManager.CloudSync.Client"
     ]
     SubscribeTypeCloudDetails
+    |
+    @!Hide
+    SubscribeTypeLocalDetails
     | ...
 
     func getValue(): Int32 {
@@ -1397,4 +1419,15 @@ func throwIfOOM(isOOM: Bool, className: String, funcName: String, handler: () ->
         throw BusinessException(getErrorCode(MEMORY_ERROR),
             "${className} ${funcName} failed: ${getErrorMsg(MEMORY_ERROR)}")
     }
+}
+
+@!Hide
+enum HAMode {
+    @!Hide
+    Single
+    |
+
+    @!Hide
+    MainReplica
+    | ...
 }
