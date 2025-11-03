@@ -164,6 +164,7 @@ class Test_distributed_kv_store_error {
         } catch (e: BusinessException) {
             @Expect(e.code, 401)
         }
+        kvManager.deleteKVStore(bundleName, kvstoreName)
     }
 
     @TestCase
@@ -178,6 +179,7 @@ class Test_distributed_kv_store_error {
         } catch (e: BusinessException) {
             @Expect(e.code, 401)
         }
+        kvManager.deleteKVStore(bundleName, kvstoreName)
     }
 
     @TestCase

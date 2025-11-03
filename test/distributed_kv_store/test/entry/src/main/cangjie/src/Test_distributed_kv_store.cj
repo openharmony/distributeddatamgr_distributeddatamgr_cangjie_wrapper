@@ -327,7 +327,7 @@ class Test_distributed_kv_store {
     func test_Valuetype() {
         let kvstoreName = "myStoreId"
         let opt = KVOptions(KVSecurityLevel.S4,)
-        let kvStore = kvManager.getKVStore<DeviceKVStore>("myStoreId", opt)
+        let kvStore = kvManager.getKVStore<DeviceKVStore>(kvstoreName, opt)
         kvStore.put("myKey01", KVValueType.StringValue("myValue"))
         kvStore.put("myKey02", KVValueType.Integer(123))
         kvStore.put("myKey03", KVValueType.Float(123.45))
@@ -336,6 +336,8 @@ class Test_distributed_kv_store {
         kvStore.put("myKey06", KVValueType.ByteArray([1, 2, 3]))
         let resultSet = kvStore.getResultSet("myKey")
         @Expect(resultSet.getCount(), 6)
+        let arr = kvStore.getEntries(Query())
+        @Expect(arr.size, 6)
         var key1 = kvStore.get("myKey01")
         var key2 = kvStore.get("myKey02")
         var key3 = kvStore.get("myKey03")
@@ -343,16 +345,21 @@ class Test_distributed_kv_store {
         var key5 = kvStore.get("myKey05")
         var key6 = kvStore.get("myKey06")
         kvManager.closeKVStore(bundleName, kvstoreName)
-        kvManager.deleteKVStore(bundleName, kvstoreName)
+        try {
+            kvManager.deleteKVStore(bundleName, kvstoreName)
+        } catch (e: BusinessException) {
+            Hilog.error(0, "test", "deleteKVStore error ${e}")
+        }
     }
 
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_DeviceKVStore_getEntries_query() {
-        let kvstoreName = "myStoreId"
+        let kvstoreName = "myStoreId11"
         let opt = KVOptions(KVSecurityLevel.S4,)
-        let kvStore = kvManager.getKVStore<DeviceKVStore>("myStoreId", opt)
-        kvStore.getEntries(Query())
+        let kvStore = kvManager.getKVStore<DeviceKVStore>(kvstoreName, opt)
+        let arr = kvStore.getEntries(Query())
+        @Expect(arr.size, 0)
         kvManager.closeKVStore(bundleName, kvstoreName)
         kvManager.deleteKVStore(bundleName, kvstoreName)
     }
@@ -360,9 +367,9 @@ class Test_distributed_kv_store {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_DeviceKVStore_getResultSize_query() {
-        let kvstoreName = "myStoreId"
+        let kvstoreName = "myStoreId12"
         let opt = KVOptions(KVSecurityLevel.S4,)
-        let kvStore = kvManager.getKVStore<DeviceKVStore>("myStoreId", opt)
+        let kvStore = kvManager.getKVStore<DeviceKVStore>(kvstoreName, opt)
         try {
             kvStore.getResultSize(Query())
         } catch (e: BusinessException) {
