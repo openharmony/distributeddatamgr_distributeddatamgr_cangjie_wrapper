@@ -29,6 +29,8 @@ ohos_cangjie_shared_library("ohos.data.distributed_kv_store") {
 
   external_deps = [ "kv_store:cj_distributed_kv_store_ffi" ]
 
+  cj_deps = [ "../data_share_predicates:ohos.data.data_share_predicates" ]
+
   cj_external_deps = [
     "ability_cangjie_wrapper:ohos.app.ability",
     "ability_cangjie_wrapper:ohos.app.ability.ui_ability",
