@@ -18,11 +18,14 @@
 package ohos.data.distributed_kv_store
 
 import std.sync.Mutex
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 import std.collection.ArrayList
 import ohos.ffi.{releaseFFIData, RemoteDataLite, SUCCESS_CODE, toArrayCString}
 import ohos.business_exception.BusinessException
 import ohos.callback_invoke.CallbackObject
+import ohos.data.data_share_predicates.DataSharePredicates
+import std.collection.HashMap
+import ohos.callback_invoke.{ Callback1Argument, CallbackObject }
 
 class SingleKVStoreFinalizer {
     SingleKVStoreFinalizer(let id: Int64) {}
@@ -118,6 +121,9 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
+    @!Hide
+    public open func putBatch(value: Array<HashMap<String, KVValueType>>): Unit {}
+
     /**
      * Deletes the key-value pair based on a specified key.
      *
@@ -144,6 +150,9 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
+    @!Hide
+    public open func delete(predicates: DataSharePredicates): Unit {}
+
     /**
      * Deletes key-value pairs in batches from the {@code SingleKVStore} database.
      *
@@ -169,6 +178,9 @@ public open class SingleKVStore <: RemoteDataLite {
             }
         }
     }
+
+    @!Hide
+    public open func removeDeviceData(deviceId: String): Unit {}
 
     /**
      * Obtains the value of a specified key.
@@ -198,6 +210,39 @@ public open class SingleKVStore <: RemoteDataLite {
             }
             return result
         }
+    }
+
+    @!Hide
+    public open func getEntries(keyPrefix: String): Array<Entry> {
+        throw Exception()
+    }
+
+    @!Hide
+    public open func getEntries(query: Query): Array<Entry> {
+        throw Exception()
+    }
+
+    @!Hide
+    public open func getResultSet(keyPrefix: String): KVStoreResultSet {
+        throw Exception()
+    }
+
+    @!Hide
+    public open func getResultSet(query: Query): KVStoreResultSet {
+        throw Exception()
+    }
+
+    @!Hide
+    public open func getResultSet(predicates: DataSharePredicates): KVStoreResultSet {
+        throw Exception()
+    }
+
+    @!Hide
+    public open func closeResultSet(resultSet: KVStoreResultSet): Unit {}
+
+    @!Hide
+    public open func getResultSize(query: Query): Int32 {
+        throw Exception()
     }
 
     /**
@@ -244,6 +289,11 @@ public open class SingleKVStore <: RemoteDataLite {
                 throw BusinessException(getErrorCode(errCode), "KVStore restore failed: ${getErrorMsg(errCode)}")
             }
         }
+    }
+
+    @!Hide
+    public open func deleteBackup(files: Array<String>): Array<(String, Int32)> {
+        throw Exception()
     }
 
     /**
@@ -346,4 +396,74 @@ public open class SingleKVStore <: RemoteDataLite {
             }
         }
     }
+
+    @!Hide
+    public open func sync(deviceIds: Array<String>, mode: SyncMode): Unit {}
+
+    @!Hide
+    public open func sync(deviceIds: Array<String>, mode: SyncMode, delayMs: Int32): Unit {}
+
+    @!Hide
+    public open func sync(deviceIds: Array<String>, query: Query, mode: SyncMode): Unit {}
+
+    @!Hide
+    public open func sync(deviceIds: Array<String>, query: Query, mode: SyncMode, delayMs: Int32): Unit {}
+
+    @!Hide
+    public open func on(event: KVStoreEvent, `type`: SubscribeType, listener: Callback1Argument<ChangeNotification>): Unit {}
+
+    @!Hide
+    public open func on(event: KVStoreEvent, syncCallback: Callback1Argument<Array<(String, Int32)>>): Unit {}
+
+    @!Hide
+    public open func off(event: KVStoreEvent, listener: CallbackObject): Unit {}
+
+    @!Hide
+    public open func off(event: KVStoreEvent): Unit {}
+
+    @!Hide
+    public open func getSecurityLevel(): KVSecurityLevel {
+        throw Exception()
+    }
+}
+
+@!Hide
+public enum KVStoreEvent {
+    @!Hide
+    DataChange
+    |
+    @!Hide
+    SyncComplete
+    | ...
+}
+
+@!Hide
+public enum SyncMode {
+    @!Hide
+    PullOnly
+    |
+    @!Hide
+    PushOnly
+    |
+    @!Hide
+    PushPull
+    | ...
+}
+
+@!Hide
+public enum SubscribeType {
+    @!Hide
+    SubscribeTypeLocal
+    |
+    @!Hide
+    SubscribeTypeRemote
+    |
+    @!Hide
+    SubscribeTypeAll
+    | ...
+}
+
+@!Hide
+public class ChangeNotification {
+    init() {}
 }
