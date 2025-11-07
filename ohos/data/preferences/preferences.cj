@@ -365,13 +365,7 @@ public class Preferences <: RemoteDataLite {
                 let cValue = CPreferencesValueType(value)
                 let errCode = FfiOHOSPreferencesPut(getID(), cKey.value, cValue)
                 cValue.free()
-                if (errCode != SUCCESS_CODE) {
-                    PREFERENCES_LOG.error(
-                        "Preferences put failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
-                    )
-                    throw BusinessException(getCJErrorCode(errCode), "Preferences put failed: ${getCJErrorMsg(errCode)}"
-                    )
-                }
+                throwIfNotSuccess(errCode)
             }
         }
     }
@@ -413,13 +407,7 @@ public class Preferences <: RemoteDataLite {
         unsafe {
             try (cKey = LibC.mallocCString(key).asResource()) {
                 let errCode = FfiOHOSPreferencesDelete(getID(), cKey.value)
-                if (errCode != SUCCESS_CODE) {
-                    PREFERENCES_LOG.error(
-                        "Preferences delete failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
-                    )
-                    throw BusinessException(getCJErrorCode(errCode),
-                        "Preferences delete failed: ${getCJErrorMsg(errCode)}")
-                }
+                throwIfNotSuccess(errCode)
             }
         }
     }
@@ -485,13 +473,7 @@ public class Preferences <: RemoteDataLite {
                 let lambdaData = Callback1Param<CString, Unit>(wrapper)
                 try (ctp = LibC.mallocCString(tp).asResource()) {
                     let errCode = FfiOHOSPreferencesOn(getID(), ctp.value, lambdaData.getID())
-                    if (errCode != SUCCESS_CODE) {
-                        PREFERENCES_LOG.error(
-                            "Preferences on failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
-                        )
-                        throw BusinessException(getCJErrorCode(errCode),
-                            "Preferences on failed: ${getCJErrorMsg(errCode)}")
-                    }
+                    throwIfNotSuccess(errCode)
                     callbackList.add((callback, lambdaData.getID()))
                 }
             }
@@ -542,13 +524,7 @@ public class Preferences <: RemoteDataLite {
         unsafe {
             try (ctp = LibC.mallocCString(tp).asResource()) {
                 let errCode = FfiOHOSPreferencesOff(getID(), ctp.value, funcId.value)
-                if (errCode != SUCCESS_CODE) {
-                    PREFERENCES_LOG.error(
-                        "Preferences off failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
-                    )
-                    throw BusinessException(getCJErrorCode(errCode), "Preferences off failed: ${getCJErrorMsg(errCode)}"
-                    )
-                }
+                throwIfNotSuccess(errCode)
             }
         }
     }
@@ -561,17 +537,20 @@ public class Preferences <: RemoteDataLite {
         unsafe {
             try (ctp = LibC.mallocCString(tp).asResource()) {
                 let errCode = FfiOHOSPreferencesOffAll(getID(), ctp.value)
-                if (errCode != SUCCESS_CODE) {
-                    PREFERENCES_LOG.error(
-                        "Preferences off failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
-                    )
-                    throw BusinessException(getCJErrorCode(errCode), "Preferences off failed: ${getCJErrorMsg(errCode)}"
-                    )
-                }
+                throwIfNotSuccess(errCode)
             }
         }
         synchronized(onOffMutex) {
             callbackList.clear()
         }
+    }
+}
+
+func throwIfNotSuccess(code: Int32): Unit {
+    if (errCode != SUCCESS_CODE) {
+        PREFERENCES_LOG.error(
+            "Preferences on failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
+        )
+        throw BusinessException(getCJErrorCode(errCode), "Preferences on failed: ${getCJErrorMsg(errCode)}")
     }
 }

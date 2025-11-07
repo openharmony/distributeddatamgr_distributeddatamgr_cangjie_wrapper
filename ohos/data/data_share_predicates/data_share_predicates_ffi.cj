@@ -40,3 +40,14 @@ foreign {
 
     func FfiOHOSDataSharePredicatesEndWrap(id: Int64): Int32
 }
+
+func free(cValuesArray: CPointer<CValueType>) {
+    unsafe {
+       if (!cValuesArray.isNull()) {
+            for (i in 0..valuesSize) {
+                cValuesArray.read(i).free()
+            }
+            LibC.free<CValueType>(cValuesArray)
+        } 
+    }
+}
