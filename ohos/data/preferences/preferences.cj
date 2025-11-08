@@ -546,7 +546,7 @@ public class Preferences <: RemoteDataLite {
     }
 }
 
-func throwIfNotSuccess(code: Int32): Unit {
+func throwIfNotSuccess(errCode: Int32): Unit {
     if (errCode != SUCCESS_CODE) {
         PREFERENCES_LOG.error(
             "Preferences failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
