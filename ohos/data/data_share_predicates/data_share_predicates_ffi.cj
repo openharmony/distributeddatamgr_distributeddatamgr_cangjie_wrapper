@@ -41,7 +41,7 @@ foreign {
     func FfiOHOSDataSharePredicatesEndWrap(id: Int64): Int32
 }
 
-func free(cValuesArray: CPointer<CValueType>) {
+func free(cValuesArray: CPointer<CValueType>, valuesSize: Int64) {
     unsafe {
        if (!cValuesArray.isNull()) {
             for (i in 0..valuesSize) {

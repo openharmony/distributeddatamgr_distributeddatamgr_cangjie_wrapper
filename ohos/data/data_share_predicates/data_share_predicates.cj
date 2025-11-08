@@ -233,7 +233,7 @@ public class DataSharePredicates <: RemoteDataLite {
                 let code = FfiOHOSDataSharePredicatesIn(getID(), cFieldR.value, cValuesArray, valuesSize)
                 throwIfNotSuccess(code)
             } finally {
-                free(cValuesArray)
+                free(cValuesArray, valuesSize)
             }
         }
         return this
