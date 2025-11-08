@@ -549,8 +549,8 @@ public class Preferences <: RemoteDataLite {
 func throwIfNotSuccess(code: Int32): Unit {
     if (errCode != SUCCESS_CODE) {
         PREFERENCES_LOG.error(
-            "Preferences on failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
+            "Preferences failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
         )
-        throw BusinessException(getCJErrorCode(errCode), "Preferences on failed: ${getCJErrorMsg(errCode)}")
+        throw BusinessException(getCJErrorCode(errCode), "Preferences failed: ${getCJErrorMsg(errCode)}")
     }
 }
