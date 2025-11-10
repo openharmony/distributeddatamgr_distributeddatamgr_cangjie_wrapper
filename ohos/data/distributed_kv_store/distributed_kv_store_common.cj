@@ -162,15 +162,6 @@ public enum KVValueType {
 ]
 public class KVManagerConfig {
     /**
-     * Indicates the ability or hap context
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
-    ]
-    public var context: BaseContext
-
-    /**
      * Indicates the bundleName
      */
     @!APILevel[
@@ -178,6 +169,15 @@ public class KVManagerConfig {
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var bundleName: String
+
+    /**
+     * Indicates the ability or hap context
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+    ]
+    public var context: BaseContext
 
     /**
      * KVManagerConfig constructor.
@@ -288,15 +288,6 @@ public enum KVSecurityLevel {
 ]
 public class FieldNode {
     /**
-     * Indicates the nullable of database field.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
-    ]
-    public var nullable: Bool
-
-    /**
      * Indicates the default value of field node.
      */
     @!APILevel[
@@ -304,6 +295,15 @@ public class FieldNode {
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public var default: String
+
+    /**
+     * Indicates the nullable of database field.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
+    ]
+    public var nullable: Bool
 
     /**
      * Indicates the type of value.

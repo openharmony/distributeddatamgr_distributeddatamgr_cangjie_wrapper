@@ -376,6 +376,9 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
+    @!Hide
+    public open func setSyncRange(localLabels: Array<String>, remoteSupportLabels: Array<String>): Unit {}
+
     /**
      * Sets synchronization range labels.
      * <p>The labels determine the devices with which data will be synchronized.

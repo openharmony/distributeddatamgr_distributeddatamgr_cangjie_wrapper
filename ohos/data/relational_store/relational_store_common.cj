@@ -500,6 +500,15 @@ public class StoreConfig {
     public var allowRebuild: Bool
 
     /**
+     * Specifies whether the vector type is supported.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
+    ]
+    public var vector: Bool
+
+    /**
      * Specifies whether the database opened is read-only.
      * If isReadOnly is true, other configuration items will become invalid.
      */
@@ -529,15 +538,6 @@ public class StoreConfig {
         syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
     ]
     public var cryptoParam: CryptoParam
-
-    /**
-     * Specifies whether the vector type is supported.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.DistributedDataManager.RelationalStore.Core"
-    ]
-    public var vector: Bool
 
     /**
      * Specifies the tokenizer type when using fts capability.
