@@ -39,7 +39,7 @@ type StageContext = CPointer<Unit>
 ]
 public enum PreferencesEvent {
     /**
-     * change
+     * PreferencesEvent change enum instance
      */
     @!APILevel[
         since: "22",
@@ -48,7 +48,7 @@ public enum PreferencesEvent {
     PreferencesChange
     |
     /**
-     * multiProcessChange
+     * PreferencesEvent multiProcessChange enum instance
      */
     @!APILevel[
         since: "22",
@@ -68,6 +68,10 @@ public enum PreferencesEvent {
 
 /**
  * Provides interfaces to obtain and modify preferences data.
+ * The preferences data is stored in a file, which matches only one Preferences instance in the memory.
+ * You can use getPreferences to obtain the Preferences instance matching
+ * the file that stores preferences data, and use movePreferencesFromCache
+ * to remove the Preferences instance from the memory.
  */
 @!APILevel[
     since: "22",
@@ -102,20 +106,20 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Obtains a {@link Preferences} instance matching a specified preferences file name.
+     * Obtains a Preferences instance matching a specified preferences file name.
+     * The Preferences instance loads all data of the preferences file and
+     * resides in the memory. You can use removePreferencesFromCache to remove the instance from the memory.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
      * @param { String } name - Indicates the preferences file name.
-     * @returns { Preferences } Returns the Preferences instance.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
+     * @returns { Preferences } The Preferences instance matching the specified preferences file name.
      * @throws { BusinessException } 15500000 - Inner error.
-     *
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func getPreferences(context: UIAbilityContext, name: String): Preferences {
         let stageContext = getStageContext(context)
@@ -126,24 +130,24 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Obtains a {@link Preferences} instance matching a specified preferences file name.
+     * Obtains a Preferences instance matching a specified preferences file name.
+     * The Preferences instance loads all data of the preferences file and
+     * resides in the memory. You can use removePreferencesFromCache to remove the instance from the memory.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
-     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences
+     * @param { PreferencesOptions } options - Indicates the PreferencesOptions option of preferences
      * file position.
-     * @returns { Preferences } Returns the Preferences instance.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
+     * @returns { Preferences } The Preferences instance matching the specified preferences file name.
      * @throws { BusinessException } 801 - Capability not supported.
      * @throws { BusinessException } 15500000 - Inner error.
      * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
      * @throws { BusinessException } 15501002 - Invalid dataGroupId.
-     *
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func getPreferences(context: UIAbilityContext, options: PreferencesOptions): Preferences {
         let stageContext = getStageContext(context)
@@ -154,43 +158,50 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Deletes a {@link Preferences} instance matching a specified preferences file name.
+     * Deletes a Preferences instance matching a specified preferences file name
+     * from the cache which is performed by removePreferencesFromCache and deletes the
+     * preferences file.
+     * When deleting the Preferences instance, you must release all references
+     * of the instance. In addition, do not use the instance to perform data operations. Otherwise, data inconsistency
+     * will occur.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
      * @param { String } name - Indicates the preferences file name.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      * @throws { BusinessException } 15500010 - Failed to delete the user preferences persistence file.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func deletePreferences(context: UIAbilityContext, name: String): Unit {
         deletePreferences(context, PreferencesOptions(name))
     }
 
     /**
-     * Deletes a {@link Preferences} instance matching a specified preferences file name.
+     * Deletes a Preferences instance matching a specified preferences file name
+     * from the cache which is performed by removePreferencesFromCache and deletes the
+     * preferences file.
+     * When deleting the Preferences instance, you must release all references
+     * of the instance. In addition, do not use the instance to perform data operations. Otherwise, data inconsistency
+     * will occur.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
-     * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences
+     * @param { PreferencesOptions } options - Indicates the PreferencesOptions option of preferences
      * file position.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
      * @throws { BusinessException } 801 - Capability not supported.
      * @throws { BusinessException } 15500000 - Inner error.
      * @throws { BusinessException } 15500010 - Failed to delete the user preferences persistence file.
      * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
      * @throws { BusinessException } 15501002 - Invalid dataGroupId.
-     *
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func deletePreferences(context: UIAbilityContext, options: PreferencesOptions): Unit {
         let stageContext = getStageContext(context)
@@ -217,49 +228,45 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Deletes a {@link Preferences} instance matching a specified preferences file name
-     * from the cache. This interface is executed synchronously.
-     * <p>When deleting the {@link Preferences} instance, you must release all references
+     * Deletes a Preferences instance matching a specified preferences file name
+     * from the cache.
+     * When deleting the Preferences instance, you must release all references
      * of the instance. In addition, do not use the instance to perform data operations. Otherwise, data inconsistency
      * will occur.
      *
      * @param { UIAbilityContext } context - Indicates the context of application or capability.
      * @param { String } name - Indicates the preferences file name.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, name: String): Unit {
         removePreferencesFromCache(context, PreferencesOptions(name))
     }
 
-   /**
-    * Deletes a {@link Preferences} instance matching a specified preferences file name
-    * from the cache. This interface is executed synchronously.
-    * <p>When deleting the {@link Preferences} instance, you must release all references
-    * of the instance. In addition, do not use the instance to perform data operations. Otherwise, data inconsistency
-    * will occur.
-    *
-    * @param { UIAbilityContext } context - Indicates the context of application or capability.
-    * @param { PreferencesOptions } options - Indicates the {@link PreferencesOptions} option of preferences
-    * file position.
-    * @throws { BusinessException } 401 - Parameter error. Possible causes:
-    * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-    * <br>3. Parameter verification failed.
-    * @throws { BusinessException } 801 - Capability not supported.
-    * @throws { BusinessException } 15500000 - Inner error.
-    * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
-    * @throws { BusinessException } 15501002 - Invalid dataGroupId.
-    *
-    */
+    /**
+     * Deletes a Preferences instance matching a specified preferences file name
+     * from the cache.
+     * When deleting the Preferences instance, you must release all references
+     * of the instance. In addition, do not use the instance to perform data operations. Otherwise, data inconsistency
+     * will occur.
+     *
+     * @param { UIAbilityContext } context - Indicates the context of application or capability.
+     * @param { PreferencesOptions } options - Indicates the PreferencesOptions option of preferences file position.
+     * @throws { BusinessException } 801 - Capability not supported.
+     * @throws { BusinessException } 15500000 - Inner error.
+     * @throws { BusinessException } 15501001 - The operations is supported in stage mode only.
+     * @throws { BusinessException } 15501002 - Invalid dataGroupId.
+     */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, options: PreferencesOptions): Unit {
         let stageContext = getStageContext(context)
@@ -286,29 +293,31 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Saves the {@link Preferences} object to the file.
+     * saves the Preferences object to the file.
      *
-     * @throws { BusinessException } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func flush(): Unit {
         unsafe { FfiOHOSPreferencesFlush(getID()) }
     }
 
     /**
-     * Clears all preferences from the {@link Preferences} object.
-     * <p>You can call the {@link #flush} method to save the {@link Preferences} object to the file.
+     * Clears all preferences from the Preferences object.
+     * You can call the flush method to save the Preferences object to the file.
      *
-     * @throws { BusinessException } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func clear(): Unit {
         unsafe { FfiOHOSPreferencesClear(getID()) }
@@ -316,20 +325,18 @@ public class Preferences <: RemoteDataLite {
 
     /**
      * Obtains the value of a preferences in the PreferencesValueType format.
-     * <p>If the value is {@code null} or not in the PreferencesValueType format, the default value is returned.
+     * If the value is null or not in the PreferencesValueType format, the default value is returned.
      *
-     * @param { String } key - Indicates the key of the preferences. It cannot be {@code null} or empty.
-     * <tt>MAX_KEY_LENGTH</tt>.
+     * @param { String } key - Indicates the key of the preferences. It cannot be null or empty.
      * @param { PreferencesValueType } defValue - Indicates the default value to return.
      * @returns { PreferencesValueType } The value matching the specified key if it is found;
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func get(key: String, defValue: PreferencesValueType): PreferencesValueType {
         unsafe {
@@ -346,18 +353,23 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Sets an int value for the key in the {@link Preferences} object.
+     * Sets an int value for the key in the Preferences object.
+     * You can call the flush method to save the Preferences object to the
+     * file.
+     * When the value contains strings in a non-UTF-8 format, use the Uint8Array type for storage.
+     * Otherwise, the format of the persistent file is incorrect and the file is damaged.
+     * If the corresponding key already exists, the put method will overwrite its value.
+     * You can use the hasSync method to check whether the corresponding key-value pair exists.
      *
-     * @param { String } key - Indicates the key of the preferences to modify. It cannot be {@code null} or empty.
+     * @param { String } key - Indicates the key of the preferences to modify. It cannot be null or empty.
      * @param { PreferencesValueType } value - Indicates the value of the preferences.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func put(key: String, value: PreferencesValueType): Unit {
         unsafe {
@@ -374,12 +386,13 @@ public class Preferences <: RemoteDataLite {
      * Obtains all the keys and values of a preferences in an HashMap.
      *
      * @returns { HashMap<String, PreferencesValueType> } The values and keys in an HashMap.
-     * @throws { BusinessException } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAll(): HashMap<String, PreferencesValueType> {
         unsafe {
@@ -391,17 +404,17 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Deletes the preferences with a specified key from the {@link Preferences} object.
+     * Deletes the preferences with a specified key from the Preferences object.
+     * You can call the flush method to save the Preferences object to the file.
      *
-     * @param { String } key - Indicates the key of the preferences to delete. It cannot be {@code null} or empty.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
+     * @param { String } key - Indicates the key of the preferences to delete. It cannot be null or empty.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func delete(key: String): Unit {
         unsafe {
@@ -413,18 +426,18 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Checks whether the {@link Preferences} object contains a preferences matching a specified key.
+     * Checks whether the Preferences object contains a preferences matching a specified key.
      *
-     * @param { String } key - Indicates the key of the preferences to modify. It cannot be {@code null} or empty.
-     * @returns { Bool } {@code true} if the {@link Preferences} object contains
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
+     * @param { String } key - Indicates the key of the preferences to modify. It cannot be null or empty.
+     * @returns { Bool } true if the Preferences object contains
+     * a preferences with the specified key; returns false otherwise.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func has(key: String): Bool {
         unsafe {
@@ -454,9 +467,18 @@ public class Preferences <: RemoteDataLite {
      * @throws { BusinessException } 15500019 - Failed to obtain the subscription service.
      */
 
+    /**
+     * Registers an observer to listen for the change of a Preferences object.
+     *
+     * @param { PreferencesEvent } event - Indicates the callback when preferences changes.
+     * @param { Callback1Argument<String> } callback - Indicates the callback function.
+     * @throws { BusinessException } 15500000 - Inner error.
+     * @throws { BusinessException } 15500019 - Failed to obtain the subscription service.
+     */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true
     ]
     public func on(event: PreferencesEvent, callback: Callback1Argument<String>): Unit {
         let tp = event.getValue()
@@ -483,18 +505,16 @@ public class Preferences <: RemoteDataLite {
     /**
      * Unregisters an existing observer.
      *
-     * @param { String } tp - Indicates the callback when preferences changes.
-     * @param { Callback1Argument<String> } callback - Indicates the callback function.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
+     * @param { PreferencesEvent } event - Indicates the callback when preferences changes.
+     * @param { Callback1Argument<String> } [callback] - Indicates the callback function.
      * @throws { BusinessException } 15500000 - Inner error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
+        syscap: "SystemCapability.DistributedDataManager.Preferences.Core",
+        throwexception: true
     ]
-    public func off(event :PreferencesEvent, callback!: ?Callback1Argument<String> = None): Unit {
+    public func off(event: PreferencesEvent, callback!: ?Callback1Argument<String> = None): Unit {
         let tp = event.getValue()
         match (callback) {
             case Some(v) => offImpl(tp, v)

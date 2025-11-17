@@ -28,29 +28,37 @@ import ohos.labels.APILevel
     syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
 ]
 public enum VBValueType {
-    /* Integer */ 
+    /**
+     * Integer.
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Integer(Int64)
     |
-        /* Double */ 
-        @!APILevel[
+    /**
+     * Double.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     Double(Float64)
     |
-        /* StringValue */ 
-        @!APILevel[
+    /**
+     * StringValue.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
     StringValue(String)
     |
-        /* Boolean */ 
-        @!APILevel[
+    /**
+     * Boolean.
+     */
+    @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
     ]
