@@ -22,9 +22,9 @@ import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
  * Represents a database query using predicates.
- * <p>This class provides a constructor used to create a {@code Query} instance, which is used to query data
+ * This class provides a constructor used to create a Query instance, which is used to query data
  * matching specified conditions in the database.
- * <p>This class also provides methods to add predicates to the {@code Query} instance.
+ * This class also provides methods to add predicates to the Query instance.
  */
 @!APILevel[
     since: "22",

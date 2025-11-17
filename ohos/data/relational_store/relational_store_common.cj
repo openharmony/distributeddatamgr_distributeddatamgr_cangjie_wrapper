@@ -99,7 +99,7 @@ public class CryptoParam {
 
     /**
      * Specifies the encryption algorithm when opening an encrypted database.
-     * Default encryption algorithm is AES_256_GCM.
+     * Default encryption algorithm is Aes256Gcm.
      */
     @!APILevel[
         since: "22",
@@ -139,6 +139,19 @@ public class CryptoParam {
 
     /**
      * CryptoParam constructor.
+     *
+     * @param { Array<UInt8> } encryptionKey - Specifies the key used algorithm when opening an encrypted database.
+     * When finished passing the key to the database, its content should be set to all-zero.
+     * @param { Int32 } [iterationCount] - Specifies the number of KDF iterations used when opening an encrypted database.
+     * Default number is 10000. When the number is set to 0, use default iteration number and encryption algorithm.
+     * @param { EncryptionAlgo } encryptionAlgo - Specifies the encryption algorithm when opening an encrypted database.
+     * Default encryption algorithm is EncryptionAlgo.Aes256Gcm.
+     * @param { HmacAlgo } hmacAlgo - Specifies the HMAC algorithm when opening an encrypted database.
+     * Default HMAC algorithm is HmacAlgo.Sha256.
+     * @param { ?KdfAlgo } kdfAlgo - Specifies the KDF algorithm when opening an encrypted database.
+     * Default KDF SHA algorithm is the same as the HMAC algorithm.
+     * @param { UInt32 } cryptoPageSize - Specifies the page size used when opening an encrypted database.
+     * Default crypto page size is 1024.
      */
     @!APILevel[
         since: "22",
@@ -166,7 +179,7 @@ public class CryptoParam {
 ]
 public enum KdfAlgo {
     /**
-     * KDF_SHA1: PBKDF2_HMAC_SHA1 algorithm.
+     * KdfSha1: PBKDF2_HMAC_SHA1 algorithm.
      */
     @!APILevel[
         since: "22",
@@ -175,7 +188,7 @@ public enum KdfAlgo {
     KdfSha1
     |
     /**
-     * PBKDF2_HMAC_SHA256 algorithm.
+     * KdfSha256: PBKDF2_HMAC_SHA256 algorithm.
      */
     @!APILevel[
         since: "22",
@@ -184,7 +197,7 @@ public enum KdfAlgo {
     KdfSha256
     |
     /**
-     * PBKDF2_HMAC_SHA512 algorithm.
+     * KdfSha512: PBKDF2_HMAC_SHA512 algorithm.
      */
     @!APILevel[
         since: "22",
@@ -203,7 +216,7 @@ public enum KdfAlgo {
 ]
 public enum HmacAlgo {
     /**
-     * HMAC_SHA1 algorithm.
+     * Sha1: HMAC_SHA1 algorithm.
      */
     @!APILevel[
         since: "22",
@@ -212,7 +225,7 @@ public enum HmacAlgo {
     Sha1
     |
     /**
-     * HMAC_SHA256 algorithm.
+     * Sha256: HMAC_SHA256 algorithm.
      */
     @!APILevel[
         since: "22",
@@ -221,7 +234,7 @@ public enum HmacAlgo {
     Sha256
     |
     /**
-     * HMAC_SHA512 algorithm.
+     * Sha512: HMAC_SHA512 algorithm.
      */
     @!APILevel[
         since: "22",
@@ -240,7 +253,7 @@ public enum HmacAlgo {
 ]
 public enum EncryptionAlgo {
     /**
-     * Database is encrypted using AES_256_GCM.
+     * Database is encrypted using Aes256Gcm.
      */
     @!APILevel[
         since: "22",
@@ -249,7 +262,7 @@ public enum EncryptionAlgo {
     Aes256Gcm
     |
     /**
-     * Database is encrypted using AES_256_CBC.
+     * Database is encrypted using Aes256Cbc.
      */
     @!APILevel[
         since: "22",
@@ -271,7 +284,7 @@ public enum EncryptionAlgo {
 ]
 public enum Tokenizer {
     /**
-     * not use tokenizer.
+     *  not use tokenizer
      */
     @!APILevel[
         since: "22",
@@ -309,7 +322,7 @@ public enum Tokenizer {
 }
 
 /**
- * Describes the {@code RdbStore} type.
+ * Describes the RdbStore security level.
  */
 @!APILevel[
     since: "22",
@@ -377,7 +390,7 @@ public enum RelationalStoreSecurityLevel {
 ]
 public enum ChangeType {
     /**
-     * Means the change type is data change.
+     * DataChange: Means the change type is data change.
      */
     @!APILevel[
         since: "22",
@@ -386,7 +399,7 @@ public enum ChangeType {
     DataChange
     |
     /**
-     * Means the change type is asset change.
+     * AssetChange: Means the change type is asset change.
      */
     @!APILevel[
         since: "22",
@@ -568,7 +581,23 @@ public class StoreConfig {
 
     /**
      * StoreConfig constructor.
-     * 
+     *
+     * @param { RelationalStoreSecurityLevel } securityLevel - Specifies the security level of the database.
+     * @param { String } [name] - The database name.
+     * @param { Bool } [encrypt] - Specifies whether the database is encrypted.
+     * @param { String } dataGroupId - The data group id of application.
+     * @param { String } customDir - Specifies the directory relative to the database directory obtained from context.
+     * @param { String } rootDir - Specifies the root directory relative to the database.
+     * @param { Bool } autoCleanDirtyData - Specifies whether to clean up dirty data that is synchronized to
+     * the local but deleted in the cloud.
+     * @param { Bool } allowRebuild - Specifies whether database allows rebuild.
+     * @param { Bool } isReadOnly - Specifies whether the database opened is read-only.
+     * @param { Array<String> } pluginLibs - Indicates the names of the shared library containing fts etc.
+     * @param { CryptoParam } cryptoParam - Specifies the cryptographic parameters used when opening an encrypted database.
+     * @param { Bool } vector - Specifies whether the vector type is supported.
+     * @param { Tokenizer } tokenizer - Specifies the tokenizer type when using fts capability.
+     * @param { Bool } persist - Specifies whether the database need persistence.
+     * @param { Bool } enableSemanticIndex - Specifies whether the database enable the capabilities for semantic indexing processing.
      */
     @!APILevel[
         since: "22",
@@ -609,7 +638,7 @@ public class StoreConfig {
 ]
 public enum AssetStatus {
     /**
-     * ASSET_NORMAL: means the status of asset is normal.
+     * AssetNormal: means the status of asset is normal.
      */
     @!APILevel[
         since: "22",
@@ -618,7 +647,7 @@ public enum AssetStatus {
     AssetNormal
     |
     /**
-     * ASSET_INSERT: means the asset needs to be inserted.
+     * AssetInsert: means the asset needs to be inserted.
      */
     @!APILevel[
         since: "22",
@@ -627,7 +656,7 @@ public enum AssetStatus {
     AssetInsert
     |
     /**
-     * ASSET_UPDATE: means the asset needs to be updated.
+     * AssetUpdate: means the asset needs to be updated.
      */
     @!APILevel[
         since: "22",
@@ -636,7 +665,7 @@ public enum AssetStatus {
     AssetUpdate
     |
     /**
-     * ASSET_DELETE: means the asset needs to be deleted.
+     * AssetDelete: means the asset needs to be deleted.
      */
     @!APILevel[
         since: "22",
@@ -645,7 +674,7 @@ public enum AssetStatus {
     AssetDelete
     |
     /**
-     * ASSET_ABNORMAL: means the status of asset is abnormal.
+     * AssetAbnormal: means the status of asset is abnormal.
      */
     @!APILevel[
         since: "22",
@@ -654,7 +683,7 @@ public enum AssetStatus {
     AssetAbnormal
     |
     /**
-     * ASSET_DOWNLOADING: means the status of asset is downloading.
+     * AssetDownloading: means the status of asset is downloading.
      */
     @!APILevel[
         since: "22",
@@ -709,7 +738,7 @@ public enum Field {
     CursorField
     |
     /**
-     * Origin field. For details, see {@link Origin}.
+     * Origin field. For details, see Origin.
      */
     @!APILevel[
         since: "22",
@@ -920,7 +949,14 @@ public class Asset {
 
     /**
      * Asset constructor.
-     * 
+     *
+     * @param { String } name - The name of asset.
+     * @param { String } uri - The uri of asset.
+     * @param { String } path - The path of asset.
+     * @param { String } createTime - The create time of asset.
+     * @param { String } modifyTime - The modify time of asset.
+     * @param { String } size - The size of asset.
+     * @param { AssetStatus } status - The status of asset.
      */
     @!APILevel[
         since: "22",
@@ -1151,7 +1187,7 @@ public enum SyncMode {
 ]
 public enum Progress {
     /**
-     * ISYNC_BEGIN: means the sync process begin.
+     * SyncBegin: means the sync process begin.
      */
     @!APILevel[
         since: "22",
@@ -1160,7 +1196,7 @@ public enum Progress {
     SyncBegin
     |
     /**
-     * SYNC_BEGIN: means the sync process is in progress.
+     * SyncInProgress: means the sync process is in progress.
      */
     @!APILevel[
         since: "22",
@@ -1169,7 +1205,7 @@ public enum Progress {
     SyncInProgress
     |
     /**
-     * SYNC_BEGIN: means the sync process is finished.
+     * SyncFinish: means the sync process is finished.
      */
     @!APILevel[
         since: "22",

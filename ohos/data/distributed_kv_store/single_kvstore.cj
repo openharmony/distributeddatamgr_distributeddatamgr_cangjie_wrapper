@@ -38,11 +38,11 @@ class SingleKVStoreImpl {}
 
 /**
  * Provides methods related to single-version distributed databases.
- * <p>To create a {@code SingleKVStore} database,
- * you can use the {@link data.distributed.common.KVManager#getKVStore​(KVOptions, String)} method
- * with {@code KVStoreType} set to {@code SingleVersion} for the input parameter {@code KVOptions}.
+ * To create a SingleKVStore database,
+ * you can use the getKVStore​(KVOptions, String) method
+ * with KVStoreType set to SingleVersion for the input parameter KVOptions.
  * This database synchronizes data to other databases in time sequence.
- * The {@code SingleKVStore} database does not support
+ * The SingleKVStore database does not support
  * synchronous transactions, or data search using snapshots.
  */
 @!APILevel[
@@ -66,20 +66,22 @@ public open class SingleKVStore <: RemoteDataLite {
     }
 
     /**
-     * Writes a key-value pair of the string type into the {@code SingleKVStore} database.
-     * <p>If you do not want to synchronize this key-value pair to other devices, set the write option in the local
+     * Writes a key-value pair of the string type into the SingleKVStore database.
+     * If you do not want to synchronize this key-value pair to other devices, set the write option in the local
      * database.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types;
-     * <br>3.Parameter verification failed.
+     * @param { String } key - Indicates the key. Length must be less than MAX_KEY_LENGTH.
+     * Spaces before and after the key will be cleared.
+     * @param { KVValueType } value - Indicates the value to be inserted.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func put(key: String, value: KVValueType): Unit {
         unsafe {
@@ -97,17 +99,18 @@ public open class SingleKVStore <: RemoteDataLite {
     }
 
     /**
-     * Inserts key-value pairs into the {@code SingleKVStore} database in batches.
+     * Inserts key-value pairs into the SingleKVStore database in batches.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
+     * @param { Array<Entry> } entries - Indicates the key-value pairs to be inserted in batches.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func putBatch(entries: Array<Entry>): Unit {
         unsafe {
@@ -127,16 +130,17 @@ public open class SingleKVStore <: RemoteDataLite {
     /**
      * Deletes the key-value pair based on a specified key.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types;
-     * <br>3.Parameter verification failed.
+     * @param { String } key - Indicates the key. Length must be less than MAX_KEY_LENGTH.
+     * Spaces before and after the key will be cleared.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func delete(key: String): Unit {
         unsafe {
@@ -154,18 +158,18 @@ public open class SingleKVStore <: RemoteDataLite {
     public open func delete(predicates: DataSharePredicates): Unit {}
 
     /**
-     * Deletes key-value pairs in batches from the {@code SingleKVStore} database.
+     * Deletes key-value pairs in batches from the SingleKVStore database.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types;
-     * <br>3.Parameter verification failed.
+     * @param { Array<String> } keys - Indicates the key-value pairs to be deleted in batches, It can not be empty.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func deleteBatch(keys: Array<String>): Unit {
         unsafe {
@@ -185,16 +189,18 @@ public open class SingleKVStore <: RemoteDataLite {
     /**
      * Obtains the value of a specified key.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types;
-     * <br>3.Parameter verification failed.
+     * @param { String } key - Indicates the key. The length must be less than MAX_KEY_LENGTH.
+     * @returns { KVValueType } the returned value specified by the key.
+     * {KVValueType}: the returned value specified by the key.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100004 - Not found.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func get(key: String): KVValueType {
         unsafe {
@@ -248,13 +254,15 @@ public open class SingleKVStore <: RemoteDataLite {
     /**
      * Backs up a database in the specified filename.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Parameter verification failed.
+     * @param { String } file - Indicates the database backup filename, It can not be empty and
+     * The length must be less than MAX_KEY_LENGTH.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func backup(file: String): Unit {
         unsafe {
@@ -271,13 +279,15 @@ public open class SingleKVStore <: RemoteDataLite {
     /**
      * Restores a database from a specified database file.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Parameter verification failed.
+     * @param { String } file - Indicates the database backup filename, It can not be empty and
+     * The length must be less than MAX_KEY_LENGTH.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func restore(file: String): Unit {
         unsafe {
@@ -297,15 +307,17 @@ public open class SingleKVStore <: RemoteDataLite {
     }
 
     /**
-     * Starts a transaction operation in the {@code SingleKVStore} database.
-     * <p>After the database transaction is started, you can submit or roll back the operation.
+     * Starts a transaction operation in the SingleKVStore database.
+     * After the database transaction is started, you can submit or roll back the operation.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      * @throws { BusinessException } 14800047 - The WAL file size exceeds the default limit.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func startTransaction(): Unit {
         unsafe {
@@ -319,13 +331,15 @@ public open class SingleKVStore <: RemoteDataLite {
     }
 
     /**
-     * Submits a transaction operation in the {@code SingleKVStore} database.
+     * Submits a transaction operation in the SingleKVStore database.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func commit(): Unit {
         unsafe {
@@ -338,13 +352,15 @@ public open class SingleKVStore <: RemoteDataLite {
     }
 
     /**
-     * Rolls back a transaction operation in the {@code SingleKVStore} database.
+     * Rolls back a transaction operation in the SingleKVStore database.
      *
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public open func rollback(): Unit {
         unsafe {
@@ -359,12 +375,13 @@ public open class SingleKVStore <: RemoteDataLite {
     /**
      * Sets whether to enable synchronization.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
+     * @param { Bool } enabled - Specifies whether to enable synchronization. The value true
+     * means to enable synchronization, and false means the opposite.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        workerthread: true
     ]
     public open func enableSync(enabled: Bool): Unit {
         unsafe {
@@ -380,15 +397,15 @@ public open class SingleKVStore <: RemoteDataLite {
     public open func setSyncRange(localLabels: Array<String>, remoteSupportLabels: Array<String>): Unit {}
 
     /**
-     * Sets synchronization range labels.
-     * <p>The labels determine the devices with which data will be synchronized.
+     * Sets the default delay allowed for database synchronization.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
+     * @param { UInt32 } defaultAllowedDelayMs - Indicates the default delay allowed for the
+     * database synchronization, in milliseconds.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        workerthread: true
     ]
     public open func setSyncParam(defaultAllowedDelayMs: UInt32): Unit {
         unsafe {

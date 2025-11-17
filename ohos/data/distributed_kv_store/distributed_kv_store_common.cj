@@ -89,7 +89,7 @@ public class Constants {
 }
 
 /**
- * Indicates the {@code KVValueType}.
+ * Indicates the KVValueType.
  */
 @!APILevel[
     since: "22",
@@ -153,7 +153,7 @@ public enum KVValueType {
 }
 
 /**
- * Provides configuration information to create a {@link KVManager} instance,
+ * Provides configuration information to create a KVManager instance,
  * which includes the caller's package name and ability or hap context.
  */
 @!APILevel[
@@ -182,6 +182,8 @@ public class KVManagerConfig {
     /**
      * KVManagerConfig constructor.
      *
+     * @param { BaseContext } context - Indicates the ability or hap context
+     * @param { String } bundleName - Indicates the bundleName
      */
     @!APILevel[
         since: "22",
@@ -277,10 +279,10 @@ public enum KVSecurityLevel {
 
 
 /**
- * Represents a node of a {@link Schema} instance.
- * <p>With a {@link Schema} instance, you can define the value fields which stored in the database.
- * <p>A FieldNode of the {@link Schema} instance is either a leaf or a non-leaf node.
- * <p>The leaf node must have a value; the non-leaf node must have a child {@code FieldNode}.
+ * Represents a node of a Schema instance.
+ * With a Schema instance, you can define the value fields which stored in the database.
+ * A FieldNode of the Schema instance is either a leaf or a non-leaf node.
+ * The leaf node must have a value; the non-leaf node must have a child FieldNode.
  */
 @!APILevel[
     since: "22",
@@ -317,6 +319,10 @@ public class FieldNode {
     /**
      * FieldNode constructor.
      *
+     * @param { String } name - It can not be empty.
+     * @param { Bool } nullable - Indicates the nullable of database field.
+     * @param { String } default - Indicates the default value of field node.
+     * @param { Int32 } nodeType - Indicates the type of value.
      */
     @!APILevel[
         since: "22",
@@ -377,6 +383,10 @@ public class Schema {
     /**
      * Schema constructor.
      *
+     * @param { FieldNode } root - Indicates the root json object.
+     * @param { Array<String> } indexes - Indicates the string array of json.
+     * @param { Int32 } mode - Indicates the mode of schema.
+     * @param { Int32 } skip - Indicates the skip size of schema.
      */
     @!APILevel[
         since: "22",
@@ -391,7 +401,7 @@ public class Schema {
 }
 
 /**
- * Provides configuration options to create a {@code SingleKVStore} or {@code DeviceKVStore}.
+ * Provides configuration options to create a SingleKVStore or DeviceKVStore.
  */
 @!APILevel[
     since: "22",
@@ -431,7 +441,6 @@ public class KVOptions {
      */
     @!APILevel[
         since: "22",
-        permission: "ohos.permission.DISTRIBUTED_DATASYNC",
         syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
     ]
     public var autoSync: Bool
@@ -457,6 +466,12 @@ public class KVOptions {
     /**
      * KVOptions constructor.
      *
+     * @param { KVSecurityLevel } securityLevel - Indicates the database security level
+     * @param { Bool } [createIfMissing] - Indicates whether to create a database when the database file does not exist
+     * @param { Bool } [encrypt] - Indicates whether database files to be encrypted
+     * @param { Bool } backup - Indicates whether to back up database files
+     * @param { Bool } autoSync - Indicates whether database files are automatically synchronized
+     * @param { ?Schema } schema - Indicates the database schema
      */
     @!APILevel[
         since: "22",
@@ -502,6 +517,8 @@ public class Entry {
     /**
      * Entry constructor.
      *
+     * @param { String } key - Indicates the key.
+     * @param { KVValueType } value - Indicates the value.
      */
     @!APILevel[
         since: "22",

@@ -46,6 +46,7 @@ private func createDataSharePredicates(): Int64 {
 public class DataSharePredicates <: RemoteDataLite {
     /**
      * DataSharePredicates constructor.
+     * Currently, only used for RDB and KVDB(schema).
      */
     @!APILevel[
         since: "22",
@@ -63,16 +64,17 @@ public class DataSharePredicates <: RemoteDataLite {
      * Configure the DataSharePredicates to match the field whose data type is VBValueType and value is equal
      * to a specified value.
      * This method is similar to = of the SQL statement.
+     * Currently only used for RDB and KVDB(schema).
      *
      * @param { String } field - Indicates the column name in the database table.
      * @param { VBValueType } value - Indicates the value to match with the DataSharePredicates.
      * @returns { DataSharePredicates } Returns the DataSharePredicates that match the specified field.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core",
+        throwexception: true
     ]
     public func equalTo(field: String, value: VBValueType): DataSharePredicates {
         if (field.isEmpty()) {
@@ -95,13 +97,15 @@ public class DataSharePredicates <: RemoteDataLite {
     /**
      * Adds an and condition to the DataSharePredicates.
      * This method is similar to and of the SQL statement.
+     * Currently only used for RDB and KVDB(schema).
      *
      * @returns { DataSharePredicates } Returns the DataSharePredicates with the and condition.
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core",
+        throwexception: true
     ]
     public func and(): DataSharePredicates {
         unsafe {
@@ -114,15 +118,16 @@ public class DataSharePredicates <: RemoteDataLite {
     /**
      * Restricts the ascending order of the return list. When there are several orders,
      * the one close to the head has the highest priority.
+     * Currently only used for RDB and KVDB(schema).
      *
      * @param { String } field - Indicates the column name for sorting the return list.
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core",
+        throwexception: true
     ]
     public func orderByAsc(field: String): DataSharePredicates {
         if (field.isEmpty()) {
@@ -141,15 +146,16 @@ public class DataSharePredicates <: RemoteDataLite {
     /**
      * Restricts the descending order of the return list. When there are several orders,
      * the one close to the head has the highest priority.
+     * Currently only used for RDB and KVDB(schema).
      *
      * @param { String } field - Indicates the column name for sorting the return list.
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core",
+        throwexception: true
     ]
     public func orderByDesc(field: String): DataSharePredicates {
         if (field.isEmpty()) {
@@ -168,16 +174,17 @@ public class DataSharePredicates <: RemoteDataLite {
 
     /**
      * Construct a query object to specify the number of results and the starting position.
+     * Currently only used for RDB and KVDB(schema).
      *
      * @param { Int32 } total - Represents the specified number of results.
      * @param { Int32 } offset - Indicates the starting position.
      * @returns { DataSharePredicates } Returns the query object.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core",
+        throwexception: true
     ]
     public func limit(total: Int32, offset: Int32): DataSharePredicates {
         if (total < 0 || offset < 0) {
@@ -193,18 +200,19 @@ public class DataSharePredicates <: RemoteDataLite {
     }
 
     /**
-     * Configure {@code DataSharePredicates} to match the specified field whose data type is VBValueType array
-     * and values are within a given range.
+     * Configure DataSharePredicates to match the specified field whose data type is ValueType array and values
+     * are within a given range.
+     * Currently only used for RDB and KVDB(schema).
      *
      * @param { String } field - Indicates the column name in the database table.
-     * @param { Array<VBValueType> } values - Indicates the values to match with DataSharePredicates.
+     * @param { Array<VBValueType> } value - Indicates the values to match with DataSharePredicates.
      * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
-     * @throws { BusinessException } 401 - Parameter error.
      * @throws { BusinessException } 16000050 - Internal error.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core",
+        throwexception: true
     ]
     public func inValues(field: String, value: Array<VBValueType>): DataSharePredicates {
         if (field.isEmpty() || value.isEmpty()) {

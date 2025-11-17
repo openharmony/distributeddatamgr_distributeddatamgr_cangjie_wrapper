@@ -32,7 +32,7 @@ import std.collection.HashMap
 public enum StorageType {
     /**
      * XML storage type
-     */   
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
@@ -42,7 +42,7 @@ public enum StorageType {
     
     /**
      * GSKV storage type
-     */  
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
@@ -53,7 +53,7 @@ public enum StorageType {
 
 
 /**
- * Enumeration implements a collection of basic data types.
+ * Indicates possible value types
  */
 @!APILevel[
     since: "22",
@@ -62,7 +62,7 @@ public enum StorageType {
 public enum PreferencesValueType {
     /**
      * Type for Int64.
-     */   
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
@@ -92,7 +92,7 @@ public enum PreferencesValueType {
     
     /**
      * Type for Bool.
-     */    
+     */
     @!APILevel[
         since: "22",
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
@@ -132,7 +132,7 @@ public enum PreferencesValueType {
 }
 
 /**
- * The Max length of key.
+ * Maximum length of a key, which is 1024 bytes.
  */
 @!APILevel[
     since: "22",
@@ -141,7 +141,7 @@ public enum PreferencesValueType {
 public const MAX_KEY_LENGTH: UInt32 = 1024
 
 /**
- * The Max length of value.
+ * Maximum length of value, which is 16 MB.
  */
 @!APILevel[
     since: "22",
@@ -279,6 +279,10 @@ public class PreferencesOptions {
 
     /**
      * PreferencesOptions constructor.
+     *
+     * @param { String } name - The preferences file name.
+     * @param { String } [dataGroupId] - Application Group Id.
+     * @param { StorageType } [storageType] - The preferences file storage type.
      */
     @!APILevel[
         since: "22",

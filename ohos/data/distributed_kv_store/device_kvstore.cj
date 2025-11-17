@@ -23,9 +23,9 @@ import ohos.business_exception.BusinessException
 
 /**
  * Provides methods related to device-collaboration distributed databases.
- * <p>To create a {@code DeviceKVStore} database, you can use the
- * {@link data.distributed.common.KVManager.getKVStore(KVOptions, String)}
- * method with {@code KVStoreType} set to {@code DeviceCollaboration} for the input parameter KVOptions.
+ * To create a DeviceKVStore database, you can use the
+ * data.distributed.common.KVManager.getKVStore(KVOptions, String)
+ * method with KVStoreType set to DeviceCollaboration for the input parameter KVOptions.
  * This database manages distributed
  * data by device, and cannot modify data synchronized from remote devices. When an application writes a
  * key-value pair entry
@@ -51,19 +51,18 @@ public class DeviceKVStore <: SingleKVStore {
     /**
      * Obtains the value matching the local device ID and specified key.
      *
-     * @param { String } key - Indicates the key. The length must be less than {@code MAX_KEY_LENGTH}.
-     * @returns { KVValueType } KVValueType - the returned value specified by the key.
+     * @param { String } key - Indicates the key. The length must be less than MAX_KEY_LENGTH.
+     * @returns { KVValueType } KVValueType the returned value specified by the key.
      *
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types;
-     * <br>3.Parameter verification failed.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100004 - Not found.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func get(key: String): KVValueType {
         return get("", key)
@@ -99,15 +98,15 @@ public class DeviceKVStore <: SingleKVStore {
      * Obtains all key-value pairs that match the local device ID and specified key prefix.
      *
      * @param { String } keyPrefix - Indicates the key prefix to match.
-     * @returns { Array<Entry> } Array<Entry> - the list of all key-value pairs that match the specified key prefix.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
+     * @returns { Array<Entry> } Array<Entry> the list of all key-value pairs that match the specified key prefix.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getEntries(keyPrefix: String): Array<Entry> {
         return getEntries("", keyPrefix)
@@ -139,19 +138,19 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * Obtains the list of key-value pairs matching the local device ID and specified {@code Query} object.
+     * Obtains the list of key-value pairs matching the local device ID and specified Query object.
      *
-     * @param { Query } query - Indicates the {@code Query} object.
-     * @returns { Array<Entry> } Array<Entry> - the list of all key-value pairs matching the
-     * specified {@code Query} object.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
+     * @param { Query } query - Indicates the Query object.
+     * @returns { Array<Entry> } Array<Entry> the list of all key-value pairs matching the
+     * specified Query object.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getEntries(query: Query): Array<Entry> {
         return getEntries("", query)
@@ -179,25 +178,25 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * Obtains the result set with the local device ID and specified prefix from a {@code DeviceKVStore} database.
-     * The {@code KVStoreResultSet} object can be used to query all key-value pairs that meet the search criteria.
-     * Each {@code DeviceKVStore} instance can have a maximum of four {@code KVStoreResultSet} objects at the
+     * Obtains the result set with the local device ID and specified prefix from a DeviceKVStore database.
+     * The KVStoreResultSet object can be used to query all key-value pairs that meet the search criteria.
+     * Each DeviceKVStore instance can have a maximum of four KVStoreResultSet objects at the
      * same time.
      * If you have created four objects, calling this method will return a failure. Therefore, you are advised to
-     * call the closeResultSet method to close unnecessary {@code KVStoreResultSet} objects in a timely manner.
+     * call the closeResultSet method to close unnecessary KVStoreResultSet objects in a timely manner.
      *
      * @param { String } keyPrefix - Indicates the key prefix to match.
-     * @returns { KVStoreResultSet } KVStoreResultSet - the {@code KVStoreResultSet}
+     * @returns { KVStoreResultSet } KVStoreResultSet the KVStoreResultSet
      * object matching the specified keyPrefix.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
      * @throws { BusinessException } 15100001 - Over max limits.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getResultSet(keyPrefix: String): KVStoreResultSet {
         return getResultSet("", keyPrefix)
@@ -229,20 +228,20 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * Obtains the {@code KVStoreResultSet} object matching the local device ID and specified {@code Query} object.
+     * Obtains the KVStoreResultSet object matching the local device ID and specified Query object.
      *
-     * @param { Query } query - Indicates the {@code Query} object.
-     * @returns { KVStoreResultSet } KVStoreResultSet - the {@code KVStoreResultSet}
-     * object matching the specified {@code Query} object.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
+     * @param { Query } query - Indicates the Query object.
+     * @returns { KVStoreResultSet } KVStoreResultSet the KVStoreResultSet
+     * object matching the specified Query object.
      * @throws { BusinessException } 15100001 - Over max limits.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getResultSet(query: Query): KVStoreResultSet {
         return getResultSet("", query)
@@ -269,18 +268,18 @@ public class DeviceKVStore <: SingleKVStore {
     }
 
     /**
-     * Obtains the number of results matching the local device ID and specified {@code Query} object.
+     * Obtains the number of results matching the local device ID and specified Query object.
      *
-     * @param { Query } query - Indicates the {@code Query} object.
-     * @returns { Int32 } Int32 - the number of results matching the specified {@code Query} object.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types.
+     * @param { Query } query - Indicates the Query object.
+     * @returns { Int32 } Int32 the number of results matching the specified Query object.
      * @throws { BusinessException } 15100003 - Database corrupted.
      * @throws { BusinessException } 15100005 - Database or result set already closed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getResultSize(query: Query): Int32 {
         return getResultSize("", query)
