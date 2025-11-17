@@ -21,9 +21,9 @@ import ohos.labels.APILevel
 import ohos.ffi.{RemoteDataLite, releaseFFIData}
 
 /**
- * Provides methods to operate the result set of the {@code SingleKVStore} or {@code DeviceKVStore} database.
- * <p>The result set is created by using the {@code getResultSet} method in the {@code SingleKVStore} or
- * {@code DeviceKVStore} class. This interface also provides methods to move the data read
+ * Provides methods to operate the result set of the SingleKVStore or DeviceKVStore database.
+ * The result set is created by using the getResultSet method in the SingleKVStore or
+ * DeviceKVStore class. This interface also provides methods to move the data read
  * position in the result set.
  */
 @!APILevel[

@@ -31,7 +31,7 @@ let KV_STORE_LOG = HilogChannel(0, 0xD001650, "CJ-DistributedKVStore")
 type StageContext = CPointer<Unit>
 
 /**
- * Provider interfaces to create a {@link KVManager} instance.
+ * Provider interfaces to create a KVManager instance.
  */
 @!APILevel[
     since: "22",
@@ -39,17 +39,18 @@ type StageContext = CPointer<Unit>
 ]
 public class DistributedKVStore {
     /**
-     * Creates a {@link KVManager} instance based on the configuration information.
-     * <p>You must pass {@link KVManagerConfig} to provide configuration information
-     * to create a {@link KVManager} instance.
+     * Creates a KVManager instance based on the configuration information.
+     * You must pass KVManagerConfig to provide configuration information
+     * to create a KVManager instance.
      *
-     * @param { KVManagerConfig } config - Indicates the configuration information, including the bundle name and context.
-     * @returns { KVManager } Returns the KVManager instance.
-     * @throws { BusinessException } 401 - The context type is not supported. Only support UIAbilityContext.
+     * @param { KVManagerConfig } config - Indicates the KVStore configuration information,
+     * including the user information and package name.
+     * @returns { KVManager } the KVManager instance.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true
     ]
     public static func createKVManager(config: KVManagerConfig): KVManager {
         unsafe {
@@ -110,20 +111,22 @@ public class KVManager <: RemoteDataLite {
     }
 
     /**
-     * Creates and obtains a KVStore database by specifying {@code KVOptions} and {@code storeId}.
+     * Creates and obtains a KVStore database by specifying KVOptions and storeId.
      *
-     * @param { String } storeId - Identifies the KVStore, which must be unique for the same application.
-     * @param { Options } options - Indicates the configuration information, including createIfMissing, encrypt, backup, autoSync, kvStoreType, schema, and dataGroupId.
+     * @param { String } storeId - Identifies the KVStore database. The value of this parameter must be unique
+     * for the same application, and different applications can share the same value. The storeId can consist
+     * of only letters, digits, and underscores (_), and cannot exceed 128 characters.
+     * @param { KVOptions } options - Indicates the options used for creating and obtaining the KVStore database,
+     * including isCreateIfMissing, isEncrypt, and KVStoreType.
      * @returns { T } Returns the created KVStore instance.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Incorrect parameters types;
-     * <br>3.Parameter verification failed.
      * @throws { BusinessException } 15100002 - Open existed database with changed options.
      * @throws { BusinessException } 15100003 - Database corrupted.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getKVStore<T>(storeId: String, options: KVOptions): T where T <: SingleKVStore {
         let KVStore = match (T.getKVStore(getID(), storeId, options) as T) {
@@ -135,20 +138,22 @@ public class KVManager <: RemoteDataLite {
 
     /**
      * Closes the KVStore database.
-     * <p>Warning: This method is not thread-safe. If you call this method to stop a KVStore database that is running,
+     * Warning: This method is not thread-safe. If you call this method to stop a KVStore database that is running,
      * your thread may crash.
-     * <p>The KVStore database to close must be an object created by using the {@code getKVStore} method. Before using
-     * this method, release the resources created for the database, for example, {@code KVStoreResultSet} for KVStore,
+     * The KVStore database to close must be an object created by using the getKVStore method. Before using
+     * this method, release the resources created for the database, for example, KVStoreResultSet for KVStore,
      * otherwise closing the database will fail.
      *
-     * @param { String } appId - Indicates the bundle name of the app that invokes the KVStore.
-     * @param { String } storeId - Identifies the KVStore, which must be unique for the same application.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Parameter verification failed.
+     * @param { String } appId - Identifies the application that the database belong to, and cannot exceed 256
+     * characters.
+     * @param { String } storeId - Identifies the KVStore database to close. The storeId can consist of only letters,
+     * digits, and underscores (_), and cannot exceed 128 characters.
      */
-    @!APILevel[
+    @!APILevel[ 
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func closeKVStore(appId: String, storeId: String): Unit {
         unsafe {
@@ -176,13 +181,13 @@ public class KVManager <: RemoteDataLite {
      * characters.
      * @param { String } storeId - Identifies the KVStore database to delete. The storeId can consist of only letters,
      * digits, and underscores (_), and cannot exceed 128 characters.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Parameter verification failed.
      * @throws { BusinessException } 15100004 - Not found.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func deleteKVStore(appId: String, storeId: String): Unit {
         unsafe {
@@ -201,18 +206,18 @@ public class KVManager <: RemoteDataLite {
     }
 
     /**
-     * Obtains the storeId of all KVStore databases that are created by using the {@code getKVStore} method and not
-     * deleted by calling the {@code deleteKVStore} method.
+     * Obtains the storeId of all KVStore databases that are created by using the getKVStore method and not
+     * deleted by calling the deleteKVStore method.
      *
      * @param { String } appId - Identifies the application that obtains the databases, and cannot exceed 256
      * characters.
-     * @returns { Array<String> } Array<String> - the storeId of all created KVStore databases.
-     * @throws { BusinessException } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-     * <br>2.Parameter verification failed.
+     * @returns { Array<String> } Array<String> the storeId of all created KVStore databases.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.DistributedDataManager.KVStore.Core"
+        syscap: "SystemCapability.DistributedDataManager.KVStore.Core",
+        throwexception: true,
+        workerthread: true
     ]
     public func getAllKVStoreId(appId: String): Array<String> {
         unsafe {
