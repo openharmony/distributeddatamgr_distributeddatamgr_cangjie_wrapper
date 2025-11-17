@@ -76,7 +76,7 @@ public enum PreferencesEvent {
 public class Preferences <: RemoteDataLite {
     let callbackList = ArrayList<(CallbackObject, Int64)>()
     let onOffMutex = Mutex()
-    init(context: StageContext, name: String, dataGroupId: String) {
+    init(ctxId: Int64, name: String, dataGroupId: String) {
         super(
             unsafe {
                 var codeId = 0i64
@@ -85,7 +85,7 @@ public class Preferences <: RemoteDataLite {
                     cDataGroupId = LibC.mallocCString(dataGroupId).asResource()
                 ) {
                     var errCode = 0i32
-                    codeId = FfiOHOSPreferencesGetPreferences(context, cName.value, cDataGroupId.value, inout errCode)
+                    codeId = FfiOHOSPreferencesGetPreferencesV1(ctxId, cName.value, cDataGroupId.value, inout errCode)
                     if (errCode != SUCCESS_CODE) {
                         PREFERENCES_LOG.error(
                             "Preferences getPreferences failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
@@ -118,11 +118,7 @@ public class Preferences <: RemoteDataLite {
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func getPreferences(context: UIAbilityContext, name: String): Preferences {
-        let stageContext = getStageContext(context)
-        if (stageContext.isNull()) {
-            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
-        }
-        return Preferences(stageContext, name, String.empty)
+        return Preferences(context.getID(), name, String.empty)
     }
 
     /**
@@ -146,11 +142,7 @@ public class Preferences <: RemoteDataLite {
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func getPreferences(context: UIAbilityContext, options: PreferencesOptions): Preferences {
-        let stageContext = getStageContext(context)
-        if (stageContext.isNull()) {
-            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
-        }
-        return Preferences(stageContext, options.name, options.dataGroupId)
+        return Preferences(context.getID(), options.name, options.dataGroupId)
     }
 
     /**
@@ -193,17 +185,13 @@ public class Preferences <: RemoteDataLite {
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func deletePreferences(context: UIAbilityContext, options: PreferencesOptions): Unit {
-        let stageContext = getStageContext(context)
-        if (stageContext.isNull()) {
-            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
-        }
         var errCode: Int32 = 0
         unsafe {
             try (
                 cName = LibC.mallocCString(options.name).asResource(),
                 cDataGroupId = LibC.mallocCString(options.dataGroupId).asResource()
             ) {
-                errCode = FfiOHOSPreferencesDeletePreferences(stageContext, cName.value, cDataGroupId.value)
+                errCode = FfiOHOSPreferencesDeletePreferencesV1(context.getID(), cName.value, cDataGroupId.value)
             }
         }
         if (errCode != SUCCESS_CODE) {
@@ -262,17 +250,13 @@ public class Preferences <: RemoteDataLite {
         syscap: "SystemCapability.DistributedDataManager.Preferences.Core"
     ]
     public static func removePreferencesFromCache(context: UIAbilityContext, options: PreferencesOptions): Unit {
-        let stageContext = getStageContext(context)
-        if (stageContext.isNull()) {
-            throw BusinessException(getCJErrorCode(E_INNER_ERROR), getCJErrorMsg(E_INNER_ERROR))
-        }
         var errCode: Int32 = 0
         unsafe {
             try (
                 cName = LibC.mallocCString(options.name).asResource(),
                 cDataGroupId = LibC.mallocCString(options.dataGroupId).asResource()
             ) {
-                errCode = FfiOHOSPreferencesRemovePreferencesFromCache(stageContext, cName.value, cDataGroupId.value)
+                errCode = FfiOHOSPreferencesRemovePreferencesFromCacheV1(context.getID(), cName.value, cDataGroupId.value)
             }
         }
         if (errCode != SUCCESS_CODE) {
@@ -336,10 +320,10 @@ public class Preferences <: RemoteDataLite {
             var result = PreferencesValueType.Integer(0)
             try (cKey = LibC.mallocCString(key).asResource()) {
                 let cDefValue = CPreferencesValueType(defValue)
-                let cPreferencesValueType = FfiOHOSPreferencesGet(getID(), cKey.value, cDefValue)
+                var cPreferencesValueType = FfiOHOSPreferencesGet(getID(), cKey.value, cDefValue)
                 cDefValue.free()
                 result = CPreferencesValueType.parse(cPreferencesValueType)
-                cPreferencesValueType.free()
+                FfiOHOSPreferencesFreeValueType(inout cPreferencesValueType)
             }
             return result
         }
@@ -383,9 +367,9 @@ public class Preferences <: RemoteDataLite {
     ]
     public func getAll(): HashMap<String, PreferencesValueType> {
         unsafe {
-            let cValues = FfiOHOSPreferencesGetAll(getID())
+            var cValues = FfiOHOSPreferencesGetAll(getID())
             let result = CPreferencesValueTypes.parse(cValues)
-            cValues.free()
+            FfiOHOSPreferencesFreeValueTypes(inout cValues)
             return result
         }
     }
