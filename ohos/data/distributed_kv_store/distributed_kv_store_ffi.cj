@@ -404,7 +404,7 @@ struct CEntry {
             this.value = CKVValueType(entry.value)
         } catch (e: Exception) {
             unsafe { LibC.free(this.key) }
-            throw e
+            throw BusinessException(14800000, "Inner error.")
         }
     }
 
