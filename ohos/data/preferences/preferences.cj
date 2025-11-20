@@ -91,10 +91,11 @@ public class Preferences <: RemoteDataLite {
                     var errCode = 0i32
                     codeId = FfiOHOSPreferencesGetPreferences(context, cName.value, cDataGroupId.value, inout errCode)
                     if (errCode != SUCCESS_CODE) {
+                        checkCodeAndThrow(errCode, "getPreferences")
                         PREFERENCES_LOG.error(
                             "Preferences getPreferences failed: ${getCJErrorMsg(errCode)}${getNativeErrorMsg(errCode)} code: ${getCJErrorCode(errCode)} nativeErrorCode: ${errCode}"
                         )
-                        checkCodeAndThrow(errCode, "getPreferences")
+                        throw BusinessException(getCJErrorCode(errCode),"Preferences getPreferences failed: ${getCJErrorMsg(errCode)}")
                     }
                 }
                 codeId
