@@ -398,6 +398,10 @@ struct COptions {
 struct CEntry {
     var key: CString
     var value: CKVValueType
+
+    /**
+     * @throws { BusinessException } 14800000 - Inner error.
+     */
     init(entry: Entry) {
         this.key = unsafe { LibC.mallocCString(entry.key) }
         try {
