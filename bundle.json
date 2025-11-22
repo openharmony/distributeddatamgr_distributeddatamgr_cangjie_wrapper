@@ -47,6 +47,12 @@
             "inner_kits": [
                 {
                     "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/data_share_predicates:ohos.data.data_share_predicates"
+                },
+                {
+                    "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper:copy_sdk_distributeddatamgr_cangjie_libs"
+                },
+                {
+                    "name": "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper:copy_sdk_distributeddatamgr_cangjie_libs_kit"
                 }
             ],
             "test": []
