@@ -29,6 +29,13 @@ foreign {
 
     func FfiOHOSPreferencesRemovePreferencesFromCache(context: StageContext, name: CString, dataGroupId: CString): Int32
 
+    func FfiOHOSPreferencesGetPreferencesV1(ctxId: Int64, name: CString, dataGroupId: CString,
+        errCode: CPointer<Int32>): Int64
+
+    func FfiOHOSPreferencesDeletePreferencesV1(ctxId: Int64, name: CString, dataGroupId: CString): Int32
+
+    func FfiOHOSPreferencesRemovePreferencesFromCacheV1(ctxId: Int64, name: CString, dataGroupId: CString): Int32
+
     func FfiOHOSPreferencesDelete(id: Int64, key: CString): Int32
 
     func FfiOHOSPreferencesHas(id: Int64, key: CString): Bool
@@ -48,6 +55,10 @@ foreign {
     func FfiOHOSPreferencesFlush(id: Int64): Unit
 
     func FfiOHOSPreferencesClear(id: Int64): Unit
+
+    func FfiOHOSPreferencesFreeValueType(pValue: CPointer<CPreferencesValueType>): Unit
+
+    func FfiOHOSPreferencesFreeValueTypes(pValues: CPointer<CPreferencesValueTypes>): Unit
 }
 
 @C
