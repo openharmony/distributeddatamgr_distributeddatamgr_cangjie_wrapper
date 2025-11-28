@@ -12,12 +12,7 @@
     "component": {
         "name": "distributeddatamgr_cangjie_wrapper",
         "subsystem": "distributeddatamgr",
-        "syscap": [
-            "SystemCapability.DistributedDataManager.DataShare.Core",
-            "SystemCapability.DistributedDataManager.KVStore.Core",
-            "SystemCapability.DistributedDataManager.Preferences.Core",
-            "SystemCapability.DistributedDataManager.RelationalStore.Core"
-        ],
+        "syscap": [],
         "features": [],
         "adapted_system_type": [
             "standard"
