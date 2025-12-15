@@ -20,6 +20,7 @@ distributeddatamgr_cangjie_wrapper_packages_ohos = [
   "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/relational_store:ohos.data.relational_store",
   "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/values_bucket:ohos.data.values_bucket",
   "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/data/distributed_kv_store:ohos.data.distributed_kv_store",
+  "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/ohos/pasteboard:ohos.pasteboard",
 ]
 distributeddatamgr_cangjie_wrapper_packages_kit = [ "//foundation/distributeddatamgr/distributeddatamgr_cangjie_wrapper/kit/ArkData:kit.ArkData" ]
 copy_ohos_cangjie_sdk_api_lib("copy_sdk_distributeddatamgr_cangjie_libs") {
