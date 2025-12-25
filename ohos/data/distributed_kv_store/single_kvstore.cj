@@ -124,7 +124,7 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func putBatch(value: Array<HashMap<String, KVValueType>>): Unit {}
 
     /**
@@ -154,7 +154,7 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func delete(predicates: DataSharePredicates): Unit {}
 
     /**
@@ -183,7 +183,7 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func removeDeviceData(deviceId: String): Unit {}
 
     /**
@@ -218,35 +218,35 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func getEntries(keyPrefix: String): Array<Entry> {
         throw Exception()
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func getEntries(query: Query): Array<Entry> {
         throw Exception()
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func getResultSet(keyPrefix: String): KVStoreResultSet {
         throw Exception()
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func getResultSet(query: Query): KVStoreResultSet {
         throw Exception()
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func getResultSet(predicates: DataSharePredicates): KVStoreResultSet {
         throw Exception()
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func closeResultSet(resultSet: KVStoreResultSet): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func getResultSize(query: Query): Int32 {
         throw Exception()
     }
@@ -301,7 +301,7 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func deleteBackup(files: Array<String>): Array<(String, Int32)> {
         throw Exception()
     }
@@ -393,7 +393,7 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func setSyncRange(localLabels: Array<String>, remoteSupportLabels: Array<String>): Unit {}
 
     /**
@@ -417,73 +417,73 @@ public open class SingleKVStore <: RemoteDataLite {
         }
     }
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func sync(deviceIds: Array<String>, mode: SyncMode): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func sync(deviceIds: Array<String>, mode: SyncMode, delayMs: Int32): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func sync(deviceIds: Array<String>, query: Query, mode: SyncMode): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func sync(deviceIds: Array<String>, query: Query, mode: SyncMode, delayMs: Int32): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func on(event: KVStoreEvent, `type`: SubscribeType, listener: Callback1Argument<ChangeNotification>): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func on(event: KVStoreEvent, syncCallback: Callback1Argument<Array<(String, Int32)>>): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func off(event: KVStoreEvent, listener: CallbackObject): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func off(event: KVStoreEvent): Unit {}
 
-    @!Hide
+    @!Hide[isChecked: true]
     public open func getSecurityLevel(): KVSecurityLevel {
         throw Exception()
     }
 }
 
-@!Hide
+@!Hide[isChecked: true]
 public enum KVStoreEvent {
-    @!Hide
+    @!Hide[isChecked: true]
     DataChange
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SyncComplete
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 public enum SyncMode {
-    @!Hide
+    @!Hide[isChecked: true]
     PullOnly
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PushOnly
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PushPull
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 public enum SubscribeType {
-    @!Hide
+    @!Hide[isChecked: true]
     SubscribeTypeLocal
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubscribeTypeRemote
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubscribeTypeAll
     | ...
 }
 
-@!Hide
+@!Hide[isChecked: true]
 public class ChangeNotification {
     init() {}
 }
