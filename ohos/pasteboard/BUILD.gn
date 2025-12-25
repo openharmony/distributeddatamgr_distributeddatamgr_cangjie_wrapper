@@ -16,17 +16,22 @@
 import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
-ohos_cangjie_shared_library("kit.ArkData") {
-  sources = [ "index.cj" ]
+ohos_cangjie_shared_library("ohos.pasteboard") {
+  sources = [
+    "cj_pasteboard_common.cj",
+    "cj_pasteboard_exception.cj",
+    "cj_pasteboard_log.cj",
+    "paste_data.cj",
+    "system_pasteboard.cj"
+  ]
 
-  cj_deps = [
-    "../../ohos/data:ohos.data",
-    "../../ohos/data/data_share_predicates:ohos.data.data_share_predicates",
-    "../../ohos/data/distributed_kv_store:ohos.data.distributed_kv_store",
-    "../../ohos/data/preferences:ohos.data.preferences",
-    "../../ohos/data/relational_store:ohos.data.relational_store",
-    "../../ohos/data/values_bucket:ohos.data.values_bucket",
-    "../../ohos/pasteboard:ohos.pasteboard",
+  external_deps = [ "pasteboard:cj_pasteboard_ffi" ]
+
+  cj_external_deps = [
+    "cangjie_ark_interop:ohos.business_exception",
+    "cangjie_ark_interop:ohos.ffi",
+    "cangjie_ark_interop:ohos.labels",
+    "hiviewdfx_cangjie_wrapper:ohos.hilog",
   ]
 
   subsystem_name = "distributeddatamgr"

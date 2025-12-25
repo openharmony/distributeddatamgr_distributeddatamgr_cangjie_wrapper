@@ -15,12 +15,9 @@
 
 // The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
 
-package kit.ArkData
+package ohos.pasteboard
 
-public import ohos.data.*
-public import ohos.data.data_share_predicates.*
-public import ohos.data.distributed_kv_store.*
-public import ohos.data.preferences.*
-public import ohos.data.relational_store.*
-public import ohos.data.values_bucket.*
-public import ohos.pasteboard.*
+import ohos.hilog.HilogChannel
+
+const PASTEBOARD_DOMAIN_ID = 0xD001C05u32
+let PASTEBOARD_LOG = HilogChannel(0, PASTEBOARD_DOMAIN_ID, "CJ-pasteboard")

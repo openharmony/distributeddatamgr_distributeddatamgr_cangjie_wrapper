@@ -15,12 +15,23 @@
 
 // The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
 
-package kit.ArkData
+package ohos.pasteboard
 
-public import ohos.data.*
-public import ohos.data.data_share_predicates.*
-public import ohos.data.distributed_kv_store.*
-public import ohos.data.preferences.*
-public import ohos.data.relational_store.*
-public import ohos.data.values_bucket.*
-public import ohos.pasteboard.*
+import ohos.labels.APILevel
+
+/**
+ * Indicates MIME types of plain text.
+ */
+@!APILevel[
+    since: "24",
+    syscap: "SystemCapability.MiscServices.Pasteboard"
+]
+public const MIMETYPE_TEXT_PLAIN: String = "text/plain"
+
+const MIMETYPE_TEXT_HTML: String = "text/html"
+
+const MIMETYPE_TEXT_WANT: String = "text/want"
+
+const MIMETYPE_TEXT_URI: String = "text/uri"
+
+const MIMETYPE_PIXELMAP: String = "pixelMap"
