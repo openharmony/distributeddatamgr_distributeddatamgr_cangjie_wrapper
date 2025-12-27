@@ -270,7 +270,7 @@ public enum EncryptionAlgo {
     ]
     Aes256Cbc
     |
-    @!Hide
+    @!Hide[isChecked: true]
     PlainText
     | ...
 }
@@ -500,7 +500,7 @@ public class StoreConfig {
     ]
     public var autoCleanDirtyData: Bool
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var isSearchable: Bool = true
 
     /**
@@ -540,7 +540,7 @@ public class StoreConfig {
     ]
     public var pluginLibs: Array<String>
 
-    @!Hide
+    @!Hide[isChecked: true]
     internal var haMode: HAMode = HAMode.Single
 
     /**
@@ -756,7 +756,7 @@ public enum Field {
     ]
     DeletedFlagField
     |
-    @!Hide
+    @!Hide[isChecked: true]
     DataStatusField
     |
     /**
@@ -1062,10 +1062,10 @@ public enum RelationalStoreValueType {
     ]
     AssetsEnum(Array<Asset>)
     |
-    @!Hide
+    @!Hide[isChecked: true]
     Float32Array(Array<Float32>)
     |
-    @!Hide
+    @!Hide[isChecked: true]
     BigIntValue(BigInt)
     | ...
 }
@@ -1271,7 +1271,7 @@ public enum SubscribeType {
     ]
     SubscribeTypeCloudDetails
     |
-    @!Hide
+    @!Hide[isChecked: true]
     SubscribeTypeLocalDetails
     | ...
 
@@ -1469,13 +1469,13 @@ func throwIfOOM(isOOM: Bool, className: String, funcName: String, handler: () ->
     }
 }
 
-@!Hide
+@!Hide[isChecked: true]
 enum HAMode {
-    @!Hide
+    @!Hide[isChecked: true]
     Single
     |
 
-    @!Hide
+    @!Hide[isChecked: true]
     MainReplica
     | ...
 }
