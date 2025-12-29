@@ -19,7 +19,7 @@ package ohos.data.preferences
 
 import ohos.ffi.{RemoteDataLite, releaseFFIData, SUCCESS_CODE, Callback1Param}
 import ohos.hilog.HilogChannel
-import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
+import ohos.app.ability.ui_ability.UIAbilityContext
 import std.sync.Mutex
 import std.collection.{ArrayList, HashMap}
 import ohos.labels.APILevel

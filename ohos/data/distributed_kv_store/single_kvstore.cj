@@ -22,7 +22,6 @@ import ohos.labels.{APILevel, Hide}
 import std.collection.ArrayList
 import ohos.ffi.{releaseFFIData, RemoteDataLite, SUCCESS_CODE, toArrayCString}
 import ohos.business_exception.BusinessException
-import ohos.callback_invoke.CallbackObject
 import ohos.data.data_share_predicates.DataSharePredicates
 import std.collection.HashMap
 import ohos.callback_invoke.{ Callback1Argument, CallbackObject }
