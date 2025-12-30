@@ -289,6 +289,7 @@ public enum KVSecurityLevel {
     syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
 ]
 public class FieldNode {
+    var name: String
     /**
      * Indicates the default value of field node.
      */
@@ -329,6 +330,7 @@ public class FieldNode {
         syscap: "SystemCapability.DistributedDataManager.KVStore.DistributedKVStore"
     ]
     public init(name: String, nullable: Bool, default: String, nodeType: Int32) {
+        this.name = name
         this.nullable = nullable
         this.default = default
         this.nodeType = nodeType
