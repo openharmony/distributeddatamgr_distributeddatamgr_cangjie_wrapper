@@ -17,7 +17,12 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.data.values_bucket") {
-  sources = [ "value_type.cj" ]
+  
+  if (is_mingw || is_mac){
+    sources = [ "../../../mock/ohos.data.values_bucket.cj" ]
+  } else {
+    sources = [ "value_type.cj" ]
+  }
 
   cj_external_deps = [
     "cangjie_ark_interop:ohos.ffi",

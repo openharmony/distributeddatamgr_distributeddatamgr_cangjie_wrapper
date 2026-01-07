@@ -17,14 +17,19 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.data.relational_store") {
-  sources = [
-    "rdb_predicates.cj",
-    "rdb_store.cj",
-    "relational_store.cj",
-    "relational_store_common.cj",
-    "relational_store_ffi.cj",
-    "result_set.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = [ "../../../mock/ohos.data.relational_store.cj" ]
+  } else {
+    sources = [
+      "rdb_predicates.cj",
+      "rdb_store.cj",
+      "relational_store.cj",
+      "relational_store_common.cj",
+      "relational_store_ffi.cj",
+      "result_set.cj",
+    ]
+  }
 
   external_deps = [ "relational_store:cj_relational_store_ffi" ]
 
