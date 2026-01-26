@@ -18,39 +18,63 @@ package ohos.data.data_share_predicates
 import ohos.data.values_bucket.*
 import ohos.labels.*
 
-@!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+]
 public class DataSharePredicates {
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
     public init() {
         super()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
     public func equalTo(field: String, value: VBValueType): DataSharePredicates {
         return DataSharePredicates()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
     public func and(): DataSharePredicates {
         return DataSharePredicates()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
     public func orderByAsc(field: String): DataSharePredicates {
         return DataSharePredicates()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
     public func orderByDesc(field: String): DataSharePredicates {
         return DataSharePredicates()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
     public func limit(total: Int32, offset: Int32): DataSharePredicates {
         return DataSharePredicates()
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
     public func inValues(field: String, value: Array<VBValueType>): DataSharePredicates {
         return DataSharePredicates()
     }
