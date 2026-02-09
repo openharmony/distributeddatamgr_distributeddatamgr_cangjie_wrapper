@@ -107,7 +107,7 @@ public class DistributedKVStore {
         return KVManager()
     }
 
-    public init() {
+    init() {
         super()
     }
 }
