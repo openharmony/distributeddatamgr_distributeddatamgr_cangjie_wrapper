@@ -49,7 +49,6 @@ class Test_hide_distributed {
     }
 
     func testHideFunc(): Unit {
-        let kvstore = DistributedKVStore()
         let kvstoreName = "com.example.myapplication"
         let kvManager = DistributedKVStore.createKVManager(KVManagerConfig(getAbilityContext(), kvstoreName))
         kvManager.removeDeviceData(kvstoreName)
