@@ -19,7 +19,7 @@ package ohos.data.preferences
 
 import ohos.ffi.{RemoteDataLite, releaseFFIData, SUCCESS_CODE, Callback1Param}
 import ohos.hilog.HilogChannel
-import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
+import ohos.app.ability.ui_ability.UIAbilityContext
 import std.sync.Mutex
 import std.collection.{ArrayList, HashMap}
 import ohos.labels.APILevel
@@ -439,18 +439,6 @@ public class Preferences <: RemoteDataLite {
             throw BusinessException(ERR_PARAMETER_ERROR, MESSAGE_TPYE_ERROR)
         }
     }
-
-    /**
-     * Registers an observer to listen for the change of a {@link Preferences} object.
-     *
-     * @param { String } tp - Indicates the callback when preferences changes.
-     * @param { Callback1Argument<String> } callback - Indicates the callback function.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
-     * @throws { BusinessException } 15500000 - Inner error.
-     * @throws { BusinessException } 15500019 - Failed to obtain the subscription service.
-     */
 
     /**
      * Registers an observer to listen for the change of a Preferences object.
