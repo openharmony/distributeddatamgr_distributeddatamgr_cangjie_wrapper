@@ -17,13 +17,17 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.pasteboard") {
-  sources = [
-    "cj_pasteboard_common.cj",
-    "cj_pasteboard_exception.cj",
-    "cj_pasteboard_log.cj",
-    "paste_data.cj",
-    "system_pasteboard.cj"
-  ]
+  if (is_mingw || is_mac){
+    sources = [ "../../mock/ohos.pasteboard.cj" ]
+  } else {
+    sources = [
+      "cj_pasteboard_common.cj",
+      "cj_pasteboard_exception.cj",
+      "cj_pasteboard_log.cj",
+      "paste_data.cj",
+      "system_pasteboard.cj"
+    ]
+  }
 
   external_deps = [ "pasteboard:cj_pasteboard_ffi" ]
 
