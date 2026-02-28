@@ -17,15 +17,20 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.data.distributed_kv_store") {
-  sources = [
-    "device_kvstore.cj",
-    "distributed_kv_store.cj",
-    "distributed_kv_store_common.cj",
-    "distributed_kv_store_ffi.cj",
-    "kvstore_result_set.cj",
-    "query.cj",
-    "single_kvstore.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = [ "../../../mock/ohos.data.distributed_kv_store.cj" ]
+  } else {
+    sources = [
+      "device_kvstore.cj",
+      "distributed_kv_store.cj",
+      "distributed_kv_store_common.cj",
+      "distributed_kv_store_ffi.cj",
+      "kvstore_result_set.cj",
+      "query.cj",
+      "single_kvstore.cj",
+    ]
+  }
 
   external_deps = [ "kv_store:cj_distributed_kv_store_ffi" ]
 
