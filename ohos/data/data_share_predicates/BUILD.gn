@@ -17,11 +17,16 @@ import("//build/ohos.gni")
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.data.data_share_predicates") {
-  sources = [
-    "data_share_predicates.cj",
-    "data_share_predicates_common.cj",
-    "data_share_predicates_ffi.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = [ "../../../mock/ohos.data.data_share_predicates.cj" ]
+  } else {
+    sources = [
+      "data_share_predicates.cj",
+      "data_share_predicates_common.cj",
+      "data_share_predicates_ffi.cj",
+    ]
+  }
 
   external_deps = [ "data_share:cj_data_share_predicates_ffi" ]
 

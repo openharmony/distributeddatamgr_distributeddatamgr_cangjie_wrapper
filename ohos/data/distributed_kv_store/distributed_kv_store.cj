@@ -67,6 +67,8 @@ public class DistributedKVStore {
             return KVManager(codeId)
         }
     }
+
+    init() {}
 }
 
 /**

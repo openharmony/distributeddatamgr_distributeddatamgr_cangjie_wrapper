@@ -69,7 +69,6 @@ class Test_distributed_kv_store {
     @TestCase
     @Tag[APILevel22, TestLevel0]
     func test_creatKVManager() {
-        let kvstore = DistributedKVStore()
         let kvstoreName = "com.example.myapplication"
         let kvManager = DistributedKVStore.createKVManager(KVManagerConfig(getAbilityContext(), kvstoreName))
         @Expect(true)
