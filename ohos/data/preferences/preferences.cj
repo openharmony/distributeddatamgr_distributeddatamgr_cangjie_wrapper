@@ -441,18 +441,6 @@ public class Preferences <: RemoteDataLite {
     }
 
     /**
-     * Registers an observer to listen for the change of a {@link Preferences} object.
-     *
-     * @param { String } tp - Indicates the callback when preferences changes.
-     * @param { Callback1Argument<String> } callback - Indicates the callback function.
-     * @throws { BusinessException } 401 - Parameter error. Possible causes:
-     * <br>1. Mandatory parameters are left unspecified; <br>2. Incorrect parameter types;
-     * <br>3. Parameter verification failed.
-     * @throws { BusinessException } 15500000 - Inner error.
-     * @throws { BusinessException } 15500019 - Failed to obtain the subscription service.
-     */
-
-    /**
      * Registers an observer to listen for the change of a Preferences object.
      *
      * @param { PreferencesEvent } event - Indicates the callback when preferences changes.

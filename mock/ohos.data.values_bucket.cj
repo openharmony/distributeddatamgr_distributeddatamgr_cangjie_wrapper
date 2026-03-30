@@ -17,11 +17,30 @@ package ohos.data.values_bucket
 
 import ohos.labels.APILevel
 
-@!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+]
 public enum VBValueType {
-    @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core"] Integer(Int64)
-    | @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core"] Double(Float64)
-    | @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core"] StringValue(String)
-    | @!APILevel[since: "22", syscap: "SystemCapability.DistributedDataManager.DataShare.Core"] Boolean(Bool)
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+    ]
+    Integer(Int64)
+    | @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+      ]
+    Double(Float64)
+    | @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+      ]
+    StringValue(String)
+    | @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.DistributedDataManager.DataShare.Core"
+      ]
+    Boolean(Bool)
     | ...
 }
