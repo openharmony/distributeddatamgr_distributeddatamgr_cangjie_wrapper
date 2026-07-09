@@ -198,15 +198,4 @@ struct CPreferencesValueTypes {
         }
         return result
     }
-
-    func free() {
-        for (i in 0..size) {
-            unsafe {
-                LibC.free(this.key.read(i))
-                this.value.read(i).free()
-            }
-        }
-        unsafe { LibC.free<CString>(this.key) }
-        unsafe { LibC.free<CPreferencesValueType>(this.value) }
-    }
 }

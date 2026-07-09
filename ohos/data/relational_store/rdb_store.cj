@@ -780,29 +780,6 @@ public class RdbStore <: RemoteDataLite {
         }
     }
 
-    func offDataChangeCommon(`type`: SubscribeType, callback: CallbackObject): Unit {
-        synchronized(onOffMutex) {
-            let callbackList = observers_
-            if (callbackList.size == 0) {
-                RELATIONAL_STORE_LOG.error("RdbStore off failed: The event is not registered")
-                return
-            }
-            unsafe {
-                callbackList.removeIf(
-                    {
-                        item =>
-                        if (refEq(item[0], callback)) {
-                            let errCode = FfiOHOSRelationalStoreOffArrStrChangeInfo(getID(), `type`.getValue(), item[1])
-                            throwIfNotSuccess(errCode, "RdbStore", "offDataChange")
-                            return true
-                        }
-                        return false
-                    }
-                )
-            }
-        }
-    }
-
     /**
      * Notifies the registered observers of a change to the data resource specified by Uri.
      *

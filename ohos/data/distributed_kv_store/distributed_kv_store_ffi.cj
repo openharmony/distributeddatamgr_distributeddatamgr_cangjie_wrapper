@@ -67,8 +67,6 @@ foreign {
 
     func FfiOHOSDistributedKVStoreSingleKVStoreRestore(id: Int64, file: CString): Int32
 
-    func FfiOHOSDistributedKVStoreSingleKVStoreDeleteBackup(id: Int64, cArrStr: CArrString, errCode: CPointer<Int32>): CStringNum
-
     func FfiOHOSDistributedKVStoreSingleKVStoreStartTransaction(id: Int64): Int32
 
     func FfiOHOSDistributedKVStoreSingleKVStoreCommit(id: Int64): Int32
@@ -201,29 +199,6 @@ struct CArrByte {
         let head: CPointer<UInt8>,
         let size: Int64
     ) {}
-}
-
-@C
-struct CStringNum {
-    CStringNum(
-        let headString: CPointer<CString>,
-        let headInt32: CPointer<Int32>,
-        let size: Int64
-    ) {}
-
-    func toArrayAndFree(): ArrayList<(String, Int32)> {
-        unsafe {
-            let res = ArrayList<(String, Int32)>(size, {i => (headString.read(i).toString(), headInt32.read(i))})
-            if (!this.headString.isNull()) {
-                for (i in 0..this.size) {
-                    LibC.free(this.headString.read(i))
-                }
-            }
-            LibC.free<CString>(this.headString)
-            LibC.free<Int32>(this.headInt32)
-            return res
-        }
-    }
 }
 
 @C
@@ -412,10 +387,6 @@ struct CEntry {
         }
     }
 
-    func toEntry(): Entry {
-        return Entry(key.toString(), value.toValueType())
-    }
-
     func free() {
         unsafe { LibC.free(key) }
         value.free()
@@ -456,14 +427,4 @@ struct CArrEntry {
             LibC.free<CEntry>(head)
         }
     }
-}
-
-@C
-struct CChangeNotification {
-    CChangeNotification(
-        var insertEntries: CArrEntry,
-        var updateEntries: CArrEntry,
-        var deleteEntries: CArrEntry,
-        var deviceId: CString
-    ) {}
 }

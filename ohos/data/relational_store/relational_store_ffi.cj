@@ -44,9 +44,6 @@ foreign {
     func FfiOHOSRelationalStoreSetDistributedTablesType(id: Int64, tables: CPointer<CString>, tablesSize: Int64,
         distributedType: Int32): Int32
 
-    func FfiOHOSRelationalStoreSetDistributedTablesConfig(id: Int64, tables: CPointer<CString>, tablesSize: Int64,
-        distributedType: Int32, config: RetDistributedConfig): Int32
-
     func FfiOHOSRelationalStoreBeginTransaction(id: Int64): Int32
 
     func FfiOHOSRelationalStoreCommit(id: Int64): Int32
@@ -66,8 +63,6 @@ foreign {
         conflictResolution: Int32, errCode: CPointer<Int32>): Int64
 
     func FfiOHOSRelationalStoreExecuteSql(id: Int64, sql: CString, errCode: CPointer<Int32>): Unit
-
-    func FfiOHOSRelationalStoreSync(id: Int64, mode: Int32, predicatesID: Int64, errCode: CPointer<Int32>): CArrSyncResult
 
     func FfiOHOSRelationalStoreRdbPredicatesConstructor(tablename: CString): Int64
 
@@ -241,18 +236,6 @@ func mallocCString(str: String): Option<CString> {
     return cstr
 }
 
-func cArrStringtoArrayStringAndFree(carr: CArrString): Array<String> {
-    if (carr.head.isNull() || carr.size <= 0) {
-        return Array<String>()
-    }
-    let res = ArrayList<String>()
-    for (i in 0..carr.size) {
-        unsafe { res.add(carr.head.read(i).toString()) }
-    }
-    carr.free()
-    return res.toArray()
-}
-
 enum CallbackType {
     | ParamArrStr
     | ParamChangeInfo
@@ -382,37 +365,6 @@ func convert(asset: RetAsset): Asset {
     let size = CString(asset.size).toString()
     let status = AssetStatus.parse(asset.status)
     return Asset(name, uri, path, createTime, modifyTime, size, status: status)
-}
-
-@C
-struct CArrSyncResult {
-    CArrSyncResult(
-        let str: CPointer<CString>,
-        let num: CPointer<Int32>,
-        let size: Int64
-    ) {}
-
-    func free() {
-        if (str.isNotNull()) {
-            for (i in 0..size) {
-                unsafe { LibC.free(str.read(i)) }
-            }
-        }
-        unsafe { LibC.free(str) }
-        unsafe { LibC.free(num) }
-    }
-}
-
-func convert(carr: CArrSyncResult): Array<(String, Int32)> {
-    if (carr.size <= 0 || carr.str.isNull() || carr.num.isNull()) {
-        carr.free()
-        return Array<(String, Int32)>()
-    }
-    let arr = Array<(String, Int32)>(carr.size, repeat: ("", 0))
-    for (i in 0..carr.size) {
-        unsafe { arr[i] = (carr.str.read(i).toString(), carr.num.read(i)) }
-    }
-    return arr
 }
 
 @C
@@ -577,17 +529,6 @@ func convert(value: RetValueType): RelationalStoreValueType {
     }
 }
 
-
-@C
-struct CStatistic {
-    CStatistic(
-        let total: UInt32,
-        let successful: UInt32,
-        let failed: UInt32,
-        let remained: UInt32
-    ) {}
-}
-
 @C
 struct CValuesBucket {
     CValuesBucket(
@@ -672,14 +613,5 @@ func convert(value: CValuesBucket): HashMap<String, RelationalStoreValueType> {
             map.add(value.key.read(i).toString(), convert(value.value.read(i)))
         }
         return map
-    }
-}
-
-@C
-struct RetDistributedConfig {
-    let autoSync: Bool
-
-    init(autoSync: Bool) {
-        this.autoSync = autoSync
     }
 }
