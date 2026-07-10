@@ -310,15 +310,6 @@ public enum Tokenizer {
     ]
     CustomTokenizer
     | ...
-
-    func getValue(): Int32 {
-        match (this) {
-            case NoneTokenizer => 0
-            case IcuTokenizer => 1
-            case CustomTokenizer => 2
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 /**
@@ -407,25 +398,6 @@ public enum ChangeType {
     ]
     AssetChange
     | ...
-
-    func getValue(): Int32 {
-        match (this) {
-            case DataChange => 0
-            case AssetChange => 1
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
-
-    /*
-     * @throws { BusinessException } 14800000 - Invalid instance.
-     */
-    static func parse(val: Int32): ChangeType {
-        match (val) {
-            case 0 => DataChange
-            case 1 => AssetChange
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 /**
@@ -786,18 +758,6 @@ public enum Field {
     ]
     SharingResourceField
     | ...
-
-    func getValue(): String {
-        match (this) {
-            case CursorField => "#_cursor"
-            case OriginField => "#_origin"
-            case DeletedFlagField => "#_deleted_flag"
-            case OwnerField => "#_cloud_owner"
-            case PrivilegeField => "#_cloud_privilege"
-            case SharingResourceField => "#_sharing_resource_field"
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 /**
@@ -1102,14 +1062,6 @@ public enum DistributedType {
     ]
     DistributedCloud
     | ...
-
-    func getValue(): Int32 {
-        match (this) {
-            case DistributedDevice => 0
-            case DistributedCloud => 1
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 /**
@@ -1165,17 +1117,6 @@ public enum SyncMode {
     ]
     SyncModeCloudFirst
     | ...
-
-    func getValue(): Int32 {
-        match (this) {
-            case SyncModePush => 0
-            case SyncModePull => 1
-            case SyncModeTimeFirst => 4
-            case SyncModeNativeFirst => 5
-            case SyncModeCloudFirst => 6
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 /**
@@ -1213,27 +1154,6 @@ public enum Progress {
     ]
     SyncFinish
     | ...
-
-    func getValue(): Int32 {
-        match (this) {
-            case SyncBegin => 0
-            case SyncInProgress => 1
-            case SyncFinish => 2
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
-
-    /*
-     * @throws { BusinessException } 14800000 - Invalid instance.
-     */
-    static func parse(val: Int32): Progress {
-        match (val) {
-            case 0 => SyncBegin
-            case 1 => SyncInProgress
-            case 2 => SyncFinish
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 /**
@@ -1274,15 +1194,6 @@ public enum SubscribeType {
     @!Hide[isChecked: true]
     SubscribeTypeLocalDetails
     | ...
-
-    func getValue(): Int32 {
-        match (this) {
-            case SubscribeTypeRemote => 0
-            case SubscribeTypeCloud => 1
-            case SubscribeTypeCloudDetails => 2
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 /**
@@ -1320,15 +1231,6 @@ public enum Origin {
     ]
     Remote
     | ...
-
-    func getValue(): Int32 {
-        match (this) {
-            case Local => 0
-            case Cloud => 1
-            case Remote => 2
-            case _ => throw BusinessException(getErrorCode(E_INNER_ERROR), getErrorMsg(E_INNER_ERROR))
-        }
-    }
 }
 
 let ERROR_CODE_MAP = HashMap<Int32, (Int32, String)>(

@@ -256,16 +256,6 @@ public enum KVSecurityLevel {
     S4
     | ...
 
-    static func parse(securityLevel: Int32): KVSecurityLevel {
-        match (securityLevel) {
-            case 2 => S1
-            case 3 => S2
-            case 5 => S3
-            case 6 => S4
-            case _ => throw BusinessException(401, "Parameter error.")
-        }
-    }
-
     func getValue(): Int32 {
         match (this) {
             case S1 => 2

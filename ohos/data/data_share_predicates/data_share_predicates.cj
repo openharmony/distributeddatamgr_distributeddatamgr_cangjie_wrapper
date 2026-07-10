@@ -246,31 +246,4 @@ public class DataSharePredicates <: RemoteDataLite {
         }
         return this
     }
-
-    protected func or(): DataSharePredicates {
-        var code: Int32 = 0
-        unsafe {
-            code = FfiOHOSDataSharePredicatesOr(getID())
-        }
-        throwIfNotSuccess(code)
-        return this
-    }
-
-    protected func beginWrap(): DataSharePredicates {
-        var code: Int32 = 0
-        unsafe {
-            code = FfiOHOSDataSharePredicatesBeginWrap(getID())
-        }
-        throwIfNotSuccess(code)
-        return this
-    }
-
-    protected func endWrap(): DataSharePredicates {
-        var code: Int32 = 0
-        unsafe {
-            code = FfiOHOSDataSharePredicatesEndWrap(getID())
-        }
-        throwIfNotSuccess(code)
-        return this
-    }
 }
