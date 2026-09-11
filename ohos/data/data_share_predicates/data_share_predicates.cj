@@ -26,12 +26,12 @@ import ohos.business_exception.{BusinessException, ERR_PARAMETER_ERROR}
  * Create an DataSharePredicates.
  *
  * @returns { Int64 } Returns Id.
- * @throws { BusinessException } 16000050 - Internal error.
+ * @throws { BusinessException } 14800000 - Inner error.
  */
 private func createDataSharePredicates(): Int64 {
     let id = unsafe { FfiOHOSDataSharePredicatesCreateDataSharePredicates() }
     if (id < 0) {
-        throw BusinessException(16000050, "Internal error.")
+        throw BusinessException(14800000, "Inner error.")
     }
     return id
 }
@@ -69,7 +69,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @param { String } field - Indicates the column name in the database table.
      * @param { VBValueType } value - Indicates the value to match with the DataSharePredicates.
      * @returns { DataSharePredicates } Returns the DataSharePredicates that match the specified field.
-     * @throws { BusinessException } 16000050 - Internal error.
+     * @throws { BusinessException } 14800000 - Inner error.
      */
     @!APILevel[
         since: "22",
@@ -100,7 +100,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * Currently only used for RDB and KVDB(schema).
      *
      * @returns { DataSharePredicates } Returns the DataSharePredicates with the and condition.
-     * @throws { BusinessException } 16000050 - Internal error.
+     * @throws { BusinessException } 14800000 - Inner error.
      */
     @!APILevel[
         since: "22",
@@ -122,7 +122,7 @@ public class DataSharePredicates <: RemoteDataLite {
      *
      * @param { String } field - Indicates the column name for sorting the return list.
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
-     * @throws { BusinessException } 16000050 - Internal error.
+     * @throws { BusinessException } 14800000 - Inner error.
      */
     @!APILevel[
         since: "22",
@@ -150,7 +150,7 @@ public class DataSharePredicates <: RemoteDataLite {
      *
      * @param { String } field - Indicates the column name for sorting the return list.
      * @returns { DataSharePredicates } Returns the SQL query statement with the specified DataSharePredicates.
-     * @throws { BusinessException } 16000050 - Internal error.
+     * @throws { BusinessException } 14800000 - Inner error.
      */
     @!APILevel[
         since: "22",
@@ -179,7 +179,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @param { Int32 } total - Represents the specified number of results.
      * @param { Int32 } offset - Indicates the starting position.
      * @returns { DataSharePredicates } Returns the query object.
-     * @throws { BusinessException } 16000050 - Internal error.
+     * @throws { BusinessException } 14800000 - Inner error.
      */
     @!APILevel[
         since: "22",
@@ -207,7 +207,7 @@ public class DataSharePredicates <: RemoteDataLite {
      * @param { String } field - Indicates the column name in the database table.
      * @param { Array<VBValueType> } value - Indicates the values to match with DataSharePredicates.
      * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
-     * @throws { BusinessException } 16000050 - Internal error.
+     * @throws { BusinessException } 14800000 - Inner error.
      */
     @!APILevel[
         since: "22",

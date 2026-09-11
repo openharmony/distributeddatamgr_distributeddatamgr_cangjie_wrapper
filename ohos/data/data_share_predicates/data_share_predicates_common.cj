@@ -33,7 +33,7 @@ func getErrorMsg(code: Int32): String {
 func throwIfNotSuccess(code: Int32): Unit {
     if (code != 0) {
         if (code == -1) {
-            throw BusinessException(16000050, "Internal error.")
+            throw BusinessException(14800000, "Inner error.")
         }
         throw BusinessException(code, getErrorMsg(code))
     }
